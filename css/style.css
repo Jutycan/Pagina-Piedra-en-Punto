@@ -113,7 +113,7 @@
 
 .banner-content {
     flex: 1;
-    max-width: 800px;
+    max-width: 500px;
     padding: 0 40px;
     text-align: left;
 }
@@ -121,6 +121,7 @@
 .banner-content h1 {
     font-size: 3em;
     margin-bottom: 20px;
+    
 }
 
 .banner-content p {
@@ -151,6 +152,139 @@
     background-color: white;
     height: 350px;
     margin: 0 40px;
+}
+
+
+
+/* Nuevos estilos para la sección ¿Quiénes somos? */
+.about-us {
+    background-color: white;
+    color: #333;
+    padding: 80px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 450px;
+    gap: 60px;
+}
+
+.about-us-content {
+    flex: 1;
+    max-width: 500px;
+    padding: 0 40px;
+    text-align: left;
+}
+
+.about-us-content h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #212529;
+}
+
+.about-us-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.about-us-image-placeholder {
+    flex: 1;
+    max-width: 400px;
+    background-color: #B2B2B2;
+    height: 300px;
+    margin: 0 40px;
+}
+
+/* Modificación del Botón CTA para el estilo secundario */
+.cta-button.secondary {
+    background-color: #A0A0A0;
+    color: white;
+    border-color: #A0A0A0;
+}
+
+.cta-button.secondary:hover {
+    background-color: #888;
+    border-color: #888;
+    color: white;
+}
+
+
+
+
+/* Nuevos estilos para la sección Casos de Éxito */
+.success-stories {
+    background-color: #696969;
+    color: #FFFFFF;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.success-stories .section-title {
+    font-size: 2.8em;
+    margin-bottom: 50px;
+    color: #FFFFFF;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /*Impide que las tarjetas se solten a la siguiente linea*/
+    gap: 20px; /*Espacio entre tarjetas*/
+    margin-bottom: 50px;
+    padding: 0 20px;
+    overflow-x: auto; /*Permite scroll horizontal si es necesario*/
+}
+
+.case-card {
+    background-color: #B2B2B2;
+    color: #FFFFFF;
+    padding: 25px; /*Reducido para mejor ajuste*/
+    border-radius: 8px;
+    width: calc(33.33% - 20px); /*Calculamos el ancho exacto*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin: 10px; /*Ajustar para mejor espaciado*/
+}
+
+.case-card .icon-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.case-card .icon-placeholder img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.case-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+}
+
+.case-card p {
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.cta-button.tertiary {
+    background-color: #B2B2B2;
+    color: #FFFFFF;
+    border-color: #B2B2B2;
+    margin-top: 30px;
+}
+
+.cta-button.tertiary:hover {
+    background-color: #999999;
+    border-color: #999999;
+    color: #FFFFFF;
 }
 
 
@@ -187,5 +321,39 @@
     
     .banner-content h1 {
         font-size: 2.5em;
+    }
+    
+    /* ¿Quiénes somos? */
+    .about-us {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 40px 0;
+        gap: 30px;
+    }
+    
+    .about-us-content,
+    .about-us-image-placeholder {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+    
+    .about-us-content h2 {
+        font-size: 2em;
+    }
+    
+    /* Casos de Éxito */
+    .case-card {
+        width: calc(33.33% - 20px);
+        margin: 10px;
+    }
+    
+    .cards-container {
+        flex-wrap: nowrap;
+        gap: 20px;
+        overflow-x: auto;
+    }
+    
+    .success-stories .section-title {
+        font-size: 2.2em;
     }
 }
