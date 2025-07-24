@@ -211,7 +211,7 @@
 
 
 
-/* Nuevos estilos para la sección Casos de Éxito */
+/* Nuevos estilos para la sección Casos de Éxito (MODIFICAR LAS 3 TARJETAS LINEA DE 3) */
 .success-stories {
     background-color: #696969;
     color: #FFFFFF;
@@ -228,22 +228,24 @@
 .cards-container {
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap; /*Impide que las tarjetas se solten a la siguiente linea*/
-    gap: 20px; /*Espacio entre tarjetas*/
-    margin-bottom: 50px;
+    flex-wrap: wrap; /*Permite que bajen en móvil*/
+    gap: 40px; /*Espacio entre tarjetas*/
+    margin: 0 auto;
+    max-width: 1200px;/* Limita el ancho total*/
     padding: 0 20px;
-    overflow-x: auto; /*Permite scroll horizontal si es necesario*/
+    
 }
 
 .case-card {
     background-color: #B2B2B2;
     color: #FFFFFF;
     padding: 25px; /*Reducido para mejor ajuste*/
-    border-radius: 8px;
-    width: calc(33.33% - 20px); /*Calculamos el ancho exacto*/
+    border-radius: 12px;
+    flex: 1 1 300px; /* Hace que las tarjetas sean flexibles y responsivas*/
+    max-width: 350px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    margin: 10px; /*Ajustar para mejor espaciado*/
+    text-align: center;
+    
 }
 
 .case-card .icon-placeholder {
@@ -342,18 +344,46 @@
     }
     
     /* Casos de Éxito */
-    .case-card {
-        width: calc(33.33% - 20px);
-        margin: 10px;
-    }
-    
-    .cards-container {
-        flex-wrap: nowrap;
-        gap: 20px;
-        overflow-x: auto;
+    .success-stories {
+        padding: 60px 15px;
     }
     
     .success-stories .section-title {
         font-size: 2.2em;
+    }
+    
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        padding: 0 10px;
+    }
+    
+    .case-card {
+        width: 100%;
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    .cta-button.tertiary {
+        width: 90%;
+        padding: 14px;
+        font-size: 1em;
+    }
+    
+}
+
+/* Ajustes adicionales para pantallas extra pequeñas */
+@media screen and (max-width: 480px) {
+    .success-stories .section-title {
+        font-size: 1.8em;
+    }
+    
+    .case-card h3 {
+        font-size: 1.2em;
+    }
+    
+    .case-card p {
+        font-size: 0.9em;
     }
 }
