@@ -211,7 +211,7 @@
 
 
 
-/* Nuevos estilos para la sección Casos de Éxito (MODIFICAR LAS 3 TARJETAS LINEA DE 3) */
+/* Nuevos estilos para la sección Casos de Éxito  */
 .success-stories {
     background-color: #696969;
     color: #FFFFFF;
@@ -287,6 +287,163 @@
     background-color: #999999;
     border-color: #999999;
     color: #FFFFFF;
+}
+
+
+/* Nuevos estilos para la sección Beneficios  */
+
+.benefits-section {
+    background-color: #FFFFFF; /*Fondo blanco general*/
+    padding: 40px 20px;
+    color: #212529; /*Color principal de texto*/
+    
+}
+
+.benefits-container {/*contenedor principal: imagen + texto*/
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap; /*Para permitir responsive en pantallas pequeñas*/
+} 
+
+.benefits-image{/*Cuadro de imagen (gris)*/
+    background-color: #B2B2B2;/*Color gris para el contenedor de imagen*/
+    width: 400px;
+    height: 400px;
+    flex-shrink: 0;
+    border-radius: 8px;
+}
+
+.benefits-content{/*Contenido derecha*/
+    flex: 1;
+    min-width: 300px;
+}
+
+.benefits-title{
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #212529;/*Color oscuro para el titulo*/
+}
+
+.benefits-list{/*Lista de beneficios*/
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.icon-circle {
+    background-color: #B2B2B2;/*Color de los circulos*/
+    color: #212529;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-weight: bold;
+}
+
+.benefits-list{/*texto de cada beneficio*/
+    margin: 0;
+    font-size: 0.95em;
+    line-height: 1.5;
+    color: #212529;
+}
+
+
+/* Nuevos estilos para la sección Nuestro Servicios  */
+.servicios{
+    padding: 60px 20px;
+    background-color: #FFFFFF;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.servicios h2{
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #212529;
+}
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tarjeta {
+    padding: 25px;
+    border-radius: 20px;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.tarjeta:hover{
+    transform: translateY(-5px);
+}
+
+.tarjeta .icono{
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.tarjeta h3 {
+    font-size: 1,5rem;
+    margin-bottom: 10px;
+}
+
+.tarjeta p {
+    font-size: 1rem;
+    margin-bottom: bold;
+
+}
+
+.tarjeta a {
+    color: #FFFFFF;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/*Colore personalizados*/
+.color1 {background: #B2B2B2;}
+.color2 {background: #B2B2B2;}
+.color3 {background: #B2B2B2;}
+.color4 {background: #B2B2B2;}
+.color5 {background: #B2B2B2;}
+.color6 {background: #B2B2B2;}
+
+.cta {
+    margin-top: 50px;
+}
+
+.cta a {
+    background-color: #b2b2b2;
+    padding: 15px 30px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.cta a:hover {
+    background-color: #696969;
 }
 
 
@@ -370,11 +527,47 @@
         padding: 14px;
         font-size: 1em;
     }
+
+    /* Beneficios*/
+    .benefits-container{
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .befits-image{
+        width: 90%;
+        height: auto;
+        aspect-ratio: 1/1;/*Mantiene proporcion cuadrada*/
+    }
+
+    .benefits-title{
+        text-align: center;
+    }
+
+    .benefits-list{
+        padding: 0 10px;
+    }
+
+    /* Nuestros Servicios*/
+    .tarjetas {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .servicios h2 {
+        font-size: 2rem;
+    }
+
+    .tarjeta {
+        padding: 20px;
+    }
     
 }
 
 /* Ajustes adicionales para pantallas extra pequeñas */
 @media screen and (max-width: 480px) {
+    /* Casos de Éxito */
     .success-stories .section-title {
         font-size: 1.8em;
     }
@@ -385,5 +578,43 @@
     
     .case-card p {
         font-size: 0.9em;
+    }
+
+    /* Beneficios */
+    .benefits-title{
+        font-size: 1.5em;
+    }
+
+    .icon-circle{
+        width: 30px;
+        height: 30px;
+        font-size: 0.8em;
+    }
+
+    .benefits-list p {
+        font-size: 0.9em;
+    }
+
+    /* Nuestros servicios */
+    .tarjetas {
+        grid-template-columns: 1fr;
+
+    }
+
+    .servicios h2 {
+        font-size: 1.8rem;
+    }
+
+    .tarjeta .icono {
+        font-size: 2rem;
+    }
+
+    .tarjeta h3 {
+        font-size: 1.3rem;
+    }
+
+    .cta a {
+        width: 100%;
+        display: inline-block;
     }
 }
