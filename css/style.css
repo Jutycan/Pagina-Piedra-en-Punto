@@ -447,6 +447,76 @@
 }
 
 
+/* Nuevos estilos para la sección Flujo de trabajo  */
+.proceso-trabajo {
+    background-color: #696969;
+    color: #FFFFFF;
+    padding: 60px 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.proceso-header{
+    margin-bottom: 40px;
+}
+
+.proceso-trabajo .subtitulo {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+.proceso-trabajo h2 {
+    font-size: 2.4em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.pasos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.paso {
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.icono-img {
+    width: 70px;
+    height: 70px;
+    background-color: #B2B2B2;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: brackground-color 0.3s ease;
+}
+
+.icono-img:hover {
+    background-color: #A0A0A0;
+}
+
+.paso p {
+    font-size: 1.1em;
+    margin: 0;
+    font-weight: 500;
+}
+
+.flecha {
+    font-size: 28px;
+    color: #FFFFFF;
+    align-self: center;
+}
+
+
 
 /* Media Queries para Responsividad */
 @media (max-width: 768px) {
@@ -562,6 +632,30 @@
     .tarjeta {
         padding: 20px;
     }
+
+    /* Flujo de trabajo*/
+    .proceso-trabajo {
+        padding: 40px 15px;
+    }
+
+    .proceso-trabajo h2 {
+        font-size: 2em;
+    }
+
+    .pasos-container {
+        gap: 20px;
+    }
+
+    .icono-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .flecha {
+        font-size: 24px;
+    }
+
+    
     
 }
 
@@ -616,5 +710,32 @@
     .cta a {
         width: 100%;
         display: inline-block;
+    }
+
+    /* Flujo de trabajo */
+    .proceso-trabajo {
+        padding: 30px 15px;
+    }
+    .proceso-trabajo h2 {
+        font-size: 1.8em;
+    }
+
+    .proceso-trabajo .subtitulo {
+        font-size: 1em;
+    }
+
+    .pasos-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .flecha {
+        display: none;
+    }
+
+    .paso {
+        min-width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
     }
 }
