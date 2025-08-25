@@ -1,321 +1,135 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Piedra en Punto</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Inicio | Piedra en Punto</title>
+
+    <link rel="stylesheet" href="css/inicio.css">
+
+    <link rel="stylesheet" href="css/responsive-movil/responsive-movil-inicio.css">
 </head>
 <body>
-    <!-- Header principal -->
-    <header class="main-header">
-        <!-- Logo de la empresa -->
+
+    <header class="header">
+        
         <div class="logo">
-            <img src="imagenes/LOGO blanco.png" alt="Piedra en Punto" class="logo-img">
+            <img src="imagenes/general/LOGO rosa (1).png" alt="Piedra en Punto - Logo">
         </div>
 
-        <!-- Menú principal -->
-        <nav class="main-nav">
-            <!-- Enlace con dropdown -->
-            <a href="#" class="nav-link">Inicio </a>
-            
-            <!-- Dropdown menu para Inicio -->
-            <div class="dropdown-menu">
-                <a href="#">Subopción 1</a>
-                <a href="#">Subopción 2</a>
-                <a href="#">Subopción 3</a>
-            </div>
+        <!-- Botón hamburguesa SOLO visible en móvil -->
+        <button class="menu-toggle" aria-label="Abrir menú">&#9776;</button>
 
-            <!-- Enlace con dropdown -->
-            <a href="#" class="nav-link">Servicios </a>
-            
-            <!-- Dropdown menu para Servicios -->
-            <div class="dropdown-menu">
-                <a href="#">Subservicio 1</a>
-                <a href="#">Subservicio 2</a>
-                <a href="#">Subservicio 3</a>
-            </div>
+        <nav>
+            <ul>
+                <li class="submenu">
+                    <a href="#">Inicio</a>
+                    <ul>
+                        <li><a href="#banner-inicio">Banner</a></li>
+                        <li><a href="#quienes-somos-inicio">¿Quiénes Somos?</a></li>
+                        <li><a href="#empresas-inicio">Empresas Aliadas</a></li>
+                        <li><a href="#beneficios-inicio">Beneficios</a></li>
+                        <li><a href="#servicios-inicio">Nuestros Servicios</a></li>
+                        <li><a href="#flujo-trabajo-inicio">Flujo de Trabajo</a></li>
+                        <li><a href="#formulario-inicio">Formulario Contacto</a></li>
+                    </ul>
+                </li>
 
-            <!-- Enlace con dropdown -->
-            <a href="#" class="nav-link">Equipo </a>
-            
-            <!-- Dropdown menu para Equipo -->
-            <div class="dropdown-menu">
-                <a href="#">Miembro 1</a>
-                <a href="#">Miembro 2</a>
-                <a href="#">Miembro 3</a>
-            </div>
+                <li class="submenu">
+                    <a href="#">Servicios</a>
+                    <ul>
+                        <li><a href="#banner-servicios">Banner</a></li>
+                        <li><a href="#servicios1">Servicio 1</a></li>
+                        <li><a href="#servicios2">Servicio 2</a></li>
+                        <li><a href="#servicios3">Servicio 3</a></li>
+                        <li><a href="#servicios4">Servicio 4</a></li>
+                        <li><a href="#servicios5">Servicio 5</a></li>
+                        <li><a href="#servicios6">Servicio 6</a></li>
+                        <li><a href="#flujo-trabajo-servicios">Flujo de Trabajo</a></li>
+                        <li><a href="#preguntas-servicios">FAQS Servicios</a></li>
+                        <li><a href="#formulario-servicios">Formulario Contacto</a></li>
+                    </ul>
+                </li>
 
-            <!-- Botón de contacto circular -->
-            <button class="contact-btn">Contacto</button>
+                <li class="submenu">
+                    <a href="#">Equipo</a>
+                    <ul>
+                        <li><a href="#banner-equipo">Banner</a></li>
+                        <li><a href="#quienes-somos-equipo">¿Quiénes Somos?</a></li>
+                        <li><a href="#certificaciones-equipo">Certificaciones Premios</a></li>
+                        <li><a href="#historia-equipo">Historia + Misión-Visión</a></li>
+                        <li><a href="#valores-equipo">Valores</a></li>
+                        <li><a href="#equipo-equipo">Equipo</a></li>
+                        <li><a href="#testimonios-equipo-equipo">Testimonios Equipo</a></li>
+                        <li><a href="#formulario-equipo">Formulario Contacto</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#contacto" class="btn-contacto">Contacto</a>
+                </li>
+            </ul>
         </nav>
     </header>
 
-
-
-    <!-- Contenido de la página -->
     <main>
-        <!-- Aquí va tu contenido principal -->
-        <!-- Banner nuevo -->
-    <section id="banner-inicio" class="banner">
-        <div class="banner-content">
-            <h1>Título Banner</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis.</p>
-            <a href="#" class="cta-button">Link CTA &rarr;</a>
-        </div>
-        <div class="banner-image-placeholder">
-            <img src="ruta-a-tu-imagen.jpg" alt="Descripción de la imagen" class="banner-image">
-        </div>
-    </section>
-
-    <!--Nueva seccion ¿Quiénes somos?-->
-    <section id="quienes-somos" class="about-us">
-        <div class="about-us-image-placeholder">
-            <img src="imagen.jpg" alt="Descripcion de la imagen" class="about-us-image">
-
-        </div>
-        <div class="about-us-content">
-            <h2>¿Quiénes somos?</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis.</p>
-            <a href="#" class="cta-button secondary">Link CTA &rarr;</a>
-
-        </div>
-
-    </section>
-
-    <!--Nueva Seccion Caoso de Éxito-->
-    <section id="casos-exito" class="success-stories">
-        <h2 class="section-title">Casos de éxito</h2>
-        <div class="cards-container">
-            <div class="case-card">
-                <div class="icon-placeholder">
-                    <img src="ruta-icono1.png" alt="Icono de Empresa 1">
-
+        <section id="banner-inicio" class="main-banner">
+            <div class="banner-container">
+                <div class="banner-text">
+                    <p class="banner-pre-title">En Piedra en Punto:</p>
+                    <h1 class="banner-title">Hacemos Marketing Culinario,</h1>
+                    <p class="banner-subtitle">Somos el punto de encuentro que hace la diferencia.</p>
+                    <ul class="banner-features">
+                        <li>20 años de experiencia</li>
+                        <li>Llegamos a toda la república mexicana</li>
+                        <li>Personal culinario capacitado para cada proyecto</li>
+                    </ul>
+                    <a href="#" class="cta-banner">¡Me interesa! →</a>
                 </div>
-                <h3>Nombre Empresa 1</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat</p>
-
-
-            </div>
-            <div class="case-card">
-                <div class="icon-placeholder">
-                    <img src="ruta-icono2.png" alt="Icono de Empresa 2">
-
+                <div class="banner-image">
+                    <img src="imagenes/inicio/Chef 1.png" alt="Chef sonriendo sosteniendo pan">
                 </div>
-                <h3>Nombre Empresa 2</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat</p>
-
-
             </div>
+        </section>
 
-            
-            <div class="case-card">
-                <div class="icon-placeholder">
-                    <img src="ruta-icono3.png" alt="Icono de Empresa 3">
-
+        <section id="quienes-somos-inicio" class="about-us-section">
+            <div class="about-us-container">
+                <div class="about-us-image">
+                    <img src="imagenes/inicio/Quienes somos.png" alt="Equipo de chefs trabajando juntos">
                 </div>
-                <h3>Nombre Empresa 3</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat</p>
-                
-
-            </div>
-
-        </div>
-        <a href="#" class="cta-button tertiary">Ver más casos &rarr;</a>
-
-    </section>
-
-    <!--Nueva seccion Beneficios-->
-
-    <section id="beneficios" class="benefits- section">
-        <div class="benefits-container">
-            <div class="benefits-image"><!--Va imagen lateral izquierda -->
-                <img src="benefits-imagen.png" alt="Imagen">
-
-            </div> 
-
-            <!--Va el contenido textual derecho-->
-            <div class="benefits-content">
-                <h2 class="benefits-title">Beneficios del Marketing Culinario</h2>
-
-                <ul class="benefits-list">
-                    <li>
-                        <span class="icon-circle">01</span>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore voluptas soluta officiis porro consectetur neque debitis saepe odio natus! Sequi aperiam tenetur, obcaecati dolorum itaque voluptas eos! Quis, dignissimos qui.</p>
-                    </li>
-                    <li>
-                        <span class="icon-circle">02</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus fugiat, dolorum ullam temporibus veniam cupiditate aperiam, numquam unde modi voluptatem, iure ipsam adipisci odio! Tempore veritatis porro doloribus nobis ex!</p>
-                    </li>
-                    <li>
-                        <span class="icon-circle">03</span>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem neque consequuntur, iusto, in accusantium doloremque quisquam impedit porro adipisci quia deleniti, aspernatur accusamus odit. Exercitationem quam fugit reiciendis magnam corporis.</p>
-                    </li>
-                    <li>
-                        <span class="icon-circle">04</span>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat debitis autem deserunt facere sed consequuntur mollitia iste voluptates unde culpa officiis, non, voluptatibus quo maxime magni perferendis modi cum aperiam.</p>
-                    </li>
-                    <li>
-                        <span class="icon-circle">05</span>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex, assumenda. Veritatis ab alias odio maiores quasi suscipit est architecto illo. Repellat fuga reprehenderit alias vero doloremque quod animi voluptate dolorem!</p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </section>
-
-
-    <!--Nueva seccion Nuestros Servicios-->
-    <section id="servicios-inicio" class="servicios">
-        <h2>Nuestro servicios</h2>
-        <div class="tarjetas">
-            <div class="tarjeta color1">
-                <div class="icono"></div>
-                <h3>Servicio <span>01</span></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Conoce Más</a>
-            </div>
-            <div class="tarjeta color2">
-                <div class="icono"></div>
-                <h3>Servicio <span>02</span></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Conoce Más</a>
-            </div>
-            <div class="tarjeta color3">
-                <div class="icono"></div>
-                <h3>Servicio <span>03</span></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Conoce Más</a>
-            </div>
-            <div class="tarjeta color4">
-                <div class="icono"></div>
-                <h3>Servicio <span>04</span></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Conoce Más</a>
-            </div>
-            <div class="tarjeta color5">
-                <div class="icono"></div>
-                <h3>Servicio <span>05</span></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Conoce Más</a>
-            </div>
-            <div class="tarjeta color6">
-                <div class="icono"></div>
-                <h3>Servicio <span>06</span></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <a href="#">Conoce Más</a>
-            </div>
-        </div>
-        <div class="cta"><a href="#">Link CTA</a></div>
-    </section>
-
-
-    <!--Nueva seccion Flujo de trabajo -->
-    <section id="flujo-trabajo" class="proceso-trabajo">
-        <div class="proceso-header">
-            <p class="subtitulo">Flujo de trabajo</p>
-        <h2>Nuestro Proceso de Trabajo</h2>
-
-        </div>
-        
-
-        <div class="pasos-container">
-            <div class="paso">
-                <div class="icono-img">
-                    <img src="ruta/icono1.png" alt="icono 1">
+                <div class="about-us-content">
+                    <h2 class="about-us-title">¿Quiénes somos?</h2>
+                    <p class="about-us-text">En piedra en punto nos especializamos en ser el punto de encuentro entre los marcos y sus consumidores.</p>
+                    <p class="about-us-text">Somos expertos en logística, creación y desarrollo de proyectos. Creamos experiencias culinarias 360° para potencializar tu marca.</p>
+                    <a href="#" class="about-us-button">Conócenos →</a>
                 </div>
-                <p>Parte 1</p>
             </div>
-            <span class="flecha">></span>
+        </section>
 
-            <div class="paso">
-                <div class="icono-img">
-                    <img src="ruta/icono2.png" alt="icono 2">
+        <section id="empresas-inicio" class="partners-section">
+            <div class="partners-container">
+                <h2 class="partners-title">Empresas con las que<br>hemos trabajado</h2>
+                <div class="logo-carousel">
+                    <div class="logos-slide">
+                        <img src="imagenes/inicio/Samsung logo.png" alt="Logo de Samsung">
+                        <img src="imagenes/inicio/Mabe logo.png" alt="Logo de Mabe">
+                        <img src="imagenes/inicio/Superama logo.png" alt="Logo de Superama">
+                        <img src="imagenes/inicio/Moulinex logo.png" alt="Logo de Moulinex">
+                        <img src="imagenes/inicio/Krups logo.png" alt="Logo de Krups">
+                        <img src="imagenes/inicio/Tefal logo.png" alt="Logo de Tefal">
+                        <img src="imagenes/inicio/Samsung logo.png" alt="Logo de Samsung">
+                        <img src="imagenes/inicio/Mabe logo.png" alt="Logo de Mabe">
+                        <img src="imagenes/inicio/Superama logo.png" alt="Logo de Superama">
+                        <img src="imagenes/inicio/Moulinex logo.png" alt="Logo de Moulinex">
+                        <img src="imagenes/inicio/Krups logo.png" alt="Logo de Krups">
+                        <img src="imagenes/inicio/Tefal logo.png" alt="Logo de Tefal">
+                    </div>
                 </div>
-                <p>Parte 2</p>
             </div>
-            <span class="flecha">></span>
-
-            <div class="paso">
-                <div class="icono-img">
-                    <img src="ruta/icono3.png" alt="icono 3">
-                </div>
-                <p>Parte 3</p>
-            </div>
-            <span class="flecha">></span>
-            
-            <div class="paso">
-                <div class="icono-img">
-                    <img src="ruta/icono4.png" alt="icono 4">
-                </div>
-                <p>Parte 4</p>
-            </div>
-        </div>
-    </section>
-
-
-    <!--Nueva seccion Formulario contacto -->
-    <section id="formulario-inicio" class="cta-section">
-        <div class="cta-container">
-            <div class="cta-left">
-                <h2>CTA contáctanos</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non inventore a fuga consectetur sint modi assumenda aliquam ipsum aperiam necessitatibus? Earum reprehenderit quaerat eaque fugit corporis ab voluptates adipisci sed.</p>
-                <form>
-                    <label for="nombre">Nombre*</label>
-                    <input type="text" id="nombre" name="nombre" required>
-
-                    <label for="empresa">Empresa*</label>
-                    <input type="text" id="empresa" name="empresa" required>
-
-                    <label for="email">Correo electrónico*</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="comentario">Dejar comentario*</label>
-                    <input type="text" id="comentario" name="comentario" required>
-
-                    <button type="submit">Link CTA →</button>
-                </form>
-            </div>
-
-            <div class="cta-right"></div>
-        </div>
-    </section>
-
+        </section>
     </main>
 
-    <!--Nueva seccion Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-left">
-                <img src="imagenes/LOGO blanco.png" alt="Logo Piedra en Punto" class="logo-footer">
-                <ul class="footer-links">
-                    <li>Servicios</li>
-                    <li>Sobre nosostros</li>
-                    <li>FAQs</li>
-                    <li>PQRS</li>
-                    <li>contáctanos</li>
-                    <li>Blog</li>
-                    <li>Newsletter</li>
-                    <li>Trabaja con nosotros</li>
-                </ul>
-                <div class="footer-social">
-                    <a href="#"><img src="imagenes/instagram.png" alt="Instagram"></a>
-                    <a href="#"><img src="imagenes/facebook.png" alt="Facebook"></a>
-                    <a href="#"><img src="imagenes/linkedin.png" alt="LinkedIn"></a>
-                </div>
-            </div>
-            <div class="footer-right">
-                <h3>Información de contacto</h3>
-                <p>Iglesia 2, Torre A 603, Tizapán San Ángel, 01090, Álvaro Obregón, CDMX</p>
-                <p>email: veronica@piedraenpunto.com.mx</p>
-            </div>
-        </div>
-    </footer>
+    <script src="js/inicio.js"></script>
 
-    
-
-    <!-- Scripts al final del body -->
-    <script src="js/script.js"></script>
 </body>
 </html>

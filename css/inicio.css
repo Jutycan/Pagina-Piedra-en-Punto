@@ -1,0 +1,318 @@
+/* -------------------------------------- */
+/* Estilos del Header */
+/* -------------------------------------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1000;
+}
+
+.header .logo img {
+    max-height: 60px;
+}
+
+/* === NAV === */
+.header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.header nav ul li {
+    position: relative;
+}
+
+.header nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    padding: 10px 0;
+    display: block;
+}
+
+/* === BOTÓN CONTACTO === */
+.header .btn-contacto {
+    background-color: #e91e63;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* === SUBMENÚ ESCRITORIO === */
+.header nav ul li ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.header nav ul li ul li {
+    padding: 0;
+}
+
+.header nav ul li ul li a {
+    padding: 5px 15px;
+    white-space: nowrap;
+}
+
+/* === BOTÓN HAMBURGUESA (OCULTO EN ESCRITORIO) === */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* -------------------------------------- */
+/* Estilos del Banner */
+/* -------------------------------------- */
+.main-banner {
+    width: 100%;
+    max-width: 1200px;
+    height: 979px; 
+    margin: -100px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.banner-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-text {
+    width: 50%;
+    padding-right: 40px;
+    box-sizing: border-box;
+}
+
+.banner-pre-title {
+    color: #777;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.banner-title {
+    font-size: 56px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 25px;
+    line-height: 1.1;
+}
+
+.banner-subtitle {
+    color: #555;
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.banner-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.banner-features li {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.banner-features li::before {
+    content: '•';
+    color: #EC8A10;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+}
+
+.cta-banner {
+    display: inline-block;
+    background-color: #EC8A10;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-banner:hover {
+    background-color: #d1780d;
+}
+
+.banner-image {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-image img {
+    max-height: 90%;
+    max-width: 90%;
+    object-fit: contain;
+}
+
+/* -------------------------------------- */
+/* Estilos de ¿Quiénes somos? */
+/* -------------------------------------- */
+.about-us-section {
+    width: 100%;
+    max-width: 1200px;
+    height: 593px;
+    margin: -100px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    position: relative;
+}
+
+.about-us-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.about-us-image {
+    width: 50%;
+    position: relative;
+    padding-right: 50px;
+    box-sizing: border-box;
+}
+
+.about-us-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.about-us-content {
+    width: 50%;
+    padding-left: 50px;
+    box-sizing: border-box;
+}
+
+.about-us-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.about-us-text {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-us-button {
+    display: inline-block;
+    background-color: #38b492;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.about-us-button:hover {
+    background-color: #2f9479;
+
+}
+
+/* -------------------------------------- */
+/* Estilos de Empresas Aliadas */
+/* -------------------------------------- */
+.partners-section {
+    width: 100%;
+    height: 250px;
+    background-image: url(''); /* fondo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    padding: 50px 0;
+}
+
+.partners-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 60px;
+}
+
+.logo-carousel {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    overflow: hidden;
+}
+
+.logos-slide {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: slide 30s linear infinite;
+}
+
+.logos-slide img {
+    height: 80px;
+    margin: 0 40px;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+/* Animación del Carrusel */
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
