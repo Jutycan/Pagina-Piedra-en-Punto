@@ -1,0 +1,790 @@
+/* -------------------------------------- */
+/* Estilos del Header */
+/* -------------------------------------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1000;
+}
+
+.header .logo img {
+    max-height: 60px;
+}
+
+/* === NAV === */
+.header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.header nav ul li {
+    position: relative;
+}
+
+.header nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    padding: 10px 0;
+    display: block;
+}
+
+/* === BOTÓN CONTACTO === */
+.header .btn-contacto {
+    background-color: #e91e63;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* === SUBMENÚ ESCRITORIO === */
+.header nav ul li ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.header nav ul li ul li {
+    padding: 0;
+}
+
+.header nav ul li ul li a {
+    padding: 5px 15px;
+    white-space: nowrap;
+}
+
+/* === BOTÓN HAMBURGUESA (OCULTO EN ESCRITORIO) === */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* -------------------------------------- */
+/* Estilos del Banner */
+/* -------------------------------------- */
+.banner-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.banner-desktop {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding: 40px 20px;
+}
+
+.banner-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #e67e22;
+    border-radius: 10px;
+    padding: 4px 40px;
+    min-height: 180px;
+    max-width: 1200px;
+    width: 100%;
+    position: relative;
+}
+
+.banner-image-box {
+    flex: 0 0 380px;
+    margin-right: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.banner-image {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: -30px;
+    margin-bottom: -30px;
+    position: relative;
+    z-index: 2;
+}
+
+.banner-content {
+    flex: 1;
+    color: #fff;
+    z-index: 2;
+    max-width: 500px;
+}
+
+.banner-title {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.banner-description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.banner-cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0b9b73;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.banner-cta-button:hover {
+    background-color: #088a64;
+}
+
+/* Ocultar la versión móvil en escritorio */
+.banner-mobile {
+    display: none;
+}
+
+/* -------------------------------------- */
+/* Título de la sección de Empresas */
+/* -------------------------------------- */
+.section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 64px;
+    font-weight: bold;
+    color: #333333; /* Un gris oscuro para un aspecto profesional */
+    text-align: center;
+    margin-bottom: 60px; /* Espacio para separar del siguiente contenido */
+}
+
+/* -------------------------------------- */
+/* Estilos del Servcio 1*/
+/* -------------------------------------- */
+.service-one-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    background-color: #f7f3ed;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+
+/* Oculta la versión móvil por defecto en escritorio */
+.service-one-mobile {
+    display: none;
+}
+
+/* Estilos de escritorio */
+.service-one-desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-one-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.service-one-details {
+    width: 50%;
+    padding-right: 40px;
+}
+
+.service-one-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #71b8be;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.service-one-features {
+    margin-bottom: 30px;
+}
+
+.service-one-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.service-one-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #71b8be;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.service-one-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-left: 15px;
+}
+
+.service-one-cta-button {
+    display: inline-block;
+    background-color: transparent;
+    border: 2px solid #71b8be;
+    color: #71b8be;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.service-one-cta-button:hover {
+    background-color: #71b8be;
+    color: #fff;
+}
+
+.service-one-image-container {
+    width: 50%;
+    height: 520px;
+    margin-top: -20px;
+}
+
+.service-one-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+/* -------------------------------------- */
+/* Estilos del Servcio 2*/
+/* -------------------------------------- */
+.service-two-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    background-color: #f7f3ed;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+
+/* Oculta la versión móvil por defecto en escritorio */
+.service-two-mobile {
+    display: none;
+}
+
+/* Estilos de escritorio */
+.service-two-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.service-two-content {
+    width: 50%;
+    padding-left: 80px;
+    padding-right: 0;
+}
+
+.service-two-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #f2b934;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.service-two-features {
+    margin-bottom: 30px;
+}
+
+.service-two-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.service-two-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #f2b934;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.service-two-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-left: 15px;
+}
+
+.service-two-cta-button {
+    display: inline-block;
+    background-color: #f2b934;
+    border: 2px solid #f2b934;
+    color: #333333;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.service-two-cta-button:hover {
+    background-color: #e0ac2c;
+    border-color: #e0ac2c;
+    color: #333333;
+}
+
+.service-two-image-box {
+    width: 50%;
+    height: 520px;
+    margin-top: -20px;
+}
+
+.service-two-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+/* -------------------------------------- */
+/* Estilos del Servcio 3*/
+/* -------------------------------------- */
+.service-three-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    background-color: #f7f3ed;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+
+/* --- Oculta la versión móvil por defecto en escritorio --- */
+.service-three-mobile {
+    display: none;
+}
+
+.service-three-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.service-three-content {
+    width: 50%;
+    padding-left: 0;
+    padding-right: 80px;
+}
+
+.service-three-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #f29e34;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.service-three-features {
+    margin-bottom: 30px;
+}
+
+.service-three-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.service-three-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #f29e34;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.service-three-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-left: 15px;
+}
+
+.service-three-cta-button {
+    display: inline-block;
+    background-color: #f29e34;
+    border: 2px solid #f29e34;
+    color: #333333;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.service-three-cta-button:hover {
+    background-color: #e0942c;
+    color: #333333;
+}
+
+.service-three-image-box {
+    width: 50%;
+    height: 520px;
+    margin-top: -20px;
+}
+
+.service-three-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+/* -------------------------------------- */
+/* Estilos del Servcio 4*/
+/* -------------------------------------- */
+.service-four-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    background-color: #f7f3ed;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+
+/* Oculta la versión móvil por defecto en escritorio */
+.service-four-mobile {
+    display: none;
+}
+
+.service-four-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.service-four-image-box {
+    width: 50%;
+    height: 520px;
+    margin-top: -20px;
+}
+
+.service-four-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+.service-four-content {
+    width: 50%;
+    padding-left: 80px;
+    padding-right: 0;
+}
+
+.service-four-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #e0409a;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.service-four-features {
+    margin-bottom: 30px;
+}
+
+.service-four-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.service-four-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #e0409a;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.service-four-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-left: 15px;
+}
+
+.service-four-cta-button {
+    display: inline-block;
+    background-color: #e0409a;
+    border: 2px solid #e0409a;
+    color: #fff;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.service-four-cta-button:hover {
+    background-color: #d13a8c;
+    border-color: #d13a8c;
+    color: #fff;
+}
+
+/* -------------------------------------- */
+/* Estilos del Servcio 5*/
+/* -------------------------------------- */
+.service-five-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    background-color: #f7f3ed;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+
+/* Oculta la versión móvil por defecto en escritorio */
+.service-five-mobile {
+    display: none;
+}
+
+/* Estilos para la versión de escritorio */
+.service-five-desktop {
+    display: block;
+}
+
+.service-five-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.service-five-content {
+    width: 50%;
+    padding-left: 0;
+    padding-right: 80px;
+}
+
+.service-five-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #087b7a;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.service-five-features {
+    margin-bottom: 30px;
+}
+
+.service-five-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.service-five-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #087b7a;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.service-five-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-left: 15px;
+}
+
+.service-five-cta-button {
+    display: inline-block;
+    background-color: #087b7a;
+    border: 2px solid #087b7a;
+    color: #fff;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.service-five-cta-button:hover {
+    background-color: #056665;
+    border-color: #056665;
+    color: #fff;
+}
+
+.service-five-image-box {
+    width: 50%;
+    height: 520px;
+    margin-top: -20px;
+}
+
+.service-five-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+/* -------------------------------------- */
+/* Estilos del Servcio 6*/
+/* -------------------------------------- */
+.service-six-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    background-color: #f7f3ed;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+
+/* Oculta la versión móvil por defecto en escritorio */
+.service-six-mobile {
+    display: none;
+}
+
+/* Estilos de escritorio */
+.service-six-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.service-six-image-box {
+    width: 50%;
+    height: 520px;
+    margin-top: -20px;
+}
+
+.service-six-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+}
+
+.service-six-content {
+    width: 50%;
+    padding-left: 80px;
+    padding-right: 0;
+}
+
+.service-six-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #f29e34;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.service-six-features {
+    margin-bottom: 30px;
+}
+
+.service-six-feature-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.service-six-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #f29e34;
+    margin-top: 5px;
+    flex-shrink: 0;
+}
+
+.service-six-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-left: 15px;
+}
+
+.service-six-cta-button {
+    display: inline-block;
+    background-color: #f29e34;
+    border: 2px solid #f29e34;
+    color: #333333;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.service-six-cta-button:hover {
+    background-color: #e0942c;
+    border-color: #e0942c;
+    color: #333333;
+}

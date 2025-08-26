@@ -43,3 +43,54 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+//---------------------------------------------------------------------------------------
+//-----------Formulario Contacto---------------------------------------------------------
+//---------------------------------------------------------------------------------------
+const form = document.getElementById('contact-form');
+const formContent = document.querySelector('.contact-form-content');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Evita que la página se recargue
+
+    // Muestra un mensaje de "Enviando..."
+    const button = form.querySelector('.contact-form-button');
+    button.innerText = 'Enviando...';
+    button.disabled = true;
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        throw new Error('El envío falló. Por favor, inténtalo de nuevo.');
+    })
+    .then(data => {
+        if (data.result === 'success') {
+            // Mensaje de éxito
+            const successMessage = document.createElement('div');
+            successMessage.className = 'success-message';
+            successMessage.innerHTML = '¡Mensaje enviado con éxito!';
+
+            // Oculta el formulario y muestra el mensaje
+            formContent.innerHTML = '';
+            formContent.appendChild(successMessage)
+
+            // Muestra un emoji profesional de éxito
+            console.log("¡Envío exitoso! 🎉");
+        } else {
+            throw new Error(data.message);
+        }
+    })
+    .catch(error => {
+        // Muestra un mensaje de error
+        alert(error.message);
+        button.innerText = 'Enviar →';
+        button.disabled = false;
+    });
+});

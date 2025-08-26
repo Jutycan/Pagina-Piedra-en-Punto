@@ -1,0 +1,418 @@
+/* Hover solo en escritorio */
+@media (min-width: 769px) {
+    .header nav ul li:hover > ul {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Header */
+    /* -------------------------------------- */
+    .menu-toggle {
+        display: block;
+    }
+
+    .header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .header nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .header nav ul li {
+        width: 100%;
+    }
+
+    .header nav ul li a {
+        padding: 12px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header nav.active {
+        max-height: 600px; /* se expande */
+    }
+
+    /* Submenús móviles */
+    .header nav ul li ul {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background: #f9f9f9;
+    }
+
+    .header nav ul li.submenu.submenu-open > ul {
+        display: block;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Banner */
+    /* -------------------------------------- */
+    .banner-desktop {
+        display: none !important;
+    }
+    
+    .banner-mobile {
+        display: block !important;
+        width: 100%;
+        max-width: 600px;
+        background-color: #e67e22;
+        border-radius: 10px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .banner-wrapper-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .banner-content {
+        max-width: 100%;
+    }
+    
+    .banner-image-box-mobile {
+        width: 100%;
+        margin: 0;
+        z-index: 1;
+    }
+
+    .banner-image {
+        margin: 0;
+    }
+
+    .banner-cta-button-mobile {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 12px 24px;
+        background-color: #0b9b73;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+
+    /* -------------------------------------- */
+    /* Título de la sección de Empresas */
+    /* -------------------------------------- */
+    .section-title {
+        font-size: 40px; /* Tamaño más pequeño para móviles */
+        margin-bottom: 30px; /* Reduce el espacio inferior */
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Servcio 1*/
+    /* -------------------------------------- */
+    /* Oculta la versión de escritorio y muestra la versión móvil */
+    .service-one-desktop {
+        display: none !important;
+    }
+
+    .service-one-mobile {
+        display: block !important;
+    }
+
+    .service-one-wrapper-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .service-one-image-container-mobile {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .service-one-cta-button-mobile {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        background-color: transparent;
+        border: 2px solid #71b8be;
+        color: #71b8be;
+        padding: 15px 30px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Ajustes generales para móvil */
+    .service-one-details {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .service-one-title {
+        font-size: 36px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Servcio 2*/
+    /* -------------------------------------- */
+    /* Oculta la versión de escritorio y muestra la versión móvil */
+    .service-two-desktop {
+        display: none !important;
+    }
+
+    .service-two-mobile {
+        display: block !important;
+    }
+
+    .service-two-wrapper-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .service-two-image-box-mobile {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .service-two-cta-button-mobile {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        background-color: #f2b934;
+        border: 2px solid #f2b934;
+        color: #333333;
+        padding: 15px 30px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Servcio 3*/
+    /* -------------------------------------- */
+    /* Oculta la versión de escritorio y muestra la versión móvil */
+    .service-three-desktop {
+        display: none !important;
+        
+    }
+
+    .service-three-mobile {
+        display: block;
+    }
+
+    .service-three-wrapper-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .service-three-image-box-mobile {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .service-three-cta-button-mobile {
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+    /* Ajustes generales para móvil */
+    .service-three-content {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .service-three-title {
+        font-size: 36px;
+    }
+    
+    .service-three-image {
+        border-radius: 10px;
+    }
+
+    .service-three-cta-button-mobile {
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        background-color: #f29e34;
+        border: 2px solid #f29e34;
+        color: #333333;
+        padding: 15px 30px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Servcio 4*/
+    /* -------------------------------------- */
+    /* Oculta la versión de escritorio y muestra la versión móvil */
+    .service-four-desktop {
+        display: none !important;
+    }
+
+    .service-four-mobile {
+        display: block;
+    }
+
+    .service-four-wrapper-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .service-four-image-box-mobile {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .service-four-cta-button-mobile {
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        background-color: #e0409a;
+        border: 2px solid #e0409a;
+        color: #fff;
+        padding: 15px 30px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Ajustes generales para móvil */
+    .service-four-content {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .service-four-title {
+        font-size: 36px;
+    }
+
+    .service-four-image {
+        border-radius: 10px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Servcio 5*/
+    /* -------------------------------------- */
+    /* Oculta la versión de escritorio y muestra la versión móvil */
+    .service-five-desktop {
+        display: none !important;
+    }
+
+    .service-five-mobile {
+        display: block !important;
+    }
+
+    .service-five-wrapper-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .service-five-image-box-mobile {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .service-five-cta-button-mobile {
+        display: block;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        background-color: #087b7a;
+        border: 2px solid #087b7a;
+        color: #fff;
+        padding: 15px 30px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Ajustes generales para móvil */
+    .service-five-content {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .service-five-title {
+        font-size: 36px;
+    }
+
+    .service-five-image {
+        border-radius: 10px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Servcio 6*/
+    /* -------------------------------------- */
+    /* Oculta el escritorio y muestra la versión móvil */
+    .service-six-desktop {
+        display: none !important;
+    }
+
+    .service-six-mobile {
+        display: block !important;
+    }
+
+    .service-six-wrapper-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .service-six-image-box-mobile {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .service-six-cta-button-mobile {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        background-color: #f29e34;
+        border: 2px solid #f29e34;
+        color: #333333;
+        padding: 15px 30px;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+}

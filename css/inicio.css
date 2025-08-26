@@ -264,7 +264,7 @@
 .partners-section {
     width: 100%;
     height: 250px;
-    background-image: url(''); /* fondo */
+    background-image: url('../imagenes/inicio/Fondo\ Empresas.png'); /* fondo */
     background-size: cover;
     background-position: center;
     display: flex;
@@ -315,4 +315,707 @@
     to {
         transform: translateX(-100%);
     }
+}
+
+/* -------------------------------------- */
+/* Estilos de Beneficios */
+/* -------------------------------------- */
+.benefits-section {
+    width: 100%;
+    max-width: 1200px;
+    height: 1034px;
+    margin: -0px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    position: relative;
+}
+
+.benefits-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.benefits-image-container {
+    width: 50%;
+    position: relative;
+    padding-right: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.benefits-image-container img {
+    max-width: 90%;
+    height: auto;
+    object-fit: contain;
+}
+
+.benefits-link {
+    color: #ed217c;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: color 0.3s ease;
+}
+
+.benefits-link:hover {
+    color: #d11e6e;
+}
+
+.benefits-content {
+    width: 50%;
+    padding-left: 50px;
+    box-sizing: border-box;
+}
+
+.benefits-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 40px;
+    line-height: 1.1;
+}
+
+.benefits-title .highlight-text {
+    color: #ed217c;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.icon-circle {
+    min-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.icon-circle.icon-pink { background-color: #ed217c; }
+.icon-circle.icon-green { background-color: #38b492; }
+.icon-circle.icon-yellow { background-color: #fcc228; }
+
+.benefit-item p {
+    color: #555;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.benefits-button {
+    display: inline-block;
+    background-color: #ed217c;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.benefits-button:hover {
+    background-color: #d11e6e;
+}
+
+/* -------------------------------------- */
+/* Estilos de Nuestros Servicios */
+/* -------------------------------------- */
+.services-section {
+    width: 100%;
+    max-width: 1200px;
+    height: auto; /* Cambiado a auto para que se adapte al contenido */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px;
+    box-sizing: border-box;
+    background-color: #fcfbf8;
+    position: relative;
+}
+
+.services-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.services-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 100%;
+}
+
+.service-card {
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.card-top {
+    height: 250px;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-radius: 20px 20px 0 0;
+}
+
+.card-bottom {
+    height: 250px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff;
+    border-radius: 0 0 20px 20px;
+}
+
+/* Colores de fondo para las tarjetas */
+/* Esta sección la vamos a mantener porque sí está bien */
+.service-card.service-1 .card-top { background-color: #e5f1f0; }
+.service-card.service-2 .card-top { background-color: #f9e2f9; }
+.service-card.service-3 .card-top { background-color: #f7eedb; }
+.service-card.service-4 .card-top { background-color: #e3f2fd; }
+.service-card.service-5 .card-top { background-color: #f9e2f9; }
+.service-card.service-6 .card-top { background-color: #f7eedb; }
+
+/* Círculos de los íconos con sus propios colores de fondo */
+.card-icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+/* Colores y la imagen como fondo para cada círculo */
+.service-card.service-1 .card-icon-circle { background-color: #ed217c; }
+.service-card.service-2 .card-icon-circle { background-color: #f28cf0; }
+.service-card.service-3 .card-icon-circle { background-color: #fcae12; }
+.service-card.service-4 .card-icon-circle { background-color: #57d2d3; }
+.service-card.service-5 .card-icon-circle { background-color: #ed217c; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+.service-card.service-6 .card-icon-circle { background-color: #fcae12; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+
+/* Estilo para las imágenes dentro del círculo */
+.card-icon-circle img {
+    max-width: 40px; 
+    max-height: 40px;
+    /* La imagen ya es blanca, por lo que no necesita un color adicional */
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.2;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.card-number {
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 1;
+    position: absolute;
+    right: 40px;
+    top: 40px;
+}
+
+/* Colores de los números */
+.service-card.service-1 .card-number { color: #ed217c; }
+.service-card.service-2 .card-number { color: #f28cf0; }
+.service-card.service-3 .card-number { color: #fcae12; }
+.service-card.service-4 .card-number { color: #57d2d3; }
+.service-card.service-5 .card-number { color: #ed217c; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+.service-card.service-6 .card-number { color: #fcae12; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+
+.card-description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Colores de los enlaces */
+.service-card.service-1 .read-more { color: #ed217c; }
+.service-card.service-2 .read-more { color: #f28cf0; }
+.service-card.service-3 .read-more { color: #fcae12; }
+.service-card.service-4 .read-more { color: #57d2d3; }
+.service-card.service-5 .read-more { color: #ed217c; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+.service-card.service-6 .read-more { color: #fcae12; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+
+.read-more:hover {
+    color: #d11e6e;
+}
+
+.cta-services {
+    display: inline-block;
+    background-color: #EC8A10;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    margin-top: 60px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-services:hover {
+    background-color: #d1780d;
+}
+
+/* -------------------------------------- */
+/* Estilos de Flujo de trabajo */
+/* -------------------------------------- */
+.work-process-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    height: 652px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.work-process-container {
+    width: 100%;
+}
+
+.work-process-section .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #4a4a4a;
+    margin-bottom: 5px;
+}
+
+.work-process-section .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 80px;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 150px;
+}
+
+.step-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.step-icon {
+    width: 60px;
+    height: auto;
+}
+
+.step-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #4a4a4a;
+    line-height: 1.4;
+}
+
+.step-separator {
+    font-size: 40px;
+    color: #ccc;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    height: 120px; /* Alineamos con los círculos */
+}
+
+/* Colores de los círculos */
+.step-1-color { background-color: #f2b934; }
+.step-2-color { background-color: #1c998c; }
+.step-3-color { background-color: #ec9e20; }
+.step-4-color { background-color: #e03387; }
+.step-5-color { background-color: #f2b934; }
+
+/* -------------------------------------- */
+/* Estilos del Formulario Contacto*/
+/* -------------------------------------- */
+.contact-form-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 940px;
+    margin: 50px auto;
+    /* Color de fondo eliminado para que se vea el fondo de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.contact-form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.contact-form-content {
+    width: 50%;
+    padding: 0 50px 0 20px;
+}
+
+.contact-form-image-box {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end; /* Alinea la imagen a la derecha */
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+}
+
+.contact-form-image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Asegura que la imagen se muestre completa dentro del contenedor */
+}
+
+.contact-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.contact-form-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 25px;
+}
+
+.contact-form label {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    background-color: #f7f3ed;
+    transition: border-color 0.3s;
+}
+
+.contact-form input::placeholder {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+.form-divider {
+    height: 1px;
+    background-color: #d3d3d3;
+    margin: 40px 0;
+}
+
+.form-checkbox-group {
+    margin-bottom: 30px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #333333;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: #333333;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f7f3ed;
+}
+
+.contact-form-button {
+    display: inline-block;
+    background-color: #33614a;
+    border: 2px solid #33614a;
+    color: #ffffff;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.contact-form-button:hover {
+    background-color: #2a523e;
+    border-color: #2a523e;
+}
+/* -------------------------------------- *
+/* Estilos del Formulario Contacto javaScript*/
+/* -------------------------------------- */
+.success-message {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: #33614a; /* Un verde profesional */
+    text-align: center;
+    margin-top: 100px;
+    line-height: 1.5;
+}
+
+/* -------------------------------------- */
+/* Estilos del footer completo */
+/* -------------------------------------- */
+.main-footer {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.footer-top-bg {
+    background-color: #fff; /* El color de fondo de la parte superior */
+    padding: 20px;
+}
+
+.footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 263px;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal del contenido izquierdo */
+.footer-content-wrapper {
+    display: flex;
+    flex: 1; /* Ocupa el espacio disponible */
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedor del logo y los íconos de redes sociales */
+.footer-logo-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+}
+
+.footer-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.social-icons a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* Contenedor de las columnas de enlaces */
+.footer-links-container {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #666;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ed217c;
+}
+
+/* Contenedor de la información de contacto */
+.footer-contact-info {
+    width: 40%;
+    background-color: #ed217c;
+    color: #fff;
+    padding: 20px 40px 20px 20px;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.footer-contact-info h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-contact-info p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+}
+
+/* Sección inferior del footer */
+.footer-bottom-bg {
+    width: 100%;
+    background-color: #d1d1d1;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #555;
 }
