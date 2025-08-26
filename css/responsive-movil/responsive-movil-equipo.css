@@ -1,0 +1,422 @@
+/* Hover solo en escritorio */
+@media (min-width: 769px) {
+    .header nav ul li:hover > ul {
+        display: flex;
+    }
+}
+
+@media (max-width: 768px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Header */
+    /* -------------------------------------- */
+    .menu-toggle {
+        display: block;
+    }
+
+    .header nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+
+    .header nav ul {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .header nav ul li {
+        width: 100%;
+    }
+
+    .header nav ul li a {
+        padding: 12px 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .header nav.active {
+        max-height: 600px; /* se expande */
+    }
+
+    /* Submenús móviles */
+    .header nav ul li ul {
+        position: static;
+        display: none;
+        box-shadow: none;
+        background: #f9f9f9;
+    }
+
+    .header nav ul li.submenu.submenu-open > ul {
+        display: block;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Banner */
+    /* -------------------------------------- */
+    .banner {
+        height: auto;
+        padding: 50px 20px;
+    }
+
+    .banner-content {
+        margin-bottom: 30px;
+    }
+
+    .banner-content h2 {
+        font-size: 32px;
+    }
+
+    .banner-content p {
+        font-size: 14px;
+        max-width: 100%; /* El párrafo ocupa todo el ancho disponible */
+    }
+
+    .banner-shapes {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        width: 100%; /* El contenedor ocupa el 100% del ancho disponible */
+        max-width: none; /* Se elimina el límite de ancho */
+    }
+    
+    .shape {
+        width: 100%; /* La forma ocupa el 100% del ancho de su columna */
+        max-width: 250px; /* Tamaño máximo para evitar que sea demasiado grande en tabletas */
+        height: 250px; /* Altura más grande para mantener la proporción */
+        margin: 0 auto; /* Centra la forma dentro de la columna */
+    }
+
+    /* -------------------------------------- */
+    /* Estilos generales de ¿Quiénes somos? */
+    /* -------------------------------------- */
+    .quienes-somos-image-wrapper {
+        display: none;
+    }
+
+    .quienes-somos {
+        flex-direction: column;
+        height: auto;
+        padding: 50px 20px;
+        gap: 0; /* No necesitamos gap si no hay imagen */
+    }
+
+    .quienes-somos-content {
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    .quienes-somos-content h4 {
+        font-size: 16px;
+    }
+
+    .quienes-somos-content h2 {
+        font-size: 32px;
+        margin-top: 0;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos generales de Certificaciones y Premios */
+    /* -------------------------------------- */
+    .certificaciones-premios {
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .certificaciones-premios-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        justify-content: center;
+        max-width: none;
+    }
+
+    .certificacion-item {
+        flex-direction: row;
+        text-align: left;
+        gap: 15px;
+    }
+
+    .certificacion-icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+
+    .certificacion-text p:first-child {
+        font-size: 24px;
+    }
+
+    .certificacion-text p:last-child {
+        font-size: 12px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos generales de "Historia + Misión + Visión" */
+    /* -------------------------------------- */
+    .historia-mision-vision {
+        height: auto; /* La altura se adapta al contenido */
+        padding: 50px 20px; /* Reducimos el padding para móviles */
+    }
+
+    .historia-mision-vision-container {
+        flex-direction: column; /* Apilamos las columnas verticalmente */
+        height: auto; /* La altura se adapta al contenido */
+        padding-top: 0; /* Eliminamos el padding superior */
+    }
+
+    .historia-column {
+        height: auto; /* La altura se adapta al contenido */
+        margin-bottom: 40px; /* Añadimos espacio entre la tarjeta de Historia y las de Misión/Visión */
+    }
+
+    .historia-card,
+    .mision-card,
+    .vision-card {
+        width: 100%; /* Las tarjetas ocupan todo el ancho de la pantalla */
+        height: auto; /* La altura se adapta al contenido de cada tarjeta */
+    }
+
+    .historia-card h3 {
+        font-size: 32px; /* Reducimos el tamaño del título */
+    }
+    
+    .mision-vision-column {
+        height: auto; /* La altura se adapta al contenido */
+        gap: 20px; /* Reducimos el espacio entre Misión y Visión */
+    }
+    
+    .mision-card h3,
+    .vision-card h3 {
+        font-size: 28px; /* Reducimos el tamaño de los títulos */
+    }
+
+    /* -------------------------------------- */
+    /* Estilos generales de  "Nuestros Valores" */
+    /* -------------------------------------- */
+    .nuestros-valores {
+        height: auto; /* La altura se ajusta al contenido */
+        padding: 50px 20px; /* Reducimos el padding */
+    }
+
+    .valores-container {
+        flex-direction: column; /* Apilamos las columnas verticalmente */
+        gap: 40px; /* Reducimos el espacio entre el encabezado y la cuadrícula */
+    }
+
+    .valores-headline {
+        text-align: center; /* Centramos el texto para una mejor visualización móvil */
+    }
+    
+    .valores-headline h2 {
+        font-size: 48px; /* Reducimos el tamaño del título */
+        line-height: 1.1;
+    }
+
+    .valores-headline p {
+        font-size: 14px; /* Reducimos el tamaño del párrafo */
+    }
+
+    .valores-grid {
+        grid-template-columns: 1fr 1fr; /* Mantenemos la cuadrícula de 2x2 */
+        gap: 15px; /* Reducimos el espacio entre las tarjetas */
+    }
+
+    .valor-item {
+        padding: 15px; /* Reducimos el padding interno de cada tarjeta */
+    }
+
+    .valor-icon img {
+        width: 40px; /* Reducimos el tamaño de los iconos */
+        height: 40px;
+    }
+    
+    .valor-content {
+        margin-top: 15px; /* Reducimos el margen superior del contenido */
+    }
+    
+    .valor-content .valor-titulo {
+        font-size: 16px; /* Reducimos el tamaño del título del valor */
+    }
+
+    /* -------------------------------------- */
+    /* Estilos generales de Equipo */
+    /* -------------------------------------- */
+    .equipo {
+        padding: 40px 15px;
+        height: auto; /* La altura se ajusta al contenido */
+    }
+
+    .equipo h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    /* La cuadrícula cambia de 2 columnas a 1 columna */
+    .equipo-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    /* Ajustes para las tarjetas de los miembros */
+    .equipo-item {
+        width: 100%;
+        max-width: 350px;
+        height: 450px; /* Altura fija para mantener el formato */
+        margin: 0 auto;
+    }
+
+    /* Ajuste de la foto para que se posicione correctamente en la tarjeta */
+    .equipo-foto {
+        bottom: 70px;
+        max-height: 75%;
+    }
+
+    /* Ajuste de la caja de información del miembro */
+    .equipo-info {
+        padding: 10px 0;
+    }
+
+    .equipo-info h3 {
+        font-size: 0.9rem;
+    }
+
+    .equipo-info p {
+        font-size: 0.8rem;
+    }
+
+    /* Ajuste del botón CTA */
+    .equipo-cta {
+        margin-top: 40px;
+    }
+
+    .btn-cta {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos generales de Testimonio del Equipo */
+    /* -------------------------------------- */
+    .testimonios-section {
+        padding: 40px 15px;
+    }
+
+    /* Ajuste para el título */
+    .testimonios-container h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+
+    /* Ajuste para el contenedor del video */
+    .video-container {
+        padding-top: 56.25%; /* Mantiene la proporción 16:9 */
+        border-radius: 10px;
+    }
+
+    /* Ajuste para el botón de reproducción (si lo usas) */
+    .video-container::after {
+        width: 50px;
+        height: 50px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Formulario Contacto*/
+    /* -------------------------------------- */
+    .team-form-container {
+        height: auto;
+        width: auto;
+        padding: 40px 20px;
+    }
+
+    .team-form-wrapper {
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+    }
+
+    .team-form-content {
+        width: 100%;
+        padding: 0;
+    }
+
+    .team-form-image-box {
+        display: none;
+    }
+
+    .team-form-title {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .team-form-subtitle {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .team-form label {
+        font-size: 15px;
+    }
+
+    .team-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-divider {
+        margin: 30px 0;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del footer completo */
+    /* -------------------------------------- */
+    .main-footer, .footer-top-bg, .footer-bottom-bg {
+        padding: 0;
+    }
+    
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 40px 15px;
+    }
+    
+    .footer-content-wrapper,
+    .footer-logo-social,
+    .footer-links-container,
+    .footer-contact-info {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-links-container {
+        flex-direction: column;
+        gap: 20px;
+        margin: 30px 0;
+    }
+    
+    .footer-logo-social {
+        margin-bottom: 20px;
+    }
+    
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-contact-info {
+        padding: 20px;
+        border-radius: 20px;
+        width: 100%;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

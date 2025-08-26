@@ -8,7 +8,10 @@
     padding: 15px 30px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: relative;
+    /* Propiedades para hacerlo fijo */
+    position: fixed;
+    top: 0;
+    width: 100%;
     z-index: 1000;
 }
 
@@ -787,4 +790,533 @@
     background-color: #e0942c;
     border-color: #e0942c;
     color: #333333;
+}
+
+/* -------------------------------------- */
+/* Estilos del Flujo de Trabajo */
+/* -------------------------------------- */
+.workflow-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 621px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 20px;
+}
+
+/* --------- Versión de Escritorio --------- */
+/* Se muestra por defecto */
+.workflow-steps-mobile {
+    display: none;
+}
+
+.workflow-content {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.workflow-small-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.workflow-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #333333;
+    margin: 0;
+    margin-bottom: 50px;
+}
+
+.workflow-steps-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.workflow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.workflow-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Colores de los círculos */
+.workflow-circle.yellow-circle {
+    background-color: #f7eed2;
+}
+.workflow-circle.teal-circle {
+    background-color: #c4d7d6;
+}
+.workflow-circle.peach-circle {
+    background-color: #f2d5bd;
+}
+.workflow-circle.pink-circle {
+    background-color: #f2d5e0;
+}
+
+.workflow-step-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #4a4a4a;
+    font-weight: 500;
+    margin: 0;
+}
+
+.workflow-arrow {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: #8c8c8c;
+}
+
+/* -------------------------------------- */
+/* Estilos del FAQS Servicios*/
+/* -------------------------------------- */
+.faqs-section {
+    width: 100%;
+    max-width: 1200px;
+    margin: 50px auto 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f3ed;
+    border-radius: 20px;
+    height: 1076px;
+    padding: 0 20px;
+}
+
+.faqs-desktop {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.faqs-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.faqs-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+}
+
+.faqs-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #888;
+}
+
+.faqs-wrapper {
+    width: 100%;
+    max-width: 800px;
+}
+
+.faq-item {
+    background-color: #f29e34;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    cursor: pointer;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+.faq-question-text {
+    flex-grow: 1;
+    margin-right: 20px;
+}
+
+.faq-toggle-icon {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H32c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32v-32c0-17.7-14.3-32-32-32z"/></svg>') no-repeat center;
+    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H32c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32v-32c0-17.7-14.3-32-32-32z"/></svg>') no-repeat center;
+    transition: transform 0.3s ease;
+}
+
+/* Estado activo */
+.faq-item.active .faq-question {
+    background-color: #e0942c;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.faq-item.active .faq-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    background-color: #fff;
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.faq-answer-text {
+    padding: 20px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+}
+
+.faqs-cta-container {
+    width: 100%;
+    max-width: 800px;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.faqs-cta-button {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #888;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.faqs-cta-button:hover {
+    color: #4a4a4a;
+}
+
+/* Ocultar la versión móvil en escritorio */
+.faqs-mobile {
+    display: none;
+}
+
+/* -------------------------------------- */
+/* Estilos del Formulario Contacto*/
+/* -------------------------------------- */
+.contact-form-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 940px;
+    margin: 50px auto;
+    /* Color de fondo eliminado para que se vea el fondo de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.contact-form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.contact-form-content {
+    width: 50%;
+    padding: 0 50px 0 20px;
+}
+
+.contact-form-image-box {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end; /* Alinea la imagen a la derecha */
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+}
+
+.contact-form-image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Asegura que la imagen se muestre completa dentro del contenedor */
+}
+
+.contact-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.contact-form-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 25px;
+}
+
+.contact-form label {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    background-color: #f7f3ed;
+    transition: border-color 0.3s;
+}
+
+.contact-form input::placeholder {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+.form-divider {
+    height: 1px;
+    background-color: #d3d3d3;
+    margin: 40px 0;
+}
+
+.form-checkbox-group {
+    margin-bottom: 30px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #333333;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: #333333;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f7f3ed;
+}
+
+.contact-form-button {
+    display: inline-block;
+    background-color: #33614a;
+    border: 2px solid #33614a;
+    color: #ffffff;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.contact-form-button:hover {
+    background-color: #2a523e;
+    border-color: #2a523e;
+}
+/* -------------------------------------- *
+/* Estilos del Formulario Contacto javaScript*/
+/* -------------------------------------- */
+.success-message {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: #33614a; /* Un verde profesional */
+    text-align: center;
+    margin-top: 100px;
+    line-height: 1.5;
+}
+
+/* -------------------------------------- */
+/* Estilos del footer completo */
+/* -------------------------------------- */
+.main-footer {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.footer-top-bg {
+    background-color: #fff; /* El color de fondo de la parte superior */
+    padding: 20px;
+}
+
+.footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 263px;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal del contenido izquierdo */
+.footer-content-wrapper {
+    display: flex;
+    flex: 1; /* Ocupa el espacio disponible */
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedor del logo y los íconos de redes sociales */
+.footer-logo-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+}
+
+.footer-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.social-icons a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* Contenedor de las columnas de enlaces */
+.footer-links-container {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #666;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ed217c;
+}
+
+/* Contenedor de la información de contacto */
+.footer-contact-info {
+    width: 40%;
+    background-color: #ed217c;
+    color: #fff;
+    padding: 20px 40px 20px 20px;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.footer-contact-info h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-contact-info p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+}
+
+/* Sección inferior del footer */
+.footer-bottom-bg {
+    width: 100%;
+    background-color: #d1d1d1;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #555;
 }

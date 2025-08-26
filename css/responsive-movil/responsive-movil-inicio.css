@@ -13,6 +13,13 @@
     /* -------------------------------------- */
     /* Estilos del Header */
     /* -------------------------------------- */
+    .header-content {
+        padding: 15px 30px; /* Mantiene el padding en móviles */
+    }
+
+    /* -------------------------------------- */
+    /* Estilos del Header */
+    /* -------------------------------------- */
     .menu-toggle {
         display: block;
     }

@@ -1,0 +1,982 @@
+/* Restablece el box-sizing para evitar desbordamiento horizontal */
+* {
+    box-sizing: border-box;
+}
+
+/* Variables de color para un código más limpio y fácil de mantener */
+:root {
+    --primary-color: #ed217c;
+    --text-color: #333;
+    --bg-color: #fff;
+    --border-radius: 8px;
+}
+/* -------------------------------------- */
+/* Estilos del Header */
+/* -------------------------------------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 1000;
+}
+
+.header .logo img {
+    max-height: 60px;
+}
+
+/* === NAV === */
+.header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.header nav ul li {
+    position: relative;
+}
+
+.header nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    padding: 10px 0;
+    display: block;
+}
+
+/* === BOTÓN CONTACTO === */
+.header .btn-contacto {
+    background-color: #e91e63;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* === SUBMENÚ ESCRITORIO === */
+.header nav ul li ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.header nav ul li ul li {
+    padding: 0;
+}
+
+.header nav ul li ul li a {
+    padding: 5px 15px;
+    white-space: nowrap;
+}
+
+/* === BOTÓN HAMBURGUESA (OCULTO EN ESCRITORIO) === */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* -------------------------------------- */
+/* Estilos del Banner */
+/* -------------------------------------- */
+.banner {
+    width: 100%;
+    height: 657px; /* Altura fija para escritorio */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 100px; /* Padding a los lados para que el texto no toque los bordes */
+    background-color: var(--bg-color);
+    font-family: Arial, sans-serif;
+}
+
+.banner-content {
+    margin-bottom: 50px;
+}
+
+.banner-content h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.banner-content p {
+    font-size: 16px;
+    color: #666;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Contenedor para las formas en escritorio */
+.banner-shapes {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas para las 5 formas */
+    gap: 20px;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 50px;
+}
+
+/* Estilos de las formas individuales */
+.shape {
+    width: 160px;
+    height: 160px;
+    background-color: #eee;
+    border-radius: 8px;
+}
+
+/* Colores y formas específicas */
+.shape-1 { background-color: #21a9a8; }
+.shape-2 { 
+    background-color: #21a9a8; 
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 100px;
+    border-top-right-radius: 100px;
+}
+.shape-3 {
+    background-color: #f7b733;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.shape-4 {
+    background-color: #f7b733;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 100px;
+    border-top-right-radius: 100px;
+}
+.shape-5 {
+    background-color: #ed217c;
+    border-radius: 50%;
+}
+
+/* -------------------------------------- */
+/* Estilos generales de ¿Quiénes somos? */
+/* -------------------------------------- */
+.quienes-somos {
+    width: 100%;
+    max-width: 1200px;
+    height: 700px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Lado izquierdo: Contenedor de la imagen y la forma */
+.quienes-somos-image-wrapper {
+    position: relative;
+    width: 600px; /* Tamaño del contenedor */
+    height: 600px;
+    display: flex; /* Usamos flexbox para centrar la imagen */
+    align-items: center;
+    justify-content: center;
+}
+
+.quienes-somos-image-shape {
+    /* Este div lo usamos como contenedor para la imagen y el badge */
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.quienes-somos-image {
+    width: 100%; /* Ocupa todo el contenedor para mantener la proporción de la imagen */
+    height: 100%;
+    object-fit: contain; /* Ajusta la imagen dentro del contenedor sin distorsionarla */
+    z-index: 1; /* Asegura que la imagen esté detrás del badge */
+}
+
+.experience-badge {
+    position: absolute;
+    top: 50%;
+    right: -20px; /* Posiciona el badge a la derecha para que se superponga */
+    transform: translateY(-50%);
+    width: 160px;
+    height: 160px;
+    background-color: #ed217c;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.experience-badge p:first-child {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.experience-badge p:last-child {
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Lado derecho: Contenedor del texto */
+.quienes-somos-content {
+    max-width: 600px;
+}
+
+.quienes-somos-content h4 {
+    font-size: 18px;
+    color: #ed217c;
+    margin: 0;
+    font-weight: normal;
+}
+
+.quienes-somos-content h2 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0 20px;
+    line-height: 1.2;
+}
+
+.quienes-somos-content p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Estilos para el botón de llamada a la acción */
+.link-cta {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #fff;
+    color: #21a9a8;
+    border: 2px solid #21a9a8;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.link-cta:hover {
+    background-color: #21a9a8;
+    color: #fff;
+}
+
+/* -------------------------------------- */
+/* Estilos generales de Certificaciones y Premios */
+/* -------------------------------------- */
+.certificaciones-premios {
+    width: 100%;
+    height: 350px;
+    background-color: #ed217c; /* Fondo rosa */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 100px;
+}
+
+.certificaciones-premios-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.certificacion-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.certificacion-icon-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.certificacion-icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: invert(100%); /* Hace que los iconos sean blancos */
+}
+
+.certificacion-text {
+    color: #fff;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.certificacion-text p:first-child {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+    line-height: 1;
+}
+
+.certificacion-text p:last-child {
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* -------------------------------------- */
+/* Estilos generales de "Historia + Misión + Visión" */
+/* -------------------------------------- */
+.historia-mision-vision {
+    width: 100%;
+    height: 1105px; /* Altura fija como solicitaste */
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 100px;
+}
+
+.historia-mision-vision-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 80%; /* Ajustamos la altura para que las tarjetas ocupen el espacio deseado */
+    display: flex;
+    gap: 40px;
+    align-items: stretch; /* Esto hace que los items se estiren para llenar el contenedor */
+}
+
+/* Columna de la izquierda */
+.historia-column {
+    flex: 1;
+    height: 100%; /* El 100% de la altura del contenedor padre */
+}
+
+.historia-card {
+    width: 100%;
+    height: 100%; /* El 100% de la altura de la columna */
+    background-color: #f39200;
+    border-radius: 20px;
+    padding: 40px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.historia-card h3 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.historia-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Columna de la derecha */
+.mision-vision-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye Misión y Visión con espacio entre ellos */
+    height: 100%; /* Ocupa el 100% de la altura del contenedor padre */
+}
+
+.mision-card,
+.vision-card {
+    width: 100%;
+    height: calc(50% - 20px); /* Dividimos la altura disponible y restamos la mitad del gap */
+    background-color: #3cb09c;
+    border-radius: 20px;
+    padding: 40px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.mision-card h3,
+.vision-card h3 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.mision-card p,
+.vision-card p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* -------------------------------------- */
+/* Estilos generales de  "Nuestros Valores" */
+/* -------------------------------------- */
+.nuestros-valores {
+    width: 100%;
+    height: 524px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 100px;
+}
+
+.valores-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    gap: 80px;
+}
+
+/* Lado Izquierdo: Título y Párrafo */
+.valores-headline {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.valores-headline h2 {
+    font-size: 64px;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.valores-headline p {
+    font-size: 16px;
+    color: #666;
+    margin-top: 20px;
+    line-height: 1.6;
+}
+
+/* Lado Derecho: Cuadrícula de Valores */
+.valores-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.valor-item {
+    background-color: #E8E8E8; /* Color de fondo gris para los valores 2, 3 y 4 */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Estilos para los valores no destacados (gris con letras negras) */
+.valor-item .valor-content p,
+.valor-item .valor-content .valor-titulo {
+    color: #333; /* Color de texto negro */
+}
+
+/* Estilos para el valor destacado (rosa con letras blancas) */
+.valor-item.valor-destacado {
+    background-color: #ed217c; /* Color de fondo rosa */
+}
+
+.valor-item.valor-destacado .valor-content p,
+.valor-item.valor-destacado .valor-content .valor-titulo {
+    color: #fff; /* Color de texto blanco */
+}
+
+.valor-icon img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.valor-content {
+    margin-top: 20px;
+}
+
+.valor-content p {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.valor-content .valor-titulo {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* -------------------------------------- */
+/* Estilos generales de Equipo */
+/* -------------------------------------- */
+.equipo {
+    max-width: 1200px; /* ancho como otras secciones */
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px 20px;
+    height: 1488px;
+}
+
+.equipo h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.equipo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    justify-items: center;
+}
+
+.equipo-item {
+    width: 400px;
+    height: 500px;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* contenido hacia abajo */
+}
+
+.fondo1 { background-image: url("../imagenes/equipo/Fondo\ 1.png"); }
+.fondo2 { background-image: url("../imagenes/equipo/Fondo\ 2.png"); }
+.fondo3 { background-image: url("../imagenes/equipo/Fondo\ 3.png"); }
+.fondo4 { background-image: url("../imagenes/equipo/Fondo\ 4.png"); }
+
+.equipo-foto {
+    position: absolute;
+    bottom: 80px; /* espacio para la caja de texto */
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 100%;
+    max-height: 80%;
+    z-index: 1;
+}
+
+.equipo-info {
+    background: rgba(255, 255, 255, 0.95); /* blanca con ligera transparencia */
+    width: 100%;
+    padding: 12px 0;
+    position: relative;
+    z-index: 2;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* sombra suave */
+}
+
+.equipo-info h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.equipo-info p {
+    font-size: 0.9rem;
+    color: gray;
+    margin: 0;
+}
+
+.equipo-cta {
+    margin-top: 50px;
+}
+
+.btn-cta {
+    display: inline-block;
+    background: #f50057;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* -------------------------------------- */
+/* Estilos generales de Testimonio del Equipo */
+/* -------------------------------------- */
+.testimonios-section {
+    width: 100%;
+    height: auto; /* Altura automática para que se ajuste al contenido */
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px; /* Reducción de padding */
+    box-sizing: border-box;
+}
+
+.testimonios-container {
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.testimonios-container h2 {
+    font-size: 48px; /* Tamaño de fuente reducido */
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px; /* Espacio debajo del título reducido */
+}
+
+.video-container {
+    width: 100%;
+    max-width: 990px;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 56.25%; /* Mantiene el aspect ratio 16:9 */
+    background-color: #333;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+/* Pseudo-elemento para el botón de reproducción (opcional) */
+.video-container::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; /* Tamaño del botón reducido */
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* -------------------------------------- */
+/* Estilos del Formulario Contacto*/
+/* -------------------------------------- */
+.team-form-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 940px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.team-form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.team-form-content {
+    width: 50%;
+    padding: 0 50px 0 20px;
+}
+
+.team-form-image-box {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
+}
+
+.team-form-image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.team-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.team-form-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+.team-form .form-group {
+    margin-bottom: 25px;
+}
+
+.team-form label {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.team-form input[type="text"],
+.team-form input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    background-color: #f7f3ed;
+    transition: border-color 0.3s;
+}
+
+.team-form input::placeholder {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+.form-divider {
+    height: 1px;
+    background-color: #d3d3d3;
+    margin: 40px 0;
+}
+
+.form-checkbox-group {
+    margin-bottom: 30px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #333333;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: #333333;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f7f3ed;
+}
+
+.team-form-button {
+    display: inline-block;
+    background-color: #33614a;
+    border: 2px solid #33614a;
+    color: #ffffff;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.team-form-button:hover {
+    background-color: #2a523e;
+    border-color: #2a523e;
+}
+
+/* -------------------------------------- */
+/* Estilos del footer completo */
+/* -------------------------------------- */
+.main-footer {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.footer-top-bg {
+    background-color: #fff; /* El color de fondo de la parte superior */
+    padding: 20px;
+}
+
+.footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 263px;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal del contenido izquierdo */
+.footer-content-wrapper {
+    display: flex;
+    flex: 1; /* Ocupa el espacio disponible */
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedor del logo y los íconos de redes sociales */
+.footer-logo-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+}
+
+.footer-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.social-icons a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* Contenedor de las columnas de enlaces */
+.footer-links-container {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #666;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ed217c;
+}
+
+/* Contenedor de la información de contacto */
+.footer-contact-info {
+    width: 40%;
+    background-color: #ed217c;
+    color: #fff;
+    padding: 20px 40px 20px 20px;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.footer-contact-info h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-contact-info p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+}
+
+/* Sección inferior del footer */
+.footer-bottom-bg {
+    width: 100%;
+    background-color: #d1d1d1;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #555;
+}
