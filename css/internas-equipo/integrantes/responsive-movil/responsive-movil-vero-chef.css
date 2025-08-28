@@ -70,4 +70,87 @@
     .header nav ul li.submenu.submenu-open > ul {
         display: block;
     }
+
+    /* -------------------------------------- */
+    /* Estilos del Banner */
+    /* -------------------------------------- */
+    .banner-desktop {
+        display: none; /* Oculta el div de escritorio en móvil */
+    }
+
+    .banner-mobile {
+        display: block; /* Muestra el div de móvil */
+        width: 100%;
+        height: auto;
+        padding: 50px 20px;
+    }
+
+    .banner-content-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .banner-text-top-mobile h1 {
+        font-size: 2.5rem;
+    }
+    .graf-icon-mobile {
+        width: 20px;
+        position: static;
+        margin-left: 5px;
+    }
+    
+    .chef-image-container-mobile {
+        position: relative;
+        z-index: 2;
+        margin-top: 30px;
+    }
+    .chef-image-container-mobile .pink-square-bg {
+        width: 250px;
+        height: 250px;
+    }
+    .chef-image-container-mobile .chef-image {
+        width: 80%;
+        height: auto;
+    }
+    
+    .side-elements-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 20px;
+        margin-top: 40px;
+    }
+
+    .experience-circle-mobile {
+        width: 120px;
+        height: 120px;
+        background-color: #e91e63;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1rem;
+        line-height: 1.2;
+    }
+
+    .quote-box-mobile {
+        width: 100%;
+        text-align: center;
+    }
+    .quote-box-mobile p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+    .quote-icon-mobile {
+        width: 40px;
+        height: auto;
+        display: block;
+        margin: 0 auto 10px;
+    }
 }

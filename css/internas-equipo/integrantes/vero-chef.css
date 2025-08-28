@@ -109,6 +109,11 @@
     overflow: hidden;
 }
 
+.banner-mobile {
+    display: none; /* Oculta el div de móvil por defecto */
+}
+
+/* Resto de estilos del banner de escritorio (sin cambios) */
 .banner-content {
     display: flex;
     flex-direction: column;
@@ -121,107 +126,111 @@
     margin-bottom: 50px;
 }
 
-.banner-text-top p {
-    font-size: 1.2rem;
-    color: #e91e63;
-    font-weight: 500;
-    margin: 0;
+.banner-text-top p { 
+    font-size: 1.2rem; 
+    color: #000; 
+    font-weight: 500; 
+    margin: 0; 
 }
 
-.banner-text-top h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-weight: bold;
-    color: #333;
-    margin: 10px 0;
-    position: relative;
-    line-height: 1;
+.banner-text-top h1 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 4rem; 
+    font-weight: bold; 
+    color: #000; 
+    margin: 10px 0; 
+    position: relative; 
+    line-height: 1; 
 }
 
-.banner-text-top .subtitle {
-    font-size: 1.1rem;
-    color: #555;
-    letter-spacing: 2px;
+.pink-title { 
+    color: #e91e63; 
 }
 
-.graf-icon {
-    width: 30px;
-    height: auto;
-    position: absolute;
-    right: -35px;
-    top: -5px;
+.banner-text-top .subtitle { 
+    font-size: 1.1rem; 
+    color: #555; 
+    letter-spacing: 2px; 
 }
 
-.banner-main-visual {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
+.graf-icon { 
+    width: 30px; 
+    height: auto; 
+    position: absolute; 
+    right: -35px; 
+    top: -5px; 
 }
 
-.chef-image-container {
-    position: relative;
-    z-index: 2;
+.banner-main-visual { 
+    position: relative; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 50px; 
 }
 
-.pink-square-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
-    height: 300px;
-    background-color: #e91e63;
-    z-index: -1;
+.chef-image-container { 
+    position: relative; 
+    z-index: 2; 
 }
 
-.chef-image {
-    width: 400px;
-    height: auto;
-    display: block;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    z-index: 1;
+.pink-square-bg { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    width: 300px; 
+    height: 300px; 
+    background-color: #e91e63; 
+    z-index: -1; 
 }
 
-.quote-box {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 250px;
-    text-align: left;
+.chef-image { 
+    width: 400px; 
+    height: auto; 
+    display: block; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+    z-index: 1; 
 }
 
-.quote-box p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    color: #555;
+.quote-box { 
+    position: absolute; 
+    left: 10%; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 250px; 
+    text-align: left; 
 }
 
-.quote-icon {
-    width: 40px;
-    height: auto;
-    display: block;
-    margin-bottom: 10px;
+.quote-box p { 
+    font-size: 0.9rem; 
+    line-height: 1.5; 
+    color: #555; 
 }
 
-.experience-circle {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 150px;
-    height: 150px;
-    background-color: #e91e63;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    line-height: 1.2;
+.quote-icon { 
+    width: 40px; 
+    height: auto; 
+    display: block; 
+    margin-bottom: 10px; 
+}
+
+.experience-circle { 
+    position: absolute; 
+    right: 10%; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    width: 150px; 
+    height: 150px; 
+    background-color: #e91e63; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: #fff; 
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 1.2rem; 
+    line-height: 1.2; 
 }
