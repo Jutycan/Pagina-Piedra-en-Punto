@@ -3,6 +3,9 @@
     .header nav ul li:hover > ul {
         display: flex;
     }
+    .header nav ul li.submenu > ul li.submenu:hover > ul {
+        display: flex;
+    }
 }
 
 @media (max-width: 768px) {
@@ -11,15 +14,13 @@
     }
 
     /* -------------------------------------- */
-    /* Estilos del Header */
+    /* Estilos del Header para Móviles */
     /* -------------------------------------- */
+
     .header-content {
-        padding: 15px 30px; /* Mantiene el padding en móviles */
+        padding: 15px 30px;
     }
 
-    /* -------------------------------------- */
-    /* Estilos del Header */
-    /* -------------------------------------- */
     .menu-toggle {
         display: block;
     }
@@ -51,7 +52,7 @@
     }
 
     .header nav.active {
-        max-height: 600px; /* se expande */
+        max-height: 600px;
     }
 
     /* Submenús móviles */
@@ -60,8 +61,13 @@
         display: none;
         box-shadow: none;
         background: #f9f9f9;
+        padding-left: 20px;
     }
 
+    .header nav ul li ul ul {
+        padding-left: 20px;
+    }
+    
     .header nav ul li.submenu.submenu-open > ul {
         display: block;
     }

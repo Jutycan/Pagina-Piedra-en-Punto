@@ -8,13 +8,14 @@
     }
 }
 
-/* -------------------------------------- */
-/* Estilos del Header para Móviles */
-/* -------------------------------------- */
 @media (max-width: 768px) {
     * {
         box-sizing: border-box;
     }
+
+    /* -------------------------------------- */
+    /* Estilos del Header para Móviles */
+    /* -------------------------------------- */
 
     .header-content {
         padding: 15px 30px;
@@ -74,59 +75,71 @@
     /* -------------------------------------- */
     /* Estilos del Banner */
     /* -------------------------------------- */
-    .banner-desktop {
-        display: none; /* Oculta el div de escritorio en móvil */
-    }
-
-    .banner-mobile {
-        display: block; /* Muestra el div de móvil */
-        width: 100%;
-        height: auto;
-        padding: 50px 20px;
-    }
+    .desktop-only { display: none; }
+    .mobile-only { display: block; }
 
     .banner-content-mobile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         text-align: center;
+        padding: 20px;
     }
 
-    .banner-text-top-mobile h1 {
-        font-size: 2.5rem;
+    .banner-content-mobile h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #000;
+        margin: 15px 0;
+        position: relative;
+        line-height: 1.2;
+        display: inline-block;
+        white-space: nowrap; /* evita que el icono baje */
     }
-    .graf-icon-mobile {
-        width: 20px;
-        position: static;
-        margin-left: 5px;
+
+    /* Ícono al lado de la "a" (móvil) */
+    .banner-content-mobile .graf-icon {
+        position: relative;
+        margin-left: 6px;
+        top: 0;
+        vertical-align: middle;
     }
-    
+
+    .banner-content-mobile .subtitle {
+        font-size: 1rem;
+        color: #555;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+    }
+
     .chef-image-container-mobile {
         position: relative;
-        z-index: 2;
-        margin-top: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
     }
-    .chef-image-container-mobile .pink-square-bg {
+
+    .pink-square-bg-mobile {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         width: 250px;
         height: 250px;
+        background-color: #e91e63;
+        z-index: -1;
     }
-    .chef-image-container-mobile .chef-image {
-        width: 80%;
+
+    .chef-image-mobile {
+        width: 280px;
         height: auto;
-    }
-    
-    .side-elements-mobile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: 20px;
-        margin-top: 40px;
+        display: block;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 1;
     }
 
     .experience-circle-mobile {
-        width: 120px;
-        height: 120px;
+        width: 130px;
+        height: 130px;
         background-color: #e91e63;
         border-radius: 50%;
         display: flex;
@@ -137,20 +150,23 @@
         font-weight: bold;
         font-size: 1rem;
         line-height: 1.2;
+        margin: 0 auto 20px auto;
     }
 
     .quote-box-mobile {
-        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
         text-align: center;
     }
+
     .quote-box-mobile p {
         font-size: 0.9rem;
-        padding: 0 10px;
+        line-height: 1.5;
+        color: #555;
     }
-    .quote-icon-mobile {
-        width: 40px;
-        height: auto;
-        display: block;
-        margin: 0 auto 10px;
+
+    .quote-box-mobile .quote-icon {
+        width: 35px;
+        margin-bottom: 10px;
     }
 }
