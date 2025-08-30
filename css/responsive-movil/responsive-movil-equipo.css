@@ -261,57 +261,35 @@
     /* -------------------------------------- */
     /* Estilos generales de Equipo */
     /* -------------------------------------- */
-    .equipo {
-        padding: 40px 15px;
-        height: auto; /* La altura se ajusta al contenido */
-    }
-
-    .equipo h2 {
-        font-size: 2rem;
-        margin-bottom: 30px;
-    }
-
-    /* La cuadrícula cambia de 2 columnas a 1 columna */
     .equipo-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        grid-template-columns: 1fr; /* 1 tarjeta por fila */
+        gap: 30px; /* menos espacio entre tarjetas */
     }
 
-    /* Ajustes para las tarjetas de los miembros */
     .equipo-item {
-        width: 100%;
-        max-width: 350px;
-        height: 450px; /* Altura fija para mantener el formato */
-        margin: 0 auto;
+        width: 100%; /* ocupar ancho del contenedor */
+        max-width: 350px; /* límite para que no sea tan grande */
+        height: auto; /* que la altura se adapte */
     }
 
-    /* Ajuste de la foto para que se posicione correctamente en la tarjeta */
     .equipo-foto {
-        bottom: 70px;
-        max-height: 75%;
+        position: relative;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        max-height: 250px;
     }
 
-    /* Ajuste de la caja de información del miembro */
     .equipo-info {
-        padding: 10px 0;
+        padding: 15px 10px;
     }
 
     .equipo-info h3 {
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
 
     .equipo-info p {
-        font-size: 0.8rem;
-    }
-
-    /* Ajuste del botón CTA */
-    .equipo-cta {
-        margin-top: 40px;
-    }
-
-    .btn-cta {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     /* -------------------------------------- */

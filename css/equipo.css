@@ -564,11 +564,10 @@
 /* Estilos generales de Equipo */
 /* -------------------------------------- */
 .equipo {
-    max-width: 1200px; /* ancho como otras secciones */
+    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
     padding: 50px 20px;
-    height: 1488px;
 }
 
 .equipo h2 {
@@ -584,6 +583,13 @@
     justify-items: center;
 }
 
+/* El enlace que envuelve la tarjeta */
+.equipo-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .equipo-item {
     width: 400px;
     height: 500px;
@@ -594,7 +600,14 @@
     background-position: center;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* contenido hacia abajo */
+    justify-content: flex-end;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animación cuando se pasa el mouse */
+.equipo-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .fondo1 { background-image: url("../imagenes/equipo/Fondo\ 1.png"); }
@@ -604,7 +617,7 @@
 
 .equipo-foto {
     position: absolute;
-    bottom: 80px; /* espacio para la caja de texto */
+    bottom: 80px;
     left: 50%;
     transform: translateX(-50%);
     max-width: 100%;
@@ -613,14 +626,14 @@
 }
 
 .equipo-info {
-    background: rgba(255, 255, 255, 0.95); /* blanca con ligera transparencia */
+    background: rgba(255, 255, 255, 0.95);
     width: 100%;
     padding: 12px 0;
     position: relative;
     z-index: 2;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* sombra suave */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .equipo-info h3 {
@@ -633,20 +646,6 @@
     font-size: 0.9rem;
     color: gray;
     margin: 0;
-}
-
-.equipo-cta {
-    margin-top: 50px;
-}
-
-.btn-cta {
-    display: inline-block;
-    background: #f50057;
-    color: white;
-    padding: 12px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
 }
 
 /* -------------------------------------- */
