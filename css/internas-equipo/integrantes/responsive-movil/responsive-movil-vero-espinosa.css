@@ -71,4 +71,102 @@
     .header nav ul li.submenu.submenu-open > ul {
         display: block;
     }
+
+    /* -------------------------------------- */
+    /* Estilos del Banner */
+    /* -------------------------------------- */
+    .desktop-only { display: none; }
+    .mobile-only { display: block; }
+
+    .banner-content-mobile {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .banner-content-mobile h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #000;
+        margin: 15px 0;
+        position: relative;
+        line-height: 1.2;
+        display: inline-block;
+        white-space: nowrap;
+    }
+
+    /* Ícono al lado de la "a" (móvil) */
+    .banner-content-mobile .graf-icon {
+        position: relative;
+        margin-left: 6px;
+        top: 0;
+        vertical-align: middle;
+    }
+
+    .banner-content-mobile .subtitle {
+        font-size: 1rem;
+        color: #555;
+        letter-spacing: 1px;
+        margin-bottom: 25px;
+    }
+
+    .chef-image-container-mobile {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .yellow-square-bg-mobile {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 250px;
+        height: 250px;
+        background-color: #218380; /* nuevo color */
+        z-index: -1;
+    }
+
+    .chef-image-mobile {
+        width: 280px;
+        height: auto;
+        display: block;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        z-index: 1;
+    }
+
+    .experience-circle-mobile {
+        width: 130px;
+        height: 130px;
+        background-color: #218380; /* nuevo color */
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1rem;
+        line-height: 1.2;
+        margin: 0 auto 20px auto;
+    }
+
+    .quote-box-mobile {
+        max-width: 280px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .quote-box-mobile p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: #555;
+    }
+
+    .quote-box-mobile .quote-icon {
+        width: 35px;
+        margin-bottom: 10px;
+    }
 }

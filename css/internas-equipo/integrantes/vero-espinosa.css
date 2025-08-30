@@ -92,3 +92,150 @@
     border: none;
     cursor: pointer;
 }
+
+/* -------------------------------------- */
+/* Estilos del Banner */
+/* -------------------------------------- */
+.banner-section {
+    width: 100%;
+    max-width: 1400px;
+    height: 988px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.banner-text-top {
+    margin-bottom: 50px;
+}
+
+.banner-text-top p {
+    font-size: 1.2rem;
+    color: #000;
+    font-weight: 500;
+    margin: 0;
+}
+
+.banner-text-top h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: bold;
+    color: #000;
+    margin: 10px 0;
+    position: relative;
+    line-height: 1;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.yellow-title {
+    color: #218380; /* nuevo color */
+}
+
+/* Ícono al lado de la "a" (escritorio) */
+.graf-icon {
+    width: 30px;
+    height: auto;
+    position: relative;
+    margin-left: 8px;
+    top: -5px;
+    vertical-align: middle;
+}
+
+.banner-text-top .subtitle {
+    font-size: 1.1rem;
+    color: #555;
+    letter-spacing: 2px;
+}
+
+.banner-main-visual {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.chef-image-container {
+    position: relative;
+    z-index: 2;
+}
+
+.yellow-square-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background-color: #218380; /* nuevo color */
+    z-index: -1;
+}
+
+.chef-image {
+    width: 400px;
+    height: auto;
+    display: block;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.quote-box {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px;
+    text-align: left;
+}
+
+.quote-box p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #555;
+}
+
+.quote-icon {
+    width: 40px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.experience-circle {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px;
+    height: 150px;
+    background-color: #218380; /* nuevo color */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+/* -------------------------------------- */
+/* Responsive - Móvil */
+/* -------------------------------------- */
+.desktop-only { display: block; }
+.mobile-only { display: none; }
