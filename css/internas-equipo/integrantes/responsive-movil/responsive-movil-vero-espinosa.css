@@ -243,4 +243,39 @@
         width: 60px;
         height: 60px;
     }
+
+    /* -------------------------------------- */
+    /* Estilos del Frame 003 */
+    /* -------------------------------------- */
+    .info-content {
+        flex-direction: column; /* Apila los elementos */
+        text-align: center;
+        gap: 30px;
+    }
+
+    .info-text-wrapper {
+        order: 1; /* primero el texto */
+    }
+
+    .info-text-wrapper p {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    .signature-text {
+        order: 2; /* debajo del párrafo */
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    .info-image-wrapper {
+        order: 3; /* último la imagen */
+        margin-top: 10px;
+    }
+
+    .info-image {
+        max-width: 280px; /* imagen más pequeña en móvil */
+        width: 100%;
+    }
 }
