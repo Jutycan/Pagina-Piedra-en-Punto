@@ -1,0 +1,149 @@
+/* -------------------------------------- */
+/* Estilos del Header */
+/* -------------------------------------- */
+.header {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header .logo img {
+    max-height: 60px;
+}
+
+/* === NAV === */
+.header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+.header nav ul li {
+    position: relative;
+}
+
+.header nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 500;
+    padding: 10px 0;
+    display: block;
+}
+
+/* === BOTÓN CONTACTO === */
+.header .btn-contacto {
+    background-color: #e91e63;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* === SUBMENÚS ESCRITORIO === */
+.header nav ul li ul {
+    position: absolute;
+    top: 100%;
+    right: 0; /* Corrección: el primer submenú se alinea a la derecha */
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    min-width: 180px;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.header nav ul li ul li {
+    padding: 0;
+}
+
+.header nav ul li ul li a {
+    padding: 5px 15px;
+    white-space: nowrap;
+}
+
+/* Segundo nivel de submenú (Integrantes) */
+.header nav ul ul ul {
+    position: absolute;
+    top: 0;
+    right: 100%; /* CORRECCIÓN CLAVE: el submenú se despliega hacia la izquierda */
+    left: auto;
+}
+
+/* === BOTÓN HAMBURGUESA (OCULTO EN ESCRITORIO) === */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* -------------------------------------- */
+/* Estilos de Cómo se ofrece */
+/* -------------------------------------- */
+.ofrece {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.ofrece-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 40px;
+}
+
+.ofrece-imagen img {
+    width: 500px;
+    height: auto;
+    border: 5px solid #6EAEAC;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.ofrece-texto {
+    max-width: 550px;
+}
+
+.ofrece-frase {
+    font-family: "Playfair Display", serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #6EAEAC;
+    margin-bottom: 10px;
+}
+
+.ofrece-titulo {
+    font-family: "Montserrat", sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #1C1C1C;
+    margin-bottom: 15px;
+}
+
+.ofrece-parrafo {
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #5A5A5A;
+}
