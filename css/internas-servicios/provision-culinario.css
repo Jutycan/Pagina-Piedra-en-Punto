@@ -147,3 +147,306 @@
     line-height: 1.6;
     color: #5A5A5A;
 }
+
+/* -------------------------------------- */
+/* Estilos de faqs-uno */
+/* -------------------------------------- */
+.faqs-uno {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px ;
+    height: 300px;
+    border: 1px solid #6EAEAC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.faqs-uno-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+}
+
+.faqs-uno-left {
+    flex: 1;
+}
+
+.faqs-uno-left h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.faqs-uno-left p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.faqs-uno-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-uno-item {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #6EAEAC;
+    transition: background 0.3s ease;
+}
+
+.faq-uno-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-uno-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-uno-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #218380;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-uno-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 15px 0;
+}
+
+/* Estado activo */
+.faq-uno-item.active {
+    background: #218380;
+}
+
+.faq-uno-item.active .faq-uno-answer {
+    max-height: 200px;
+    padding: 0 20px 15px;
+}
+
+.faq-uno-item.active .faq-uno-icon {
+    transform: rotate(180deg);
+}
+
+/* -------------------------------------- */
+/* Estilos de faqs-dos */
+/* -------------------------------------- */
+.faqs-dos {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px ;
+    height: 250px;
+    border: 1px solid #6EAEAC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.faqs-dos-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+}
+
+.faqs-dos-left {
+    flex: 1;
+}
+
+.faqs-dos-left h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.faqs-dos-left p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.faqs-dos-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-dos-item {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #6EAEAC;
+    transition: background 0.3s ease;
+}
+
+.faq-dos-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-dos-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-dos-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #218380;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-dos-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 15px 0;
+}
+
+/* Estado activo */
+.faq-dos-item.active {
+    background: #218380;
+}
+
+.faq-dos-item.active .faq-dos-answer {
+    max-height: 200px;
+    padding: 0 20px 15px;
+}
+
+.faq-dos-item.active .faq-dos-icon {
+    transform: rotate(180deg);
+}
+
+/* -------------------------------------- */
+/* Estilos de faqs-tres */
+/* -------------------------------------- */
+.faqs-tres {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px ;
+    height: 350px;
+    border: 1px solid #6EAEAC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.faqs-tres-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+}
+
+.faqs-tres-left {
+    flex: 1;
+}
+
+.faqs-tres-left h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.faqs-tres-left p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.faqs-tres-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-tres-item {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #6EAEAC;
+    transition: background 0.3s ease;
+}
+
+.faq-tres-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-tres-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-tres-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #218380;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-tres-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 15px 0;
+}
+
+/* Estado activo */
+.faq-tres-item.active {
+    background: #218380;
+}
+
+.faq-tres-item.active .faq-tres-answer {
+    max-height: 200px;
+    padding: 0 20px 15px;
+}
+
+.faq-tres-item.active .faq-tres-icon {
+    transform: rotate(180deg);
+}

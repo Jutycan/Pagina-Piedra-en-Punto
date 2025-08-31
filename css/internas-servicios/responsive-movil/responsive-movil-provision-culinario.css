@@ -100,4 +100,44 @@
     .ofrece-parrafo {
         font-size: 15px;
     }
+
+    /* -------------------------------------- */
+    /* Estilos de faqs-uno */
+    /* -------------------------------------- */
+    .faqs-uno {
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .faqs-uno-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos de faqs-dos */
+    /* -------------------------------------- */
+    .faqs-dos {
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .faqs-dos-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+
+    /* -------------------------------------- */
+    /* Estilos de faqs-tres */
+    /* -------------------------------------- */
+    .faqs-tres {
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .faqs-tres-container {
+        flex-direction: column;
+        gap: 30px;
+    }
 }
