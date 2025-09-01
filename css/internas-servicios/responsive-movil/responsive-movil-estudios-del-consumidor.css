@@ -71,4 +71,73 @@
     .header nav ul li.submenu.submenu-open > ul {
         display: block;
     }
+
+        /* -------------------------------------- */
+    /* Estilos de Cómo se ofrece */
+    /* -------------------------------------- */
+    .ofrece {
+        height: auto;
+        padding: 40px 20px;
+    }
+
+    .ofrece-contenido {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .ofrece-imagen {
+        display: none; /* Imagen se oculta en móvil */
+    }
+
+    .ofrece-texto {
+        max-width: 100%;
+    }
+
+    .ofrece-titulo {
+        font-size: 24px;
+    }
+
+    .ofrece-parrafo {
+        font-size: 15px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos de faqs-uno */
+    /* -------------------------------------- */
+    .faqs-uno {
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .faqs-uno-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos de faqs-dos */
+    /* -------------------------------------- */
+    .faqs-dos {
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .faqs-dos-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+
+    /* -------------------------------------- */
+    /* Estilos de faqs-tres */
+    /* -------------------------------------- */
+    .faqs-tres {
+        height: auto;
+        padding: 30px 20px;
+    }
+
+    .faqs-tres-container {
+        flex-direction: column;
+        gap: 30px;
+    }
 }
