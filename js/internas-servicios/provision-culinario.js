@@ -59,6 +59,69 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ----------------------------------------------------------------------------- 
+//----------------------Estilos de Beneficios------------------------------------- 
+// -----------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const benefitCards = document.querySelectorAll('.benefit-card');
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile) {
+        benefitCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const isActive = card.classList.contains('is-active');
+
+                // Si ya está activo, no hagas nada
+                if (isActive) {
+                    return;
+                }
+
+                // Cierra todas las tarjetas
+                benefitCards.forEach(otherCard => {
+                    otherCard.classList.remove('is-active');
+                    otherCard.style.pointerEvents = 'auto';
+                });
+
+                // Activa la tarjeta clicada
+                card.classList.add('is-active');
+            });
+        });
+
+        // Restablece los bloques al bajar o al salir de la sección
+        const benefitsSection = document.querySelector('.benefits-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    // Si el elemento no es visible, restablece todas las tarjetas
+                    benefitCards.forEach(card => {
+                        card.classList.remove('is-active');
+                    });
+                }
+            });
+        }, {
+            threshold: 0.1 // Porcentaje de visibilidad para considerar que el elemento está en pantalla
+        });
+
+        observer.observe(benefitsSection);
+
+    } else {
+        // Lógica de hover para escritorio
+        benefitCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.backgroundColor = '#2BB093';
+                card.querySelector('.benefit-number').style.color = '#114240';
+                card.querySelector('.benefit-text-hover').style.color = '#114240';
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.backgroundColor = '#f0f0f0';
+                card.querySelector('.benefit-number').style.color = '#888888';
+                card.querySelector('.benefit-text-hover').style.color = '#888888';
+            });
+        });
+    }
+}); 
+
+// ----------------------------------------------------------------------------- 
 //----------------------Estilos de faqs-uno------------------------------------- 
 // ----------------------------------------------------------------------------- 
 document.querySelectorAll(".faq-uno-question").forEach(button => {

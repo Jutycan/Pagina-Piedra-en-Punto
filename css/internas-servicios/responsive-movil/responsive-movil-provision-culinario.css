@@ -145,6 +145,92 @@
         margin-bottom: 0; /* Elimina cualquier margen residual */
     }
 
+    /* -------------------------------------- */
+    /* Estilos de Beneficios */
+    /* -------------------------------------- */
+    .benefits-section {
+        margin: 40px auto;
+    }
+
+    .benefits-title {
+        font-size: 2.5rem;
+        -webkit-text-stroke: 1px #888888;
+        letter-spacing: 2px;
+    }
+
+    /* La cuadrícula de beneficios se convierte en una columna */
+    .benefits-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    /* Estilos de la tarjeta en móvil */
+    .benefit-card {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+    }
+
+    .benefit-content {
+        height: auto;
+    }
+    
+    /* El contenedor visual se adapta */
+    .benefit-visual {
+        max-height: 200px; /* Altura máxima para la transición */
+        transition: max-height 0.3s ease, opacity 0.3s ease;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+    
+    .chef-image {
+        display: block;
+        transition: opacity 0.3s ease;
+    }
+
+    /* El texto del hover se oculta por defecto en móvil */
+    .benefit-text-hover {
+        position: static;
+        opacity: 0;
+        max-height: 0;
+        transition: opacity 0.3s ease, max-height 0.3s ease;
+        padding: 0;
+    }
+
+    /* Estado cuando se hace clic */
+    .benefit-card.is-active .chef-image {
+        opacity: 0;
+    }
+    
+    .benefit-card.is-active .benefit-text-hover {
+        opacity: 1;
+        max-height: 500px; /* Suficiente altura para mostrar el texto */
+        padding: 20px 0;
+    }
+    
+    .benefit-card.is-active {
+        background-color: #2BB093;
+    }
+
+    .benefit-card.is-active .benefit-number,
+    .benefit-card.is-active .benefit-text-hover * {
+        color: #114240;
+    }
+
+    /* Deshabilitar el hover en móvil */
+    .benefit-card:hover {
+        background-color: #f0f0f0;
+        transform: none;
+    }
+    .benefit-card:hover .benefit-number,
+    .benefit-card:hover .benefit-text-hover *,
+    .benefit-card:hover .chef-image {
+        color: #888888;
+        background-color: transparent;
+        opacity: 1;
+    }
+
 
     /* -------------------------------------- */
     /* Estilos de Cómo se ofrece */

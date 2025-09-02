@@ -195,6 +195,146 @@
     object-position: center;
 }
 
+/* -------------------------------------- */
+/* Estilos de Beneficios */
+/* -------------------------------------- */
+.benefits-section {
+    width: 100%;
+    max-width: 1400px; /* Ancho consistente con el banner */
+    margin: 80px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+    color: #114240; /* Color general del texto, para el estado de hover */
+}
+
+.benefits-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.benefits-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: transparent;
+    -webkit-text-stroke: 1px #888888;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+/* -------------------------------------- */
+/* Contenedor de los beneficios */
+/* -------------------------------------- */
+.benefits-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* -------------------------------------- */
+/* Estilos para cada tarjeta de beneficio */
+/* -------------------------------------- */
+.benefit-card {
+    flex: 1;
+    min-width: 200px;
+    background-color: #f0f0f0; /* Fondo gris inicial */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative; /* Importante para el posicionamiento del contenido */
+}
+
+.benefit-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.benefit-visual {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chef-image {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.benefit-text-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.benefit-number {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #888888; /* Color gris inicial para el número */
+    line-height: 1;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 3;
+    margin-top: 20px;
+}
+
+.benefit-small-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.benefit-description {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* -------------------------------------- */
+/* Efecto HOVER (al pasar el mouse) */
+/* -------------------------------------- */
+.benefit-card:hover {
+    background-color: #2BB093;
+    transform: translateY(-10px);
+}
+
+.benefit-card:hover .chef-image {
+    opacity: 0;
+}
+
+.benefit-card:hover .benefit-text-hover {
+    opacity: 1;
+    z-index: 3; /* Asegura que el texto esté encima del chef */
+}
+
+.benefit-card:hover .benefit-number,
+.benefit-card:hover .benefit-text-hover * {
+    color: #114240;
+}
+
 
 /* -------------------------------------- */
 /* Estilos de Cómo se ofrece */
