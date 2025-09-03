@@ -63,6 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // -----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const benefitCards = document.querySelectorAll('.benefit-card');
+    const benefitsSection = document.querySelector('.benefits-section');
     const isMobile = window.innerWidth <= 768;
 
     if (isMobile) {
@@ -70,56 +71,49 @@ document.addEventListener('DOMContentLoaded', () => {
             card.addEventListener('click', () => {
                 const isActive = card.classList.contains('is-active');
 
-                // Si ya está activo, no hagas nada
+                // Si la tarjeta clicada ya está activa, ciérrala.
                 if (isActive) {
-                    return;
+                    card.classList.remove('is-active');
+                    return; // Sal del evento
                 }
 
-                // Cierra todas las tarjetas
+                // Cierra todas las demás tarjetas
                 benefitCards.forEach(otherCard => {
                     otherCard.classList.remove('is-active');
-                    otherCard.style.pointerEvents = 'auto';
                 });
-
+                
                 // Activa la tarjeta clicada
                 card.classList.add('is-active');
             });
         });
 
         // Restablece los bloques al bajar o al salir de la sección
-        const benefitsSection = document.querySelector('.benefits-section');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) {
-                    // Si el elemento no es visible, restablece todas las tarjetas
                     benefitCards.forEach(card => {
                         card.classList.remove('is-active');
                     });
                 }
             });
         }, {
-            threshold: 0.1 // Porcentaje de visibilidad para considerar que el elemento está en pantalla
+            threshold: 0.0
         });
 
         observer.observe(benefitsSection);
 
     } else {
-        // Lógica de hover para escritorio
-        benefitCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.backgroundColor = '#2BB093';
-                card.querySelector('.benefit-number').style.color = '#114240';
-                card.querySelector('.benefit-text-hover').style.color = '#114240';
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.backgroundColor = '#f0f0f0';
-                card.querySelector('.benefit-number').style.color = '#888888';
-                card.querySelector('.benefit-text-hover').style.color = '#888888';
-            });
-        });
+        // Lógica de hover para escritorio (no se necesita si el CSS lo maneja)
+        // Puedes dejar esto vacío si solo usas el CSS para el hover
     }
-}); 
+
+    // Asegura el comportamiento correcto al cambiar el tamaño de la ventana
+    window.addEventListener('resize', () => {
+        if ((window.innerWidth > 768 && isMobile) || (window.innerWidth <= 768 && !isMobile)) {
+            location.reload();
+        }
+    });
+});
 
 // ----------------------------------------------------------------------------- 
 //----------------------Estilos de faqs-uno------------------------------------- 
