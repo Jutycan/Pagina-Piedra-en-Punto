@@ -73,6 +73,163 @@
     }
 
     /* -------------------------------------- */
+    /* Estilos del banner */
+    /* -------------------------------------- */
+    .hero-banner-section {
+        max-width: 100%;
+        height: 250px; /* Altura más pequeña para móvil */
+        border-radius: 0; /* Sin bordes redondeados para ocupar todo el ancho */
+    }
+
+    .hero-text-container {
+        top: 20px; /* Menor distancia desde la parte superior */
+        left: 20px; /* Menor distancia desde la izquierda */
+    }
+
+    .hero-text-container h1 {
+        font-size: 1.5rem; /* Tamaño de fuente más pequeño para que quepa bien */
+    }
+
+    /* -------------------------------------- */
+    /* Estilos de servicio descripcion */
+    /* -------------------------------------- */
+    .service-description-animated-section {
+        padding: 40px 20px;
+        min-height: 400px; /* Vuelve a una altura mínima fija para el móvil */
+        border-radius: 0;
+        display: flex; /* Añadimos flexbox para centrar verticalmente */
+        align-items: center; /* Centramos verticalmente todo el contenido */
+    }
+
+    .service-description-animated-section::before,
+    .service-description-animated-section::after {
+        display: none;
+    }
+
+    .service-description-animated-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Chef en móvil (estado inicial) */
+    .animated-chef-image {
+        position: absolute; /* Vuelve a posición absoluta para superponerse */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Centramos la imagen perfectamente */
+        width: 80%;
+        max-width: 300px;
+        opacity: 1;
+        transition: opacity 1.5s ease-out;
+        z-index: 2;
+    }
+    .animated-chef-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Contenido de Texto en móvil (estado inicial oculto) */
+    .animated-text-content {
+        position: absolute; /* Posición absoluta para que se superponga */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Centramos el texto perfectamente */
+        width: 90%;
+        padding: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 1.5s ease-out, visibility 1.5s ease-out;
+        z-index: 1;
+        text-align: center;
+    }
+    
+    .animated-text-content h2 {
+        font-size: 1.8rem;
+    }
+    .animated-text-content p {
+        font-size: 0.9rem;
+    }
+
+    /* Clase para mostrar el contenido (al activar la animación) */
+    .service-description-animated-section.is-visible .animated-chef-image {
+        opacity: 0;
+    }
+
+    .service-description-animated-section.is-visible .animated-text-content {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* -------------------------------------- */
+    /* Estilos de como se ofrece */
+    /* -------------------------------------- */
+    .how-offer-section {
+        padding: 40px 20px;
+        border-radius: 0;
+        min-height: auto; /* La altura se ajustará al contenido */
+    }
+
+    /* Ocultar elementos decorativos en móvil */
+    .how-offer-section::before,
+    .how-offer-section::after {
+        display: none;
+    }
+
+    .how-offer-container {
+        flex-direction: column; /* Apila los elementos */
+        text-align: center; /* Centra el texto */
+        padding: 0;
+    }
+
+    .how-offer-text-content {
+        margin-left: 0; /* Elimina el margen */
+        padding: 0 10px; /* Padding para el texto */
+        align-items: center; /* Centra el texto */
+        order: 1; /* El texto va primero */
+        margin-bottom: 30px;
+    }
+    .how-offer-text-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    .how-offer-text-content p {
+        font-size: 0.9rem;
+        max-width: 100%;
+    }
+
+    /* Imagen circular en móvil (inicialmente oculta, sin ocupar espacio) */
+    .how-offer-image-wrapper {
+        order: 2; /* La imagen va después del texto */
+        height: 0; /* No ocupa espacio inicialmente */
+        padding: 0;
+        opacity: 0;
+        transform: translateY(20px); /* Para una animación de entrada */
+        transition: opacity 2.0s ease-out, transform 2.0s ease-out, height 2.0s ease-out, padding 2.0s ease-out;
+        visibility: hidden;
+    }
+
+    .how-offer-image-wrapper img {
+        width: 250px; /* Tamaño de imagen más pequeño para móvil */
+        height: 250px;
+        box-shadow: none; /* Quitamos la sombra para un look más limpio en móvil */
+    }
+
+    /* Clase para mostrar la imagen y ocupar espacio */
+    .how-offer-section.is-visible .how-offer-image-wrapper {
+        height: auto; /* Ocupa el espacio que necesita */
+        padding: 20px 0; /* Agrega padding cuando es visible */
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+
+    /* -------------------------------------- */
     /* Estilos de faqs-uno */
     /* -------------------------------------- */
     .faqs-uno {
