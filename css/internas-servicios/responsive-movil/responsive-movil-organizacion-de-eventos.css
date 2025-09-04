@@ -120,6 +120,84 @@
     }
 
     /* -------------------------------------- */
+    /* Estilos de beneficios */
+    /* -------------------------------------- */
+    .benefit-card {
+        cursor: pointer; /* Indica que es clicable */
+        animation: subtle-pulse 2s infinite ease-in-out; /* Animación para invitar al clic */
+    }
+    
+    .benefit-card:hover { /* Reinicia el hover para móviles */
+        background-color: #f7f3f1;
+        transform: none;
+    }
+
+    /* Animación sutil de pulso para invitar al clic */
+    @keyframes subtle-pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.01); } /* Ligero aumento de tamaño */
+        100% { transform: scale(1); }
+    }
+
+    .benefits-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .benefit-card {
+        width: 100%;
+        max-width: 400px;
+        min-height: 150px; /* Ajusta si el texto corto necesita más espacio */
+        padding: 25px; /* Asegura el padding en móvil también */
+    }
+
+    /* Anular el efecto de hover en móviles */
+    .benefit-card:hover .benefit-content {
+        opacity: 1;
+    }
+
+    .benefit-card:hover .benefit-full-text {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* Estado de clic (Móvil) */
+    .benefit-card.is-active {
+        background-color: #FFBC0A; /* Color activo en móvil, igual que el hover de escritorio */
+        min-height: 250px; /* Ajusta la altura para el contenido completo */
+    }
+
+    .benefit-card.is-active .benefit-content {
+        opacity: 0;
+    }
+
+    .benefit-card.is-active .benefit-full-text {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .benefit-card.is-active .benefit-full-text h3,
+    .benefit-card.is-active .benefit-full-text p {
+        color: #fff;
+    }
+
+    /* Ajustes para el texto en móvil */
+    .benefits-header h2 {
+        font-size: 2.2rem; /* Tamaño de título ajustado */
+    }
+    .benefits-header p {
+        font-size: 0.9rem; /* Tamaño de descripción ajustado */
+    }
+    .benefit-full-text h3 {
+        font-size: 1.3rem; /* Tamaño de subtítulo en texto completo */
+    }
+    .benefit-full-text p {
+        font-size: 0.85rem; /* Tamaño de párrafo en texto completo */
+    }
+
+
+    /* -------------------------------------- */
     /* Estilos de como se ofrece */
     /* -------------------------------------- */
     .how-we-offer-container {
