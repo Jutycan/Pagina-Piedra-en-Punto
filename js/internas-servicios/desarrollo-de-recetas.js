@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+
 // ----------------------------------------------------------------------------- 
 //----------------------Estilos de servicio descripcion------------------------------------- 
 // -----------------------------------------------------------------------------
@@ -52,6 +53,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }, observerOptions);
 
         observer.observe(section);
+    }
+});
+
+// ----------------------------------------------------------------------------- 
+//----------------------Estilos de beneficios-----------------------------------
+// ----------------------------------------------------------------------------- 
+document.addEventListener('DOMContentLoaded', () => {
+    const benefitsSection = document.querySelector('.benefits-section');
+    const benefitCards = document.querySelectorAll('.benefit-card');
+
+    if (window.innerWidth <= 768) {
+        // Lógica para móviles (clic)
+        benefitCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Si la tarjeta ya está activa, la desactiva
+                if (card.classList.contains('is-active')) {
+                    card.classList.remove('is-active');
+                } else {
+                    // Desactiva todas las demás tarjetas
+                    benefitCards.forEach(otherCard => {
+                        otherCard.classList.remove('is-active');
+                    });
+                    // Activa la tarjeta actual
+                    card.classList.add('is-active');
+                }
+            });
+        });
+
+        // Restablecer los bloques al bajar o salir de la sección
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    benefitCards.forEach(card => card.classList.remove('is-active'));
+                }
+            });
+        });
+
+        observer.observe(benefitsSection);
     }
 });
 
