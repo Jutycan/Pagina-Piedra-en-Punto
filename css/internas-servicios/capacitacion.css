@@ -199,3 +199,813 @@
     height: auto;
     transform: scale(1.1); /* Chef un poco más grande */
 }
+
+/* -------------------------------------- */
+/* Estilos de beneficios */
+/* -------------------------------------- */
+.benefits-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.benefits-header {
+    margin-bottom: 40px;
+}
+
+.benefits-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.benefits-header p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Estilos de los bloques de beneficios (Escritorio) */
+.benefits-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.benefit-card {
+    flex: 1;
+    background-color: #f7f3f1;
+    border-radius: 10px;
+    padding: 25px;
+    cursor: pointer;
+    transition: background-color 0.4s ease, transform 0.4s ease;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-content {
+    transition: opacity 0.4s ease;
+    text-align: center;
+}
+
+.benefit-content .short-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #888;
+}
+
+.benefit-full-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 5px; /* Aquí está el cambio clave */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.benefit-full-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.benefit-full-text p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #fff;
+}
+
+/* Efecto de Hover (Escritorio) */
+.benefit-card:hover {
+    background-color: #218380;
+    transform: translateY(-5px);
+}
+
+.benefit-card:hover .benefit-content {
+    opacity: 0;
+}
+
+.benefit-card:hover .benefit-full-text {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* -------------------------------------- */
+/* Estilos de como se ofrece */
+/* -------------------------------------- */
+.how-offer-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: 50px auto 0;
+    padding: 80px 0;
+    box-sizing: border-box;
+    background-color: #F7F7F7; /* Color de fondo gris claro */
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Elementos decorativos de fondo (con pseudo-elementos) */
+.how-offer-section::before,
+.how-offer-section::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(128, 128, 128, 0.1); /* Gris muy suave */
+    z-index: 0;
+}
+
+/* Forma orgánica grande */
+.how-offer-section::before {
+    width: 300px;
+    height: 300px;
+    top: -50px;
+    left: -50px;
+    border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%; /* Forma orgánica */
+    transform: rotate(-20deg);
+}
+
+/* Círculos pequeños */
+.how-offer-section::after {
+    width: 30px;
+    height: 30px;
+    top: 30px;
+    left: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px rgba(128, 128, 128, 0.1),
+                0 0 0 20px rgba(128, 128, 128, 0.08); /* Círculos concéntricos */
+}
+
+
+/* Contenedor principal de imagen y texto */
+.how-offer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* Imagen circular (Escritorio) */
+.how-offer-image-wrapper {
+    flex: 0 0 40%; /* Ocupa 40% del ancho, no se encoge */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.how-offer-image-wrapper img {
+    width: 350px; /* Tamaño fijo para la imagen */
+    height: 350px;
+    object-fit: cover; /* Asegura que la imagen cubra el círculo */
+    border-radius: 50%; /* Hace la imagen circular */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra elegante */
+}
+
+/* Contenido de Texto (Escritorio) */
+.how-offer-text-content {
+    flex: 1; /* Ocupa el resto del espacio */
+    padding: 20px;
+    text-align: left; /* Alineación a la izquierda como en la referencia */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente */
+    align-items: flex-start; /* Alinea al inicio horizontalmente */
+    margin-left: 50px; /* Espacio con la imagen */
+}
+
+.how-offer-text-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.how-offer-text-content p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 15px; /* Espacio entre párrafos */
+    max-width: 550px;
+}
+.how-offer-text-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* -------------------------------------- */
+/* Estilos de faqs-uno */
+/* -------------------------------------- */
+.faqs-uno {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px ;
+    height: 300px;
+    border: 1px solid #6EAEAC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.faqs-uno-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+}
+
+.faqs-uno-left {
+    flex: 1;
+}
+
+.faqs-uno-left h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.faqs-uno-left p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.faqs-uno-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-uno-item {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #D3E6E6;
+    transition: background 0.3s ease;
+}
+
+.faq-uno-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-uno-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-uno-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #218380;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-uno-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 15px 0;
+}
+
+/* Estado activo */
+.faq-uno-item.active {
+    background: #218380;
+}
+
+.faq-uno-item.active .faq-uno-answer {
+    max-height: 200px;
+    padding: 0 20px 15px;
+}
+
+.faq-uno-item.active .faq-uno-icon {
+    transform: rotate(180deg);
+}
+
+/* -------------------------------------- */
+/* Estilos de faqs-dos */
+/* -------------------------------------- */
+.faqs-dos {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px ;
+    height: 250px;
+    border: 1px solid #6EAEAC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.faqs-dos-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+}
+
+.faqs-dos-left {
+    flex: 1;
+}
+
+.faqs-dos-left h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.faqs-dos-left p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.faqs-dos-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-dos-item {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #D3E6E6;
+    transition: background 0.3s ease;
+}
+
+.faq-dos-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-dos-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-dos-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #218380;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-dos-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 15px 0;
+}
+
+/* Estado activo */
+.faq-dos-item.active {
+    background: #218380;
+}
+
+.faq-dos-item.active .faq-dos-answer {
+    max-height: 200px;
+    padding: 0 20px 15px;
+}
+
+.faq-dos-item.active .faq-dos-icon {
+    transform: rotate(180deg);
+}
+
+/* -------------------------------------- */
+/* Estilos de faqs-tres */
+/* -------------------------------------- */
+.faqs-tres {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px ;
+    height: 350px;
+    border: 1px solid #6EAEAC;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.faqs-tres-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+}
+
+.faqs-tres-left {
+    flex: 1;
+}
+
+.faqs-tres-left h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.faqs-tres-left p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.faqs-tres-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-tres-item {
+    border-radius: 8px;
+    overflow: hidden;
+    background: #D3E6E6;
+    transition: background 0.3s ease;
+}
+
+.faq-tres-question {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-tres-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-tres-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #218380;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 20px;
+}
+
+.faq-tres-answer p {
+    font-size: 0.95rem;
+    color: #fff;
+    padding: 15px 0;
+}
+
+/* Estado activo */
+.faq-tres-item.active {
+    background: #218380;
+}
+
+.faq-tres-item.active .faq-tres-answer {
+    max-height: 200px;
+    padding: 0 20px 15px;
+}
+
+.faq-tres-item.active .faq-tres-icon {
+    transform: rotate(180deg);
+}
+
+/* -------------------------------------- */
+/* Estilos del Formulario Contacto*/
+/* -------------------------------------- */
+.contact-form-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 940px;
+    margin: 50px auto;
+    /* Color de fondo eliminado para que se vea el fondo de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.contact-form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.contact-form-content {
+    width: 50%;
+    padding: 0 50px 0 20px;
+}
+
+.contact-form-image-box {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end; /* Alinea la imagen a la derecha */
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+}
+
+.contact-form-image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Asegura que la imagen se muestre completa dentro del contenedor */
+}
+
+.contact-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.contact-form-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 25px;
+}
+
+.contact-form label {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    background-color: #f7f3ed;
+    transition: border-color 0.3s;
+}
+
+.contact-form input::placeholder {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+.form-divider {
+    height: 1px;
+    background-color: #d3d3d3;
+    margin: 40px 0;
+}
+
+.form-checkbox-group {
+    margin-bottom: 30px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #333333;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: #333333;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f7f3ed;
+}
+
+.contact-form-button {
+    display: inline-block;
+    background-color: #33614a;
+    border: 2px solid #33614a;
+    color: #ffffff;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.contact-form-button:hover {
+    background-color: #2a523e;
+    border-color: #2a523e;
+}
+
+/* -------------------------------------- */
+/* Estilos del footer completo */
+/* -------------------------------------- */
+.main-footer {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.footer-top-bg {
+    background-color: #fff; /* El color de fondo de la parte superior */
+    padding: 20px;
+}
+
+.footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 263px;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal del contenido izquierdo */
+.footer-content-wrapper {
+    display: flex;
+    flex: 1; /* Ocupa el espacio disponible */
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedor del logo y los íconos de redes sociales */
+.footer-logo-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+}
+
+.footer-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.social-icons a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    margin-left: 15px;
+}
+
+/* Contenedor de las columnas de enlaces */
+.footer-links-container {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #666;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ed217c;
+}
+
+/* Contenedor de la información de contacto */
+.footer-contact-info {
+    width: 40%;
+    background-color: #ed217c;
+    color: #fff;
+    padding: 20px 40px 20px 20px;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.footer-contact-info h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-contact-info p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+}
+
+/* Sección inferior del footer */
+.footer-bottom-bg {
+    width: 100%;
+    background-color: #d1d1d1;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #555;
+}

@@ -130,55 +130,74 @@
     line-height: 1.2;
 }
 
-
 /* -------------------------------------- */
 /* Estilos del servicio descripcion */
 /* -------------------------------------- */
-.service-description-section {
+.service-description-animated-section-2 {
     width: 100%;
-    background-color: #fff; /* Color de fondo claro para la sección */
-    padding: 80px 0;
-}
-
-.service-description-container {
     max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
+    margin: 80px auto 0;
+    padding: 80px 0;
+    box-sizing: border-box;
+    background-color: #F7F7F7; /* Color de fondo gris claro */
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.service-description-text {
+.service-description-animated-container-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* Contenido de Texto (Escritorio) */
+.animated-text-content-2 {
     flex: 1;
     padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.service-description-text h2 {
-    font-family: 'Playfair Display', serif; /* Usamos una tipografía elegante */
-    font-size: 3rem;
+.animated-text-content-2 h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
     color: #444;
     margin-bottom: 20px;
 }
 
-.service-description-text p {
+.animated-text-content-2 p {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     color: #666;
+    max-width: 500px;
 }
 
-.service-description-image {
-    flex: 1;
+/* Imagen del Chef (Escritorio) */
+.animated-chef-image-2 {
+    flex: 0 0 35%;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    right: -20px; /* Desplazamiento a la derecha como en la referencia */
 }
 
-.service-description-image img {
+.animated-chef-image-2 img {
     max-width: 100%;
     height: auto;
-    border-radius: 15px; /* Bordes redondeados para un toque elegante */
+    transform: scale(1.1); /* Chef un poco más grande */
 }
 
 /* -------------------------------------- */
@@ -298,51 +317,112 @@
 /* -------------------------------------- */
 /* Estilos de como se ofrece */
 /* -------------------------------------- */
-.how-we-offer-section {
+.how-offer-section {
     width: 100%;
-    background-color: #fff;
-    padding: 80px 0;
-}
-
-.how-we-offer-container {
     max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-}
-
-.how-we-offer-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.how-we-offer-image img {
-    max-width: 100%;
-    height: auto;
+    margin: 50px auto 0;
+    padding: 80px 0;
+    box-sizing: border-box;
+    background-color: #F7F7F7; /* Color de fondo gris claro */
+    position: relative;
+    overflow: hidden;
     border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-.how-we-offer-text {
-    flex: 1;
+/* Elementos decorativos de fondo (con pseudo-elementos) */
+.how-offer-section::before,
+.how-offer-section::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(128, 128, 128, 0.1); /* Gris muy suave */
+    z-index: 0;
+}
+
+/* Forma orgánica grande */
+.how-offer-section::before {
+    width: 300px;
+    height: 300px;
+    top: -50px;
+    left: -50px;
+    border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%; /* Forma orgánica */
+    transform: rotate(-20deg);
+}
+
+/* Círculos pequeños */
+.how-offer-section::after {
+    width: 30px;
+    height: 30px;
+    top: 30px;
+    left: 20px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px rgba(128, 128, 128, 0.1),
+                0 0 0 20px rgba(128, 128, 128, 0.08); /* Círculos concéntricos */
+}
+
+
+/* Contenedor principal de imagen y texto */
+.how-offer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* Imagen circular (Escritorio) */
+.how-offer-image-wrapper {
+    flex: 0 0 40%; /* Ocupa 40% del ancho, no se encoge */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
     padding: 20px;
+    box-sizing: border-box;
 }
 
-.how-we-offer-text h2 {
+.how-offer-image-wrapper img {
+    width: 350px; /* Tamaño fijo para la imagen */
+    height: 350px;
+    object-fit: cover; /* Asegura que la imagen cubra el círculo */
+    border-radius: 50%; /* Hace la imagen circular */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Sombra elegante */
+}
+
+/* Contenido de Texto (Escritorio) */
+.how-offer-text-content {
+    flex: 1; /* Ocupa el resto del espacio */
+    padding: 20px;
+    text-align: left; /* Alineación a la izquierda como en la referencia */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra verticalmente */
+    align-items: flex-start; /* Alinea al inicio horizontalmente */
+    margin-left: 50px; /* Espacio con la imagen */
+}
+
+.how-offer-text-content h2 {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: #444;
     margin-bottom: 20px;
+    line-height: 1.2;
 }
 
-.how-we-offer-text p {
+.how-offer-text-content p {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     line-height: 1.6;
     color: #666;
+    margin-bottom: 15px; /* Espacio entre párrafos */
+    max-width: 550px;
+}
+.how-offer-text-content p:last-child {
+    margin-bottom: 0;
 }
 
 /* -------------------------------------- */
