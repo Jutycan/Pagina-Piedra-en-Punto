@@ -94,6 +94,146 @@
 }
 
 /* -------------------------------------- */
+/* Estilos de Beneficios */
+/* -------------------------------------- */
+.benefits-section {
+    width: 100%;
+    max-width: 1400px; /* Ancho consistente con el banner */
+    margin: 80px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+    color: #114240; /* Color general del texto, para el estado de hover */
+}
+
+.benefits-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.benefits-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: transparent;
+    -webkit-text-stroke: 1px #888888;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+/* -------------------------------------- */
+/* Contenedor de los beneficios */
+/* -------------------------------------- */
+.benefits-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* -------------------------------------- */
+/* Estilos para cada tarjeta de beneficio */
+/* -------------------------------------- */
+.benefit-card {
+    flex: 1;
+    min-width: 200px;
+    background-color: #f0f0f0; /* Fondo gris inicial */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative; /* Importante para el posicionamiento del contenido */
+}
+
+.benefit-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.benefit-visual {
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chef-image {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.benefit-text-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.benefit-number {
+    font-size: 8rem;
+    font-weight: bold;
+    color: #888888; /* Color gris inicial para el número */
+    line-height: 1;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 3;
+    margin-top: 20px;
+}
+
+.benefit-small-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.benefit-description {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* -------------------------------------- */
+/* Efecto HOVER (al pasar el mouse) */
+/* -------------------------------------- */
+.benefit-card:hover {
+    background-color: #EC0868;
+    transform: translateY(-10px);
+}
+
+.benefit-card:hover .chef-image {
+    opacity: 0;
+}
+
+.benefit-card:hover .benefit-text-hover {
+    opacity: 1;
+    z-index: 3; /* Asegura que el texto esté encima del chef */
+}
+
+.benefit-card:hover .benefit-number,
+.benefit-card:hover .benefit-text-hover * {
+    color: #fff;
+}
+
+/* -------------------------------------- */
 /* Estilos de Cómo se ofrece */
 /* -------------------------------------- */
 .ofrece {
@@ -113,12 +253,25 @@
     gap: 40px;
 }
 
+.ofrece-imagen {
+    position: relative;
+    /* En escritorio la imagen estará a la derecha */
+}
+
 .ofrece-imagen img {
     width: 500px;
     height: auto;
     border: 5px solid #F682B1;
     border-radius: 12px;
     object-fit: cover;
+}
+
+.ofrece-texto-y-imagen {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .ofrece-texto {
@@ -449,4 +602,287 @@
 
 .faq-tres-item.active .faq-tres-icon {
     transform: rotate(180deg);
+}
+
+/* -------------------------------------- */
+/* Estilos del Formulario */
+/* -------------------------------------- */
+.contact-form-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 940px;
+    margin: 50px auto;
+    /* Color de fondo eliminado para que se vea el fondo de la página */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.contact-form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.contact-form-content {
+    width: 50%;
+    padding: 0 50px 0 20px;
+}
+
+.contact-form-image-box {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end; /* Alinea la imagen a la derecha */
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
+}
+
+.contact-form-image-box img {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* Asegura que la imagen se muestre completa dentro del contenedor */
+}
+
+.contact-form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    font-weight: 500;
+    color: #333333;
+    line-height: 1.1;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.contact-form-subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin-bottom: 50px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 25px;
+}
+
+.contact-form label {
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    box-sizing: border-box;
+    background-color: #f7f3ed;
+    transition: border-color 0.3s;
+}
+
+.contact-form input::placeholder {
+    color: #8c8c8c;
+    font-style: italic;
+}
+
+.form-divider {
+    height: 1px;
+    background-color: #d3d3d3;
+    margin: 40px 0;
+}
+
+.form-checkbox-group {
+    margin-bottom: 30px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #4a4a4a;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #333333;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: #333333;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #f7f3ed;
+}
+
+.contact-form-button {
+    display: inline-block;
+    background-color: #33614a;
+    border: 2px solid #33614a;
+    color: #ffffff;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.contact-form-button:hover {
+    background-color: #2a523e;
+    border-color: #2a523e;
+}
+
+/* -------------------------------------- */
+/* Estilos del footer completo */
+/* -------------------------------------- */
+.main-footer {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.footer-top-bg {
+    background-color: #fff; /* El color de fondo de la parte superior */
+    padding: 20px;
+}
+
+.footer-top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    height: 263px;
+    box-sizing: border-box;
+}
+
+/* Contenedor principal del contenido izquierdo */
+.footer-content-wrapper {
+    display: flex;
+    flex: 1; /* Ocupa el espacio disponible */
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedor del logo y los íconos de redes sociales */
+.footer-logo-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 50px;
+}
+
+.footer-logo {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.social-icons a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    margin-left: 15px;
+}
+
+/* Contenedor de las columnas de enlaces */
+.footer-links-container {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+}
+
+.footer-links ul li {
+    margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #666;
+    line-height: 1.8;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #ed217c;
+}
+
+/* Contenedor de la información de contacto */
+.footer-contact-info {
+    width: 40%;
+    background-color: #ed217c;
+    color: #fff;
+    padding: 20px 40px 20px 20px;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.footer-contact-info h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.footer-contact-info p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 10px 0;
+}
+
+/* Sección inferior del footer */
+.footer-bottom-bg {
+    width: 100%;
+    background-color: #d1d1d1;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #555;
 }

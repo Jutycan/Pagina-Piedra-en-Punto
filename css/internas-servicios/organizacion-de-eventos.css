@@ -487,7 +487,7 @@
     padding: 15px 20px;
     font-size: 1rem;
     font-weight: 500;
-    color: #fff;
+    color: #333;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -588,7 +588,7 @@
     padding: 15px 20px;
     font-size: 1rem;
     font-weight: 500;
-    color: #fff;
+    color: #333;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -689,7 +689,7 @@
     padding: 15px 20px;
     font-size: 1rem;
     font-weight: 500;
-    color: #fff;
+    color: #333;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -938,6 +938,7 @@
     width: 24px;
     height: 24px;
     margin-right: 10px;
+    margin-left: 15px;
 }
 
 /* Contenedor de las columnas de enlaces */
