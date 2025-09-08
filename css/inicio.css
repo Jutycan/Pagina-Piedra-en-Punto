@@ -99,8 +99,8 @@
 .main-banner {
     width: 100%;
     max-width: 1200px;
-    height: 979px; 
-    margin: -100px auto 0;
+    height: 750px; 
+    margin: 25px auto 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -963,6 +963,7 @@
     width: 24px;
     height: 24px;
     margin-right: 10px;
+    margin-left: 15px;
 }
 
 /* Contenedor de las columnas de enlaces */

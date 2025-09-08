@@ -73,6 +73,101 @@
     }
 
     /* -------------------------------------- */
+    /* Estilos del Banner */
+    /* -------------------------------------- */
+    .banner-section {
+        margin-top: 40px;
+        border-radius: 0; /* Sin bordes redondeados en móvil */
+        box-shadow: none;
+    }
+
+    .banner-top {
+        height: 250px;
+        padding: 15px;
+    }
+
+    .banner-top-text {
+        font-size: 1.8rem;
+    }
+    
+    .banner-bottom {
+        padding: 40px 20px;
+        position: relative;
+        min-height: 350px; /* Ajuste para la altura mínima en móvil */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .banner-bottom::before {
+        height: 60px; /* Altura de curva menor en móvil */
+        top: -30px;
+        transform: translateY(30px);
+    }
+
+    .banner-bottom-content {
+        flex-direction: column;
+        text-align: center;
+        padding: 0;
+        gap: 20px;
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* La imagen del chef se muestra por defecto con animación en móvil */
+    .banner-bottom-image-wrapper {
+        position: relative; /* Para que ocupe espacio en el flujo */
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        cursor: pointer; /* Añadimos un cursor de clic */
+        top: 0; /* Reiniciamos la posición */
+        order: 2; /* Para que aparezca debajo del texto si se activa */
+    }
+    
+    .banner-bottom-image-wrapper img {
+        width: 200px; /* Tamaño del chef en móvil */
+        height: auto;
+        transform: scale(1);
+    }
+    
+    /* El texto del banner inferior se oculta por defecto */
+    .banner-bottom-text-content {
+        position: absolute; /* Para superponerlo al espacio de la imagen */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        order: 1; /* Para que el texto quede encima si se activa */
+    }
+
+    /* Clase para ocultar la imagen y mostrar el texto al hacer clic */
+    .banner-bottom.show-text .banner-bottom-image-wrapper {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .banner-bottom.show-text .banner-bottom-text-content {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .banner-bottom-title {
+        font-size: 1.5rem;
+    }
+
+    .banner-bottom-paragraph {
+        font-size: 0.9rem;
+    }
+
+
+    /* -------------------------------------- */
     /* Estilos de Beneficios */
     /* -------------------------------------- */
     /* Desactivar cualquier efecto de hover en móvil */

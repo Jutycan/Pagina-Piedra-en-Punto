@@ -22,6 +22,20 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ----------------------------------------------------------------------------- 
+//----------------------Estilos del Banner------------------------------------- 
+// -----------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const bannerBottom = document.querySelector('.banner-bottom');
+    const isMobile = window.innerWidth <= 768;
+
+    if (isMobile && bannerBottom) {
+        bannerBottom.addEventListener('click', () => {
+            bannerBottom.classList.toggle('show-text');
+        });
+    }
+});
+
+// ----------------------------------------------------------------------------- 
 //----------------------Estilos de Beneficios------------------------------------- 
 // -----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
