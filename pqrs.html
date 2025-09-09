@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto | Piedra en Punto</title>
+    <title>PQRS | Piedra en Punto</title>
 
-    <meta name="description" content="Ponte en contacto con nuestra agencia de marketing especializada en la industria de alimentos. Llámanos, escríbenos o visita nuestras oficinas.">
+    <meta name="description" content="Envía tus Peticiones, Quejas, Reclamos y Sugerencias a nuestra agencia de marketing culinario.">
 
-    <link rel="icon" type="image/png" href="../imagenes/general/LOGO rosa (1).png">
+    <link rel="icon" type="image/png" href="imagenes/general/LOGO rosa (1).png">
 
-    <link rel="stylesheet" href="/css/contacto.css">
+    <link rel="stylesheet" href="/css/pqrs.css">
 
-    <link rel="stylesheet" href="/css/responsive-movil/responsive-movil-contacto.css">
+    <link rel="stylesheet" href="/css/responsive-movil/responsive-movil-pqrs.css">
 
-    <meta property="og:title" content="Contacto | Piedra en Punto">
-    <meta property="og:description" content="Ponte en contacto con nuestra agencia de marketing especializada en la industria de alimentos. Llámanos, escríbenos o visita nuestras oficinas.">
+    <meta property="og:title" content="PQRS | Agencia de Marketing de Alimentos">
+    <meta property="og:description" content="Envía tus Peticiones, Quejas, Reclamos y Sugerencias a nuestra agencia de marketing culinario.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="URL_DE_TU_PAGINA/contacto.html">
+    <meta property="og:url" content="URL_DE_TU_PAGINA/pqrs.html">
     <meta property="og:image" content="URL_DE_UNA_IMAGEN_REPRESENTATIVA.jpg">
 </head>
 <body>
@@ -71,73 +71,87 @@
     </header>
 
     <main>
-        <section id="contacto-banner" class="contact-banner-section">
-            <div class="contact-banner-content">
-                <h1 class="contact-banner-title">Contáctanos</h1>
-                <p class="contact-banner-subtitle">Lorem ipsum dolor sit amet consectetur adipiscing elit.</p>
-            </div>
-            <div class="contact-banner-pattern">
-                <img src="/imagenes/contacto/Figures.png" alt="Patrón decorativo geométrico">
-            </div>
-        </section>
-
-        <section id="contacto-info-formulario" class="info-form-section">
-            <div class="info-form-container">
-                <div class="info-content-left">
-                    <div class="contact-info-item">
-                        <img src="/imagenes/contacto/034-place.png" alt="Icono de ubicación" class="info-icon">
-                        <div class="info-text">
-                            <h3 class="info-title">¿Dónde nos ubicamos?</h3>
-                            <p>Iglesia 2, Torre A 603, Tizapán San Ángel, 01090, Álvaro Obregón, CDMX</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <img src="/imagenes/contacto/038-headphones.png" alt="Icono de auriculares" class="info-icon">
-                        <div class="info-text">
-                            <h3 class="info-title">Nuestro número</h3>
-                            <p>+52 55 2558 6881</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-info-item">
-                        <img src="/imagenes/contacto/024-mail.png" alt="Icono de correo electrónico" class="info-icon">
-                        <div class="info-text">
-                            <h3 class="info-title">Nuestro e-mail</h3>
-                            <p>verodlp@piedraenpunto.com.mx</p>
-                        </div>
-                    </div>
-
-                    <div class="contact-pattern">
-                        <img src="/imagenes/contacto/Frame 496.png" alt="Patrón decorativo geométrico">
-                    </div>
+        <section id="pqrs-formato-pqrs" class="pqrs-section">
+            <div class="pqrs-container">
+                <div class="pqrs-content-left">
+                    <h2 class="pqrs-title">FORMATO PQRS</h2>
+                    <p class="pqrs-subtitle">
+                        Por favor, diligencia el siguiente formulario para enviarnos tu Petición, Queja, Reclamo o Sugerencia. Nuestro equipo revisará tu caso y te responderá en el menor tiempo posible.
+                    </p>
                 </div>
 
-                <div class="form-content-right">
-                    <h2 class="form-title">Sigamos en contacto</h2>
-                    <p class="form-subtitle">Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat.</p>
+                <div class="pqrs-form-right">
+                    <form action="#" method="post" class="pqrs-form">
+                        <div class="form-row">
+                            <div class="form-group-half">
+                                <label for="clasificacion">Clasificación*</label>
+                                <select id="clasificacion" name="clasificacion" required>
+                                    <option value="" disabled selected hidden>Selecciona una opción</option>
+                                    <option value="peticion">Petición</option>
+                                    <option value="queja">Queja</option>
+                                    <option value="reclamo">Reclamo</option>
+                                    <option value="sugerencia">Sugerencia</option>
+                                </select>
+                            </div>
 
-                    <form action="#" method="post" class="contact-form">
-                        <div class="form-group">
-                            <label for="nombre">Nombre*</label>
-                            <input type="text" id="nombre" name="nombre" placeholder="¿Cuáles son tus nombres y apellidos?" required>
+                            <div class="form-group-half">
+                                <label for="nombres">Nombres y Apellidos*</label>
+                                <input type="text" id="nombres" name="nombres" placeholder="¿Cuáles son tus nombres y apellidos?" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Correo electrónico*</label>
-                            <input type="email" id="email" name="email" placeholder="¿Cuál es tu e-mail?" required>
+
+                        <div class="form-row">
+                            <div class="form-group-half">
+                                <label for="identificacion">Número de identificación*</label>
+                                <input type="text" id="identificacion" name="identificacion" placeholder="Número de identificación" required>
+                            </div>
+                            <div class="form-group-half">
+                                <label for="fecha">Fecha*</label>
+                                <input type="date" id="fecha" name="fecha" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="telefono">Número de teléfono*</label>
-                            <input type="tel" id="telefono" name="telefono" placeholder="¿Cuál es tu número teléfono?" required>
+
+                        <div class="form-row">
+                            <div class="form-group-half">
+                                <label for="motivo">Motivo PQRS*</label>
+                                <select id="motivo" name="motivo" required>
+                                    <option value="" disabled selected hidden>Selecciona una opción</option>
+                                    <option value="servicio">Calidad del servicio</option>
+                                    <option value="producto">Problema con producto</option>
+                                    <option value="facturacion">Inconveniente de facturación</option>
+                                    <option value="asesoria">Asesoría o información</option>
+                                    <option value="sugerencia-mejora">Sugerencia para mejora</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group-half">
+                                <label for="email">Correo electrónico*</label>
+                                <input type="email" id="email" name="email" placeholder="¿Cuál es tu e-mail?" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="mensaje">Mensaje</label>
-                            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Dejar un comentario."></textarea>
+
+                        <div class="form-row">
+                            <div class="form-group-half">
+                                <label for="telefono">Número de teléfono*</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="¿Cuál es tu número de teléfono?" required>
+                            </div>
                         </div>
+                
+                        <div class="form-group">
+                            <label for="mensaje">¿Cómo podemos ayudarte?*</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Dejar un comentario." required></textarea>
+                        </div>
+
+                        <div class="form-group-checkbox">
+                            <input type="checkbox" id="politicas" name="politicas" required>
+                            <label for="politicas">Acepto las políticas de tratamiento de datos*</label>
+                        </div>
+
                         <button type="submit" class="submit-btn">Enviar &rarr;</button>
                     </form>
                 </div>
-            </div>
+    </div>
         </section>
     </main>
 
@@ -191,7 +205,7 @@
         </div>
     </footer>
 
-    <script src="/js/contacto.js"></script>
+    <script src="/js/pqrs.js"></script>
     
 </body>
 </html>
