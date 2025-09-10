@@ -21,6 +21,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+//------------------------------------------------------------------------------
+//---------------------------¿Quiénes somos?--------------------------------------------
+//-----------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    const aboutUsSection = document.querySelector('.about-us-section');
+    const aboutUsImage = document.querySelector('.about-us-image');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Si la sección es visible, muestra la imagen
+                aboutUsImage.classList.add('is-visible');
+            } else {
+                // Si la sección NO es visible, oculta la imagen
+                aboutUsImage.classList.remove('is-visible');
+            }
+        });
+    }, {
+        threshold: 0.2 // Se activa cuando el 20% de la sección es visible
+    });
+
+    if (aboutUsSection) {
+        observer.observe(aboutUsSection);
+    }
+});
+
 //---------------------------------------------------------------------------------------
 //-----------Formulario Contacto---------------------------------------------------------
 //---------------------------------------------------------------------------------------

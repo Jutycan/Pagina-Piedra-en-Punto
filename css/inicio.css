@@ -123,22 +123,30 @@
     box-sizing: border-box;
 }
 
+/* MODIFICACIÓN CLAVE 1: Color del pre-título */
 .banner-pre-title {
-    color: #777;
+    color: #218380;
     font-size: 16px;
     margin-bottom: 10px;
 }
 
+/* MODIFICACIÓN CLAVE 2: Tipografía del título */
 .banner-title {
+    font-family: 'Century Gothic', sans-serif; /* Usamos Century Gothic */
     font-size: 56px;
-    font-weight: bold;
+    font-weight: normal; /* Cambiado a regular */
     color: #222;
     margin-bottom: 25px;
     line-height: 1.1;
 }
 
+/* MODIFICACIÓN CLAVE 3: Color para el texto resaltado */
+.banner-title .highlight {
+    color: #218380;
+}
+
 .banner-subtitle {
-    color: #555;
+    color: #444;
     font-size: 20px;
     line-height: 1.5;
     margin-bottom: 30px;
@@ -151,7 +159,7 @@
 }
 
 .banner-features li {
-    color: #555;
+    color: #444;
     font-size: 16px;
     margin-bottom: 10px;
     position: relative;
@@ -232,6 +240,28 @@
     max-width: 100%;
     height: auto;
     border-radius: 20px;
+    position: relative;
+    z-index: 1;
+
+    animation: glowing-border 3s ease-in-out infinite;
+}
+
+@keyframes glowing-border {
+    0% {
+        filter: drop-shadow(0 0 10px #f59b4c);
+    }
+    25% {
+        filter: drop-shadow(0 0 10px #c64cf5);
+    }
+    50% {
+        filter: drop-shadow(0 0 10px #4c9bf5);
+    }
+    75% {
+        filter: drop-shadow(0 0 10px #218380);
+    }
+    100% {
+        filter: drop-shadow(0 0 10px #f59b4c);
+    }
 }
 
 .about-us-content {
@@ -241,7 +271,7 @@
 }
 
 .about-us-title {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Century Gothic', sans-serif;
     font-size: 48px;
     font-weight: bold;
     color: #222;
@@ -257,7 +287,7 @@
 
 .about-us-button {
     display: inline-block;
-    background-color: #38b492;
+    background-color: #218380;
     color: #fff;
     font-size: 18px;
     font-weight: bold;
@@ -270,8 +300,8 @@
 
 .about-us-button:hover {
     background-color: #2f9479;
-
 }
+
 
 /* -------------------------------------- */
 /* Estilos de Empresas Aliadas */

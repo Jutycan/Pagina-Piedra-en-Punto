@@ -76,70 +76,97 @@
     /* Estilos del Banner */
     /* -------------------------------------- */
     .main-banner {
-        height: auto; /* La altura se ajusta automáticamente */
+        height: auto;
         padding: 60px 20px;
     }
 
     .banner-container {
-        flex-direction: column; /* Apila los elementos verticalmente */
-        text-align: center; /* Centra el texto */
+        flex-direction: column;
+        text-align: center;
     }
 
     .banner-text {
-        width: 100%; /* Ocupa todo el ancho */
+        width: 100%;
         padding-right: 0;
-        margin-bottom: 40px; /* Agrega espacio entre el texto y la imagen */
+        margin-bottom: 40px;
     }
 
+    .banner-pre-title {
+        color: #218380;
+    }
+    
     .banner-title {
-        font-size: 48px; /* Reduce el tamaño del título */
+        font-family: 'Century Gothic', sans-serif;
+        font-size: 48px;
     }
 
     .banner-subtitle {
-        font-size: 18px; /* Reduce el tamaño del subtítulo */
+        font-size: 18px;
     }
     
     .banner-features {
         display: flex;
         flex-direction: column;
-        align-items: center; /* Centra la lista */
+        align-items: center;
     }
 
     .banner-image {
-        width: 100%; /* Ocupa todo el ancho */
+        width: 100%;
     }
     
     .banner-image img {
-        width: 90%; /* Ajusta el tamaño de la imagen */
+        width: 90%;
     }
 
     /* -------------------------------------- */
     /* Estilos de ¿Quiénes somos? */
     /* -------------------------------------- */
     .about-us-section {
-        height: auto; /* Ajusta la altura al contenido */
-        margin-top: 0; /* Elimina el margen superior negativo */
-        padding: 60px 20px; /* Ajusta el padding para móviles */
+        height: auto;
+        margin-top: 0;
+        padding: 60px 20px;
     }
 
     .about-us-container {
-        flex-direction: column; /* Apila el contenido verticalmente */
-        align-items: center; /* Centra los elementos */
-    }
-
-    .about-us-image {
-        display: none; /* Oculta la imagen en móviles */
-        padding-right: 0; /* Elimina el padding */
+        flex-direction: column;
+        align-items: center;
     }
 
     .about-us-content {
-        width: 100%; /* El contenido ocupa todo el ancho */
-        padding-left: 0; /* Elimina el padding */
-        text-align: center; /* Centra el texto para una mejor lectura en móvil */
+        order: 1;
+        width: 100%;
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .about-us-image {
+        order: 2;
+        width: 100%;
+        padding-right: 0;
+        margin-top: 40px;
+        
+        /* Oculta la imagen y colapsa el espacio */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        /* TRANSICIÓN MEJORADA: más larga y suave */
+        transition: max-height 1s ease-in-out, opacity 1s ease-in-out, transform 1s ease-in-out;
+    }
+    
+    .about-us-image.is-visible {
+        max-height: 1000px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .about-us-image img {
+        width: 100%;
+        height: auto;
+        transform: translateY(20px);
     }
 
     .about-us-title {
-        font-size: 36px; /* Reduce el tamaño del título para móviles */
+        font-size: 36px;
         margin-bottom: 15px;
     }
 
