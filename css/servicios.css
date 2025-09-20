@@ -96,101 +96,136 @@
 /* -------------------------------------- */
 /* Estilos del Banner */
 /* -------------------------------------- */
-.banner-section {
-    width: 100%;
-    max-width: 1200px;
-    margin: 50px auto 0 auto;
-    position: relative;
+.banner {
+    width: 80%;
+    margin: 140px auto 0;
+    background-color: #EC8A10;
     display: flex;
     justify-content: center;
-    align-items: center;
-    overflow: hidden;
 }
 
-.banner-desktop {
-    display: block;
-    width: 100%;
-    position: relative;
-    padding: 40px 20px;
-}
-
-.banner-wrapper {
-    display: flex;
-    align-items: center;
-    background-color: #e67e22;
-    border-radius: 10px;
-    padding: 4px 40px;
-    min-height: 180px;
+.banner-container {
     max-width: 1200px;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
     position: relative;
+    padding: 105px 0; /* un poco de aire */
 }
 
-.banner-image-box {
-    flex: 0 0 380px;
-    margin-right: 40px;
-    position: relative;
-    z-index: 2;
-}
-
+/* Imagen */
 .banner-image {
-    width: 100%;
-    border-radius: 12px;
-    margin-top: -30px;
-    margin-bottom: -30px;
+    flex: 1;
     position: relative;
-    z-index: 2;
 }
 
+.banner-image img {
+    width: 100%;
+    max-width: 400px;
+    margin: -260px auto 0;
+    border-radius: 10px;
+    object-fit: cover;
+
+    /* Clave: sobresale del naranja */
+    position: absolute;
+    top: -40px;
+    bottom: -40px;
+    left: 0;
+}
+
+/* Contenido */
 .banner-content {
     flex: 1;
-    color: #fff;
-    z-index: 2;
-    max-width: 500px;
+    color: #FFFFFF;
+    padding: 20px;
 }
 
-.banner-title {
-    font-size: 2.2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.banner-description {
-    font-size: 1rem;
+.banner-content h2 {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 32px;
     margin-bottom: 20px;
+}
+
+.banner-content p {
+    font-family: "Comfortaa", sans-serif;
+    font-size: 16px;
     line-height: 1.6;
+    margin-bottom: 30px;
 }
 
-.banner-cta-button {
+.btn-banner {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #0b9b73;
-    color: #fff;
+    background-color: #218380;
+    color: #FFFFFF;
+    padding: 12px 25px;
+    border-radius: 6px;
     text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-.banner-cta-button:hover {
-    background-color: #088a64;
-}
-
-/* Ocultar la versión móvil en escritorio */
-.banner-mobile {
-    display: none;
+.btn-banner:hover {
+    background-color: #18645f;
 }
 
 /* -------------------------------------- */
 /* Título de la sección de Empresas */
 /* -------------------------------------- */
-.section-title {
-    font-family: 'Inter', sans-serif;
-    font-size: 64px;
-    font-weight: bold;
-    color: #333333; /* Un gris oscuro para un aspecto profesional */
+.services-title {
+    width: 100%;
     text-align: center;
-    margin-bottom: 60px; /* Espacio para separar del siguiente contenido */
+    margin: 120px auto;
+}
+
+.animated-text {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 36px;
+    color: #000000;
+    display: inline-block;
+    position: relative;
+    white-space: pre; /* 👈 mantiene los espacios */
+}
+
+/* Aplica animación letra por letra */
+.animated-text span {
+    opacity: 0;
+    display: inline-block;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s forwards;
+}
+
+/* Animación base: fade-in + subir */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Controla cada letra */
+.animated-text span:nth-child(1) { animation-delay: 0.1s; }
+.animated-text span:nth-child(2) { animation-delay: 0.2s; }
+.animated-text span:nth-child(3) { animation-delay: 0.3s; }
+.animated-text span:nth-child(4) { animation-delay: 0.4s; }
+.animated-text span:nth-child(5) { animation-delay: 0.5s; }
+.animated-text span:nth-child(6) { animation-delay: 0.6s; }
+.animated-text span:nth-child(7) { animation-delay: 0.7s; }
+.animated-text span:nth-child(8) { animation-delay: 0.8s; }
+.animated-text span:nth-child(9) { animation-delay: 0.9s; }
+.animated-text span:nth-child(10) { animation-delay: 1s; }
+.animated-text span:nth-child(11) { animation-delay: 1.1s; }
+.animated-text span:nth-child(12) { animation-delay: 1.2s; }
+.animated-text span:nth-child(13) { animation-delay: 1.3s; }
+.animated-text span:nth-child(14) { animation-delay: 1.4s; }
+.animated-text span:nth-child(15) { animation-delay: 1.5s; }
+.animated-text span:nth-child(16) { animation-delay: 1.6s; }
+
+/* Reinicia todo el ciclo */
+@keyframes reset {
+    0%, 90% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 /* -------------------------------------- */

@@ -22,6 +22,31 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //------------------------------------------------------------------------------
+//---------------------------Título de la sección de Empresas-------------------
+//-----------------------------------------------------------------------------
+const textElement = document.querySelector('.animated-text');
+const text = textElement.textContent;
+textElement.textContent = '';
+
+[...text].forEach((letter, i) => {
+    const span = document.createElement('span');
+    span.textContent = letter === ' ' ? '\u00A0' : letter; // 👈 mantiene espacio
+    span.style.animationDelay = `${i * 0.1}s`;
+    textElement.appendChild(span);
+});
+
+function restartAnimation() {
+    const spans = document.querySelectorAll('.animated-text span');
+    spans.forEach(span => {
+        span.style.animation = 'none';
+        void span.offsetWidth; // reinicia animación
+        span.style.animation = '';
+    });
+}
+
+setInterval(restartAnimation, 4000); // reinicia cada 4s
+
+//------------------------------------------------------------------------------
 //---------------------------PREGUNTAS FRECUENTES-------------------------------
 //------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
