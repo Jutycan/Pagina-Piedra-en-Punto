@@ -47,6 +47,24 @@ function restartAnimation() {
 setInterval(restartAnimation, 4000); // reinicia cada 4s
 
 //------------------------------------------------------------------------------
+//-----------------------------Servcicio 1------------------------------------
+//-----------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 }); // Se activa cuando el 20% del section es visible
+
+    const provisionSection = document.querySelector(".provision-content");
+    if (provisionSection) {
+        observer.observe(provisionSection);
+    }
+});
+
+//------------------------------------------------------------------------------
 //---------------------------PREGUNTAS FRECUENTES-------------------------------
 //------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
