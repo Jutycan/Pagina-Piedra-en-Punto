@@ -130,75 +130,173 @@
     /* -------------------------------------- */
     /* Estilos del Servcio 1*/
     /* -------------------------------------- */
+    /* Oculta la versión de escritorio y muestra la de móvil */
+    .provision-desktop {
+        display: none;
+    }
     
-
-    .provision-section {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 60px 20px;
+    .provision-mobile {
+        display: block;
     }
 
-    /* Orden en móvil: título → párrafos → imagen → botón */
+    /* Ajusta el padding y el ancho del contenedor en móvil */
+    .provision-container {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+    }
+
+    /* Ajusta el contenido para que se centre y ocupe todo el ancho */
     .provision-content {
-        order: 1;
-        align-items: center;
+        width: 100%;
+        padding-right: 0;
+        text-align: center;
+        opacity: 1; /* Asegura que el contenido sea visible */
+        transform: none; /* Deshabilita la animación de escritorio */
     }
-
-    .provision-image {
-        order: 2;
-    }
-
-    .provision-content .btn {
-        order: 3;
-        margin: 20px auto 0;
-    }
-
+    
     .provision-content h2 {
-        font-size: 2rem;
+        font-size: 24px;
+        text-align: center;
+        opacity: 1;
+        transform: none;
     }
 
-    .provision-content p {
-        font-size: 1rem;
+    .provision-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        opacity: 1;
+        transform: none;
+        margin-bottom: 20px;
+    }
+
+    .provision-item p {
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .circle {
+        margin-top: 0;
+        animation: none; /* Deshabilita la animación en móvil */
+        background: #218380; /* Color fijo para los círculos */
+    }
+    
+    /* Imagen y botón */
+    .provision-image {
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .provision-image img {
+        width: 90%;
+    }
+
+    .btn-provision {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        opacity: 1;
+        transform: none;
+    }
+    
+    /* Deshabilita las animaciones en móvil para evitar conflictos */
+    .provision-content.visible h2,
+    .provision-content.visible .provision-item,
+    .provision-content.visible .btn-provision {
+        opacity: 1;
+        transform: none;
+        transition-delay: 0s !important;
     }
 
     /* -------------------------------------- */
     /* Estilos del Servcio 2*/
     /* -------------------------------------- */
-    /* Oculta la versión de escritorio y muestra la versión móvil */
-    .service-two-desktop {
-        display: none !important;
+    /* Oculta la versión de escritorio y muestra la de móvil */
+    .organizacion-desktop {
+        display: none;
     }
-
-    .service-two-mobile {
-        display: block !important;
-    }
-
-    .service-two-wrapper-mobile {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .service-two-image-box-mobile {
-        width: 100%;
-        height: auto;
-        margin: 0;
-    }
-
-    .service-two-cta-button-mobile {
+    
+    .organizacion-mobile {
         display: block;
+    }
+
+    /* Ajusta el padding y el ancho del contenedor en móvil */
+    .organizacion-container {
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+    }
+
+    /* Ajusta el contenido para que se centre y ocupe todo el ancho */
+    .organizacion-content {
         width: 100%;
-        box-sizing: border-box;
+        padding-right: 0;
         text-align: center;
-        background-color: #f2b934;
-        border: 2px solid #f2b934;
-        color: #333333;
-        padding: 15px 30px;
-        text-decoration: none;
-        font-family: 'Roboto', sans-serif;
-        font-weight: bold;
-        border-radius: 5px;
-        transition: background-color 0.3s, color 0.3s;
+        opacity: 1; /* Asegura que el contenido sea visible */
+        transform: none; /* Deshabilita la animación de escritorio */
+    }
+    
+    .organizacion-content h2 {
+        font-size: 24px;
+        text-align: center;
+        opacity: 1;
+        transform: none;
+    }
+
+    .organizacion-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+        opacity: 1;
+        transform: none;
+        margin-bottom: 20px;
+    }
+
+    .organizacion-item p {
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .circle-org {
+        margin-top: 0;
+        animation: none; /* Deshabilita la animación en móvil */
+        background: #FFBC0A; /* Color fijo para los círculos */
+    }
+    
+    /* Imagen y botón */
+    .organizacion-image {
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .organizacion-image img {
+        width: 90%;
+    }
+
+    .btn-organizacion {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        opacity: 1;
+        transform: none;
+    }
+    
+    /* Deshabilita las animaciones en móvil para evitar conflictos */
+    .organizacion-content.visible h2,
+    .organizacion-content.visible .organizacion-item,
+    .organizacion-content.visible .btn-organizacion {
+        opacity: 1;
+        transform: none;
+        transition-delay: 0s !important;
     }
 
     /* -------------------------------------- */

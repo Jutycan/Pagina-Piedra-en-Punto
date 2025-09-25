@@ -65,6 +65,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //------------------------------------------------------------------------------
+//-----------------------------Servcicio 2------------------------------------
+//-----------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 }); // Se activa cuando el 20% del section es visible
+
+    const organizacionSection = document.querySelector(".organizacion-content");
+    if (organizacionSection) {
+        observer.observe(organizacionSection);
+    }
+});
+
+//------------------------------------------------------------------------------
 //---------------------------PREGUNTAS FRECUENTES-------------------------------
 //------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
