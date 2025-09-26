@@ -83,6 +83,42 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //------------------------------------------------------------------------------
+//-----------------------------Servcicio 3------------------------------------
+//-----------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 }); // Se activa cuando el 20% del section es visible
+
+    const desarrolloSection = document.querySelector(".desarrollo-content");
+    if (desarrolloSection) {
+        observer.observe(desarrolloSection);
+    }
+});
+
+//------------------------------------------------------------------------------
+//-----------------------------Servcicio 4------------------------------------
+//-----------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 }); // Se activa cuando el 20% del section es visible
+
+    const estudiosSection = document.querySelector(".estudios-content");
+    if (estudiosSection) {
+        observer.observe(estudiosSection);
+    }
+});
+
+//------------------------------------------------------------------------------
 //---------------------------PREGUNTAS FRECUENTES-------------------------------
 //------------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
