@@ -119,36 +119,41 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //------------------------------------------------------------------------------
-//---------------------------PREGUNTAS FRECUENTES-------------------------------
-//------------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const faqItems = document.querySelectorAll('.faq-item');
-
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            const answer = item.querySelector('.faq-answer');
-
-            // Cierra los otros elementos de FAQ
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
-                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
-                }
-            });
-
-            // Alternar la clase 'active' en el elemento clickeado
-            item.classList.toggle('active');
-
-            // Animar el desplegable
-            if (item.classList.contains('active')) {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-            } else {
-                answer.style.maxHeight = null;
+//-----------------------------Servcicio 5------------------------------------
+//-----------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
             }
         });
-    });
+    }, { threshold: 0.2 }); // Se activa cuando el 20% del section es visible
+
+    const capacitacionSection = document.querySelector(".capacitacion-content");
+    if (capacitacionSection) {
+        observer.observe(capacitacionSection);
+    }
 });
+
+//------------------------------------------------------------------------------
+//-----------------------------Servcicio 6------------------------------------
+//-----------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.2 }); // Se activa cuando el 20% del section es visible
+
+    const activacionesSection = document.querySelector(".activaciones-content");
+    if (activacionesSection) {
+        observer.observe(activacionesSection);
+    }
+});
+
 
 //--------------------------------------------------------------------------------
 //------------------------FORMULARIO DE CONTACTO---------------------------------

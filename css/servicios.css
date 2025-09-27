@@ -866,443 +866,411 @@
 /* -------------------------------------- */
 /* Estilos del Servcio 5*/
 /* -------------------------------------- */
-.service-five-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 50px auto 0 auto;
-    background-color: #f7f3ed;
-    border-radius: 20px;
-    padding: 40px 20px;
+.capacitacion {
+    width: 80%;
+    margin: 50px auto 0;
+    font-family: "Comfortaa", sans-serif;
 }
 
-/* Oculta la versión móvil por defecto en escritorio */
-.service-five-mobile {
-    display: none;
-}
-
-/* Estilos para la versión de escritorio */
-.service-five-desktop {
-    display: block;
-}
-
-.service-five-wrapper {
+/* Contenedor */
+.capacitacion-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    justify-content: space-between;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: linear-gradient(90deg, #4CAF99, #218380, #146363);
+    animation: borderAnimationcap 6s linear infinite;
+    border-radius: 10px;
+    padding: 40px;
+    gap: 40px;
 }
 
-.service-five-content {
-    width: 50%;
-    padding-left: 0;
-    padding-right: 80px;
+/* Animación del borde (tonalidades azules infinitas) */
+@keyframes borderAnimationcap {
+    0% { border-image-source: linear-gradient(90deg, #4CAF99, #218380, #146363); }
+    50% { border-image-source: linear-gradient(90deg, #218380, #146363, #4CAF99); }
+    100% { border-image-source: linear-gradient(90deg, #4CAF99, #218380, #146363); }
 }
 
-.service-five-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: bold;
-    color: #087b7a;
-    line-height: 1.2;
-    margin-bottom: 40px;
+/* Contenido */
+.capacitacion-content {
+    flex: 1;
+    padding-right: 20px; /* aire entre texto e imagen */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.service-five-features {
-    margin-bottom: 30px;
+/* Estado visible al entrar en el section */
+.capacitacion-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
 }
 
-.service-five-feature-item {
+.capacitacion-content h2 {
+    font-size: 30px;
+    color: #218380;
+    margin-bottom: 25px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.capacitacion-content.visible h2 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+/* Items con círculo */
+.capacitacion-item {
     display: flex;
     align-items: flex-start;
+    gap: 12px;
     margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.service-five-circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #087b7a;
-    margin-top: 5px;
-    flex-shrink: 0;
+.capacitacion-content.visible .capacitacion-item:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
 }
 
-.service-five-description {
-    font-family: 'Roboto', sans-serif;
+.capacitacion-content.visible .capacitacion-item:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.7s;
+}
+
+.capacitacion-content.visible .capacitacion-item:nth-child(4) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.9s;
+}
+
+.capacitacion-item p {
     font-size: 16px;
-    color: #4a4a4a;
     line-height: 1.6;
-    margin-left: 15px;
+    margin: 0;
+    text-align: justify;
 }
 
-.service-five-cta-button {
+.circle-cap {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(270deg, #4CAF99, #218380, #146363);
+    background-size: 400% 400%;
+    border-radius: 50%;
+    margin-top: 6px;
+    animation: gradientShiftcap 4s linear infinite;
+}
+
+/* Degradado en el círculo */
+@keyframes gradientShiftcap {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Botón */
+.btn-capacitacion {
     display: inline-block;
-    background-color: #087b7a;
-    border: 2px solid #087b7a;
+    background-color: #218380;
     color: #fff;
-    padding: 15px 30px;
+    padding: 12px 25px;
+    border-radius: 6px;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-.service-five-cta-button:hover {
-    background-color: #056665;
-    border-color: #056665;
-    color: #fff;
+.capacitacion-content.visible .btn-capacitacion {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
 }
 
-.service-five-image-box {
-    width: 50%;
-    height: 520px;
-    margin-top: -20px;
+.btn-capacitacion:hover {
+    background-color: #124b4a;
+    transform: translateY(-3px);
 }
 
-.service-five-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 20px;
+/* Imagen */
+.capacitacion-image {
+    flex: 1;
+    text-align: right;
+}
+
+.capacitacion-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.capacitacion-mobile {
+    display: none;
 }
 
 /* -------------------------------------- */
 /* Estilos del Servcio 6*/
 /* -------------------------------------- */
-.service-six-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 50px auto 0 auto;
-    background-color: #f7f3ed;
-    border-radius: 20px;
-    padding: 40px 20px;
+.activaciones {
+    width: 80%;
+    margin: 50px auto 0;
+    font-family: "Comfortaa", sans-serif;
 }
 
-/* Oculta la versión móvil por defecto en escritorio */
-.service-six-mobile {
-    display: none;
-}
-
-/* Estilos de escritorio */
-.service-six-wrapper {
+/* Contenedor principal de la sección ORGANIZACION */
+.activaciones-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    justify-content: space-between;
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    /* >>> AHORA USA EL DEGRADADO NARANJA Y LA NUEVA ANIMACIÓN <<< */
+    border-image-source: linear-gradient(90deg, #FFD700, #FFBC0A, #FF8C00); 
+    animation: borderAnimationact 6s linear infinite; /* Animación ÚNICA */
+    border-radius: 10px;
+    padding: 40px;
+    gap: 40px;
 }
 
-.service-six-image-box {
-    width: 50%;
-    height: 520px;
-    margin-top: -20px;
+/* Animación del borde (tonalidades cálidas - ÚNICA para Organización) */
+@keyframes borderAnimationact {
+    0% { border-image-source: linear-gradient(90deg, #FFD700, #FFBC0A, #FF8C00); }
+    50% { border-image-source: linear-gradient(90deg, #FFBC0A, #FF8C00, #FFD700); }
+    100% { border-image-source: linear-gradient(90deg, #FFD700, #FFBC0A, #FF8C00); }
 }
 
-.service-six-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 20px;
+/* El resto de estilos de contenido de Organización sigue igual */
+
+/* Contenido */
+.activaciones-content {
+    flex: 1;
+    padding-left: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.service-six-content {
-    width: 50%;
-    padding-left: 80px;
-    padding-right: 0;
+.activaciones-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
 }
 
-.service-six-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: bold;
-    color: #f29e34;
-    line-height: 1.2;
-    margin-bottom: 40px;
+.activaciones-content h2 {
+    font-size: 30px;
+    color: #FFBC0A;
+    margin-bottom: 25px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.service-six-features {
-    margin-bottom: 30px;
+.activaciones-content.visible h2 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
 }
 
-.service-six-feature-item {
+/* Items con círculo */
+.activaciones-item {
     display: flex;
     align-items: flex-start;
+    gap: 12px;
     margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
 
-.service-six-circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: #f29e34;
-    margin-top: 5px;
-    flex-shrink: 0;
+.activaciones-content.visible .activaciones-item:nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
 }
 
-.service-six-description {
-    font-family: 'Roboto', sans-serif;
+.activaciones-content.visible .activaciones-item:nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.7s;
+}
+
+.activaciones-content.visible .activaciones-item:nth-child(4) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.9s;
+}
+
+.activaciones-item p {
     font-size: 16px;
-    color: #4a4a4a;
     line-height: 1.6;
-    margin-left: 15px;
+    margin: 0;
+    text-align: justify;
 }
 
-.service-six-cta-button {
+.circle-act {
+    flex-shrink: 0;
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(270deg, #FFD700, #FFBC0A, #FF8C00);
+    background-size: 400% 400%;
+    border-radius: 50%;
+    margin-top: 6px;
+    animation: gradientShiftact 4s linear infinite;
+}
+
+/* Degradado en el círculo (ÚNICO para Organización) */
+@keyframes gradientShiftact {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Botón */
+.btn-activaciones {
     display: inline-block;
-    background-color: #f29e34;
-    border: 2px solid #f29e34;
-    color: #333333;
-    padding: 15px 30px;
+    background-color: #FFBC0A;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 6px;
     text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
-.service-six-cta-button:hover {
-    background-color: #e0942c;
-    border-color: #e0942c;
-    color: #333333;
+.activaciones-content.visible .btn-activaciones {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 1.2s;
+}
+
+.btn-activaciones:hover {
+    background-color: #ce9803;
+    transform: translateY(-3px);
+}
+
+/* Imagen */
+.activaciones-image {
+    flex: 1;
+    text-align: left;
+}
+
+.activaciones-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Oculta la versión móvil por defecto */
+.activaciones-mobile {
+    display: none;
 }
 
 /* -------------------------------------- */
 /* Estilos del Flujo de Trabajo */
 /* -------------------------------------- */
-.workflow-container {
+.work-process-section {
     width: 100%;
     max-width: 1200px;
-    height: 621px;
-    margin: 50px auto;
+    margin: -10px auto 0;
+    padding: 80px 20px;
+    height: 652px;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: 20px;
-}
-
-/* --------- Versión de Escritorio --------- */
-/* Se muestra por defecto */
-.workflow-steps-mobile {
-    display: none;
-}
-
-.workflow-content {
-    width: 100%;
-    padding: 20px;
-    display: flex;
     flex-direction: column;
-    align-items: center;
+    text-align: center;
 }
 
-.workflow-small-title {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    color: #4a4a4a;
-    margin: 0;
-    margin-bottom: 10px;
-    font-weight: 500;
+.work-process-container {
+    width: 100%;
 }
 
-.workflow-main-title {
+.work-process-section .subtitle {
     font-family: 'Playfair Display', serif;
-    font-size: 48px;
+    font-size: 20px;
+    color: #4a4a4a;
+    margin-bottom: 5px;
+}
+
+.work-process-section .main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 56px;
     font-weight: bold;
     color: #333333;
-    margin: 0;
-    margin-bottom: 50px;
+    margin-bottom: 80px;
 }
 
-.workflow-steps-desktop {
+.process-steps {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 40px;
+    align-items: flex-start;
+    gap: 20px;
 }
 
-.workflow-step {
+.step {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
+    width: 150px;
 }
 
-.workflow-circle {
-    width: 150px;
-    height: 150px;
+.step-circle {
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.step-icon {
+    width: 60px;
+    height: auto;
+}
+
+.step-text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #4a4a4a;
+    line-height: 1.4;
+}
+
+.step-separator {
+    font-size: 40px;
+    color: #ccc;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    height: 120px; /* Alineamos con los círculos */
 }
 
 /* Colores de los círculos */
-.workflow-circle.yellow-circle {
-    background-color: #f7eed2;
-}
-.workflow-circle.teal-circle {
-    background-color: #c4d7d6;
-}
-.workflow-circle.peach-circle {
-    background-color: #f2d5bd;
-}
-.workflow-circle.pink-circle {
-    background-color: #f2d5e0;
-}
+.step-1-color { background-color: #f2b934; }
+.step-2-color { background-color: #1c998c; }
+.step-3-color { background-color: #ec9e20; }
+.step-4-color { background-color: #e03387; }
+.step-5-color { background-color: #f2b934; }
 
-.workflow-step-text {
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    color: #4a4a4a;
-    font-weight: 500;
-    margin: 0;
-}
-
-.workflow-arrow {
-    font-family: 'Roboto', sans-serif;
-    font-size: 30px;
-    color: #8c8c8c;
-}
-
-/* -------------------------------------- */
-/* Estilos del FAQS Servicios*/
-/* -------------------------------------- */
-.faqs-section {
-    width: 100%;
-    max-width: 1200px;
-    margin: 50px auto 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f3ed;
-    border-radius: 20px;
-    height: 1076px;
-    padding: 0 20px;
-}
-
-.faqs-desktop {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0;
-}
-
-.faqs-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.faqs-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: bold;
-    color: #4a4a4a;
-    margin-bottom: 10px;
-}
-
-.faqs-subtitle {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    color: #888;
-}
-
-.faqs-wrapper {
-    width: 100%;
-    max-width: 800px;
-}
-
-.faq-item {
-    background-color: #f29e34;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.faq-question {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px;
-    cursor: pointer;
-    color: #fff;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-}
-
-.faq-question-text {
-    flex-grow: 1;
-    margin-right: 20px;
-}
-
-.faq-toggle-icon {
-    width: 15px;
-    height: 15px;
-    background-color: #fff;
-    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H32c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32v-32c0-17.7-14.3-32-32-32z"/></svg>') no-repeat center;
-    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 208H32c-17.7 0-32 14.3-32 32v32c0 17.7 14.3 32 32 32h384c17.7 0 32-14.3 32-32v-32c0-17.7-14.3-32-32-32z"/></svg>') no-repeat center;
-    transition: transform 0.3s ease;
-}
-
-/* Estado activo */
-.faq-item.active .faq-question {
-    background-color: #e0942c;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.faq-item.active .faq-toggle-icon {
-    transform: rotate(180deg);
-}
-
-.faq-answer {
-    background-color: #fff;
-    padding: 0 25px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-}
-
-.faq-answer-text {
-    padding: 20px 0;
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    color: #4a4a4a;
-    line-height: 1.6;
-}
-
-.faqs-cta-container {
-    width: 100%;
-    max-width: 800px;
-    text-align: right;
-    margin-top: 20px;
-}
-
-.faqs-cta-button {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    color: #888;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.faqs-cta-button:hover {
-    color: #4a4a4a;
-}
-
-/* Ocultar la versión móvil en escritorio */
-.faqs-mobile {
-    display: none;
-}
 
 /* -------------------------------------- */
 /* Estilos del Formulario Contacto*/
@@ -1311,7 +1279,7 @@
     width: 100%;
     max-width: 1200px;
     height: 940px;
-    margin: 50px auto;
+    margin: 25px auto 0;
     /* Color de fondo eliminado para que se vea el fondo de la página */
     display: flex;
     justify-content: center;
