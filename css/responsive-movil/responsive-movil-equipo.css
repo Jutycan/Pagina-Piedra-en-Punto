@@ -8,7 +8,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     * {
         box-sizing: border-box;
     }
@@ -78,10 +78,19 @@
     .banner {
         height: auto;
         padding: 50px 20px;
+        /* APLICA LA ANIMACIÓN A TODO EL CONTENEDOR EN MÓVIL */
+        opacity: 0; /* Empieza invisible */
+        animation: slideUpFadeIn 1s ease-out forwards; /* Aplica la animación */
     }
+    
+    /* Nota: Si el banner es el primer elemento visible al cargar la página,
+    no es necesario usar Intersection Observer. La animación se activa
+    inmediatamente al cargar la página. */
 
     .banner-content {
         margin-bottom: 30px;
+        /* Puedes agregar un pequeño delay a las formas si quieres un efecto escalonado */
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
 
     .banner-content h2 {
@@ -90,21 +99,24 @@
 
     .banner-content p {
         font-size: 14px;
-        max-width: 100%; /* El párrafo ocupa todo el ancho disponible */
+        max-width: 100%;
     }
 
     .banner-shapes {
         grid-template-columns: 1fr;
         gap: 20px;
-        width: 100%; /* El contenedor ocupa el 100% del ancho disponible */
-        max-width: none; /* Se elimina el límite de ancho */
+        width: 100%;
+        max-width: none;
+        /* Agregamos una animación con delay para que las formas aparezcan después del texto */
+        opacity: 0;
+        animation: slideUpFadeIn 1s ease-out forwards 0.5s; /* 0.5s de retraso */
     }
     
     .shape {
-        width: 100%; /* La forma ocupa el 100% del ancho de su columna */
-        max-width: 250px; /* Tamaño máximo para evitar que sea demasiado grande en tabletas */
-        height: 250px; /* Altura más grande para mantener la proporción */
-        margin: 0 auto; /* Centra la forma dentro de la columna */
+        width: 100%;
+        max-width: 250px;
+        height: 250px;
+        margin: 0 auto;
     }
 
     /* -------------------------------------- */
@@ -118,14 +130,46 @@
         flex-direction: column;
         height: auto;
         padding: 50px 20px;
-        gap: 0; /* No necesitamos gap si no hay imagen */
+        gap: 0;
     }
 
     .quienes-somos-content {
         max-width: 100%;
         text-align: center;
+        /* El contenedor debe ser visible, la animación la manejan los hijos */
+        opacity: 1 !important; 
+        transform: none !important;
+        transition: none; 
     }
     
+    /* 1. Estado inicial: Ocultar y desplazar individualmente cada elemento */
+    .quienes-somos-content h4,
+    .quienes-somos-content h2,
+    .quienes-somos-content p,
+    .quienes-somos-content .link-cta {
+        opacity: 0; 
+        transform: translateY(30px);
+        transition: none; /* Asegura que no interfiera con la animación */
+    }
+    
+    /* 2. Animación secuencial (Solo cuando se añade la clase .visible) */
+    .quienes-somos-content.visible h4 {
+        animation: slideUpFadeIn 0.5s ease-out forwards 0s; /* Título pequeño (inicia) */
+    }
+    
+    .quienes-somos-content.visible h2 {
+        animation: slideUpFadeIn 0.5s ease-out forwards 0.2s; /* Título grande (0.2s de retraso) */
+    }
+    
+    .quienes-somos-content.visible p {
+        animation: slideUpFadeIn 0.5s ease-out forwards 0.4s; /* Párrafo (0.4s de retraso) */
+    }
+    
+    .quienes-somos-content.visible .link-cta {
+        animation: slideUpFadeIn 0.5s ease-out forwards 0.6s; /* Botón CTA (0.6s de retraso) */
+    }
+    
+    /* Ajustes visuales finales */
     .quienes-somos-content h4 {
         font-size: 16px;
     }
@@ -134,41 +178,18 @@
         font-size: 32px;
         margin-top: 0;
     }
-
-    /* -------------------------------------- */
-    /* Estilos generales de Certificaciones y Premios */
-    /* -------------------------------------- */
-    .certificaciones-premios {
-        height: auto;
-        padding: 40px 20px;
+    
+    .quienes-somos-content .link-cta {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    
+    /* El contenedor padre ya no necesita la animación */
+    .quienes-somos-content.visible {
+        animation: none !important;
     }
 
-    .certificaciones-premios-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        justify-content: center;
-        max-width: none;
-    }
-
-    .certificacion-item {
-        flex-direction: row;
-        text-align: left;
-        gap: 15px;
-    }
-
-    .certificacion-icon-wrapper {
-        width: 60px;
-        height: 60px;
-    }
-
-    .certificacion-text p:first-child {
-        font-size: 24px;
-    }
-
-    .certificacion-text p:last-child {
-        font-size: 12px;
-    }
 
     /* -------------------------------------- */
     /* Estilos generales de "Historia + Misión + Visión" */
@@ -411,3 +432,18 @@
         gap: 5px;
     }
 }
+
+/* -------------------------------------- */
+/* KEYFRAMES para la Animación de Entrada en Móvilv */
+/* -------------------------------------- */
+@keyframes slideUpFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

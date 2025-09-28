@@ -144,7 +144,7 @@
         flex-direction: column;
         padding: 20px;
         gap: 20px;
-        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+        border: block; /* Elimina el borde animado en móvil si no quieres que se vea bien */
     }
 
     /* Ajusta el contenido para que se centre y ocupe todo el ancho */
@@ -230,13 +230,13 @@
         flex-direction: column;
         padding: 20px;
         gap: 20px;
-        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+        border: block; /* Elimina el borde animado en móvil si no quieres que se vea bien */
     }
 
     /* Ajusta el contenido para que se centre y ocupe todo el ancho */
     .organizacion-content {
         width: 100%;
-        padding-right: 0;
+        padding-right: 20px;
         text-align: center;
         opacity: 1; /* Asegura que el contenido sea visible */
         transform: none; /* Deshabilita la animación de escritorio */
@@ -316,7 +316,7 @@
         flex-direction: column;
         padding: 20px;
         gap: 20px;
-        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+        border: block; /* Elimina el borde animado en móvil si no quieres que se vea bien */
     }
 
     /* Ajusta el contenido para que se centre y ocupe todo el ancho */
@@ -402,13 +402,13 @@
         flex-direction: column;
         padding: 20px;
         gap: 20px;
-        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+        border: block; /* Elimina el borde animado en móvil si no quieres que se vea bien */
     }
 
     /* Ajusta el contenido para que se centre y ocupe todo el ancho */
     .estudios-content {
         width: 100%;
-        padding-right: 0;
+        padding-right: 20px;
         text-align: center;
         opacity: 1; /* Asegura que el contenido sea visible */
         transform: none; /* Deshabilita la animación de escritorio */
@@ -488,7 +488,7 @@
         flex-direction: column;
         padding: 20px;
         gap: 20px;
-        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+        border: block; /* Elimina el borde animado en móvil si no quieres que se vea bien */
     }
 
     /* Ajusta el contenido para que se centre y ocupe todo el ancho */
@@ -574,13 +574,13 @@
         flex-direction: column;
         padding: 20px;
         gap: 20px;
-        border: none; /* Elimina el borde animado en móvil si no quieres que se vea bien */
+        border: block; /* Elimina el borde animado en móvil si no quieres que se vea bien */
     }
 
     /* Ajusta el contenido para que se centre y ocupe todo el ancho */
     .activaciones-content {
         width: 100%;
-        padding-right: 0;
+        padding-right: 20px;
         text-align: center;
         opacity: 1; /* Asegura que el contenido sea visible */
         transform: none; /* Deshabilita la animación de escritorio */
@@ -617,7 +617,7 @@
     /* Imagen y botón */
     .activaciones-image {
         width: 100%;
-        text-align: none;
+        text-align: center;
         margin-top: 15px;
         margin-bottom: 15px;
     }
@@ -642,6 +642,7 @@
         transform: none;
         transition-delay: none !important;
     }
+
 
     /* -------------------------------------- */
     /* Estilos del Flujo de Trabajo */

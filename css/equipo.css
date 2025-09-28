@@ -111,6 +111,7 @@
 .banner {
     width: 100%;
     height: 657px; /* Altura fija para escritorio */
+    margin: 30px auto 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -118,7 +119,7 @@
     text-align: center;
     padding: 0 100px; /* Padding a los lados para que el texto no toque los bordes */
     background-color: var(--bg-color);
-    font-family: Arial, sans-serif;
+    font-family: Century Gothic, sans-serif;
 }
 
 .banner-content {
@@ -126,7 +127,7 @@
 }
 
 .banner-content h2 {
-    font-size: 48px;
+    font-size: 45px;
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
@@ -149,7 +150,7 @@
     justify-items: center;
     width: 100%;
     max-width: 1000px;
-    margin-top: 50px;
+    margin-top: 10px;
 }
 
 /* Estilos de las formas individuales */
@@ -195,7 +196,7 @@
     width: 100%;
     max-width: 1200px;
     height: 700px;
-    margin: 50px auto;
+    margin: -20px auto 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -250,13 +251,13 @@
 }
 
 .experience-badge p:first-child {
-    font-size: 32px;
+    font-size: 40px;
     font-weight: bold;
     margin: 0;
 }
 
 .experience-badge p:last-child {
-    font-size: 14px;
+    font-size: 25px;
     margin: 0;
     line-height: 1.2;
 }
@@ -267,24 +268,25 @@
 }
 
 .quienes-somos-content h4 {
-    font-size: 18px;
-    color: #ed217c;
+    font-size: 25px;
+    color: #555;
     margin: 0;
     font-weight: normal;
 }
 
 .quienes-somos-content h2 {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: bold;
-    color: #333;
+    color: #222;
     margin: 10px 0 20px;
     line-height: 1.2;
+    font-weight: normal;
 }
 
 .quienes-somos-content p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
+    font-size: 17px;
+    color: #555;
+    margin-bottom: 18px;
     line-height: 1.6;
 }
 
@@ -292,9 +294,9 @@
 .link-cta {
     display: inline-block;
     margin-top: 20px;
-    background-color: #fff;
-    color: #21a9a8;
-    border: 2px solid #21a9a8;
+    background-color: #218380;
+    color: #fff;
+    border: 2px solid #218380;
     padding: 12px 24px;
     border-radius: 8px;
     text-decoration: none;
@@ -303,76 +305,11 @@
 }
 
 .link-cta:hover {
-    background-color: #21a9a8;
+    background-color: #085454;
     color: #fff;
 }
 
-/* -------------------------------------- */
-/* Estilos generales de Certificaciones y Premios */
-/* -------------------------------------- */
-.certificaciones-premios {
-    width: 100%;
-    height: 350px;
-    background-color: #ed217c; /* Fondo rosa */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 100px;
-}
 
-.certificaciones-premios-container {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
-}
-
-.certificacion-item {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-}
-
-.certificacion-icon-wrapper {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-}
-
-.certificacion-icon-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    filter: invert(100%); /* Hace que los iconos sean blancos */
-}
-
-.certificacion-text {
-    color: #fff;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-}
-
-.certificacion-text p:first-child {
-    font-size: 32px;
-    font-weight: bold;
-    margin: 0;
-    line-height: 1;
-}
-
-.certificacion-text p:last-child {
-    font-size: 14px;
-    margin: 0;
-    line-height: 1.2;
-}
 
 /* -------------------------------------- */
 /* Estilos generales de "Historia + Misión + Visión" */
@@ -923,7 +860,7 @@
     width: 24px;
     height: 24px;
     margin-right: 10px;
-     margin-left: 15px;
+    margin-left: 15px;
 }
 
 /* Contenedor de las columnas de enlaces */
