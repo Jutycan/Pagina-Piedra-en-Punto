@@ -337,11 +337,14 @@
 .historia-column {
     flex: 1;
     height: 100%; /* El 100% de la altura del contenedor padre */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye Misión y Visión con espacio entre ellos */
 }
 
 .historia-card {
     width: 100%;
-    height: 100%; /* El 100% de la altura de la columna */
+    height: calc(50% - 20px); /* Dividimos la altura disponible y restamos la mitad del gap */
     background-color: #f39200;
     border-radius: 20px;
     padding: 40px;
@@ -350,15 +353,16 @@
 }
 
 .historia-card h3 {
-    font-size: 40px;
+    font-size: 42px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
 .historia-card p {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.6;
     margin-bottom: 15px;
+    margin: 50px auto 0;
 }
 
 /* Columna de la derecha */
@@ -370,8 +374,16 @@
     height: 100%; /* Ocupa el 100% de la altura del contenedor padre */
 }
 
-.mision-card,
 .vision-card {
+    width: 100%;
+    height: calc(50% - 20px); /* Dividimos la altura disponible y restamos la mitad del gap */
+    background-color: #218380;
+    border-radius: 20px;
+    padding: 40px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.mision-card {
     width: 100%;
     height: calc(50% - 20px); /* Dividimos la altura disponible y restamos la mitad del gap */
     background-color: #3cb09c;
@@ -381,121 +393,154 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.mision-card h3,
 .vision-card h3 {
-    font-size: 32px;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.mision-card h3 {
+    font-size: 42px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-.mision-card p,
 .vision-card p {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.6;
+    margin: 50px auto 0;
+}
+.mision-card p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 50px auto 0;
 }
 
 /* -------------------------------------- */
 /* Estilos generales de  "Nuestros Valores" */
 /* -------------------------------------- */
+:root {
+    --color-pink-primary: #f06292; /* Rosado oscuro para el card activo */
+    --color-pink-line: #ed217c; /* Rosado más vibrante para la línea/fondo */
+    --color-gray-bg: #f5f5f5; /* Gris claro para el fondo de los cards inactivos */
+    --color-text-dark: #333333;
+    --color-text-light: #555555;
+    /* Puedes añadir más colores aquí si los necesitas en el futuro */
+}
+
+/* -------------------------------------- */
+/* Estilos generales de "Nuestros Valores" (ESCRITORIO) */
+/* -------------------------------------- */
 .nuestros-valores {
-    width: 100%;
-    height: 524px;
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 100px;
+    width: 80%;
+    max-width: 1400px;
+    margin: 80px auto;
+    padding: 0 50px;
+    font-family: 'Century Gothic', sans-serif; /* Título */
+    text-align: center;
 }
 
-.valores-container {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    gap: 80px;
+.valores-header {
+    margin-bottom: 60px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Lado Izquierdo: Título y Párrafo */
-.valores-headline {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.valores-headline h2 {
-    font-size: 64px;
+.valores-header h2 {
+    font-size: 55px;
     font-weight: bold;
-    color: #333;
-    line-height: 1.2;
-    margin: 0;
+    color: var(--color-text-dark);
+    margin-bottom: 20px;
 }
 
-.valores-headline p {
-    font-size: 16px;
-    color: #666;
-    margin-top: 20px;
+.valores-header p {
+    font-family: 'Comfortaa', cursive; /* Párrafo */
+    font-size: 18px;
+    color: var(--color-text-light);
     line-height: 1.6;
 }
 
-/* Lado Derecho: Cuadrícula de Valores */
+/* Contenedor de la cuadrícula de tarjetas */
 .valores-grid {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 20px;
 }
 
-.valor-item {
-    background-color: #E8E8E8; /* Color de fondo gris para los valores 2, 3 y 4 */
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Estilos de las tarjetas individuales (Estado por defecto/Gris) */
+.valor-card {
+    flex: 1; 
+    max-width: 250px;
+    min-height: 380px;
+    padding: 30px 15px;
+    border-radius: 12px;
+    text-align: center;
+    
+    /* Estado inicial: Gris para todas las tarjetas */
+    background-color: var(--color-gray-bg); 
+    color: var(--color-text-dark);
+    
+    /* Transición suave para el hover y el JS */
+    transition: background-color 0.4s ease, color 0.4s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+/* Icono dentro del círculo */
+.valor-icon-wrapper {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* Estilos para los valores no destacados (gris con letras negras) */
-.valor-item .valor-content p,
-.valor-item .valor-content .valor-titulo {
-    color: #333; /* Color de texto negro */
-}
-
-/* Estilos para el valor destacado (rosa con letras blancas) */
-.valor-item.valor-destacado {
-    background-color: #ed217c; /* Color de fondo rosa */
-}
-
-.valor-item.valor-destacado .valor-content p,
-.valor-item.valor-destacado .valor-content .valor-titulo {
-    color: #fff; /* Color de texto blanco */
-}
-
-.valor-icon img {
-    width: 60px;
-    height: 60px;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 30px;
     border-radius: 50%;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #fff; /* Círculo interior blanco */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.valor-content {
-    margin-top: 20px;
+.valor-icon-wrapper img {
+    width: 40px;
+    height: 40px;
 }
 
-.valor-content p {
-    font-size: 14px;
-    line-height: 1.4;
-    margin-bottom: 10px;
-}
-
-.valor-content .valor-titulo {
-    font-size: 18px;
+.valor-card h3 {
+    font-size: 24px;
     font-weight: bold;
-    margin: 0;
+    margin-bottom: 20px;
 }
+
+/* Línea horizontal (div.valor-line) */
+.valor-line {
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-pink-line); /* Línea por defecto rosada */
+    margin: 0 auto 20px;
+    border-radius: 2px;
+    transition: background-color 0.4s ease;
+}
+
+/* Texto de descripción corta */
+.valor-card p {
+    font-size: 16px;
+    line-height: 1.4;
+    font-family: 'Comfortaa', cursive;
+    padding: 0 5px;
+}
+
+/* -------------------------------------- */
+/* Efecto HOVER (ESCRITORIO) */
+/* -------------------------------------- */
+
+.valor-card:hover {
+    background-color: var(--color-pink-primary);
+    color: #fff;
+}
+
+.valor-card:hover .valor-line {
+    background-color: #fff; /* Cambia a blanco en estado hover */
+}
+
 
 /* -------------------------------------- */
 /* Estilos generales de Equipo */

@@ -80,7 +80,7 @@
         padding: 50px 20px;
         /* APLICA LA ANIMACIÓN A TODO EL CONTENEDOR EN MÓVIL */
         opacity: 0; /* Empieza invisible */
-        animation: slideUpFadeIn 1s ease-out forwards; /* Aplica la animación */
+        animation: slideUpFadeIn 1.2s ease-out forwards; /* Aplica la animación */
     }
     
     /* Nota: Si el banner es el primer elemento visible al cargar la página,
@@ -90,7 +90,7 @@
     .banner-content {
         margin-bottom: 30px;
         /* Puedes agregar un pequeño delay a las formas si quieres un efecto escalonado */
-        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        transition: opacity 1s ease-out, transform 1s ease-out;
     }
 
     .banner-content h2 {
@@ -109,7 +109,7 @@
         max-width: none;
         /* Agregamos una animación con delay para que las formas aparezcan después del texto */
         opacity: 0;
-        animation: slideUpFadeIn 1s ease-out forwards 0.5s; /* 0.5s de retraso */
+        animation: slideUpFadeIn 1.2s ease-out forwards 1.2s; /* 0.5s de retraso */
     }
     
     .shape {
@@ -154,19 +154,19 @@
     
     /* 2. Animación secuencial (Solo cuando se añade la clase .visible) */
     .quienes-somos-content.visible h4 {
-        animation: slideUpFadeIn 0.5s ease-out forwards 0s; /* Título pequeño (inicia) */
+        animation: slideUpFadeIn 0.5s ease-out forwards 0.2s; /* Título pequeño (inicia) */
     }
     
     .quienes-somos-content.visible h2 {
-        animation: slideUpFadeIn 0.5s ease-out forwards 0.2s; /* Título grande (0.2s de retraso) */
+        animation: slideUpFadeIn 0.5s ease-out forwards 0.4s; /* Título grande (0.2s de retraso) */
     }
     
     .quienes-somos-content.visible p {
-        animation: slideUpFadeIn 0.5s ease-out forwards 0.4s; /* Párrafo (0.4s de retraso) */
+        animation: slideUpFadeIn 0.5s ease-out forwards 0.6s; /* Párrafo (0.4s de retraso) */
     }
     
     .quienes-somos-content.visible .link-cta {
-        animation: slideUpFadeIn 0.5s ease-out forwards 0.6s; /* Botón CTA (0.6s de retraso) */
+        animation: slideUpFadeIn 0.5s ease-out forwards 0.8s; /* Botón CTA (0.6s de retraso) */
     }
     
     /* Ajustes visuales finales */
@@ -194,89 +194,142 @@
     /* -------------------------------------- */
     /* Estilos generales de "Historia + Misión + Visión" */
     /* -------------------------------------- */
+    .figura-card {
+        display: none;
+    }
+
     .historia-mision-vision {
-        height: auto; /* La altura se adapta al contenido */
-        padding: 50px 20px; /* Reducimos el padding para móviles */
+        height: auto;
+        padding: 50px 20px;
     }
 
     .historia-mision-vision-container {
-        flex-direction: column; /* Apilamos las columnas verticalmente */
-        height: auto; /* La altura se adapta al contenido */
-        padding-top: 0; /* Eliminamos el padding superior */
+        flex-direction: column;
+        height: auto;
+        padding-top: 0;
     }
 
     .historia-column {
-        height: auto; /* La altura se adapta al contenido */
-        margin-bottom: 40px; /* Añadimos espacio entre la tarjeta de Historia y las de Misión/Visión */
+        height: auto;
+        margin-bottom: 40px;
     }
 
+    /* 1. ESTADO INICIAL: Ocultar todas las tarjetas en móvil */
     .historia-card,
-    .mision-card,
-    .vision-card {
-        width: 100%; /* Las tarjetas ocupan todo el ancho de la pantalla */
-        height: auto; /* La altura se adapta al contenido de cada tarjeta */
+    .vision-card,
+    .mision-card {
+        width: 100%;
+        height: auto;
+        opacity: 0; /* Ocultamos por defecto */
+        transform: translateY(30px); /* Movemos hacia abajo por defecto */
+        transition: none; /* Deshabilitamos transición para que la animación tome el control */
+    }
+    
+    /* Nota: También necesitas ocultar el contenedor de la figura en móvil si quieres animarlo por separado o eliminarlo del flujo. */
+    .figura-card {
+        opacity: 0;
+        transform: translateY(30px);
     }
 
-    .historia-card h3 {
-        font-size: 32px; /* Reducimos el tamaño del título */
+    /* 2. CONTENEDOR DE LA VISIBILIDAD: El JS añadirá la clase 'visible' al contenedor padre */
+    .historia-mision-vision-container.visible .historia-card {
+        animation: slideUpFadeIn 0.6s ease-out forwards 0.2s; /* Historia (inicia 0s) */
     }
     
+    .historia-mision-vision-container.visible .figura-card {
+        animation: slideUpFadeIn 0.6s ease-out forwards 0.4s; /* Figura (0.2s de retraso) */
+    }
+    
+    .historia-mision-vision-container.visible .vision-card {
+        animation: slideUpFadeIn 0.6s ease-out forwards 0.6s; /* Visión (0.4s de retraso) */
+    }
+    
+    .historia-mision-vision-container.visible .mision-card {
+        animation: slideUpFadeIn 0.6s ease-out forwards 0.8s; /* Misión (0.6s de retraso) */
+    }
+
+    /* Ajustes de estilo que ya tenías */
     .mision-vision-column {
-        height: auto; /* La altura se adapta al contenido */
-        gap: 20px; /* Reducimos el espacio entre Misión y Visión */
+        height: auto;
+        gap: 20px;
     }
     
+    .historia-card h3,
     .mision-card h3,
     .vision-card h3 {
-        font-size: 28px; /* Reducimos el tamaño de los títulos */
+        font-size: 35px;
+        text-align: center;
+    }
+
+    .historia-card p,
+    .mision-card p,
+    .vision-card p {
+        font-size: 18px;
+        text-align: center;
     }
 
     /* -------------------------------------- */
     /* Estilos generales de  "Nuestros Valores" */
     /* -------------------------------------- */
     .nuestros-valores {
-        height: auto; /* La altura se ajusta al contenido */
-        padding: 50px 20px; /* Reducimos el padding */
+        padding: 40px 20px;
+        margin: 40px auto;
     }
 
-    .valores-container {
-        flex-direction: column; /* Apilamos las columnas verticalmente */
-        gap: 40px; /* Reducimos el espacio entre el encabezado y la cuadrícula */
+    .valores-header {
+        margin-bottom: 30px;
+        text-align: center;
     }
 
-    .valores-headline {
-        text-align: center; /* Centramos el texto para una mejor visualización móvil */
+    .valores-header h2 {
+        font-size: 38px;
+    }
+
+    .valores-header p {
+        font-size: 15px;
+        text-align: center;
+        font-family: 'Comfortaa', normal;
+    }
+
+    .valor-card p {
+        font-family: 'Comfortaa', normal;
     }
     
-    .valores-headline h2 {
-        font-size: 48px; /* Reducimos el tamaño del título */
-        line-height: 1.1;
-    }
-
-    .valores-headline p {
-        font-size: 14px; /* Reducimos el tamaño del párrafo */
-    }
-
+    /* El contenedor principal se apila */
     .valores-grid {
-        grid-template-columns: 1fr 1fr; /* Mantenemos la cuadrícula de 2x2 */
-        gap: 15px; /* Reducimos el espacio entre las tarjetas */
+        flex-direction: column;
+        gap: 15px;
     }
 
-    .valor-item {
-        padding: 15px; /* Reducimos el padding interno de cada tarjeta */
-    }
-
-    .valor-icon img {
-        width: 40px; /* Reducimos el tamaño de los iconos */
-        height: 40px;
-    }
-    
-    .valor-content {
-        margin-top: 15px; /* Reducimos el margen superior del contenido */
+    /* 1. Estado por defecto: Gris (Mantiene el gris en móvil) */
+    .valor-card {
+        max-width: 100%;
+        min-height: auto;
+        padding: 30px 25px;
+        background-color: var(--color-gray-bg) !important;
+        color: var(--color-text-dark) !important;
+        transition: all 0.3s ease;
     }
     
-    .valor-content .valor-titulo {
-        font-size: 16px; /* Reducimos el tamaño del título del valor */
+    /* 2. ESTADO ACTIVO (Activado por JS al estar centrado) */
+    .valor-card.active {
+        background-color: var(--color-pink-primary) !important;
+        color: #fff !important;
+    }
+    
+    /* Línea horizontal en estado ACTIVO (blanca) */
+    .valor-card.active .valor-line {
+        background-color: #fff;
+    }
+    
+    /* 3. Deshabilitar Hover en móvil para evitar conflictos */
+    .valor-card:hover {
+        background-color: var(--color-gray-bg) !important;
+        color: var(--color-text-dark) !important;
+    }
+    
+    .valor-card:hover .valor-line {
+        background-color: var(--color-pink-line) !important;
     }
 
     /* -------------------------------------- */
