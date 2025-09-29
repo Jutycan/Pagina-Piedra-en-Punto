@@ -9,7 +9,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     * {
         box-sizing: border-box;
     }
@@ -86,7 +86,7 @@
 
     .banner-content-mobile h1 {
         font-family: 'Playfair Display', serif;
-        font-size: 2.2rem;
+        font-size: 1.9rem;
         font-weight: bold;
         color: #000;
         margin: 15px 0;
@@ -99,7 +99,8 @@
     /* Ícono al lado de la "a" (móvil) */
     .banner-content-mobile .graf-icon {
         position: relative;
-        margin-left: 6px;
+        margin-left: 0px;
+        margin: -30px auto 0;
         top: 0;
         vertical-align: middle;
     }
@@ -149,7 +150,7 @@
         color: #fff;
         text-align: center;
         font-weight: bold;
-        font-size: 1rem;
+        font-size: 1.2rem;
         line-height: 1.2;
         margin: 0 auto 20px auto;
     }
@@ -161,7 +162,7 @@
     }
 
     .quote-box-mobile p {
-        font-size: 0.9rem;
+        font-size: 1rem;
         line-height: 1.5;
         color: #555;
     }
@@ -198,6 +199,7 @@
     .about-text-content h2 {
         font-size: 2rem;
         margin-bottom: 20px;
+        margin: -6px auto 0;
     }
 
     .about-text-content p {
@@ -209,40 +211,51 @@
     /* Estilos del Frame 002 */
     /* -------------------------------------- */
     .contact-section {
-        height: auto;
-        padding: 50px 20px;
+        height: auto; /* Altura dinámica en móvil */
+        padding: 40px 20px;
     }
 
     .contact-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        /* Los elementos se apilan verticalmente, como en la imagen */
+        flex-direction: column; 
+        align-items: flex-start; /* Alineamos todo a la izquierda */
+        text-align: left;
     }
     
     .contact-text-content {
         width: 100%;
+        text-align: center; /* se Centra la alineación */
+        margin-bottom: 30px; /* Espacio entre texto y círculos */
     }
 
     .contact-text-content h2 {
         font-size: 2rem;
-        margin-bottom: 10px;
+        font-weight: 400;
+        margin-bottom: 15px;
     }
 
-    .contact-text-content p {
+    .contact-link {
         font-size: 0.9rem;
     }
 
     .contact-circles-container {
+        /* Los círculos siguen el flujo de la izquierda */
         flex-direction: row;
         gap: 15px;
-        margin-top: 30px;
-        justify-content: center;
-        flex-wrap: wrap; /* Permite que los círculos se envuelvan si la pantalla es muy estrecha */
+        justify-content: center; 
+        flex-wrap: wrap; 
+        width: 100%; /* Ocupa el ancho completo */
     }
+    
 
     .contact-circle {
-        width: 60px;
-        height: 60px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .contact-circle img {
+        width: 22px;
+        height: 22px;
     }
 
     /* -------------------------------------- */
