@@ -1,3 +1,6 @@
+* {
+        box-sizing: border-box;
+    }
 /* -------------------------------------- */
 /* Estilos del Header */
 /* -------------------------------------- */
@@ -150,6 +153,7 @@
     height: auto;
     position: relative;
     margin-left: 8px;
+    margin: -35px auto 0;
     top: -5px;
     vertical-align: middle;
 }
@@ -203,7 +207,7 @@
 }
 
 .quote-box p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 1.5;
     color: #555;
 }
@@ -230,7 +234,7 @@
     color: #fff;
     text-align: center;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     line-height: 1.2;
 }
 
@@ -247,7 +251,7 @@
     width: 100%;
     max-width: 1400px; /* Ancho de las secciones anteriores */
     height: 800px; /* Altura especificada */
-    margin: 0 auto;
+    margin: -55px auto 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -288,15 +292,16 @@
 }
 
 .about-text-content h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 2.8rem;
     color: #333;
     line-height: 1.2;
     margin-bottom: 30px;
+    font-weight: normal;
 }
 
 .about-text-content p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
 }
@@ -304,59 +309,75 @@
 /* -------------------------------------- */
 /* Estilos del Frame 002 */
 /* -------------------------------------- */
+:root {
+    --color-pink-primary: #218380; /* Color de fondo */
+    --color-text-light: #ffffff; /* Texto blanco */
+}
+
+/* Keyframes para la decoración de fondo (solo CSS) */
+@keyframes background-move {
+    0% { background-position: 0% 0; }
+    100% { background-position: 100% 100%; }
+}
+
 .contact-section {
     width: 100%;
-    max-width: 1400px;
-    height: 400px;
+    /* Altura ajustada para ser compacta, como en la imagen */
+    height: 250px; 
     margin: 0 auto;
-    background-color: #218380;
+    background-color: var(--color-pink-primary);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 30px;
+    position: relative; /* Para la decoración */
+    overflow: hidden;
+    
+    /* Decoración de fondo basada en la imagen de referencia */
+    background-image: url("data:image/svg+xml,..."); /* Aquí iría un SVG o una imagen de las formas rosas */
+    /* Como no tengo el SVG, usaré un gradiente para simular la textura */
+    background-image: radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.1) 1%, transparent 10%), radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.1) 1%, transparent 10%);
+    background-size: 400px 400px;
+    background-repeat: repeat;
+    animation: background-move 60s linear infinite alternate; /* Animación suave del fondo */
 }
 
 .contact-content {
     width: 100%;
     max-width: 1100px;
     display: flex;
-    justify-content: space-between;
+    /* Los elementos se alinean horizontalmente y el texto se alinea a la izquierda */
+    justify-content: space-between; 
     align-items: center;
+    position: relative;
+    z-index: 10; /* Asegura que el contenido esté sobre el fondo */
 }
 
+/* --- Área de Texto --- */
 .contact-text-content {
-    color: #ffffff;
+    color: var(--color-text-light);
     text-align: left;
 }
 
 .contact-text-content h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-weight: bold;
+    /* Usamos 'Playfair Display' o similar para el toque elegante del título */
+    font-family: 'Playfair Display', serif; 
+    font-size: 3rem;
+    font-weight: 300; /* Más delgado, como en la imagen */
+    margin: 0;
     margin-bottom: 20px;
+    line-height: 1;
 }
 
-.contact-text-content p {
-    font-size: 1rem;
+.contact-link {
+    /* Fuente sans-serif simple para el texto de contacto */
+    font-family: 'Inter', 'Montserrat', sans-serif; 
+    font-size: 1.2rem;
+    font-weight: 400;
     line-height: 1.5;
     margin: 5px 0;
 }
 
-.contact-circles-container {
-    display: flex;
-    gap: 20px;
-}
-
-.contact-circle {
-    width: 80px;
-    height: 80px;
-    border: 2px solid #ffffff;
-    border-radius: 50%;
-    background-color: #ffffff; /* Círculo con fondo blanco */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 /* -------------------------------------- */
 /* Estilos del Frame 003 */
