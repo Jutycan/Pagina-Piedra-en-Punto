@@ -109,8 +109,9 @@
 }
 
 .faq-title {
-    font-family: "Montserrat", sans-serif;
-    font-size: 2.5rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 3.5rem;
+    font-weight: normal;
     font-weight: 600;
     color: #1C1C1C;
     margin-bottom: 10px;
@@ -118,7 +119,7 @@
 
 .faq-subtitle {
     font-family: "Lato", sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #5A5A5A;
     margin-bottom: 40px;
 }
@@ -134,8 +135,8 @@
     font-family: "Montserrat", sans-serif;
     font-size: 1rem;
     font-weight: 500;
-    color: #EC0868;
-    background-color: #fce2ef;
+    color: #111;
+    background-color: #F9AECB;
     border: none;
     border-radius: 50px;
     padding: 12px 25px;
@@ -144,7 +145,7 @@
 }
 
 .faq-category-btn.active {
-    background-color: #EC0868;
+    background-color: #ec4f90;
     color: #fff;
 }
 
@@ -164,7 +165,7 @@
 
 /* Estilo de cada bloque de pregunta/respuesta */
 .faq-item {
-    background-color: #fce2ef; /* Color de fondo rosa claro */
+    background-color: #FDE8EE; /* Color de fondo rosa claro */
     border-radius: 12px;
     padding: 20px 25px;
     margin-bottom: 15px;
@@ -172,6 +173,10 @@
     text-align: left;
     transition: background-color 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item.active {
+    background-color: #F9AECB;
 }
 
 .faq-header {
@@ -183,8 +188,8 @@
 .faq-question {
     font-family: "Lato", sans-serif;
     font-size: 1rem;
-    font-weight: 600;
-    color: #1C1C1C;
+    font-weight: 400;
+    color: #444;
     margin: 0;
 }
 
@@ -216,7 +221,7 @@
     font-family: "Lato", sans-serif;
     font-size: 0.9rem;
     line-height: 1.5;
-    color: #5A5A5A;
+    color: #333;
     margin: 0;
 }
 

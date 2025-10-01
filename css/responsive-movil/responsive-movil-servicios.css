@@ -303,16 +303,16 @@
     /* Estilos del Servcio 3*/
     /* -------------------------------------- */
     /* Oculta la versión de escritorio y muestra la de móvil */
-    .desarrollo-desktop {
+    .degustaciones-desktop {
         display: none;
     }
     
-    .desarrollo-mobile {
+    .degustaciones-mobile {
         display: block;
     }
 
     /* Ajusta el padding y el ancho del contenedor en móvil */
-    .desarrollo-container {
+    .degustaciones-container {
         flex-direction: column;
         padding: 20px;
         gap: 20px;
@@ -320,7 +320,7 @@
     }
 
     /* Ajusta el contenido para que se centre y ocupe todo el ancho */
-    .desarrollo-content {
+    .degustaciones-content {
         width: 100%;
         padding-right: 0;
         text-align: center;
@@ -328,14 +328,14 @@
         transform: none; /* Deshabilita la animación de escritorio */
     }
     
-    .desarrollo-content h2 {
+    .degustaciones-content h2 {
         font-size: 24px;
         text-align: center;
         opacity: 1;
         transform: none;
     }
 
-    .desarrollo-item {
+    .degustaciones-item {
         flex-direction: column;
         align-items: center;
         text-align: center;
@@ -345,30 +345,30 @@
         margin-bottom: 20px;
     }
 
-    .desarrollo-item p {
+    .degustaciones-item p {
         text-align: center;
         font-size: 15px;
     }
 
-    .circle-des {
+    .circle-deg {
         margin-top: 0;
         animation: none; /* Deshabilita la animación en móvil */
         background: #EC8A10; /* Color fijo para los círculos */
     }
     
     /* Imagen y botón */
-    .desarrollo-image {
+    .degustaciones-image {
         width: 100%;
         text-align: center;
         margin-top: 15px;
         margin-bottom: 15px;
     }
     
-    .desarrollo-image img {
+    .degustaciones-image img {
         width: 90%;
     }
 
-    .btn-desarrollo {
+    .btn-degustaciones {
         width: 100%;
         text-align: center;
         box-sizing: border-box;
@@ -377,9 +377,9 @@
     }
     
     /* Deshabilita las animaciones en móvil para evitar conflictos */
-    .desarrollo-content.visible h2,
-    .desarrollo-content.visible .desarrollo-item,
-    .desarrollo-content.visible .btn-desarrollo {
+    .degustaciones-content.visible h2,
+    .degustaciones-content.visible .degustaciones-item,
+    .degustaciones-content.visible .btn-degustaciones {
         opacity: 1;
         transform: none;
         transition-delay: none !important;

@@ -99,8 +99,7 @@
     /* Ícono al lado de la "a" (móvil) */
     .banner-content-mobile .graf-icon {
         position: relative;
-        margin-left: 0px;
-        margin: -30px auto 0;
+        margin-left: -14px;
         top: 0;
         vertical-align: middle;
     }
@@ -153,6 +152,10 @@
         font-size: 1.2rem;
         line-height: 1.2;
         margin: 0 auto 20px auto;
+    }
+
+    .experience-circle-mobile p {
+        margin: -10px auto 0;
     }
 
     .quote-box-mobile {

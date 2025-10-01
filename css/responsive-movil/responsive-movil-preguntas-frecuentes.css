@@ -80,7 +80,7 @@
     }
 
     .faq-subtitle {
-        font-size: 0.9rem;
+        font-size: 1rem;
         margin-bottom: 25px;
     }
 
@@ -88,6 +88,19 @@
         flex-direction: column;
         gap: 10px;
     }
+
+    .faq-category-btn {
+        font-size: 1.1rem;
+    }
+
+    .faq-question {
+        font-size: 1.1rem;
+    }
+
+    .faq-answer {
+        font-size: 1rem;
+    }
+
 
 
     /* -------------------------------------- */

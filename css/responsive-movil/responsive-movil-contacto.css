@@ -122,20 +122,24 @@
         /* AJUSTE CLAVE: Cambiamos el orden en móvil */
         order: 1; 
         margin-top: 0;
+        margin: -20px auto 0; /* Centrado horizontal */
     }
     
     .form-content-right {
         /* AJUSTE CLAVE: Cambiamos el orden en móvil */
         order: 2;
         margin-top: 50px; /* Separación entre las secciones */
+        margin: -20px auto 0; /* Centrado horizontal */
     }
 
     .form-title {
         font-size: 2rem;
+        text-align: center;
     }
     
     .form-subtitle {
         font-size: 0.9rem;
+        text-align: center;
     }
     
     .contact-info-item {
@@ -145,6 +149,10 @@
     
     .info-icon {
         margin-bottom: 10px;
+    }
+
+    .contact-pattern img{
+        display: none; /* Ocultamos la imagen decorativa en móvil */
     }
 
 

@@ -94,9 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }, { threshold: 0.2 }); // Se activa cuando el 20% del section es visible
 
-    const desarrolloSection = document.querySelector(".desarrollo-content");
-    if (desarrolloSection) {
-        observer.observe(desarrolloSection);
+    const degustacionesSection = document.querySelector(".degustaciones-content");
+    if (degustacionesSection) {
+        observer.observe(degustacionesSection);
     }
 });
 

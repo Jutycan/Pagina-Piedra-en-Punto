@@ -153,6 +153,7 @@
     height: auto;
     position: relative;
     margin-left: 8px;
+    margin: -38px auto 0;
     top: -5px;
     vertical-align: middle;
 }
