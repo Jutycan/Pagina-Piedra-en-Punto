@@ -63,111 +63,68 @@ document.addEventListener('DOMContentLoaded', () => {
 // -----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const benefitCards = document.querySelectorAll('.benefit-card');
-    const benefitsSection = document.querySelector('.benefits-section');
     const isMobile = window.innerWidth <= 768;
 
+    // Desactivamos el 'is-featured' para móvil
     if (isMobile) {
         benefitCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const isActive = card.classList.contains('is-active');
-
-                // Si la tarjeta clicada ya está activa, ciérrala.
-                if (isActive) {
-                    card.classList.remove('is-active');
-                    return; // Sal del evento
-                }
-
-                // Cierra todas las demás tarjetas
-                benefitCards.forEach(otherCard => {
-                    otherCard.classList.remove('is-active');
-                });
-                
-                // Activa la tarjeta clicada
-                card.classList.add('is-active');
-            });
+            card.classList.remove('is-featured');
         });
-
-        // Restablece los bloques al bajar o al salir de la sección
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    benefitCards.forEach(card => {
-                        card.classList.remove('is-active');
-                    });
-                }
-            });
-        }, {
-            threshold: 0.0
-        });
-
-        observer.observe(benefitsSection);
-
-    } else {
-        // Lógica de hover para escritorio (no se necesita si el CSS lo maneja)
-        // Puedes dejar esto vacío si solo usas el CSS para el hover
     }
 
-    // Asegura el comportamiento correcto al cambiar el tamaño de la ventana
-    window.addEventListener('resize', () => {
-        if ((window.innerWidth > 768 && isMobile) || (window.innerWidth <= 768 && !isMobile)) {
-            location.reload();
-        }
-    });
-});
+    if (isMobile) {
+        const observerCallback = (entries) => {
+            entries.forEach(entry => {
+                const card = entry.target;
+                
+                // Si la tarjeta está entrando o ya está visible en el umbral del 50%
+                if (entry.isIntersecting) {
+                    // Desactivar todas las tarjetas primero
+                    benefitCards.forEach(c => c.classList.remove('is-active-mobile'));
+                    
+                    // Activar la tarjeta que está en el centro
+                    card.classList.add('is-active-mobile');
+                }
+            });
+        };
 
-// ----------------------------------------------------------------------------- 
-//----------------------Estilos de faqs-uno------------------------------------- 
-// ----------------------------------------------------------------------------- 
-document.querySelectorAll(".faq-uno-question").forEach(button => {
-    button.addEventListener("click", () => {
-        const faqItem = button.parentElement;
+        const observerOptions = {
+            // Root Margin ajustado para que el "centro" de la tarjeta sea el centro del viewport
+            rootMargin: '-40% 0px -40% 0px', // Ajustado a 40% para una mejor detección de centro
+            threshold: 0.0 
+        };
 
-        // Cierra todos los bloques antes de abrir el nuevo
-        document.querySelectorAll(".faq-uno-item").forEach(item => {
-            if (item !== faqItem) {
-                item.classList.remove("active");
-            }
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        benefitCards.forEach(card => {
+            observer.observe(card);
         });
 
-        // Alternar el estado del clic
-        faqItem.classList.toggle("active");
-    });
-});
-
-// ----------------------------------------------------------------------------- 
-//----------------------Estilos de faqs-dos------------------------------------- 
-// -----------------------------------------------------------------------------
-document.querySelectorAll(".faq-dos-question").forEach(button => {
-    button.addEventListener("click", () => {
-        const faqItem = button.parentElement;
-
-        // Cierra todos los bloques antes de abrir el nuevo
-        document.querySelectorAll(".faq-dos-item").forEach(item => {
-            if (item !== faqItem) {
-                item.classList.remove("active");
-            }
+    } else {
+        // Lógica para Escritorio: Manejo de la tarjeta "destacada" y el hover
+        // Esto solo es para asegurar el comportamiento si se requiere JS para el featured
+        
+        benefitCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Si haces hover, desactiva temporalmente el featured si existe
+                const featured = document.querySelector('.benefit-card.is-featured:not(:hover)');
+                if (featured) {
+                    featured.style.transform = 'translateY(0)';
+                    featured.style.backgroundColor = 'var(--color-gris-card)';
+                }
+            });
+            card.addEventListener('mouseleave', () => {
+                // Al salir, asegura que el featured vuelva a su estado activo
+                const featured = document.querySelector('.benefit-card.is-featured');
+                if (featured) {
+                    featured.style.transform = 'translateY(-10px)';
+                    featured.style.backgroundColor = 'var(--color-verde-destacado)';
+                }
+            });
         });
+    }
 
-        // Alternar el estado del clic
-        faqItem.classList.toggle("active");
-    });
+    // Nota: El evento de resize para recargar la página no es ideal en producción.
+    // Lo he eliminado. Los estilos y JS ahora deberían adaptarse de forma dinámica.
 });
 
-// ----------------------------------------------------------------------------- 
-//----------------------Estilos de faqs-tres------------------------------------- 
-// -----------------------------------------------------------------------------
-document.querySelectorAll(".faq-tres-question").forEach(button => {
-    button.addEventListener("click", () => {
-        const faqItem = button.parentElement;
-
-        // Cierra todos los bloques antes de abrir el nuevo
-        document.querySelectorAll(".faq-tres-item").forEach(item => {
-            if (item !== faqItem) {
-                item.classList.remove("active");
-            }
-        });
-
-        // Alternar el estado del clic
-        faqItem.classList.toggle("active");
-    });
-});

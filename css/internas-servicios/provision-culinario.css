@@ -99,7 +99,7 @@
 .service-banner-section {
     width: 100%;
     max-width: 1400px;
-    margin: 100px auto 0;
+    margin: 120px auto 0;
     position: relative;
     overflow: hidden;
 }
@@ -198,141 +198,155 @@
 /* -------------------------------------- */
 /* Estilos de Beneficios */
 /* -------------------------------------- */
+:root {
+    --color-gris-fondo: #F5F5F5;
+    --color-gris-card: #D2CDCA;
+    --color-verde-destacado: #2BB093;
+    --color-texto-oscuro: #114240;
+    --color-texto-claro: #FFFCFA;
+}
+
 .benefits-section {
     width: 100%;
-    max-width: 1400px; /* Ancho consistente con el banner */
+    max-width: 1400px;
     margin: 80px auto;
     padding: 0 20px;
-    font-family: Arial, sans-serif;
-    color: #114240; /* Color general del texto, para el estado de hover */
+    font-family: 'Inter', sans-serif;
+    background-color: transparent;
 }
 
-.benefits-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
+/* Título de Fondo */
 .benefits-title {
-    font-size: 4rem;
-    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12rem;
+    font-weight: 200;
     color: transparent;
-    -webkit-text-stroke: 1px #888888;
+    -webkit-text-stroke: 2px #cccccc;
     text-transform: uppercase;
     letter-spacing: 5px;
+    line-height: 1;
+    text-align: center;
 }
 
-/* -------------------------------------- */
-/* Contenedor de los beneficios */
-/* -------------------------------------- */
+/* Contenedor de las tarjetas */
 .benefits-grid {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
+    margin: -100px auto 0; 
+    justify-content: center;
+    gap: 15px;
 }
 
 /* -------------------------------------- */
-/* Estilos para cada tarjeta de beneficio */
+/* Estilos para cada tarjeta de beneficio (ESCRITORIO) */
 /* -------------------------------------- */
 .benefit-card {
     flex: 1;
-    min-width: 200px;
-    background-color: #f0f0f0; /* Fondo gris inicial */
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
+    min-width: 180px;
+    min-height: 500px;
+    background-color: var(--color-gris-card); 
+    border-radius: 5px;
+    padding: 30px; /* Padding ajustado */
     transition: background-color 0.3s ease, transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    position: relative; /* Importante para el posicionamiento del contenido */
+    position: relative; /* Contenedor para el posicionamiento absoluto */
+    overflow: hidden; 
+    cursor: default;
 }
 
+/* Contenido inferior (número y título) */
 .benefit-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.benefit-visual {
-    position: relative;
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.chef-image {
-    max-width: 100%;
-    height: auto;
-    transition: opacity 0.3s ease;
-    z-index: 2;
-}
-
-.benefit-text-hover {
+    justify-content: flex-end; /* Alinea al final de la tarjeta */
     position: absolute;
-    top: 0;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+}
+
+/* Número Grande */
+.benefit-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10rem;
+    font-weight: bold;
+    color: #FFFCFA;
+    line-height: 1;
+    transition: color 0.3s ease;
+    z-index: 3;
+    margin: 0;
+    /* Centrado por el contenedor flex */
+}
+
+/* Título Pequeño */
+.benefit-small-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--color-texto-claro);
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 4;
+    margin-top: 10px; /* Separación del número */
+}
+
+/* Contenido de HOVER (Descripción) */
+.benefit-text-hover {
+    /* POSICIONAMIENTO EN LA PARTE SUPERIOR */
+    position: absolute;
+    top: 0; 
     left: 0;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start; /* Alinea el texto en la parte superior */
+    align-items: flex-start; /* Alinea el texto a la izquierda */
     text-align: left;
-    padding: 20px;
+    padding: 30px;
     box-sizing: border-box;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.benefit-number {
-    font-size: 8rem;
-    font-weight: bold;
-    color: #888888; /* Color gris inicial para el número */
-    line-height: 1;
-    transition: color 0.3s ease;
-    position: relative;
-    z-index: 3;
-    margin-top: 20px;
-}
-
-.benefit-small-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+    visibility: hidden;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    z-index: 5;
+    background-color: transparent; /* Inicialmente transparente */
 }
 
 .benefit-description {
     font-size: 1rem;
     line-height: 1.6;
+    color: var(--color-texto-oscuro);
+    margin: 0;
+    font-weight: 500;
 }
 
+
 /* -------------------------------------- */
-/* Efecto HOVER (al pasar el mouse) */
+/* ESTADO DESTACADO (is-featured) y HOVER */
 /* -------------------------------------- */
+
+.benefit-card.is-featured,
 .benefit-card:hover {
-    background-color: #2BB093;
+    background-color: var(--color-verde-destacado);
     transform: translateY(-10px);
 }
 
-.benefit-card:hover .chef-image {
-    opacity: 0;
-}
-
+.benefit-card.is-featured .benefit-text-hover,
 .benefit-card:hover .benefit-text-hover {
     opacity: 1;
-    z-index: 3; /* Asegura que el texto esté encima del chef */
+    visibility: visible;
 }
 
-.benefit-card:hover .benefit-number,
-.benefit-card:hover .benefit-text-hover * {
-    color: #114240;
+/* Estilos de texto y número al activar */
+.benefit-card.is-featured .benefit-number,
+.benefit-card:hover .benefit-number {
+    color: var(--color-texto-oscuro);  
+}
+.benefit-card.is-featured .benefit-small-title,
+.benefit-card:hover .benefit-small-title {
+    color: var(--color-texto-oscuro);  
+}
+.benefit-card.is-featured .benefit-description,
+.benefit-card:hover .benefit-description {
+    color: var(--color-texto-oscuro); 
 }
 
 
@@ -350,6 +364,7 @@
 
 .ofrece-contenido {
     display: flex;
+    margin: -50px auto 0;
     justify-content: space-between;
     align-items: center;
     width: 100%;
@@ -369,17 +384,17 @@
 }
 
 .ofrece-frase {
-    font-family: "Playfair Display", serif;
-    font-size: 18px;
+    font-family: cursive;
+    font-size: 20px;
     font-style: italic;
-    color: #6EAEAC;
+    color: #b5b1af;
     margin-bottom: 10px;
 }
 
 .ofrece-titulo {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 28px;
-    font-weight: 600;
+    font-weight: normal;
     color: #1C1C1C;
     margin-bottom: 15px;
 }
@@ -391,308 +406,6 @@
     color: #5A5A5A;
 }
 
-/* -------------------------------------- */
-/* Estilos de faqs-uno */
-/* -------------------------------------- */
-.faqs-uno {
-    width: 100%;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 40px ;
-    height: 300px;
-    border: 1px solid #6EAEAC;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-}
-
-.faqs-uno-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    width: 100%;
-}
-
-.faqs-uno-left {
-    flex: 1;
-}
-
-.faqs-uno-left h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #000;
-}
-
-.faqs-uno-left p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-}
-
-.faqs-uno-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.faq-uno-item {
-    border-radius: 8px;
-    overflow: hidden;
-    background: #6EAEAC;
-    transition: background 0.3s ease;
-}
-
-.faq-uno-question {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: none;
-    padding: 15px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.faq-uno-icon {
-    transition: transform 0.3s ease;
-}
-
-.faq-uno-answer {
-    max-height: 0;
-    overflow: hidden;
-    background: #218380;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-    padding: 0 20px;
-}
-
-.faq-uno-answer p {
-    font-size: 0.95rem;
-    color: #fff;
-    padding: 15px 0;
-}
-
-/* Estado activo */
-.faq-uno-item.active {
-    background: #218380;
-}
-
-.faq-uno-item.active .faq-uno-answer {
-    max-height: 200px;
-    padding: 0 20px 15px;
-}
-
-.faq-uno-item.active .faq-uno-icon {
-    transform: rotate(180deg);
-}
-
-/* -------------------------------------- */
-/* Estilos de faqs-dos */
-/* -------------------------------------- */
-.faqs-dos {
-    width: 100%;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 40px ;
-    height: 250px;
-    border: 1px solid #6EAEAC;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-}
-
-.faqs-dos-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    width: 100%;
-}
-
-.faqs-dos-left {
-    flex: 1;
-}
-
-.faqs-dos-left h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #000;
-}
-
-.faqs-dos-left p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-}
-
-.faqs-dos-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.faq-dos-item {
-    border-radius: 8px;
-    overflow: hidden;
-    background: #6EAEAC;
-    transition: background 0.3s ease;
-}
-
-.faq-dos-question {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: none;
-    padding: 15px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.faq-dos-icon {
-    transition: transform 0.3s ease;
-}
-
-.faq-dos-answer {
-    max-height: 0;
-    overflow: hidden;
-    background: #218380;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-    padding: 0 20px;
-}
-
-.faq-dos-answer p {
-    font-size: 0.95rem;
-    color: #fff;
-    padding: 15px 0;
-}
-
-/* Estado activo */
-.faq-dos-item.active {
-    background: #218380;
-}
-
-.faq-dos-item.active .faq-dos-answer {
-    max-height: 200px;
-    padding: 0 20px 15px;
-}
-
-.faq-dos-item.active .faq-dos-icon {
-    transform: rotate(180deg);
-}
-
-/* -------------------------------------- */
-/* Estilos de faqs-tres */
-/* -------------------------------------- */
-.faqs-tres {
-    width: 100%;
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 40px ;
-    height: 350px;
-    border: 1px solid #6EAEAC;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-}
-
-.faqs-tres-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
-    width: 100%;
-}
-
-.faqs-tres-left {
-    flex: 1;
-}
-
-.faqs-tres-left h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #000;
-}
-
-.faqs-tres-left p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #333;
-}
-
-.faqs-tres-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.faq-tres-item {
-    border-radius: 8px;
-    overflow: hidden;
-    background: #6EAEAC;
-    transition: background 0.3s ease;
-}
-
-.faq-tres-question {
-    width: 100%;
-    text-align: left;
-    background: transparent;
-    border: none;
-    padding: 15px 20px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #fff;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.faq-tres-icon {
-    transition: transform 0.3s ease;
-}
-
-.faq-tres-answer {
-    max-height: 0;
-    overflow: hidden;
-    background: #218380;
-    transition: max-height 0.4s ease, padding 0.3s ease;
-    padding: 0 20px;
-}
-
-.faq-tres-answer p {
-    font-size: 0.95rem;
-    color: #fff;
-    padding: 15px 0;
-}
-
-/* Estado activo */
-.faq-tres-item.active {
-    background: #218380;
-}
-
-.faq-tres-item.active .faq-tres-answer {
-    max-height: 200px;
-    padding: 0 20px 15px;
-}
-
-.faq-tres-item.active .faq-tres-icon {
-    transform: rotate(180deg);
-}
 
 /* -------------------------------------- */
 /* Estilos del Formulario */
