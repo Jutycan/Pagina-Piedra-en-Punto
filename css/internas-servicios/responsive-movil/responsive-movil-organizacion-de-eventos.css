@@ -75,25 +75,14 @@
     /* -------------------------------------- */
     /* Estilos del banner*/
     /* -------------------------------------- */
-    .banner-section {
-        /* Mantiene la imagen de fondo también en móvil */
-        height: 250px; /* Altura ajustada para móviles */
-        padding: 20px;
-        box-shadow: none;
+    .banner-organizacion-eventos {
+        min-height: 180px; /* Altura mínima un poco menor para móviles */
+        max-height: 350px; /* Altura máxima para evitar que sea muy grande */
     }
 
-    .banner-overlay {
-        justify-content: center; /* Centra horizontalmente */
-        align-items: center; /* Centra verticalmente */
-        text-align: center; /* Asegura que el texto en sí también esté centrado */
-        padding: 0 20px;
-    }
-
-    .banner-overlay h2 {
-        font-size: 1.5rem; /* Tamaño de fuente más pequeño para móvil */
-        color: #fff;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        line-height: 1.2;
+    .banner-image {
+        object-fit: cover; 
+        object-position: center center; 
     }
 
 
@@ -449,5 +438,33 @@
     .footer-bottom {
         flex-direction: center;
         gap: 5px;
+    }
+    /*----------MODAL-------------*/
+    /*----------------------------*/
+    /*----------------------------*/
+    .modal-content-custom {
+        padding: 30px 20px; 
+        max-width: 95%;
+        margin: 20px; 
+    }
+
+    .modal-title-custom {
+        font-size: 45px; /* Ligeramente más grande que en el ejemplo anterior, aprovechando el ancho extra hasta 768px */
+    }
+    
+    .modal-check-mark {
+        width: 80px;
+        height: 80px;
+        margin: 15px auto;
+    }
+
+    .modal-check-mark::after {
+        font-size: 50px; /* Ajusta el tamaño del check */
+    }
+
+    .close-button-custom {
+        font-size: 26px; 
+        top: 10px;
+        right: 15px;
     }
 }

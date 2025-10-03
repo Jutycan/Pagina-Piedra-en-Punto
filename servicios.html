@@ -179,7 +179,7 @@
                         <p><strong>Metodología del servicio:</strong> Comenzamos con un briefing para comprender a fondo las necesidades del cliente. A partir de ahí desarrollamos un concepto creativo que guía todo el proyecto, seguido por la producción de cada detalle. Luego llevamos a cabo el montaje y la ejecución del evento, y finalmente entregamos un reporte post-evento que permite evaluar resultados y generar aprendizajes para futuros proyectos.</p>
                     </div>
 
-                    <a href="#" class="btn-organizacion">Haz realidad tu evento</a>
+                    <a href="/servicios/organizacion-de-eventos.html" class="btn-organizacion">Haz realidad tu evento</a>
                 </div>
             </div>
 
@@ -208,7 +208,7 @@
                 </div>
 
                 <div class="organizacion-content" style="text-align:center;">
-                    <a href="#" class="btn-organizacion">Haz realidad tu evento</a>
+                    <a href="/servicios/organizacion-de-eventos.html" class="btn-organizacion">Haz realidad tu evento</a>
                 </div>
             </div>
         </section>
@@ -506,7 +506,7 @@
                 <div class="contact-form-content">
                     <h2 class="contact-form-title">¿Tienes alguna pregunta?</h2>
                     <p class="contact-form-subtitle">Déjanos tus datos, en breve nos pondremos  en contacto contigo.  <br>¡Bienvenido a la familia Piedra en Punto!</p>
-                    <form id="services-contact-form" action="https://script.google.com/macros/s/AKfycbzQ8aQa5gw0_2NsxBQNZPrtHT-xPHQQ0CMWy0nrkdWiZA5rWj04ihwXQfwny4CvQWvW/exec" method="POST" class="contact-form">
+                    <form id="services-contact-form" action="https://script.google.com/macros/s/AKfycbziJazr10Ro6IhnZrQd5ZjxpzoVjNuTtFb_bZBcILV2IW7Yb7QHOswON627_j828BXN/exec" method="POST" class="contact-form">
                         <div class="form-group">
                             <label for="nombre">Nombre*</label>
                             <input type="text" id="nombre" name="nombre" placeholder="¿Cuáles son tus nombres y apellidos?" required>
@@ -523,6 +523,9 @@
                             <label for="comentario">Dejar comentario*</label>
                             <input type="text" id="comentario" name="comentario" placeholder="¿Cómo podemos ayudarte?" required>
                         </div>
+
+                        <input type="hidden" id="page-url" name="pageUrl" value="">
+                        <input type="hidden" id="status" name="status" value="Pendiente">
 
                         <div class="form-divider"></div>
 
@@ -597,6 +600,29 @@
     </footer>
 
     <script src="js/servicios.js"></script>
+    <script src="/js/formulario.js"></script>
+
+    <div id="success-modal" style="display:none;">
+        <div class="modal-content-custom">
+            <span class="close-button-custom">&times;</span>
+            <div class="thank-you-message">
+            
+                <h1 class="modal-title-custom">
+                    ¡Muchas gracias!
+                </h1>
+            
+                <div class="modal-check-mark">
+                    </div>
+            
+                <p style="font-size: 1.2em; margin-top: 20px; color: #555;">
+                    Tu formulario se envió con éxito.
+                </p>
+                <p style="font-size: 1em; color: #777;">
+                    Ahora nuestro equipo revisará tu solicitud y recibirás noticias pronto.
+                </p>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>

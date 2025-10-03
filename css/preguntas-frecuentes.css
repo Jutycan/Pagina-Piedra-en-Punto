@@ -514,3 +514,90 @@
     font-size: 14px;
     color: #555;
 }
+
+/* -------------------------------------- */
+/* 1. Estilos Base del Modal (#success-modal) */
+/* -------------------------------------- */
+
+#success-modal {
+    /* Posicionamiento y Capa de Fondo */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1000; /* Asegura que esté por encima de todos los demás elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semi-transparente */
+    
+    /* Centrado del Contenido */
+    display: flex; /* Se usa flexbox para centrar el 'modal-content-custom' */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content-custom {
+    /* Contenedor del Mensaje */
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.4);
+    position: relative;
+    width: 90%; /* Ancho base para móviles */
+    max-width: 550px; /* Ancho máximo para escritorio */
+    text-align: center;
+}
+
+/* -------------------------------------- */
+/* 2. Estilos de Diseño y Tipografía */
+/* -------------------------------------- */
+
+.close-button-custom {
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s;
+}
+
+.close-button-custom:hover {
+    color: #333;
+}
+
+.modal-title-custom {
+    /* Estilo inclinado y grande */
+    font-family: 'Times New Roman', serif; /* Ajusta si usas otra fuente elegante */
+    font-style: italic; 
+    font-size: 55px; 
+    color: #333;
+    line-height: 1.1;
+    margin-bottom: 5px;
+    transform: skewX(-5deg); /* La inclinación */
+    display: block; 
+    padding-top: 10px;
+}
+
+/* Estilo para el Check Mark (simulación con color temático) */
+.modal-check-mark {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    background-color: #F06292; /* Color de tu marca (rosa/fucsia) */
+    border-radius: 50%;
+    position: relative;
+}
+
+/* Si quieres agregar el símbolo de check (opcional) */
+.modal-check-mark::after {
+    content: '✓';
+    font-size: 70px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

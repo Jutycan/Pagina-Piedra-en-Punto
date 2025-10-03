@@ -377,4 +377,33 @@
         flex-direction: center;
         gap: 5px;
     }
+
+    /*----------MODAL-------------*/
+    /*----------------------------*/
+    /*----------------------------*/
+    .modal-content-custom {
+        padding: 30px 20px; 
+        max-width: 95%;
+        margin: 20px; 
+    }
+
+    .modal-title-custom {
+        font-size: 45px; /* Ligeramente más grande que en el ejemplo anterior, aprovechando el ancho extra hasta 768px */
+    }
+    
+    .modal-check-mark {
+        width: 80px;
+        height: 80px;
+        margin: 15px auto;
+    }
+
+    .modal-check-mark::after {
+        font-size: 50px; /* Ajusta el tamaño del check */
+    }
+
+    .close-button-custom {
+        font-size: 26px; 
+        top: 10px;
+        right: 15px;
+    }
 }
