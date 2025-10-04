@@ -161,76 +161,21 @@
     /* -------------------------------------- */
     /* Estilos de beneficios */
     /* -------------------------------------- */
-    .benefits-grid {
-        flex-direction: column; /* Apila los bloques en móvil */
-        align-items: center; 
+    .beneficios-container {
+        flex-direction: column;
         gap: 20px;
     }
-    
-    .benefit-card {
-        cursor: default; 
-        width: 100%;
-        max-width: 400px;
-        min-height: 150px; 
-        padding-top: 60px;
+
+    .beneficio-card {
+        text-align: center;
     }
 
-    .benefits-header h2 {
-        font-size: 1.7rem; 
-    }
-    
-    /* Por defecto, el texto largo no se muestra en móvil */
-    .benefit-full-text {
-        opacity: 0;
-        visibility: hidden;
+    .beneficios-header h2 {
+        font-size: 1.6rem;
     }
 
-    /* ESTADO ACTIVO (Activado por JavaScript/Scroll en móvil) */
-    .benefit-card.is-active {
-        background-color: #FFBC0A; 
-        min-height: 250px; 
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); 
-        transform: none; 
-    }
-
-    .benefit-card.is-active .benefit-icon {
-        border-color: #333; 
-        color: #333; 
-        background-color: #FFBC0A; 
-    }
-
-    .benefit-card.is-active .benefit-content {
-        opacity: 0; 
-    }
-
-    .benefit-card.is-active .benefit-full-text {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    /* ANULACIÓN DE HOVER/CLICK EN LA TARJETA COMPLETA */
-    .benefit-card:hover {
-        background-color: #f7f3f1 !important; /* Mantiene el color base de la tarjeta */
-        transform: none !important; /* Desactiva la elevación (translateY) */
-        min-height: 150px !important; /* Mantiene la altura base */
-    }
-
-    /* ANULACIÓN DE HOVER/CLICK EN EL ÍCONO NUMERADO */
-    .benefit-card:hover .benefit-icon {
-        border-color: #333 !important; 
-        color: #333 !important; 
-        background-color: transparent !important; 
-    }
-
-    /* ANULACIÓN DE LA TRANSICIÓN DE TEXTO CORTO */
-    .benefit-card:hover .benefit-content { 
-        opacity: 1 !important; /* Muestra el texto corto */
-    }
-    
-    /* ANULACIÓN DE LA TRANSICIÓN DE TEXTO COMPLETO */
-    .benefit-card:hover .benefit-full-text { 
-        opacity: 0 !important; 
-        visibility: hidden !important; /* Oculta el texto completo */
+    .beneficios-header p {
+        font-size: 1rem;
     }
 
     /* -------------------------------------- */

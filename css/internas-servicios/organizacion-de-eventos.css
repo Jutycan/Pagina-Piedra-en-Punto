@@ -193,162 +193,96 @@
 /* -------------------------------------- */
 /* Estilos de beneficios */
 /* -------------------------------------- */
-.benefits-section {
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 80px 20px;
-    box-sizing: border-box;
+.beneficios {
+    width: 80%;
+    margin: 100px auto;
+    font-family: "Comfortaa", sans-serif;
     text-align: center;
 }
 
-.benefits-header {
-    margin-bottom: 40px;
+/* Header */
+.beneficios-header h2 {
+    font-size: 29px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #222;
 }
 
-.benefits-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.7rem;
-    font-weight: normal;
-    color: #444;
-    margin-bottom: 10px;
-}
-
-.benefits-header p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
+.beneficios-header p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 50px;
     line-height: 1.6;
-    color: #666;
 }
 
-/* -------------------------------------- */
-/* Estilos del Contenedor y Tarjetas (Escritorio) */
-/* ¡AQUÍ ESTÁ LA CORRECCIÓN CLAVE! */
-/* -------------------------------------- */
-.benefits-grid {
-    display: flex; 
-    flex-direction: row; /* Debe ser 'row' en escritorio */
+/* Contenedor de tarjetas */
+.beneficios-container {
+    display: flex;
     justify-content: space-between;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
-.benefit-card {
-    /* CLAVE: volvemos a flex: 1; para que tomen el espacio disponible */
-    flex: 1; 
-    min-width: 200px; /* Agregamos un min-width para evitar que se colapsen mucho en pantallas medianas */
-    
-    background-color: #f7f3f1;
-    border-radius: 10px;
-    cursor: pointer; 
-    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-    min-height: 250px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* Cada tarjeta */
+.beneficio-card {
+    flex: 1;
+    min-width: 220px;
+    background: #F0F0F0;
+    padding: 30px 20px;
+    border-radius: 12px;
     position: relative;
-    overflow: hidden;
-    padding: 25px; 
-    padding-top: 60px; /* Espacio para el icono numerado */
+    cursor: pointer;
+    transition: all 0.4s ease;
+    text-align: center;
 }
 
-/* -------------------------------------- */
-/* Estilos del Icono Numerado */
-/* -------------------------------------- */
-.benefit-icon {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
-    height: 40px;
-    border: 2px solid #333; 
+/* Número */
+.beneficio-number {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #111;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-family: 'Playfair Display', serif; 
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    z-index: 2;
-    transition: all 0.4s ease;
-}
-
-.benefit-icon::after {
-    content: attr(data-number);
-}
-
-/* -------------------------------------- */
-/* Contenido y Texto */
-/* -------------------------------------- */
-.benefit-content {
-    transition: opacity 0.4s ease;
-    text-align: center;
-}
-
-.benefit-content .short-text {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #444;
-}
-
-.benefit-full-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 25px; 
-    padding-top: 60px; 
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease;
-    z-index: 1;
+    font-weight: bold;
+    margin: 0 auto 15px;
+    font-size: 18px;
 }
 
-.benefit-full-text h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    color: #333;
+/* Título */
+.beneficio-card h3 {
+    font-size: 18px;
     margin-bottom: 10px;
+    color: #111;
+    transition: color 0.3s ease;
 }
 
-.benefit-full-text p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 0.9rem;
-    line-height: 1.5;
+/* Descripción oculta al inicio */
+.beneficio-card p {
+    font-size: 15px;
     color: #333;
+    display: none;
+    margin-top: 10px;
+    line-height: 1.5;
 }
 
-/* -------------------------------------- */
-/* Efecto de Hover (Escritorio: Mayor a 768px) */
-/* -------------------------------------- */
-.benefit-card:hover {
-    background-color: #FFBC0A; 
+/* Estado activo o hover */
+.beneficio-card.active,
+.beneficio-card:hover {
+    background: #FFBC0A; /* amarillo referencia */
+    color: #111;
     transform: translateY(-5px);
 }
 
-.benefit-card:hover .benefit-icon {
-    border-color: #333; 
-    color: #333; 
-    background-color: #FFBC0A; 
+.beneficio-card.active h3,
+.beneficio-card:hover h3 {
+    color: #111;
 }
 
-.benefit-card:hover .benefit-content {
-    opacity: 0;
-}
-
-.benefit-card:hover .benefit-full-text {
-    opacity: 1;
-    visibility: visible;
+.beneficio-card.active p,
+.beneficio-card:hover p {
+    display: block;
 }
 
 
