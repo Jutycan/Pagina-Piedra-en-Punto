@@ -1,224 +1,3 @@
-/* -------------------------------------- */
-/* 1441px+ (Pantallas de escritorio grandes) */
-/* -------------------------------------- */
-@media (min-width: 1441px) {
-    /* -------------------------------------- */
-    /* Estilos del Header para Móviles */
-    /* -------------------------------------- */
-    .header-content {
-        padding: 20px 80px;
-    }
-    .header nav ul {
-        gap: 40px;
-    }
-    .header .logo img {
-        max-height: 80px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos del Banner */
-    /* -------------------------------------- */
-    .main-banner {
-        max-width: 1600px;
-        padding: 0 50px;
-    }
-    .banner-title {
-        font-size: 64px;
-    }
-    .banner-subtitle {
-        font-size: 24px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de ¿Quiénes somos? */
-    /* -------------------------------------- */
-    .about-us-section {
-        max-width: 1600px;
-    }
-    .about-us-title {
-        font-size: 64px;
-    }
-    .about-us-text {
-        font-size: 18px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de Empresas Aliadas */
-    /* -------------------------------------- */
-    .partners-section {
-        height: 300px;
-    }
-    .partners-title {
-        font-size: 64px;
-        margin-bottom: 70px;
-    }
-    .logos-slide img {
-        height: 100px;
-        margin: 0 50px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de Beneficios */
-    /* -------------------------------------- */
-    .benefits-section {
-        max-width: 1600px;
-        padding: 0 50px;
-    }
-    .benefits-title {
-        font-size: 64px;
-    }
-    .benefit-item p {
-        font-size: 18px;
-    }
-}
-
-/* -------------------------------------- */
-/* 1024px a 1440px (Pantallas de portátiles) */
-/* -------------------------------------- */
-@media (min-width: 1024px) and (max-width: 1440px) {
-    /* -------------------------------------- */
-    /* Estilos del Banner */
-    /* -------------------------------------- */
-    .main-banner {
-        padding: 0 40px;
-    }
-    .banner-title {
-        font-size: 52px;
-    }
-    .banner-subtitle {
-        font-size: 18px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de ¿Quiénes somos? */
-    /* -------------------------------------- */
-    .about-us-section {
-        max-width: 1200px;
-        padding: 0 40px;
-    }
-    .about-us-title {
-        font-size: 44px;
-    }
-    .about-us-text {
-        font-size: 15px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de Empresas Aliadas */
-    /* -------------------------------------- */
-    .partners-title {
-        font-size: 48px;
-        margin-bottom: 50px;
-    }
-    .logos-slide img {
-        height: 70px;
-        margin: 0 35px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de Beneficios */
-    /* -------------------------------------- */
-    .benefits-section {
-        max-width: 1200px;
-        padding: 0 40px;
-        height: 850px;
-    }
-    .benefits-title {
-        font-size: 44px;
-        margin-bottom: 30px;
-    }
-    .benefit-item p {
-        font-size: 15px;
-    }
-    .benefits-content {
-        padding-left: 40px;
-    }
-}
-
-/* -------------------------------------- */
-/* 769px a 1023px (Tablets en horizontal) */
-/* -------------------------------------- */
-@media (min-width: 769px) and (max-width: 1023px) {
-    /* -------------------------------------- */
-    /* Estilos del Banner */
-    /* -------------------------------------- */
-    .main-banner {
-        height: 600px;
-        padding: 0 30px;
-    }
-    .banner-text {
-        padding-right: 30px;
-    }
-    .banner-title {
-        font-size: 44px;
-    }
-    .banner-subtitle {
-        font-size: 18px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de ¿Quiénes somos? */
-    /* -------------------------------------- */
-    .about-us-section {
-        max-width: 1000px;
-        height: 500px;
-        padding: 0 30px;
-    }
-    .about-us-title {
-        font-size: 38px;
-    }
-    .about-us-text {
-        font-size: 14px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de Beneficios */
-    /* -------------------------------------- */
-    .benefits-section {
-        max-width: 1000px;
-        height: 750px;
-        padding: 0 30px;
-    }
-    .benefits-image-container {
-        padding-right: 30px;
-    }
-    .benefits-content {
-        padding-left: 30px;
-    }
-    .benefits-title {
-        font-size: 38px;
-        margin-bottom: 25px;
-    }
-    .benefit-item {
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-    .benefit-item p {
-        font-size: 14px;
-    }
-}
-
-/* -------------------------------------- */
-/* 768px a 1023px (Tablets en horizontal) */
-/* -------------------------------------- */
-@media (min-width: 768px) and (max-width: 1023px) {
-    * {
-        box-sizing: border-box;
-    }
-    /* -------------------------------------- */
-    /* Estilos del Header para Móviles */
-    /* -------------------------------------- */
-    .header-content {
-        padding: 15px 40px;
-    }
-    .header nav ul {
-        gap: 30px;
-    }
-    .header .logo img {
-        max-height: 65px;
-    }
-}
-
 /* Hover solo en escritorio */
 @media (min-width: 769px) {
     .header nav ul li:hover > ul {
@@ -342,6 +121,7 @@ incluyendo la orientación horizontal de un celular. */
     /* -------------------------------------- */
     .about-us-section {
         height: auto;
+        margin: -50px auto 0;
         margin-top: 0;
         padding: 60px 20px;
         max-width: 100%;
@@ -383,12 +163,14 @@ incluyendo la orientación horizontal de un celular. */
     }
 
     .about-us-title {
-        font-size: 36px;
-        margin-bottom: 15px;
+        font-size: 2rem;
+        box-sizing: border-box;
+        white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        overflow: hidden;
     }
 
     .about-us-text {
-        font-size: 16px;
+        font-size: 14px;
         margin-bottom: 25px;
     }
 
@@ -444,6 +226,7 @@ incluyendo la orientación horizontal de un celular. */
         padding: 0;
         margin-bottom: 40px;
         order: 2; /* Mueve la imagen debajo del contenido */
+        margin: 30px auto 0;
     }
 
     .benefits-content {
@@ -454,7 +237,7 @@ incluyendo la orientación horizontal de un celular. */
     }
 
     .benefits-title {
-        font-size: 36px;
+        font-size: 30px;
         margin-bottom: 20px;
     }
     
@@ -484,6 +267,7 @@ incluyendo la orientación horizontal de un celular. */
     .services-section {
         padding: 40px 15px;
         height: auto;
+        margin: px auto 0;
     }
 
     .services-title {
@@ -709,10 +493,12 @@ incluyendo la orientación horizontal de un celular. */
     
     .footer-logo-social {
         margin-bottom: 20px;
+        margin: 50px auto 0;
     }
     
     .social-icons {
         justify-content: center;
+        margin: 50px auto 0;
     }
 
     .footer-contact-info {
@@ -753,99 +539,5 @@ incluyendo la orientación horizontal de un celular. */
         font-size: 26px; 
         top: 10px;
         right: 15px;
-    }
-}
-
-/* -------------------------------------- */
-/* Estilos específicos para 480px o menos (Móviles pequeños) */
-/* -------------------------------------- */
-@media (max-width: 480px) {
-    * {
-        box-sizing: border-box;
-    }
-    
-    /* -------------------------------------- */
-    /* Estilos del Header para Móviles */
-    /* -------------------------------------- */
-    .header-content {
-        padding: 15px;
-    }
-    .header .logo img {
-        max-height: 50px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos del Banner */
-    /* -------------------------------------- */
-    .main-banner {
-        padding: 40px 15px;
-    }
-    .banner-title {
-        font-size: 32px;
-        margin-bottom: 15px;
-    }
-    .banner-subtitle {
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-    .banner-features li {
-        font-size: 14px;
-    }
-    .cta-banner {
-        font-size: 16px;
-        padding: 12px 25px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de ¿Quiénes somos? */
-    /* -------------------------------------- */
-    .about-us-section {
-        padding: 40px 15px;
-    }
-    .about-us-title {
-        font-size: 30px;
-    }
-    .about-us-text {
-        font-size: 14px;
-    }
-    .about-us-button {
-        font-size: 14px;
-        padding: 10px 20px;
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de Empresas Aliadas */
-    /* -------------------------------------- */
-    .partners-section {
-        padding: 30px 0;
-    }
-
-    .partners-title {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-    .logos-slide img {
-        height: 40px;
-        margin: 0 15px;
-    }
-    .logos-slide {
-        animation-duration: 50s; /* Aún más lenta para pantallas muy pequeñas */
-    }
-
-    /* -------------------------------------- */
-    /* Estilos de Beneficios */
-    /* -------------------------------------- */
-    .benefits-section {
-        padding: 40px 15px;
-    }
-    .benefits-title {
-        font-size: 30px;
-    }
-    .benefit-item p {
-        font-size: 14px;
-    }
-    .benefits-button {
-        font-size: 16px;
-        padding: 12px 25px;
     }
 }

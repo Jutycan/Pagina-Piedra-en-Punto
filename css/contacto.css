@@ -340,6 +340,10 @@
 .footer-logo {
     width: 150px;
     margin-bottom: 20px;
+    margin: -50px auto 0;
+}
+.social-icons {
+    margin: -50px auto 0;
 }
 
 .social-icons a img {
@@ -353,6 +357,11 @@
 .footer-links-container {
     display: flex;
     gap: 80px;
+}
+
+.footer-trans {
+    color: #c2c1c1;
+    line-height: 1.8;
 }
 
 .footer-links ul {

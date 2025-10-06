@@ -788,10 +788,12 @@
     
     .footer-logo-social {
         margin-bottom: 20px;
+        margin: 50px auto 0;
     }
     
     .social-icons {
         justify-content: center;
+        margin: 50px auto 0;
     }
 
     .footer-contact-info {

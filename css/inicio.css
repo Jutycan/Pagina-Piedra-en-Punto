@@ -269,13 +269,13 @@
 .about-us-title {
     font-family: 'Century Gothic', sans-serif;
     font-size: 48px;
-    font-weight: bold;
+    font-weight: normal;
     color: #222;
     margin-bottom: 20px;
 }
 
 .about-us-text {
-    font-size: 16px;
+    font-size: 1.1rem;
     color: #555;
     line-height: 1.6;
     margin-bottom: 20px;
@@ -365,13 +365,13 @@
     width: 85%;
     max-width: 1400px; /* Ancho máximo para el contenedor */
     height: 1034px;
-    margin: -0px auto 0;
+    margin: -100px auto 0;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: transparent;
     position: relative;
 }
 
@@ -420,8 +420,8 @@
 
 .benefits-title {
     font-family: 'Playfair Display', serif;
-    font-size: 48px;
-    font-weight: bold;
+    font-size: 37px;
+    font-weight: normal;
     color: #222;
     margin-bottom: 40px;
     line-height: 1.1;
@@ -462,7 +462,7 @@
 
 .benefit-item p {
     color: #555;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.6;
     margin: 0;
 }
@@ -491,13 +491,13 @@
     width: 100%;
     max-width: 1200px;
     height: auto; /* Cambiado a auto para que se adapte al contenido */
-    margin: 0 auto;
+    margin: -80px auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 80px 20px;
     box-sizing: border-box;
-    background-color: #fcfbf8;
+    background-color: transparent;
     position: relative;
 }
 
@@ -511,7 +511,7 @@
 .services-title {
     font-family: 'Playfair Display', serif;
     font-size: 56px;
-    font-weight: bold;
+    font-weight: normal;
     color: #222;
     margin-bottom: 60px;
     text-align: center;
@@ -608,7 +608,7 @@
 
 .card-title {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: normal;
     color: #333;
     line-height: 1.2;
     margin: 0;
@@ -812,7 +812,7 @@
 
 .contact-form-title {
     font-family: 'Playfair Display', serif;
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 500;
     color: #333333;
     line-height: 1.1;
@@ -971,6 +971,10 @@
 .footer-logo {
     width: 150px;
     margin-bottom: 20px;
+    margin: -50px auto 0;
+}
+.social-icons {
+    margin: -50px auto 0;
 }
 
 .social-icons a img {
@@ -984,6 +988,11 @@
 .footer-links-container {
     display: flex;
     gap: 80px;
+}
+
+.footer-trans {
+    color: #c2c1c1;
+    line-height: 1.8;
 }
 
 .footer-links ul {
