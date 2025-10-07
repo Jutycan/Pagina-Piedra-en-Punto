@@ -1,6 +1,6 @@
 <?php
 // 🚨🚨🚨 LÍNEAS DE DEPURACIÓN (CRÍTICAS PARA VER EL ERROR) 🚨🚨🚨
-// Muestra errores en pantalla. ¡REMOVER SÓLO DESPUÉS DE QUE TODO FUNCIONE!
+// Muestra errores en pantalla. ¡NO REMOVER HASTA QUE FUNCIONE!
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -8,24 +8,24 @@ error_reporting(E_ALL);
 
 // procesar_formulario.php - Maneja la recepción, almacenamiento y envío de correos.
 
-require_once 'db_config.php';
+// Aseguramos la carga correcta de la base de datos
+require_once __DIR__ . '/db_config.php';
 
-// INCLUSIÓN DE PHPMailer
+// INCLUSIÓN DE PHPMailer (Archivos DEBEN estar en la misma carpeta)
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-// Los 3 archivos DEBEN estar en la misma carpeta que este script
-require 'PHPMailer.php';
-require 'SMTP.php';
-require 'Exception.php';
+require __DIR__ . '/PHPMailer.php';
+require __DIR__ . '/SMTP.php';
+require __DIR__ . '/Exception.php';
 
-// 🚨🚨🚨 CONFIGURACIÓN SMTP USANDO GMAIL CON APP PASSWORD 🚨🚨🚨
-// USA la clave que generaste: ejle ozri qead awjw
+
+// 🚨🚨🚨 CONFIGURACIÓN SMTP USANDO GMAIL CON LA NUEVA APP PASSWORD 🚨🚨🚨
 define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_USER', 'cortes270k@gmailcom'); // 🚨 GMAIL DE LA JEFA
-define('SMTP_PASS', 'ejleozriqeadawjw'); // 🚨 TU APP PASSWORD REAL SIN ESPACIOS
+define('SMTP_USER', 'cortes270k@gmail.com'); // 🚨 GMAIL DE LA JEFA
+define('SMTP_PASS', 'pkgwbezvtiyqiire'); // 🚨 TU NUEVA APP PASSWORD REAL SIN ESPACIOS
 define('JEFA_EMAIL', 'cortes270k@gmail.com');
 
-// Función temporal de envío de respuesta (re-activada para que funcione el JS)
+// Función de envío de respuesta
 header('Content-Type: application/json');
 function sendResponse($success, $message) {
     echo json_encode(['success' => $success, 'message' => $message]);
@@ -46,9 +46,8 @@ $opt_in = isset($_POST['recibir-info']) ? 1 : 0;
 $status = "Pendiente"; 
 $email_enviado = 0; // Valor inicial
 
-// 4. VALIDACIÓN BÁSICA DE CAMPOS REQUERIDOS (ajustar si algún campo es opcional)
+// 4. VALIDACIÓN BÁSICA DE CAMPOS REQUERIDOS
 if (empty($nombre) || empty($email) || empty($comentario)) {
-    // Nota: 'empresa' es opcional según tu campo, lo quito de la validación.
     sendResponse(false, "Los campos Nombre, Email y Comentario son obligatorios.");
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -56,12 +55,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // 5. PREPARAR Y EJECUTAR LA CONSULTA DE INSERCIÓN EN LA BASE DE DATOS
-// 🚨 CONSULTA SQL CORREGIDA (8 campos, ya que fecha_registro se llena automáticamente)
+// CONSULTA SQL CORRECTA (8 campos, ya que fecha_registro se llena automáticamente)
 $sql = "INSERT INTO leads (nombre, empresa, email, comentario, origen, opt_in, status, email_enviado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
-    // 🚨 BIND_PARAM CORREGIDO (8 parámetros, coincidiendo con el SQL)
-    // Tipos: 5x string (nombre, empresa, email, comentario, origen), 1x int (opt_in), 1x string (status), 1x int (email_enviado)
+    // BIND_PARAM CORREGIDO (8 parámetros)
     mysqli_stmt_bind_param($stmt, "sssssisi", $param_nombre, $param_empresa, $param_email, $param_comentario, $param_origen, $param_opt_in, $param_status, $param_email_enviado);
 
     $param_nombre = $nombre;
@@ -74,13 +72,13 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     $param_email_enviado = $email_enviado; // 0
 
     if (mysqli_stmt_execute($stmt)) {
-        // 6. ÉXITO EN LA INSERCIÓN: ENVIAR CORREOS
+        // ÉXITO EN LA INSERCIÓN: ENVIAR CORREOS
         $new_lead_id = mysqli_insert_id($link);
 
-        // Envío de Correo al Usuario (solo si aceptó recibir información)
+        // Envío de Correo al Usuario
         if ($opt_in == 1) {
             if(enviarCorreoUsuario($nombre, $email, $new_lead_id, $link)) {
-                $email_enviado = 1; // Ya no es necesaria esta línea, se actualiza dentro de la función
+                // Se actualiza el campo email_enviado dentro de la función
             }
         }
         
@@ -89,14 +87,12 @@ if ($stmt = mysqli_prepare($link, $sql)) {
         
         sendResponse(true, "Formulario enviado con éxito. ¡Gracias!");
     } else {
-        // ERROR: Problema al ejecutar la consulta (posiblemente tipos o conexión)
         error_log("Error al ejecutar la consulta: " . mysqli_stmt_error($stmt));
         sendResponse(false, "Error interno del servidor (MySQLi Execute).");
     }
 
     mysqli_stmt_close($stmt);
 } else {
-    // ERROR: Problema al preparar la consulta (generalmente sintaxis SQL)
     error_log("Error al preparar la consulta: " . mysqli_error($link));
     sendResponse(false, "Error interno del servidor (MySQLi Prepare).");
 }
@@ -119,7 +115,6 @@ function configurarMailer() {
     $mail->Port = 465;
     $mail->CharSet = 'UTF-8';
     
-    // El remitente será el Gmail autenticado
     $mail->setFrom(SMTP_USER, 'Piedra en Punto'); 
     
     return $mail;
@@ -143,7 +138,7 @@ function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
         $html_content = "
             <html>
             <head>
-                <style>/* Puedes añadir estilos CSS básicos aquí si quieres */</style>
+                <style>/* ... estilos ... */</style>
             </head>
             <body>
                 <div class='container'>
@@ -168,7 +163,7 @@ function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
         $mail->Body = $html_content;
         $mail->send();
 
-        // ACTUALIZAR DB: Si el envío fue exitoso, marcamos email_enviado = 1
+        // ACTUALIZAR DB: Marcamos email_enviado = 1
         $sql_update = "UPDATE leads SET email_enviado = 1 WHERE id = ?";
         if ($stmt_update = mysqli_prepare($link, $sql_update)) {
             mysqli_stmt_bind_param($stmt_update, "i", $lead_id);
@@ -177,7 +172,6 @@ function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
         }
         return true;
     } catch (Exception $e) {
-        // Registrar error en el log del servidor y no detener la ejecución.
         error_log("Correo de usuario falló: {$mail->ErrorInfo}");
         return false;
     }
