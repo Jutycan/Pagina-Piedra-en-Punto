@@ -1,28 +1,32 @@
 <?php
-// Reportar errores en pantalla (SÓLO PARA DEBUG, REMOVER DESPUÉS)
+// 🚨🚨🚨 LÍNEAS DE DEPURACIÓN (CRÍTICAS PARA VER EL ERROR) 🚨🚨🚨
+// Muestra errores en pantalla. ¡REMOVER SÓLO DESPUÉS DE QUE TODO FUNCIONE!
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+// 🚨🚨🚨 FIN LÍNEAS DE DEPURACIÓN 🚨🚨🚨
+
 // procesar_formulario.php - Maneja la recepción, almacenamiento y envío de correos.
+
 require_once 'db_config.php';
 
-// 🚨 INCLUSIÓN DE PHPMailer 🚨
-// Asegúrate de que los archivos PHPMailer.php, SMTP.php y Exception.php están en la raíz.
+// INCLUSIÓN DE PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+// Los 3 archivos DEBEN estar en la misma carpeta que este script
 require 'PHPMailer.php';
 require 'SMTP.php';
 require 'Exception.php';
 
-// 🚨🚨🚨 CONFIGURACIÓN SMTP DE HOSTINGER 🚨🚨🚨
-// Reemplaza estos valores con la configuración de tu cuenta de correo de Hostinger
-define('SMTP_HOST', 'smtp.gmail.com'); // O el que te dé Hostinger
-define('SMTP_USER', 'cortes270k@gmail.com'); // 🚨 TU CORREO CREADO
-define('SMTP_PASS', 'ejleozriqeadawjw'); // 🚨 TU CONTRASEÑA DE CORREO
-define('JEFA_EMAIL', 'cortes270k@gmail.com'); // Correo personal de la jefa
+// 🚨🚨🚨 CONFIGURACIÓN SMTP USANDO GMAIL CON APP PASSWORD 🚨🚨🚨
+// USA la clave que generaste: ejle ozri qead awjw
+define('SMTP_HOST', 'smtp.gmail.com');
+define('SMTP_USER', 'cortes270k@gmailcom'); // 🚨 GMAIL DE LA JEFA
+define('SMTP_PASS', 'ejleozriqeadawjw'); // 🚨 TU APP PASSWORD REAL SIN ESPACIOS
+define('JEFA_EMAIL', 'cortes270k@gmail.com');
 
+// Función temporal de envío de respuesta (re-activada para que funcione el JS)
 header('Content-Type: application/json');
-
 function sendResponse($success, $message) {
     echo json_encode(['success' => $success, 'message' => $message]);
     exit;
@@ -33,31 +37,31 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 // 3. RECUPERAR DATOS DEL FORMULARIO Y SANITIZARLOS
-// Los campos son requeridos, así que no deberían ser null
 $nombre = trim($_POST['nombre'] ?? '');
 $empresa = trim($_POST['empresa'] ?? ''); 
 $email = trim($_POST['email'] ?? '');
 $comentario = trim($_POST['comentario'] ?? '');
 $origen = trim($_POST['pageUrl'] ?? 'Desconocido');
-// El opt-in se comprueba para el correo de bienvenida
 $opt_in = isset($_POST['recibir-info']) ? 1 : 0; 
 $status = "Pendiente"; 
-$email_enviado = 0; // Se actualiza a 1 si el correo de bienvenida se envía.
+$email_enviado = 0; // Valor inicial
 
-// 4. VALIDACIÓN BÁSICA DE CAMPOS REQUERIDOS
-if (empty($nombre) || empty($email) || empty($empresa) || empty($comentario)) {
-    sendResponse(false, "Todos los campos con * son obligatorios.");
+// 4. VALIDACIÓN BÁSICA DE CAMPOS REQUERIDOS (ajustar si algún campo es opcional)
+if (empty($nombre) || empty($email) || empty($comentario)) {
+    // Nota: 'empresa' es opcional según tu campo, lo quito de la validación.
+    sendResponse(false, "Los campos Nombre, Email y Comentario son obligatorios.");
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     sendResponse(false, "El formato del email es inválido.");
 }
 
 // 5. PREPARAR Y EJECUTAR LA CONSULTA DE INSERCIÓN EN LA BASE DE DATOS
-// ¡Se agregan las 9 columnas!
+// 🚨 CONSULTA SQL CORREGIDA (8 campos, ya que fecha_registro se llena automáticamente)
 $sql = "INSERT INTO leads (nombre, empresa, email, comentario, origen, opt_in, status, email_enviado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 if ($stmt = mysqli_prepare($link, $sql)) {
-    // 8 parámetros: 7 s (strings) y 1 i (integer)
+    // 🚨 BIND_PARAM CORREGIDO (8 parámetros, coincidiendo con el SQL)
+    // Tipos: 5x string (nombre, empresa, email, comentario, origen), 1x int (opt_in), 1x string (status), 1x int (email_enviado)
     mysqli_stmt_bind_param($stmt, "sssssisi", $param_nombre, $param_empresa, $param_email, $param_comentario, $param_origen, $param_opt_in, $param_status, $param_email_enviado);
 
     $param_nombre = $nombre;
@@ -67,32 +71,33 @@ if ($stmt = mysqli_prepare($link, $sql)) {
     $param_origen = $origen;
     $param_opt_in = $opt_in;
     $param_status = $status;
-    $param_email_enviado = $email_enviado; // Valor inicial 0
+    $param_email_enviado = $email_enviado; // 0
 
     if (mysqli_stmt_execute($stmt)) {
         // 6. ÉXITO EN LA INSERCIÓN: ENVIAR CORREOS
-        
-        // 🚨 Obtener el ID del lead recién insertado para actualizar el status
         $new_lead_id = mysqli_insert_id($link);
 
-        // Intenta enviar el correo de bienvenida SÓLO si el usuario aceptó
+        // Envío de Correo al Usuario (solo si aceptó recibir información)
         if ($opt_in == 1) {
             if(enviarCorreoUsuario($nombre, $email, $new_lead_id, $link)) {
-                // Si se envía con éxito, email_enviado pasa a 1 en la DB
-                $email_enviado = 1;
+                $email_enviado = 1; // Ya no es necesaria esta línea, se actualiza dentro de la función
             }
         }
         
-        // Envía la notificación de lead a la jefa (siempre se envía)
+        // Notificación de Nuevo Lead a la Jefa (siempre se envía)
         enviarNotificacionJefa($nombre, $email, $comentario, $empresa, $origen);
         
         sendResponse(true, "Formulario enviado con éxito. ¡Gracias!");
     } else {
-        sendResponse(false, "Error al guardar el lead en la base de datos.");
+        // ERROR: Problema al ejecutar la consulta (posiblemente tipos o conexión)
+        error_log("Error al ejecutar la consulta: " . mysqli_stmt_error($stmt));
+        sendResponse(false, "Error interno del servidor (MySQLi Execute).");
     }
 
     mysqli_stmt_close($stmt);
 } else {
+    // ERROR: Problema al preparar la consulta (generalmente sintaxis SQL)
+    error_log("Error al preparar la consulta: " . mysqli_error($link));
     sendResponse(false, "Error interno del servidor (MySQLi Prepare).");
 }
 
@@ -100,7 +105,7 @@ mysqli_close($link);
 
 
 // ----------------------------------------------------
-// 8. FUNCIONES DE CORREO USANDO PHPMailer (CRÍTICAS)
+// FUNCIONES DE CORREO USANDO PHPMailer Y GMAIL 
 // ----------------------------------------------------
 
 function configurarMailer() {
@@ -108,21 +113,18 @@ function configurarMailer() {
     $mail->isSMTP();
     $mail->Host = SMTP_HOST;
     $mail->SMTPAuth = true;
-    $mail->Username = SMTP_USER;
-    $mail->Password = SMTP_PASS;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Usar SSL
+    $mail->Username = SMTP_USER; 
+    $mail->Password = SMTP_PASS; // ¡El App Password!
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Usar SSL/TLS
     $mail->Port = 465;
     $mail->CharSet = 'UTF-8';
     
-    // El remitente será el correo autenticado de Hostinger
-    $mail->setFrom(SMTP_USER, 'Piedra en Punto Notificaciones'); 
+    // El remitente será el Gmail autenticado
+    $mail->setFrom(SMTP_USER, 'Piedra en Punto'); 
     
     return $mail;
 }
 
-/**
- * Envía un correo de bienvenida al usuario y actualiza el estado en la DB.
- */
 function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
     try {
         $mail = configurarMailer();
@@ -130,7 +132,6 @@ function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
         $mail->isHTML(true);
         $mail->Subject = "¡Bienvenido a Piedra en Punto, $nombre!";
         
-        // El cliente responderá al correo real de la jefa
         $mail->addReplyTo(JEFA_EMAIL, 'Valeria - Piedra en Punto');
 
         $redes_sociales = [
@@ -138,10 +139,12 @@ function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
             'instagram' => 'URL_REAL_INSTAGRAM'
         ];
 
-        // Contenido HTML Profesional
+        // Contenido HTML del Correo de Bienvenida
         $html_content = "
             <html>
-            <head><style>/* ... CSS ... */</style></head>
+            <head>
+                <style>/* Puedes añadir estilos CSS básicos aquí si quieres */</style>
+            </head>
             <body>
                 <div class='container'>
                     <h2>Hola $nombre, ¡Bienvenido!</h2>
@@ -165,7 +168,7 @@ function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
         $mail->Body = $html_content;
         $mail->send();
 
-        // 🚨 ACTUALIZAR DB: Si el envío fue exitoso
+        // ACTUALIZAR DB: Si el envío fue exitoso, marcamos email_enviado = 1
         $sql_update = "UPDATE leads SET email_enviado = 1 WHERE id = ?";
         if ($stmt_update = mysqli_prepare($link, $sql_update)) {
             mysqli_stmt_bind_param($stmt_update, "i", $lead_id);
@@ -174,14 +177,12 @@ function enviarCorreoUsuario($nombre, $email, $lead_id, $link) {
         }
         return true;
     } catch (Exception $e) {
+        // Registrar error en el log del servidor y no detener la ejecución.
         error_log("Correo de usuario falló: {$mail->ErrorInfo}");
         return false;
     }
 }
 
-/**
- * Envía una notificación por correo a la jefa.
- */
 function enviarNotificacionJefa($nombre, $email_cliente, $comentario, $empresa, $origen) {
     try {
         $mail = configurarMailer();
