@@ -1,5 +1,5 @@
 <?php
-// procesar_formulario.php - Maneja la recepción, almacenamiento y envío de correos.
+// procesar_formulario.php - Maneja la recepción, almacenamiento y envío de correos.----SE HACE DE PRUEBA-----
 
 // 1. INCLUIR LA CONFIGURACIÓN DE LA BASE DE DATOS
 // CRÍTICO: db_config.php debe estar en el mismo directorio y con las credenciales correctas
