@@ -26,7 +26,7 @@ $email = trim($_POST['email'] ?? '');
 $comentario = trim($_POST['comentario'] ?? null); // Opcional, puede ser null
 $origen = trim($_POST['pageUrl'] ?? 'Desconocido');
 // El campo opt-in solo se envía si está marcado.
-$opt_in = isset($_POST['recibir-info']) ? 1 : 0; 
+$opt_in = $_POST['recibir-info'] ? 1 : 0; 
 $status = "Pendiente"; // Valor predeterminado
 
 // 4. VALIDACIÓN BÁSICA DE CAMPOS REQUERIDOS
