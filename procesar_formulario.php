@@ -1,4 +1,8 @@
 <?php
+// Reportar errores en pantalla (SÓLO PARA DEBUG, REMOVER DESPUÉS)
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // procesar_formulario.php - Maneja la recepción, almacenamiento y envío de correos.
 require_once 'db_config.php';
 
