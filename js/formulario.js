@@ -2,63 +2,70 @@
 //---------------------------FORMULARIO Y MODAL--------------------------------------------
 //-----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Selecciona todos los formularios que tienen la clase 'contact-form'
+    // 1. Selecciona todos los formularios con la clase 'contact-form'
     const forms = document.querySelectorAll('.contact-form');
 
     forms.forEach(form => {
-        // Obtenemos el campo oculto para asignar la URL
+        // Establecer el campo oculto 'page-url'
         const formUrlInput = form.querySelector('#page-url');
-
-        // Asignamos la ruta de la página actual al campo oculto.
+        
         if (formUrlInput) {
-            formUrlInput.value = window.location.pathname; 
+            formUrlInput.value = window.location.pathname; // Captura la URL actual
         }
 
+        // 2. Maneja el evento de envío del formulario
         form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Detiene el envío normal (para que no recargue la página)
+            e.preventDefault(); // Detiene el envío normal del formulario
 
-            // CREAMOS EL OBJETO FORMDATA (contiene todos los campos del formulario)
             const formData = new FormData(form);
 
-            // Nota: Eliminamos la conversión a JSON (formObject) para evitar conflictos.
-
             try {
-                // 🚨 CORRECCIÓN CRÍTICA: Envío de datos al servidor (URL de Apps Script)
-                await fetch(form.action, {
+                // 3. Envío al script PHP
+                // Usamos form.action, que ahora es 'procesar_formulario.php'
+                const response = await fetch(form.action, {
                     method: 'POST',
-                    mode: 'no-cors', // <-- SOLUCIÓN CORS: Ignora el bloqueo del navegador
-                    body: formData // <-- Enviamos el formato nativo (funciona mejor con GAS)
+                    body: formData // Envía todos los datos del formulario
                 });
                 
-                // Debido a 'no-cors', el fetch siempre 'parece' exitoso si se conecta a Google. 
-                // Por lo tanto, movemos la lógica de éxito aquí.
+                // 4. Leer la respuesta JSON del PHP
+                const result = await response.json(); 
 
-                // 1. Limpia los campos del formulario
-                form.reset(); 
+                // 5. Lógica de éxito o error
+                // success: true solo si los datos se insertaron y los correos se lanzaron
+                if (response.ok && result.success) { 
+                    
+                    form.reset(); // Limpia los campos del formulario
+                    
+                    // --- Lógica del Modal de "¡Muchas gracias!" ---
+                    const modal = document.getElementById('success-modal');
+                    const closeBtn = modal.querySelector('.close-button-custom'); // Asegúrate de que este selector sea correcto
+                    
+                    const closeModal = () => { modal.style.display = 'none'; };
 
-                // 2. Obtiene el modal y sus botones
-                const modal = document.getElementById('success-modal');
-                const closeBtn = modal.querySelector('.close-button-custom');
-
-                // 3. Define la función para cerrar
-                const closeModal = () => {
-                    modal.style.display = 'none';
-                };
-
-                // 4. Muestra el modal (usando 'flex' para centrarlo)
-                modal.style.display = 'flex'; 
-
-                // 5. Configura los eventos para cerrar el modal
-                closeBtn.onclick = closeModal;
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        closeModal();
+                    modal.style.display = 'flex'; // Muestra el modal
+                    
+                    // Cierra al hacer clic en el botón
+                    if (closeBtn) {
+                        closeBtn.onclick = closeModal;
                     }
+                    
+                    // Cierra al hacer clic fuera del modal
+                    window.onclick = function(event) {
+                        if (event.target == modal) {
+                            closeModal();
+                        }
+                    }
+                    // --------------------------------------------------
+
+                } else {
+                    // Error reportado por el servidor PHP (ej: falta un campo, error de DB)
+                    console.error('Error al procesar formulario:', result.message || 'Error desconocido del servidor.');
+                    alert('Hubo un error al enviar el formulario. Intenta de nuevo. (Detalle: ' + (result.message || 'Error del servidor') + ')');
                 }
 
             } catch (error) {
-                console.error('Error de red:', error);
-                // Si llega a este bloque, es un problema de red real (ej: sin internet), no el bloqueo de Google.
+                // Error de red, timeout o fallo total de conexión
+                console.error('Error de red/conexión:', error);
                 alert('Error de conexión. Por favor, revisa tu red.');
             }
         });
