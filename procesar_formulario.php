@@ -95,9 +95,11 @@ function enviarCorreos($nombre, $email, $comentario, $empresa, $origen) {
  * Envía un correo de bienvenida al usuario.
  */
 function enviarCorreoUsuario($nombre, $email) {
-    // REMITENTE DE RESPALDO: Usamos el Gmail de la jefa si no hay correo de dominio.
+    // CORRECCIÓN 1: Usamos un remitente local del dominio para pasar el filtro SPF
     $subject = "¡Bienvenido a Piedra en Punto, $nombre!";
-    $from = "vdelapiedra11@gmail.com"; 
+    $from = "no-reply@piedraenpunto.com"; // 🚨 REMITENTE LOCAL DEL DOMINIO
+    $reply_to_email = "vdelapiedra11@gmail.com"; // El correo real de la jefa para respuestas
+
     $redes_sociales = [
         'facebook' => 'URL_REAL_FACEBOOK',  // 🚨 REEMPLAZAR
         'instagram' => 'URL_REAL_INSTAGRAM' // 🚨 REEMPLAZAR
@@ -133,9 +135,9 @@ function enviarCorreoUsuario($nombre, $email) {
 
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-    // El cliente responderá a este correo si presiona "Responder"
-    $headers .= "Reply-To: vdelapiedra11@gmail.com" . "\r\n"; 
-    $headers .= "From: $from" . "\r\n"; // Usamos el Gmail como remitente
+    // El cliente responderá al Gmail de la jefa
+    $headers .= "Reply-To: $reply_to_email" . "\r\n"; 
+    $headers .= "From: $from" . "\r\n"; // Usamos el remitente local
     
     // Suprimimos errores con @mail en caso de fallo de envío.
     @mail($email, $subject, $html_content, $headers);
@@ -145,10 +147,11 @@ function enviarCorreoUsuario($nombre, $email) {
  * Envía una notificación por correo a la jefa.
  */
 function enviarNotificacionJefa($nombre, $email, $comentario, $empresa, $origen) {
-    // DESTINATARIO Y REMITENTE: El Gmail de la jefa.
+    // DESTINATARIO: El Gmail de la jefa.
     $jefa_email = "vdelapiedra11@gmail.com"; 
     $subject = "🚨 NUEVO LEAD WEB: $nombre";
-    $from = "vdelapiedra11@gmail.com"; 
+    // CORRECCIÓN 2: Usamos un remitente local del dominio
+    $from = "notificaciones@piedraenpunto.com"; // 🚨 REMITENTE LOCAL DEL DOMINIO
 
     $body = "Se ha recibido un nuevo lead a través del formulario de contacto:\n\n";
     $body .= "Nombre: $nombre\n";
@@ -158,7 +161,7 @@ function enviarNotificacionJefa($nombre, $email, $comentario, $empresa, $origen)
     $body .= "Comentarios:\n$comentario\n\n";
     $body .= "Revisa la base de datos en phpMyAdmin para ver el registro completo.";
 
-    $headers = "From: $from" . "\r\n";
+    $headers = "From: $from" . "\r\n"; // Usamos el remitente local
 
     @mail($jefa_email, $subject, $body, $headers);
 }
