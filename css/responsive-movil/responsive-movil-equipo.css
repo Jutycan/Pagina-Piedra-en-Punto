@@ -394,45 +394,53 @@
     /* -------------------------------------- */
     /* Estilos del Formulario Contacto*/
     /* -------------------------------------- */
-    .team-form-container {
+    .contact-form-container {
         height: auto;
         width: auto;
         padding: 40px 20px;
     }
 
-    .team-form-wrapper {
+    /* Cambia a una columna vertical */
+    .contact-form-wrapper {
         flex-direction: column;
         height: auto;
         padding: 0;
     }
 
-    .team-form-content {
+    /* Ajusta el contenido del formulario para ocupar todo el ancho */
+    .contact-form-content {
         width: 100%;
         padding: 0;
     }
 
-    .team-form-image-box {
+    /* Oculta la imagen en móviles */
+    .contact-form-image-box {
         display: none;
     }
 
-    .team-form-title {
+    /* Ajusta el tamaño del título principal */
+    .contact-form-title {
         font-size: 40px;
         margin-bottom: 15px;
     }
 
-    .team-form-subtitle {
+    /* Ajusta el subtítulo y el espacio */
+    .contact-form-subtitle {
         font-size: 15px;
         margin-bottom: 30px;
     }
 
-    .team-form label {
+    /* Ajusta los estilos de los campos del formulario */
+    .contact-form label {
         font-size: 15px;
     }
 
-    .team-form .form-group {
+    /* Ajusta el padding y la separación de los campos */
+    .contact-form .form-group {
         margin-bottom: 20px;
     }
 
+    /* Ajusta la línea divisoria */
     .form-divider {
         margin: 30px 0;
     }

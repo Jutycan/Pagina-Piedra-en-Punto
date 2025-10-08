@@ -698,18 +698,19 @@
 /* -------------------------------------- */
 /* Estilos del Formulario Contacto*/
 /* -------------------------------------- */
-.team-form-container {
+.contact-form-container {
     width: 100%;
     max-width: 1200px;
     height: 940px;
     margin: 50px auto;
+    /* Color de fondo eliminado para que se vea el fondo de la página */
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0 20px;
 }
 
-.team-form-wrapper {
+.contact-form-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -717,27 +718,27 @@
     height: 100%;
 }
 
-.team-form-content {
+.contact-form-content {
     width: 50%;
     padding: 0 50px 0 20px;
 }
 
-.team-form-image-box {
+.contact-form-image-box {
     width: 50%;
     height: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* Alinea la imagen a la derecha */
     align-items: center;
-    overflow: hidden;
+    overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga */
 }
 
-.team-form-image-box img {
+.contact-form-image-box img {
     width: 100%;
     height: auto;
-    object-fit: contain;
+    object-fit: contain; /* Asegura que la imagen se muestre completa dentro del contenedor */
 }
 
-.team-form-title {
+.contact-form-title {
     font-family: 'Playfair Display', serif;
     font-size: 50px;
     font-weight: 500;
@@ -747,7 +748,7 @@
     margin-bottom: 20px;
 }
 
-.team-form-subtitle {
+.contact-form-subtitle {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: #4a4a4a;
@@ -755,11 +756,11 @@
     margin-bottom: 50px;
 }
 
-.team-form .form-group {
+.contact-form .form-group {
     margin-bottom: 25px;
 }
 
-.team-form label {
+.contact-form label {
     display: block;
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
@@ -768,8 +769,8 @@
     font-weight: 500;
 }
 
-.team-form input[type="text"],
-.team-form input[type="email"] {
+.contact-form input[type="text"],
+.contact-form input[type="email"] {
     width: 100%;
     padding: 15px;
     border: 1px solid #d3d3d3;
@@ -782,7 +783,7 @@
     transition: border-color 0.3s;
 }
 
-.team-form input::placeholder {
+.contact-form input::placeholder {
     color: #8c8c8c;
     font-style: italic;
 }
@@ -836,7 +837,7 @@
     background-color: #f7f3ed;
 }
 
-.team-form-button {
+.contact-form-button {
     display: inline-block;
     background-color: #33614a;
     border: 2px solid #33614a;
@@ -850,7 +851,7 @@
     cursor: pointer;
 }
 
-.team-form-button:hover {
+.contact-form-button:hover {
     background-color: #2a523e;
     border-color: #2a523e;
 }
