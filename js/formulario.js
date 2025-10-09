@@ -6,33 +6,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const forms = document.querySelectorAll('.contact-form');
 
     forms.forEach(form => {
-        // Establecer el campo oculto 'page-url' con la URL actual de la página
-        const formUrlInput = form.querySelector('#page-url');
-        
-        if (formUrlInput) {
-            formUrlInput.value = window.location.pathname; 
-        }
+        // Ya no es necesario el campo pageUrl en el JS si lo eliminaste del HTML
 
         // 2. Maneja el evento de envío del formulario
         form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Detiene el envío normal (para usar AJAX)
+            e.preventDefault(); 
 
             const formData = new FormData(form);
 
             try {
-                // 3. Envío asíncrono al script PHP (la acción debe ser la ruta absoluta: /procesar_formulario.php)
+                // La acción del formulario debe ser la ruta absoluta: /procesar_formulario.php
                 const response = await fetch(form.action, {
                     method: 'POST',
                     body: formData 
                 });
                 
-                // 4. Leer la respuesta JSON del PHP
+                // 3. Leer la respuesta JSON
                 const result = await response.json(); 
 
-                // 5. Lógica de éxito o error
+                // 4. Lógica de éxito o error
                 if (response.ok && result.success) { 
                     
-                    form.reset(); // Limpia los campos del formulario
+                    form.reset(); 
                     
                     // --- Lógica del Modal de "¡Muchas gracias!" ---
                     const modal = document.getElementById('success-modal');
