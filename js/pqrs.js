@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = title;
         modalMessage.textContent = message;
             
-        // Iconografía (simple con emojis, puedes usar iconos si los tienes)
+        // Iconografía (simple con emojis)
         if (success) {
             modalIcon.innerHTML = '✔️'; 
             modalIcon.className = 'modal-success-icon';
@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Captura del envío del formulario (para evitar recargar la página)
     form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        // MUY IMPORTANTE: Evita el comportamiento predeterminado del formulario
+        e.preventDefault(); 
 
         // Deshabilitar botón para evitar doble envío
         const submitBtn = form.querySelector('.submit-btn');
@@ -72,14 +73,16 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const formData = new FormData(form);
                 
-            // Fetch al nuevo script PHP
-            const response = await fetch(form.action, {
+            // 💥💥 CAMBIO CRÍTICO: Usamos la URL fija en lugar de form.action
+            // Esto asegura que el script AJAX se ejecute, incluso si el 'action' del HTML está vacío.
+            const response = await fetch('procesar_pqr.php', {
                 method: 'POST',
                 body: formData,
             });
 
             const result = await response.json();
 
+            // La lógica de éxito (si la DB guardó y los correos se intentaron enviar)
             if (result.success) {
                 showModal(
                     true, 
@@ -88,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
                 form.reset(); // Limpiar el formulario
             } else {
+                // Si 'success' es false (ej: faltan campos o falló la DB)
                 showModal(
                     false, 
                     'Error al enviar la solicitud', 
