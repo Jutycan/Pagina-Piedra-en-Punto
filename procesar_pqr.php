@@ -24,8 +24,8 @@ define('DB_PASSWORD', 'Ejercicios$2021$'); // Contraseña de la base de datos
 define('DB_NAME', 'u894610526_Formulario_1_P'); 
 // --- Configuración de Correo (SMTP) ---
 define('JEFA_EMAIL', 'cortes270k@gmail.com'); // Correo de la Jefa (DESTINO)
-define('SENDER_EMAIL', 'no-responder@piedraenpunto.com'); // Correo profesional para ENVIAR (DEBE ser un correo real de tu dominio)
-define('SMTP_USERNAME', 'no-responder@piedraenpunto.com'); // Mismo que SENDER_EMAIL
+define('SENDER_EMAIL', 'cortes270k@gmail.com'); // Correo profesional para ENVIAR (DEBE ser un correo real de tu dominio)
+define('SMTP_USERNAME', 'cortes270k@gmail.com'); // Mismo que SENDER_EMAIL
 define('SMTP_PASSWORD', 'pkgwbezvtiyqiire'); // ⚠️ ¡TU CONTRASEÑA DE APLICACIÓN REAL!
 define('SMTP_HOST', 'smtp.gmail.com'); // O el servidor SMTP que uses (ej: smtp.gmail.com si usas Google Workspace)
 define('SMTP_PORT', 587); // Puerto estándar TSL
