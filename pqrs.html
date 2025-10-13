@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="pqrs-form-right">
-                    <form action="#" method="post" class="pqrs-form">
+                    <form id="pqrs-form" action="procesar_pqr.php" method="post" class="pqrs-form">
                         <div class="form-row">
                             <div class="form-group-half">
                                 <label for="clasificacion">Clasificación*</label>
@@ -206,6 +206,16 @@
     </footer>
 
     <script src="/js/pqrs.js"></script>
+
+    <!-- Modal de Confirmación -->
+    <div id="pqrs-modal" class="modal">
+        <div class="modal-content">
+            <div id="modal-icon" class="modal-success-icon"></div>
+            <div id="modal-title" class="modal-title"></div>
+            <div id="modal-message" class="modal-message"></div>
+            <button id="modal-close-btn" class="modal-close-btn">Cerrar</button>
+        </div>
+    </div>
     
 </body>
 </html>

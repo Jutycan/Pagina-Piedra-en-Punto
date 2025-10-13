@@ -8,7 +8,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     * {
         box-sizing: border-box;
     }
@@ -157,5 +157,13 @@
     .footer-bottom {
         flex-direction: center;
         gap: 5px;
+    }
+    
+
+    /* -------------------------------------- */
+    /* Estilos del modal */
+    /* -------------------------------------- */
+    .modal-content {
+        margin: 20% auto;
     }
 }
