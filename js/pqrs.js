@@ -32,12 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalIcon = document.getElementById('modal-icon');
     const closeBtn = document.getElementById('modal-close-btn');
 
+    // Si por alguna razón el formulario no existe (puede ser el problema inicial),
+    // terminamos la ejecución del script aquí para evitar errores.
+    if (!form) {
+        console.error("No se encontró el formulario con ID 'pqrs-form'.");
+        return; 
+    }
+
     // Función para mostrar el modal
     const showModal = (success, title, message) => {
         modalTitle.textContent = title;
         modalMessage.textContent = message;
             
-        // Iconografía (simple con emojis)
         if (success) {
             modalIcon.innerHTML = '✔️'; 
             modalIcon.className = 'modal-success-icon';
@@ -45,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
             modalIcon.innerHTML = '❌'; 
             modalIcon.className = 'modal-error-icon';
         }
-        modal.style.display = 'block';
+        // Asegúrate de que el modal siempre tenga display: block para mostrarse
+        modal.style.display = 'block'; 
     };
 
     // Función para cerrar el modal
@@ -60,9 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Captura del envío del formulario (para evitar recargar la página)
+    // Captura del envío del formulario
     form.addEventListener('submit', async (e) => {
-        // MUY IMPORTANTE: Evita el comportamiento predeterminado del formulario
+        // ESTO ES LO QUE DEBE FUNCIONAR
         e.preventDefault(); 
 
         // Deshabilitar botón para evitar doble envío
@@ -73,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const formData = new FormData(form);
                 
-            // ✅ VOLVEMOS A USAR form.action, que ahora SÍ tiene un valor en el HTML.
+            // Usamos form.action para enviar la petición a procesar_pqr.php
             const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -81,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const result = await response.json();
 
-            // La lógica de éxito (si la DB guardó y los correos se intentaron enviar)
+            // La respuesta del servidor es exitosa
             if (result.success) {
                 showModal(
                     true, 
@@ -90,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
                 form.reset(); // Limpiar el formulario
             } else {
-                // Si 'success' es false (ej: faltan campos o falló la DB)
+                // Error reportado por el script PHP
                 showModal(
                     false, 
                     'Error al enviar la solicitud', 
@@ -99,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
         } catch (error) {
+            // Error de red/conexión
             console.error('Error de red:', error);
             showModal(
                 false, 
