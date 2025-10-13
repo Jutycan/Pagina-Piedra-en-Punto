@@ -73,9 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const formData = new FormData(form);
                 
-            // 💥💥 CAMBIO CRÍTICO: Usamos la URL fija en lugar de form.action
-            // Esto asegura que el script AJAX se ejecute, incluso si el 'action' del HTML está vacío.
-            const response = await fetch('procesar_pqr.php', {
+            // ✅ VOLVEMOS A USAR form.action, que ahora SÍ tiene un valor en el HTML.
+            const response = await fetch(form.action, {
                 method: 'POST',
                 body: formData,
             });
