@@ -2,7 +2,7 @@
 // 🚨🚨🚨 INCLUYE TUS CREDENCIALES REALES AQUÍ 🚨🚨🚨
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'u894610526_P_Formulario1'); 
-define('DB_PASSWORD', 'Ejercicios$2021$'); 
+define('DB_PASSWORD', 'Ejercicios$2021$'); // ¡REVISA ESTO!
 define('DB_NAME', 'u894610526_Formulario_1_P'); 
 
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -26,6 +26,7 @@ mysqli_close($link);
     <meta charset="UTF-8">
     <title>Gestión de Leads - Piedra en Punto</title>
     <style>
+        /* Estilos CSS incluidos directamente para simplificar el despliegue */
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f7f3ed; }
         h1 { color: #33614a; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
@@ -35,12 +36,26 @@ mysqli_close($link);
         .status-pendiente { background-color: #ffe0b2; color: #e65100; font-weight: bold; padding: 5px; border-radius: 3px; }
         .status-contestado { background-color: #c8e6c9; color: #2e7d32; font-weight: bold; padding: 5px; border-radius: 3px; }
         .select-status { padding: 8px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
+        #btn-truncate {
+            background-color: #d32f2f; 
+            color: white; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>Dashboard de Gestión de Leads</h1>
     <p>Leads encontrados: <?php echo count($leads); ?></p>
 
+    <button id="btn-truncate">
+        🚨 Limpiar/Eliminar TODOS los Registros
+    </button>
+    
     <table>
         <thead>
             <tr>
@@ -78,6 +93,7 @@ mysqli_close($link);
     </table>
 
     <script>
+        // Lógica para cambiar el estado del Lead
         document.querySelectorAll('.select-status').forEach(select => {
             select.addEventListener('change', async function() {
                 const leadId = this.dataset.leadId;
@@ -98,13 +114,8 @@ mysqli_close($link);
                         if (result.success) {
                             alert(`¡Éxito! ${result.message}`);
                             
-                            // 5. Actualizar la apariencia de la fila inmediatamente
-                            row.querySelector('.select-status').classList.remove('status-pendiente', 'status-contestado');
-                            if (newStatus === 'Pendiente') {
-                                row.querySelector('.select-status').classList.add('status-pendiente');
-                            } else {
-                                row.querySelector('.select-status').classList.add('status-contestado');
-                            }
+                            // 5. Actualizar la apariencia de la fila inmediatamente (Opcional: puedes recargar si lo prefieres)
+                            // Si quieres recargar para simplificar: window.location.reload();
 
                         } else {
                             alert('Error al actualizar: ' + result.message);
@@ -117,14 +128,51 @@ mysqli_close($link);
                         this.value = this.dataset.currentStatus;
                     }
                 } else {
-                    // Si cancela, revertir la selección (si fuera un select dinámico)
+                    // Si cancela, revertir la selección
                     this.value = this.dataset.currentStatus;
                 }
                 // Guardar el estado actual después de una actualización exitosa o al cargar
-                this.dataset.currentStatus = newStatus;
+                this.dataset.currentStatus = this.value; // Ya se actualizó this.value
             });
             // Inicializar el estado actual al cargar
             select.dataset.currentStatus = select.value;
+        });
+
+
+        // Lógica para el botón de TRUNCATE (Limpiar todos los registros)
+        document.getElementById('btn-truncate').addEventListener('click', async function() {
+            // Pedir doble confirmación para evitar accidentes
+            if (!confirm('🚨 ATENCIÓN: Esta acción ELIMINARÁ PERMANENTEMENTE TODOS los leads. ¿Estás absolutamente segura?')) {
+                return; 
+            }
+
+            if (!confirm('❌ CONFIRMACIÓN FINAL: ¿De verdad quieres borrar TODO? Esta acción es IRREVERSIBLE.')) {
+                return;
+            }
+
+            try {
+                // Llamar al script PHP que vacía la tabla
+                const response = await fetch('truncate_leads.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: '' // No necesitamos enviar datos
+                });
+                
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    
+                    // Recargar la página para mostrar la tabla vacía
+                    window.location.reload(); 
+
+                } else {
+                    alert('Error al intentar limpiar la tabla: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error de conexión con el script de limpieza del servidor.');
+                console.error(error);
+            }
         });
     </script>
 </body>
