@@ -117,7 +117,7 @@
                     <h2 class="form-title">Sigamos en contacto</h2>
                     <p class="form-subtitle">Nuestro equipo está listo para responder tus preguntas y encontrar la mejor solución para tus necesidades.</p>
 
-                    <form action="#" method="post" class="contact-form">
+                    <form id="contact-form" action="procesar_contacto.php" method="post" class="contact-form">
                         <div class="form-group">
                             <label for="nombre">Nombre*</label>
                             <input type="text" id="nombre" name="nombre" placeholder="¿Cuáles son tus nombres y apellidos?" required>
@@ -192,6 +192,16 @@
     </footer>
 
     <script src="/js/contacto.js"></script>
+
+    <!-- Modal de Confirmación para Contacto -->
+    <div id="contact-modal" class="modal" style="display:none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 90%; max-width: 500px; border-radius: 12px; text-align: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+            <div id="modal-icon-contact" style="font-size: 3rem; margin-bottom: 15px;"></div>
+            <div id="modal-title-contact" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 10px;"></div>
+            <div id="modal-message-contact" style="font-size: 1rem; color: #666; margin-bottom: 25px;"></div>
+            <button id="modal-close-btn-contact" style="background-color: #EC0868; color: white; padding: 10px 20px; border: none; border-radius: 50px; cursor: pointer;">Cerrar</button>
+        </div>
+    </div>
     
 </body>
 </html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración de Contactos</title>
+    <!-- Carga de Tailwind CSS para un diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fuente Inter */
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .card { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        .pendiente { background-color: #fef3c7; color: #92400e; }
+        .contestado { background-color: #d1fae5; color: #065f46; }
+        .btn-primary { transition: background-color 0.3s; }
+        .btn-primary:hover { background-color: #d8075a; }
+    </style>
+</head>
+<body class="min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="mb-8">
+            <h1 class="text-3xl font-extrabold text-gray-800 border-b-4 border-pink-600 pb-2">
+                Panel de Gestión de Contactos
+            </h1>
+            <p class="text-gray-600 mt-2">
+                Revisa y gestiona los mensajes recibidos a través del formulario de contacto.
+            </p>
+        </header>
+
+        <!-- Contenedor para la lista de contactos -->
+        <div id="contactos-list" class="space-y-4">
+            <!-- Los contactos se cargarán aquí por JavaScript -->
+            <p id="loading-message" class="text-center text-gray-500 p-6">Cargando mensajes...</p>
+        </div>
+        
+        <!-- Mensaje de error/alerta (modal simulado) -->
+        <div id="alert-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-lg p-6 w-full max-w-sm card">
+                <h3 id="alert-title" class="text-xl font-bold mb-3 text-red-600">Error</h3>
+                <p id="alert-body" class="text-gray-700 mb-4">Ha ocurrido un error.</p>
+                <button onclick="document.getElementById('alert-modal').classList.add('hidden')" class="w-full bg-pink-600 btn-primary text-white py-2 rounded-lg font-semibold">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Firebase y Lógica de Administración -->
+    <script type="module">
+        // Importaciones de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, query, onSnapshot, doc, updateDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Establecer nivel de log para depuración de Firestore
+        setLogLevel('Debug');
+        
+        // Variables globales que deben ser provistas por el entorno (Canvas)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth;
+        let userId = null;
+        
+        const contactosList = document.getElementById('contactos-list');
+        const loadingMessage = document.getElementById('loading-message');
+        
+        function showAlert(title, message, isError = true) {
+            const modal = document.getElementById('alert-modal');
+            document.getElementById('alert-title').textContent = title;
+            document.getElementById('alert-title').classList.toggle('text-red-600', isError);
+            document.getElementById('alert-title').classList.toggle('text-green-600', !isError);
+            document.getElementById('alert-body').innerHTML = message;
+            modal.classList.remove('hidden');
+        }
+
+        /**
+         * Inicializa Firebase y autentica al usuario.
+         */
+        async function initializeFirebase() {
+            if (!firebaseConfig) {
+                showAlert("Error de Configuración", "No se encontró la configuración de Firebase.");
+                return;
+            }
+
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Autenticación usando el token o anónima si no hay token
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                userId = auth.currentUser?.uid || crypto.randomUUID();
+                
+                // Una vez autenticado, iniciar la escucha de datos
+                startContactListener();
+
+            } catch (error) {
+                console.error("Error al inicializar o autenticar Firebase:", error);
+                showAlert("Error de Conexión", "No se pudo conectar al servidor de gestión. Revisa la consola para más detalles.");
+            }
+        }
+
+        /**
+         * Construye la ruta a la colección pública.
+         * En este caso, la tabla 'contactos' debe ser pública para que el script PHP la replique y 
+         * para que la jefa pueda ver todos los mensajes sin importar quién los creó (ya que el PHP
+         * actúa como un puente de servicio y no tiene un userId directo).
+         */
+        function getCollectionRef() {
+            return collection(db, `artifacts/${appId}/public/data/contactos`);
+        }
+
+        /**
+         * Inicia la escucha en tiempo real de los documentos de contacto.
+         */
+        function startContactListener() {
+            if (!db) return;
+
+            // Consultar todos los documentos de la colección 'contactos'
+            const q = query(getCollectionRef());
+
+            // Escuchar cambios en tiempo real
+            onSnapshot(q, (snapshot) => {
+                loadingMessage.classList.add('hidden');
+                contactosList.innerHTML = ''; // Limpiar la lista actual
+
+                if (snapshot.empty) {
+                    contactosList.innerHTML = '<p class="text-center text-gray-500 p-6">No hay mensajes de contacto.</p>';
+                    return;
+                }
+
+                const contactos = [];
+                snapshot.forEach(doc => {
+                    contactos.push({ id: doc.id, ...doc.data() });
+                });
+                
+                // Ordenar por fecha de registro descendente (los más nuevos primero)
+                contactos.sort((a, b) => new Date(b.fecha_registro) - new Date(a.fecha_registro));
+
+                contactos.forEach(contacto => {
+                    contactosList.appendChild(createContactCard(contacto));
+                });
+            }, (error) => {
+                console.error("Error al escuchar los contactos:", error);
+                showAlert("Error de Lectura", "No se pudieron cargar los datos en tiempo real.");
+            });
+        }
+
+        /**
+         * Crea la tarjeta (card) HTML para mostrar un contacto.
+         * @param {Object} contacto - El objeto de contacto de Firestore.
+         */
+        function createContactCard(contacto) {
+            const card = document.createElement('div');
+            const estadoClass = contacto.estado === 'Pendiente' ? 'pendiente border-yellow-500' : 'contestado border-green-500';
+
+            card.className = `card p-5 rounded-xl border-l-4 ${estadoClass}`;
+            
+            // Generar contenido de la tarjeta
+            card.innerHTML = `
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-3">
+                    <h3 class="text-lg font-bold text-gray-900 truncate w-full md:w-3/5">
+                        ${contacto.nombre} (${contacto.estado})
+                    </h3>
+                    <div class="text-sm text-gray-500 mt-2 md:mt-0">
+                        <span class="font-medium">ID BD:</span> ${contacto.id}
+                        <span class="ml-4 font-medium">Fecha:</span> ${new Date(contacto.fecha_registro).toLocaleString('es-ES', { dateStyle: 'short', timeStyle: 'short' })}
+                    </div>
+                </div>
+
+                <div class="text-gray-700 space-y-2 mb-4">
+                    <p class="text-sm"><span class="font-semibold">Email:</span> ${contacto.email}</p>
+                    <p class="text-sm"><span class="font-semibold">Teléfono:</span> ${contacto.telefono}</p>
+                    <div class="bg-white p-3 rounded-lg border border-gray-200">
+                        <p class="text-sm font-semibold mb-1">Mensaje:</p>
+                        <p class="text-sm whitespace-pre-wrap">${contacto.mensaje}</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-end">
+                    ${contacto.estado === 'Pendiente' ? 
+                        `<button data-id="${contacto.id}" class="btn-marcar-contestado bg-pink-600 btn-primary text-white text-sm font-semibold px-4 py-2 rounded-lg">
+                            Marcar como Contestado
+                        </button>`
+                        : 
+                        `<span class="text-sm font-semibold text-green-700">✅ Gestionado</span>`
+                    }
+                </div>
+            `;
+
+            // Agregar listener al botón
+            const button = card.querySelector('.btn-marcar-contestado');
+            if (button) {
+                button.addEventListener('click', () => updateContactState(contacto.id));
+            }
+
+            return card;
+        }
+
+        /**
+         * Actualiza el estado de un contacto en Firestore.
+         * @param {string} contactoId - El ID del documento en Firestore.
+         */
+        async function updateContactState(contactoId) {
+            try {
+                const docRef = doc(getCollectionRef(), contactoId);
+                await updateDoc(docRef, {
+                    estado: 'Contestado'
+                });
+                showAlert("¡Éxito!", `El contacto #${contactoId} ha sido marcado como contestado.`, false);
+            } catch (error) {
+                console.error("Error al actualizar el estado:", error);
+                showAlert("Error al Actualizar", `No se pudo actualizar el estado del contacto #${contactoId}.`);
+            }
+        }
+
+        // Iniciar la aplicación al cargar la ventana
+        window.onload = initializeFirebase;
+    </script>
+
+</body>
+</html>
