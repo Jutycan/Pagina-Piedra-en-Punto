@@ -1,218 +1,160 @@
 <?php
-// 🚨🚨🚨 CONFIGURACIÓN INICIAL Y DEPURACIÓN 🚨🚨🚨
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ------------------------------------------
+// CONFIGURACIÓN BÁSICA
+// ------------------------------------------
 
-// 1. CONEXIÓN A LA BASE DE DATOS Y DEFINICIÓN DE CONSTANTES
-// **REVISA QUE ESTAS CREDENCIALES SEAN TUS REALES DE HOSTINGER**
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'u894610526_P_Formulario1'); 
-define('DB_PASSWORD', 'Ejercicios$2021$'); 
-define('DB_NAME', 'u894610526_Formulario_1_P'); 
+// Datos de conexión a la base de datos
+$servername = "localhost";        // Normalmente "localhost" en Hostinger
+$username = "u894610526_formulario_g";      // Ej: u123456789_admin
+$password = "Vero$2025$";   // Tu contraseña
+$dbname = "u894610526_piedraenpunto";     // Ej: piedraenpunto_db
 
-// 🚨🚨🚨 URL CRÍTICA PARA EL DASHBOARD DE LA JEFA 🚨🚨🚨
-define('DASHBOARD_URL', 'https://www.piedraenpunto.com/dashboard/gestion_leads.php');
+// ------------------------------------------
+// EVITAR ATAQUES Y SPAM (BOT PROTECTION)
+// ------------------------------------------
 
-
-// Intento de conexión
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-if($link === false){
-    die("ERROR: No se pudo conectar a la base de datos. " . mysqli_connect_error());
-}
-
-// INCLUSIÓN DE PHPMailer (Archivos DEBEN estar en la misma carpeta)
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require 'PHPMailer.php';
-require 'SMTP.php';
-require 'Exception.php';
-
-// CONFIGURACIÓN SMTP GMAIL
-define('SMTP_HOST', 'smtp.gmail.com');
-define('SMTP_USER', 'cortes270k@gmail.com'); 
-define('SMTP_PASS', 'pkgwbezvtiyqiire'); 
-define('JEFA_EMAIL', 'cortes270k@gmail.com');
-
-// Funciones de Respuesta y Validación (sin cambios)
-header('Content-Type: application/json');
-function sendResponse($success, $message) {
-    echo json_encode(['success' => $success, 'message' => $message]);
+// Si el formulario no vino por método POST, bloqueamos
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    http_response_code(405);
+    echo json_encode(["success" => false, "message" => "Método no permitido."]);
     exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    sendResponse(false, "Método de solicitud no permitido.");
+// Honeypot (campo oculto que los bots suelen llenar)
+if (!empty($_POST["website"])) { // Si este campo invisible se llena → es un bot
+    echo json_encode(["success" => false, "message" => "Detección de bot."]);
+    exit;
 }
 
-// 3. RECUPERAR Y SANITIZAR DATOS
-$nombre = trim($_POST['nombre'] ?? '');
-$empresa = trim($_POST['empresa'] ?? ''); 
-$email = trim($_POST['email'] ?? '');
-$comentario = trim($_POST['comentario'] ?? '');
-// Se valida que acepte las políticas de datos
-$politica_datos = isset($_POST['politica-datos']) ? true : false; 
-$opt_in = isset($_POST['recibir-info']) ? 1 : 0; 
+// Capturar IP y navegador
+$ip = $_SERVER['REMOTE_ADDR'];
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
 
-// Configuramos los valores por defecto para la DB
-$status = "Pendiente"; // NUEVO: Estado por defecto
-$email_enviado = 0; 
-
-// VALIDACIÓN
-if (empty($nombre) || empty($email) || empty($comentario) || !$politica_datos) {
-    sendResponse(false, "Los campos marcados con * son obligatorios.");
+// ------------------------------------------
+// LIMPIEZA Y VALIDACIÓN DE DATOS
+// ------------------------------------------
+function limpiar($data) {
+    return htmlspecialchars(strip_tags(trim($data)));
 }
+
+$nombre = limpiar($_POST['nombre'] ?? '');
+$empresa = limpiar($_POST['empresa'] ?? '');
+$email = limpiar($_POST['email'] ?? '');
+$comentario = limpiar($_POST['comentario'] ?? '');
+$recibir_info = isset($_POST['recibir-info']) ? 1 : 0;
+$politica_datos = isset($_POST['politica-datos']) ? 1 : 0;
+$pageUrl = limpiar($_POST['pageUrl'] ?? '');
+
+// Validaciones básicas
+if (!$nombre || !$email || !$comentario || !$politica_datos) {
+    echo json_encode(["success" => false, "message" => "Faltan campos obligatorios."]);
+    exit;
+}
+
+// Validar correo
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    sendResponse(false, "El formato del email es inválido.");
+    echo json_encode(["success" => false, "message" => "Correo inválido."]);
+    exit;
 }
 
-// 5. PREPARAR Y EJECUTAR LA CONSULTA DE INSERCIÓN (7 campos)
-$sql = "INSERT INTO leads (nombre, empresa, email, comentario, opt_in, status, email_enviado) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-if ($stmt = mysqli_prepare($link, $sql)) {
-    // 7 parámetros (nombre, empresa, email, comentario, opt_in, status, email_enviado)
-    mysqli_stmt_bind_param($stmt, "ssssisi", $param_nombre, $param_empresa, $param_email, $param_comentario, $param_opt_in, $param_status, $param_email_enviado);
-
-    $param_nombre = $nombre;
-    $param_empresa = $empresa;
-    $param_email = $email;
-    $param_comentario = $comentario;
-    $param_opt_in = $opt_in;
-    $param_status = $status;
-    $param_email_enviado = $email_enviado; 
-
-    if (mysqli_stmt_execute($stmt)) {
-        // ÉXITO: ENVIAR CORREOS
-        $new_lead_id = mysqli_insert_id($link);
-
-        // Notificación de Nuevo Lead a la Jefa (siempre se envía)
-        enviarNotificacionJefa($nombre, $email, $comentario, $empresa, $new_lead_id);
-
-        // Envío de Correo al Usuario (si aceptó recibir información)
-        if ($opt_in == 1) {
-            enviarCorreoUsuario($nombre, $email, $comentario, $new_lead_id, $link); 
-        }
-        
-        sendResponse(true, "Formulario enviado con éxito. ¡Gracias!");
-    } else {
-        error_log("Error al ejecutar la consulta: " . mysqli_stmt_error($stmt));
-        sendResponse(false, "Error interno del servidor al guardar los datos.");
-    }
-
-    mysqli_stmt_close($stmt);
-} else {
-    error_log("Error al preparar la consulta: " . mysqli_error($link));
-    sendResponse(false, "Error interno del servidor (MySQLi Prepare).");
+// ------------------------------------------
+// CONEXIÓN CON LA BASE DE DATOS
+// ------------------------------------------
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    echo json_encode(["success" => false, "message" => "Error de conexión a la base de datos."]);
+    exit;
 }
 
-mysqli_close($link);
+// Preparar sentencia segura
+$stmt = $conn->prepare("INSERT INTO leads (nombre, empresa, email, comentario, recibir_info, politica_datos, ip_address, user_agent, page_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("ssssiisss", $nombre, $empresa, $email, $comentario, $recibir_info, $politica_datos, $ip, $userAgent, $pageUrl);
 
+if (!$stmt->execute()) {
+    echo json_encode(["success" => false, "message" => "Error al guardar datos."]);
+    $conn->close();
+    exit;
+}
 
-// ----------------------------------------------------
-// FUNCIONES DE CORREO PROFESIONALES Y CON ENLACE
-// ----------------------------------------------------
+$stmt->close();
+$conn->close();
 
-function configurarMailer() {
-    $mail = new PHPMailer(true);
+// ------------------------------------------
+// ENVIAR CORREOS PROFESIONALES CON PHPMailer
+// ------------------------------------------
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+require 'PHPMailer/Exception.php';
+
+// Crear instancia de PHPMailer
+$mail = new PHPMailer(true);
+
+try {
+    // CONFIGURAR SMTP DE GMAIL
     $mail->isSMTP();
-    $mail->Host = SMTP_HOST;
+    $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = SMTP_USER; 
-    $mail->Password = SMTP_PASS; 
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-    $mail->Port = 465;
-    $mail->CharSet = 'UTF-8';
-    $mail->setFrom(SMTP_USER, 'Piedra en Punto - Gestión'); 
-    return $mail;
-}
+    $mail->Username = 'cortes270k@gmail.com'; // Gmail de la jefa o el tuyo configurado
+    $mail->Password = 'pkgwbezvtiyqiire';  // Contraseña de aplicación de Gmail
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
 
-function enviarCorreoUsuario($nombre, $email, $comentario, $lead_id, $link) {
-    try {
-        $mail = configurarMailer();
-        $mail->addAddress($email, $nombre);
-        $mail->isHTML(true); 
-        $mail->Subject = "✅ Solicitud Recibida | Bienvenido a Piedra en Punto, $nombre";
-        $mail->addReplyTo(JEFA_EMAIL, 'Valeria - Piedra en Punto');
+    // Remitente
+    $mail->setFrom('cortes270k@gmail.com', 'Formulario Piedra en Punto');
 
-        // Contenido HTML PROFESIONAL para el CLIENTE
-        $html_content = "
-            <html>
-            <head><style>body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; } .container { max-width: 600px; margin: 20px auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; } .header { background-color: #33614a; color: white; padding: 20px; text-align: center; } .content { padding: 30px; } .footer { background-color: #f4f4f4; padding: 15px; font-size: 12px; color: #777; text-align: center; }</style></head>
-            <body>
-                <div class='container'>
-                    <div class='header'>
-                        <h2 style='margin: 0;'>¡Tu proyecto es nuestra prioridad!</h2>
-                    </div>
-                    <div class='content'>
-                        <h3>Hola $nombre,</h3>
-                        <p>Gracias por contactar a <strong>Piedra en Punto</strong>. Hemos recibido tu solicitud con la siguiente información:</p>
-                        <ul style='list-style: none; padding: 0; background-color: #f9f9f9; padding: 15px; border-radius: 5px;'>
-                            <li><strong>Tu Comentario:</strong> <em>\"$comentario\"</em></li>
-                            <li><strong>Estado de tu Solicitud:</strong> PENDIENTE de gestión.</li>
-                        </ul>
-                        <p>Nuestro equipo revisará tu mensaje y se comunicará contigo personalmente en las próximas horas para ofrecerte la mejor solución.</p>
-                        <p>Mientras tanto, te invitamos a explorar nuestra web o seguirnos en redes sociales.</p>
-                        <p>Atentamente,<br>El equipo de Piedra en Punto.</p>
-                    </div>
-                    <div class='footer'>
-                        Este es un mensaje automático. Por favor, no respondas a este correo.
-                    </div>
-                </div>
-            </body>
-            </html>
-        ";
-        
-        $mail->Body = $html_content;
-        $mail->send();
+    // --- EMAIL A LA JEFA ---
+    $mail->addAddress('cortes270k@gmail.com');
+    $mail->isHTML(true);
+    $mail->Subject = "📩 Nuevo registro en el formulario general - Piedra en Punto";
+    $mail->Body = "
+        <h2 style='color:#33614a;'>Nuevo registro recibido</h2>
+        <p><strong>Nombre:</strong> {$nombre}</p>
+        <p><strong>Empresa:</strong> {$empresa}</p>
+        <p><strong>Correo:</strong> {$email}</p>
+        <p><strong>Comentario:</strong> {$comentario}</p>
+        <hr>
+        <p>Estado actual: <b style='color:#f06292;'>Pendiente</b></p>
+        <p>Para ver o gestionar este registro, ingresa al panel seguro:</p>
+        <a href='https://piedraenpunto.com/dashboard/gestion_leads.php' 
+        style='background:#33614a;color:white;padding:10px 20px;border-radius:5px;text-decoration:none;'>Abrir Panel</a>
+    ";
+    $mail->send();
 
-        // ACTUALIZAR DB: Marcamos email_enviado = 1
-        $sql_update = "UPDATE leads SET email_enviado = 1 WHERE id = ?";
-        if ($stmt_update = mysqli_prepare($link, $sql_update)) {
-            mysqli_stmt_bind_param($stmt_update, "i", $lead_id);
-            mysqli_stmt_execute($stmt_update);
-            mysqli_stmt_close($stmt_update);
-        }
-        return true;
-    } catch (Exception $e) {
-        error_log("Correo de usuario falló: {$mail->ErrorInfo}");
-        return false;
-    }
-}
+    // --- EMAIL AL USUARIO (solo si aceptó recibir info) ---
+    if ($recibir_info == 1) {
+        $mail2 = new PHPMailer(true);
+        $mail2->isSMTP();
+        $mail2->Host = 'smtp.gmail.com';
+        $mail2->SMTPAuth = true;
+        $mail2->Username = 'cortes270k@gmail.com';
+        $mail2->Password = 'pkgwbezvtiyqiire';
+        $mail2->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail2->Port = 587;
 
-function enviarNotificacionJefa($nombre, $email_cliente, $comentario, $empresa, $lead_id) {
-    try {
-        $mail = configurarMailer();
-        $mail->addAddress(JEFA_EMAIL);
-        $mail->isHTML(true); // Usamos HTML para el botón del dashboard
-        $mail->Subject = "🔔 NUEVO LEAD WEB - #$lead_id: $nombre ($empresa)";
-
-        $body = "
-            <html>
-            <head><style>body { font-family: Arial, sans-serif; line-height: 1.5; }</style></head>
-            <body>
-                <h2 style='color: #F06292;'>¡Nuevo Lead Registrado!</h2>
-                <p>Se ha recibido una nueva solicitud de contacto. El estado inicial es **PENDIENTE**.</p>
-                <ul style='list-style: none; padding: 0;'>
-                    <li><strong>ID:</strong> #$lead_id</li>
-                    <li><strong>Nombre:</strong> $nombre</li>
-                    <li><strong>Empresa:</strong> " . ($empresa ?: 'N/A') . "</li>
-                    <li><strong>Email:</strong> $email_cliente</li>
-                    <li><strong>Comentario:</strong> <em>$comentario</em></li>
-                </ul>
+        $mail2->setFrom('cortes270k@gmail.com', 'Piedra en Punto');
+        $mail2->addAddress($email);
+        $mail2->isHTML(true);
+        $mail2->Subject = "¡Gracias por contactarte con Piedra en Punto!";
+        $mail2->Body = "
+            <div style='font-family:Roboto,Arial,sans-serif;color:#333'>
+                <h2 style='color:#33614a;'>¡Gracias por escribirnos, {$nombre}!</h2>
+                <p>Hemos recibido tu solicitud correctamente. En breve nuestro equipo se pondrá en contacto contigo.</p>
+                <p>Mientras tanto, te invitamos a conocer más sobre nosotros:</p>
+                <a href='https://piedraenpunto.com' style='color:#f06292;'>Visita nuestra página web</a><br>
+                <a href='https://www.instagram.com/piedraenpunto' style='color:#33614a;'>Síguenos en Instagram</a>
                 <hr>
-                <p style='font-weight: bold;'>Por favor, ingresa al panel de gestión para actualizar el estado del cliente.</p>
-                <a href='" . DASHBOARD_URL . "' style='display: inline-block; padding: 12px 25px; background-color: #33614a; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px;'>
-                    Ir al Dashboard de Leads
-                </a>
-            </body>
-            </html>
+                <p style='font-size:12px;color:#888;'>Este mensaje fue generado automáticamente por el sistema de contacto de Piedra en Punto.</p>
+            </div>
         ";
-
-        $mail->Body = $body;
-        $mail->send();
-    } catch (Exception $e) {
-        error_log("Notificacion a Jefa falló: {$mail->ErrorInfo}");
+        $mail2->send();
     }
+
+    echo json_encode(["success" => true, "message" => "Formulario enviado correctamente."]);
+
+} catch (Exception $e) {
+    echo json_encode(["success" => false, "message" => "Error al enviar correos: {$mail->ErrorInfo}"]);
 }
 ?>
