@@ -1,62 +1,64 @@
-//------------------------------------------------------------------------------
-//---------------------------FORMULARIO Y MODAL--------------------------------------------
-//-----------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Selecciona todos los formularios con la clase 'contact-form'
-    const forms = document.querySelectorAll('.contact-form');
+// ===============================
+// FORMULARIO GENERAL - Piedra en Punto
+// ===============================
 
-    forms.forEach(form => {
-        // Ya no es necesario el campo pageUrl en el JS si lo eliminaste del HTML
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
 
-        // 2. Maneja el evento de envío del formulario
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault(); 
+    // Aseguramos que el formulario exista
+    if (!form) return;
 
-            const formData = new FormData(form);
+    form.addEventListener("submit", function (e) {
+        e.preventDefault(); // Evita recargar la página
 
-            try {
-                // La acción del formulario debe ser la ruta absoluta: /procesar_formulario.php
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData 
-                });
-                
-                // 3. Leer la respuesta JSON
-                const result = await response.json(); 
+        // Desactivar botón mientras se envía
+        const submitBtn = form.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Enviando...";
 
-                // 4. Lógica de éxito o error
-                if (response.ok && result.success) { 
-                    
-                    form.reset(); 
-                    
-                    // --- Lógica del Modal de "¡Muchas gracias!" ---
-                    const modal = document.getElementById('success-modal');
-                    const closeBtn = modal.querySelector('.close-button-custom'); 
-                    
-                    const closeModal = () => { modal.style.display = 'none'; };
+        // Ejecutar reCAPTCHA v3
+        grecaptcha.ready(function () {
+            grecaptcha.execute("TU_CLAVE_PUBLICA_RECAPTCHA", { action: "submit" }).then(function (token) {
+                // Insertar token en el campo oculto
+                document.getElementById("recaptchaResponse").value = token;
 
-                    modal.style.display = 'flex'; 
-                    
-                    if (closeBtn) { closeBtn.onclick = closeModal; }
-                    
-                    window.onclick = function(event) {
-                        if (event.target == modal) {
-                            closeModal();
+                // Crear objeto con los datos del formulario
+                const formData = new FormData(form);
+
+                // Enviar datos al servidor
+                fetch("procesar_formulario.php", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            mostrarMensaje("✅ ¡Formulario enviado correctamente! Gracias por contactarte con Piedra en Punto.", "success");
+                            form.reset();
+                        } else {
+                            mostrarMensaje("⚠️ " + data.message, "error");
                         }
-                    }
-                    // --------------------------------------------------
-
-                } else {
-                    // Muestra el mensaje de error del servidor.
-                    console.error('Error al procesar formulario:', result.message || 'Error desconocido del servidor.');
-                    alert('Hubo un error al enviar el formulario. Intenta de nuevo. (Detalle: ' + (result.message || 'Error del servidor') + ')');
-                }
-
-            } catch (error) {
-                // Error de red, timeout o fallo total de conexión
-                console.error('Error de red/conexión:', error);
-                alert('Error de conexión. Por favor, revisa tu red.');
-            }
+                    })
+                    .catch(() => {
+                        mostrarMensaje("❌ Ocurrió un error al enviar el formulario. Inténtalo nuevamente.", "error");
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Enviar →";
+                    });
+            });
         });
     });
+
+    // Función para mostrar mensajes bonitos al usuario
+    function mostrarMensaje(mensaje, tipo) {
+        let box = document.createElement("div");
+        box.textContent = mensaje;
+        box.className = `alerta-formulario ${tipo}`;
+        document.body.appendChild(box);
+
+        // Desaparece automáticamente después de 4 segundos
+        setTimeout(() => box.remove(), 4000);
+    }
 });
+
