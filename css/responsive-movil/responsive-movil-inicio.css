@@ -59,12 +59,19 @@ incluyendo la orientación horizontal de un celular. */
         box-shadow: none;
         background: #f9f9f9;
         padding-left: 20px;
+        min-width: unset;
     }
     .header nav ul li ul ul {
         padding-left: 20px;
     }
     .header nav ul li.submenu.submenu-open > ul {
         display: block;
+    }
+
+    /* CAMBIO 2 (Móvil): También se aplica el hover aquí si es táctil, o simplemente para consistencia visual */
+    .header nav ul li ul li a:active {
+        background-color: #fce4ec; 
+        color: #e91e63;
     }
 
     /* -------------------------------------- */

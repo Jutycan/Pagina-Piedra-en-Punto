@@ -1,3 +1,4 @@
+
 /* -------------------------------------- */
 /* Estilos del Header */
 /* -------------------------------------- */
@@ -21,7 +22,15 @@
 
 .header .logo img {
     max-height: 60px;
+    /* Asegura que la imagen sea clickeable sin bordes extra */
+    display: block; 
 }
+/* Estilo para que el enlace del logo se comporte como un contenedor */
+.header .logo a {
+    display: block;
+    cursor: pointer;
+}
+
 
 /* === NAV === */
 .header nav ul {
@@ -42,6 +51,12 @@
     font-weight: 500;
     padding: 10px 0;
     display: block;
+    transition: color 0.2s; /* Transición suave para el hover */
+}
+
+/* Hover en enlaces principales (opcional, pero mejora la UX) */
+.header nav ul li a:not(.btn-contacto):hover {
+    color: #e91e63;
 }
 
 /* === BOTÓN CONTACTO === */
@@ -62,7 +77,7 @@
     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     display: none;
     flex-direction: column;
-    min-width: 180px;
+    min-width: 250px; /* Incrementado para mejor lectura */
     padding: 10px 0;
     z-index: 1000;
 }
@@ -72,8 +87,14 @@
 }
 
 .header nav ul li ul li a {
-    padding: 5px 15px;
+    padding: 8px 15px; /* Ajustado el padding */
     white-space: nowrap;
+}
+
+/* CAMBIO 2: Efecto hover en los enlaces de submenú */
+.header nav ul li ul li a:hover {
+    background-color: #fce4ec; /* Fondo muy claro para el hover */
+    color: #e91e63; /* Texto rosa */
 }
 
 /* Segundo nivel de submenú (Integrantes) */
@@ -82,6 +103,7 @@
     top: 0;
     right: 100%;
     left: auto;
+    min-width: 180px;
 }
 
 /* === BOTÓN HAMBURGUESA (OCULTO EN ESCRITORIO) === */
@@ -90,6 +112,7 @@
     font-size: 28px;
     background: none;
     border: none;
+    color: #000; /* Color del icono */
     cursor: pointer;
 }
 
@@ -99,12 +122,14 @@
 .main-banner {
     width: 85%;
     max-width: 1400px;
-    height: 750px; 
+    /* CAMBIO CLAVE: Eliminar altura fija (750px) para permitir fluidez. */
+    height: auto; 
     margin: 40px auto 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
+    /* Añadir padding vertical para dar espacio en anchos intermedios */
+    padding: 80px 20px; 
     box-sizing: border-box;
     background-color: #fff;
 }
@@ -114,7 +139,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 100%;
+    /* Altura fluida */
+    height: auto; 
 }
 
 .banner-text {
@@ -190,15 +216,19 @@
 
 .banner-image {
     width: 50%;
-    height: 100%;
+    /* CAMBIO CLAVE: Altura fluida */
+    height: auto; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .banner-image img {
+    /* La imagen debe ocupar el 100% del ancho disponible en su contenedor */
+    width: 100%; 
     max-height: 90%;
-    max-width: 90%;
+    /* Cambié max-width a 100% para evitar desbordamiento */
+    max-width: 100%; 
     object-fit: contain;
 }
 
@@ -208,14 +238,14 @@
 .about-us-section {
     width: 85%;
     max-width: 1400px;
-    height: 593px;
-    margin: -100px auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
+    /* CAMBIO CLAVE: Altura fluida para adaptarse al contenido */
+    height: auto; 
+    /* Ajuste de margen superior para compensar y alinear */
+    margin: -50px auto 0; 
+    /* Añadir padding vertical para dar aire a la sección */
+    padding: 80px 20px;
     box-sizing: border-box;
-    background-color: #fff;
+    background-color: transparent;
     position: relative;
 }
 
@@ -224,6 +254,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    /* Altura fluida */
+    height: auto; 
 }
 
 .about-us-image {
@@ -364,12 +396,12 @@
 .benefits-section {
     width: 85%;
     max-width: 1400px; /* Ancho máximo para el contenedor */
-    height: 1034px;
-    margin: -100px auto 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 20px;
+    /* CAMBIO CLAVE: Altura fluida para adaptarse al contenido */
+    height: auto;
+    /* Ajuste de margen superior. Mantenemos el negativo para el efecto de solapamiento */
+    margin: -50px auto 0;
+    /* Añadir padding vertical para dar aire a la sección */
+    padding: 80px 20px; 
     box-sizing: border-box;
     background-color: transparent;
     position: relative;
@@ -380,7 +412,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 100%;
+    /* Altura fluida */
+    height: auto; 
 }
 
 .benefits-image-container {
@@ -490,7 +523,7 @@
 .services-section {
     width: 100%;
     max-width: 1200px;
-    height: auto; /* Cambiado a auto para que se adapte al contenido */
+    height: auto; /* Correcto: se adapta al contenido */
     margin: -80px auto 0;
     display: flex;
     flex-direction: column;
@@ -539,7 +572,9 @@
 }
 
 .card-top {
-    height: 250px;
+    /* CAMBIO CLAVE: Cambiado de 'height' fijo a 'min-height' para que se adapte */
+    min-height: 250px; 
+    height: auto;
     padding: 40px;
     position: relative;
     display: flex;
@@ -550,7 +585,9 @@
 }
 
 .card-bottom {
-    height: 250px;
+    /* CAMBIO CLAVE: Cambiado de 'height' fijo a 'min-height' para que se adapte */
+    min-height: 250px;
+    height: auto;
     padding: 40px;
     display: flex;
     flex-direction: column;
@@ -560,7 +597,6 @@
 }
 
 /* Colores de fondo para las tarjetas */
-/* Esta sección la vamos a mantener porque sí está bien */
 .service-card.service-1 .card-top { background-color: #e5f1f0; }
 .service-card.service-2 .card-top { background-color: #f9e2f9; }
 .service-card.service-3 .card-top { background-color: #f7eedb; }
@@ -587,14 +623,13 @@
 .service-card.service-2 .card-icon-circle { background-color: #f28cf0; }
 .service-card.service-3 .card-icon-circle { background-color: #fcae12; }
 .service-card.service-4 .card-icon-circle { background-color: #57d2d3; }
-.service-card.service-5 .card-icon-circle { background-color: #ed217c; } /* Corregí el color aquí para que coincida con la imagen de referencia */
-.service-card.service-6 .card-icon-circle { background-color: #fcae12; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+.service-card.service-5 .card-icon-circle { background-color: #ed217c; } 
+.service-card.service-6 .card-icon-circle { background-color: #fcae12; } 
 
 /* Estilo para las imágenes dentro del círculo */
 .card-icon-circle img {
     max-width: 40px; 
     max-height: 40px;
-    /* La imagen ya es blanca, por lo que no necesita un color adicional */
 }
 
 .card-info {
@@ -629,8 +664,8 @@
 .service-card.service-2 .card-number { color: #f28cf0; }
 .service-card.service-3 .card-number { color: #fcae12; }
 .service-card.service-4 .card-number { color: #57d2d3; }
-.service-card.service-5 .card-number { color: #ed217c; } /* Corregí el color aquí para que coincida con la imagen de referencia */
-.service-card.service-6 .card-number { color: #fcae12; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+.service-card.service-5 .card-number { color: #ed217c; } 
+.service-card.service-6 .card-number { color: #fcae12; } 
 
 .card-description {
     font-size: 16px;
@@ -652,8 +687,8 @@
 .service-card.service-2 .read-more { color: #f28cf0; }
 .service-card.service-3 .read-more { color: #fcae12; }
 .service-card.service-4 .read-more { color: #57d2d3; }
-.service-card.service-5 .read-more { color: #ed217c; } /* Corregí el color aquí para que coincida con la imagen de referencia */
-.service-card.service-6 .read-more { color: #fcae12; } /* Corregí el color aquí para que coincida con la imagen de referencia */
+.service-card.service-5 .read-more { color: #ed217c; } 
+.service-card.service-6 .read-more { color: #fcae12; } 
 
 .read-more:hover {
     color: #d11e6e;
@@ -680,16 +715,18 @@
 /* Estilos de Flujo de trabajo */
 /* -------------------------------------- */
 .work-process-section {
-    width: 100%;
+    width: 80%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 80px 20px;
-    height: 652px;
+    /* Ajuste de altura a auto para fluidez vertical */
+    height: auto; 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .work-process-container {
@@ -716,6 +753,8 @@
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
+    /* Aseguramos que los pasos no se salgan del contenedor */
+    min-width: auto; 
 }
 
 .step {
@@ -723,7 +762,9 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 150px;
+    /* CORRECCIÓN CLAVE: Permite que el elemento se encoja para evitar el scroll horizontal */
+    flex: 1 1 0%; 
+    max-width: 150px; /* Mantiene el tamaño máximo original en pantallas grandes */
 }
 
 .step-circle {
@@ -758,6 +799,8 @@
     align-items: center;
     margin-top: 50px;
     height: 120px; /* Alineamos con los círculos */
+    /* Evita que los separadores se reduzcan demasiado */
+    flex-shrink: 0; 
 }
 
 /* Colores de los círculos */
@@ -774,7 +817,7 @@
     width: 100%;
     max-width: 1200px;
     height: 940px;
-    margin: 50px auto;
+    margin: 25px auto 0;
     /* Color de fondo eliminado para que se vea el fondo de la página */
     display: flex;
     justify-content: center;
@@ -958,6 +1001,7 @@
     align-items: flex-start;
     padding-top: 20px;
     box-sizing: border-box;
+    margin: 50px auto 0;
 }
 
 /* Contenedor del logo y los íconos de redes sociales */
@@ -975,6 +1019,7 @@
 }
 .social-icons {
     margin: -50px auto 0;
+    display: flex;
 }
 
 .social-icons a img {

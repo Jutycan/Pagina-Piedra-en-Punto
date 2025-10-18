@@ -21,7 +21,15 @@
 
 .header .logo img {
     max-height: 60px;
+    /* Asegura que la imagen sea clickeable sin bordes extra */
+    display: block; 
 }
+/* Estilo para que el enlace del logo se comporte como un contenedor */
+.header .logo a {
+    display: block;
+    cursor: pointer;
+}
+
 
 /* === NAV === */
 .header nav ul {
@@ -42,6 +50,12 @@
     font-weight: 500;
     padding: 10px 0;
     display: block;
+    transition: color 0.2s; /* Transición suave para el hover */
+}
+
+/* Hover en enlaces principales (opcional, pero mejora la UX) */
+.header nav ul li a:not(.btn-contacto):hover {
+    color: #e91e63;
 }
 
 /* === BOTÓN CONTACTO === */
@@ -57,12 +71,12 @@
 .header nav ul li ul {
     position: absolute;
     top: 100%;
-    right: 0; /* Corrección: el primer submenú se alinea a la derecha */
+    right: 0;
     background: #fff;
     box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     display: none;
     flex-direction: column;
-    min-width: 180px;
+    min-width: 250px; /* Incrementado para mejor lectura */
     padding: 10px 0;
     z-index: 1000;
 }
@@ -72,16 +86,23 @@
 }
 
 .header nav ul li ul li a {
-    padding: 5px 15px;
+    padding: 8px 15px; /* Ajustado el padding */
     white-space: nowrap;
+}
+
+/* CAMBIO 2: Efecto hover en los enlaces de submenú */
+.header nav ul li ul li a:hover {
+    background-color: #fce4ec; /* Fondo muy claro para el hover */
+    color: #e91e63; /* Texto rosa */
 }
 
 /* Segundo nivel de submenú (Integrantes) */
 .header nav ul ul ul {
     position: absolute;
     top: 0;
-    right: 100%; /* CORRECCIÓN CLAVE: el submenú se despliega hacia la izquierda */
+    right: 100%;
     left: auto;
+    min-width: 180px;
 }
 
 /* === BOTÓN HAMBURGUESA (OCULTO EN ESCRITORIO) === */
@@ -90,6 +111,7 @@
     font-size: 28px;
     background: none;
     border: none;
+    color: #000; /* Color del icono */
     cursor: pointer;
 }
 
