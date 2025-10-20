@@ -717,16 +717,14 @@
 .work-process-section {
     width: 80%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: -10px auto 0;
     padding: 80px 20px;
-    /* Ajuste de altura a auto para fluidez vertical */
-    height: auto; 
+    height: 652px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
-    box-sizing: border-box;
 }
 
 .work-process-container {
@@ -753,8 +751,10 @@
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
-    /* Aseguramos que los pasos no se salgan del contenedor */
-    min-width: auto; 
+
+    /* 🔹 Ajuste agregado para que sea fluido entre 1200px y 769px */
+    flex-wrap: wrap; /* permite que los pasos bajen si no caben */
+    transition: all 0.3s ease; /* suaviza el cambio al reducir ventana */
 }
 
 .step {
@@ -762,9 +762,11 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    /* CORRECCIÓN CLAVE: Permite que el elemento se encoja para evitar el scroll horizontal */
-    flex: 1 1 0%; 
-    max-width: 150px; /* Mantiene el tamaño máximo original en pantallas grandes */
+    width: 150px;
+
+    /* 🔹 Se permite ajuste fluido del tamaño */
+    flex: 1 1 130px;
+    min-width: 120px;
 }
 
 .step-circle {
@@ -776,11 +778,15 @@
     align-items: center;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 Transición suave al reducir tamaño */
+    transition: all 0.3s ease;
 }
 
 .step-icon {
     width: 60px;
     height: auto;
+    transition: all 0.3s ease;
 }
 
 .step-text {
@@ -799,8 +805,6 @@
     align-items: center;
     margin-top: 50px;
     height: 120px; /* Alineamos con los círculos */
-    /* Evita que los separadores se reduzcan demasiado */
-    flex-shrink: 0; 
 }
 
 /* Colores de los círculos */
@@ -809,6 +813,41 @@
 .step-3-color { background-color: #ec9e20; }
 .step-4-color { background-color: #e03387; }
 .step-5-color { background-color: #f2b934; }
+
+/* 🔹 Ajuste visual fluido entre escritorio y tablet (sin tocar móvil) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .work-process-section {
+        padding: 60px 30px;
+        height: auto;
+    }
+
+    .work-process-section .main-title {
+        font-size: 46px;
+        margin-bottom: 60px;
+    }
+
+    .process-steps {
+        gap: 30px;
+    }
+
+    .step {
+        width: 130px;
+    }
+
+    .step-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .step-icon {
+        width: 50px;
+    }
+
+    .step-separator {
+        font-size: 36px;
+        margin-top: 40px;
+    }
+}
 
 /* -------------------------------------- */
 /* Estilos del Formulario Contacto*/

@@ -119,11 +119,16 @@
 /* Estilos del Banner */
 /* -------------------------------------- */
 .banner {
-    width: 80%;
+    /* CORRECCIÓN 1: Aumentamos el ancho base y le damos un límite máximo */
+    width: 90%;
+    max-width: 1400px;
     margin: 140px auto 0;
     background-color: #EC8A10;
     display: flex;
     justify-content: center;
+    /* Agregamos redondeo para un toque más elegante y moderno */
+    border-radius: 12px;
+    box-sizing: border-box;
 }
 
 .banner-container {
@@ -132,41 +137,57 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 50px;
+    /* CORRECCIÓN 2: Reducimos el gap fijo para permitir más compresión */
+    gap: 30px; 
     position: relative;
-    padding: 105px 0; /* un poco de aire */
+    /* CORRECCIÓN 3: Ajustamos el padding para evitar que el contenido toque los bordes al encoger */
+    /* Se reduce el padding vertical y horizontal para dar más espacio fluido */
+    padding: 40px 20px; 
+    box-sizing: border-box;
 }
 
 /* Imagen */
 .banner-image {
-    flex: 1;
+    /* CORRECCIÓN 4: Le damos una base flexible, permitiendo que se encoja y crezca */
+    flex: 1 1 45%; 
     position: relative;
+    /* El overflow debe ser visible para que la imagen sobresalga del contenedor flex */
+    overflow: visible; 
+    min-width: 250px; /* Mínimo para que no se comprima demasiado */
+    margin-left: 50px;
 }
 
 .banner-image img {
+    /* CORRECCIÓN CRÍTICA: Eliminamos position: absolute, top, bottom, left y márgenes fijos. */
     width: 100%;
     max-width: 400px;
-    margin: -260px auto 0;
     border-radius: 10px;
     object-fit: cover;
-
-    /* Clave: sobresale del naranja */
-    position: absolute;
-    top: -40px;
-    bottom: -40px;
-    left: 100px;
+    /* Nueva Estrategia Fluida de Desborde */
+    position: relative; /* Lo hacemos relativo para que los márgenes negativos lo muevan */
+    display: block;
+    height: auto;
+    /* Ajuste de márgenes: Hacemos los márgenes verticales y horizontales menos agresivos 
+    para mejorar la fluidez antes del breakpoint de 768px. */
+    margin-top: -60px; /* Reducción de -80px a -60px */
+    margin-bottom: -60px; /* Reducción de -80px a -60px */
+    margin-left: -30px; /* Reducción de -50px a -30px (menor protrusion) */
 }
 
 /* Contenido */
 .banner-content {
-    flex: 1;
+    /* CORRECCIÓN 5: Le damos flexibilidad y un ancho base para que siempre tenga espacio */
+    flex: 1 1 50%; 
     color: #FFFFFF;
-    padding: 20px;
+    /* Ajustamos padding para dar espacio, sin chocar con la imagen */
+    /* Se quita el padding izquierdo extra para darle más espacio al texto al encogerse */
+    padding: 20px 0; 
 }
 
 .banner-content h2 {
     font-family: "Century Gothic", sans-serif;
-    font-size: 32px;
+    /* CORRECCIÓN 6: Usamos clamp para un tamaño de fuente que escala entre 28px y 40px */
+    font-size: clamp(28px, 4vw, 40px);
     margin-bottom: 20px;
 }
 
@@ -254,8 +275,11 @@
 /* Estilos del Servcio 1*/
 /* -------------------------------------- */
 .provision {
-    width: 80%;
-    margin: -100px auto 0;
+    /* CORRECCIÓN 1: Mejor control de ancho para fluidez */
+    width: 90%; 
+    max-width: 1200px;
+    /* CORRECCIÓN 2: Ajuste de margen para mejor visualización y fluidez */
+    margin: -90px auto 0; 
     font-family: "Comfortaa", sans-serif;
 }
 
@@ -270,7 +294,8 @@
     border-image-source: linear-gradient(90deg, #1e90ff, #00bfff, #4682b4, #1e90ff);
     animation: borderAnimation 6s linear infinite;
     border-radius: 10px;
-    padding: 40px;
+    /* CORRECCIÓN 3: Aumento de padding para un diseño más limpio */
+    padding: 60px;
     gap: 40px;
 }
 
@@ -283,8 +308,10 @@
 
 /* Contenido */
 .provision-content {
-    flex: 1;
-    padding-right: 20px; /* aire entre texto e imagen */
+    /* CORRECCIÓN 4: Flexbox fluido (50% de base, permitiendo encoger) */
+    flex: 1 1 50%; 
+    /* CORRECCIÓN 5: Usar margin para el espacio entre elementos, no padding */
+    margin-right: 20px; 
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s ease-out;
@@ -393,12 +420,16 @@
 
 /* Imagen */
 .provision-image {
-    flex: 1;
+    /* CORRECCIÓN 6: Flexbox fluido (50% de base, permitiendo encoger) */
+    flex: 1 1 50%;
     text-align: right;
 }
 
 .provision-image img {
     max-width: 100%;
+    /* Se asegura que la imagen no tenga un ancho fijo y pueda encogerse */
+    height: auto; 
+    display: center;
     border-radius: 10px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
@@ -411,8 +442,11 @@
 /* Estilos del Servcio 2*/
 /* -------------------------------------- */
 .organizacion {
-    width: 80%;
-    margin: 50px auto 0;
+    /* CORRECCIÓN 1: Mejor control de ancho para fluidez */
+    width: 90%; 
+    max-width: 1200px;
+    /* CORRECCIÓN 2: Ajuste de margen para mejor visualización y fluidez */
+    margin: 50px auto; 
     font-family: "Comfortaa", sans-serif;
 }
 
@@ -428,7 +462,7 @@
     border-image-source: linear-gradient(90deg, #FFD700, #FFBC0A, #FF8C00); 
     animation: borderAnimationOrg 6s linear infinite; /* Animación ÚNICA */
     border-radius: 10px;
-    padding: 40px;
+    padding: 60px;
     gap: 40px;
 }
 
@@ -572,7 +606,10 @@
 /* Estilos del Servcio 3*/
 /* -------------------------------------- */
 .degustaciones {
-    width: 80%;
+    /* CORRECCIÓN 1: Mejor control de ancho para fluidez */
+    width: 90%; 
+    max-width: 1200px;
+    /* CORRECCIÓN 2: Ajuste de margen para mejor visualización y fluidez */
     margin: 50px auto 0;
     font-family: "Comfortaa", sans-serif;
 }
@@ -588,7 +625,7 @@
     border-image-source: linear-gradient(90deg, #FFB03A, #EC8A10, #D67000);
     animation: borderAnimationdeg 6s linear infinite;
     border-radius: 10px;
-    padding: 40px;
+    padding: 60px;
     gap: 40px;
 }
 
@@ -729,7 +766,10 @@
 /* Estilos del Servcio 4*/
 /* -------------------------------------- */
 .estudios {
-    width: 80%;
+    /* CORRECCIÓN 1: Mejor control de ancho para fluidez */
+    width: 90%; 
+    max-width: 1200px;
+    /* CORRECCIÓN 2: Ajuste de margen para mejor visualización y fluidez */
     margin: 50px auto 0;
     font-family: "Comfortaa", sans-serif;
 }
@@ -746,7 +786,7 @@
     border-image-source: linear-gradient(90deg, #FF1493, #EC0868, #C71585); 
     animation: borderAnimationest 6s linear infinite; /* Animación ÚNICA */
     border-radius: 10px;
-    padding: 40px;
+    padding: 60px;
     gap: 40px;
 }
 
@@ -889,7 +929,10 @@
 /* Estilos del Servcio 5*/
 /* -------------------------------------- */
 .capacitacion {
-    width: 80%;
+    /* CORRECCIÓN 1: Mejor control de ancho para fluidez */
+    width: 90%; 
+    max-width: 1200px;
+    /* CORRECCIÓN 2: Ajuste de margen para mejor visualización y fluidez */
     margin: 50px auto 0;
     font-family: "Comfortaa", sans-serif;
 }
@@ -905,7 +948,7 @@
     border-image-source: linear-gradient(90deg, #4CAF99, #218380, #146363);
     animation: borderAnimationcap 6s linear infinite;
     border-radius: 10px;
-    padding: 40px;
+    padding: 60px;
     gap: 40px;
 }
 
@@ -1046,7 +1089,10 @@
 /* Estilos del Servcio 6*/
 /* -------------------------------------- */
 .activaciones {
-    width: 80%;
+    /* CORRECCIÓN 1: Mejor control de ancho para fluidez */
+    width: 90%; 
+    max-width: 1200px;
+    /* CORRECCIÓN 2: Ajuste de margen para mejor visualización y fluidez */
     margin: 50px auto 0;
     font-family: "Comfortaa", sans-serif;
 }
@@ -1063,7 +1109,7 @@
     border-image-source: linear-gradient(90deg, #FFD700, #FFBC0A, #FF8C00); 
     animation: borderAnimationact 6s linear infinite; /* Animación ÚNICA */
     border-radius: 10px;
-    padding: 40px;
+    padding: 60px;
     gap: 40px;
 }
 
@@ -1207,7 +1253,7 @@
 /* Estilos del Flujo de Trabajo */
 /* -------------------------------------- */
 .work-process-section {
-    width: 100%;
+    width: 80%;
     max-width: 1200px;
     margin: -10px auto 0;
     padding: 80px 20px;
@@ -1243,6 +1289,10 @@
     justify-content: center;
     align-items: flex-start;
     gap: 20px;
+
+    /* 🔹 Ajuste agregado para que sea fluido entre 1200px y 769px */
+    flex-wrap: wrap; /* permite que los pasos bajen si no caben */
+    transition: all 0.3s ease; /* suaviza el cambio al reducir ventana */
 }
 
 .step {
@@ -1251,6 +1301,10 @@
     align-items: center;
     text-align: center;
     width: 150px;
+
+    /* 🔹 Se permite ajuste fluido del tamaño */
+    flex: 1 1 130px;
+    min-width: 120px;
 }
 
 .step-circle {
@@ -1262,11 +1316,15 @@
     align-items: center;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 Transición suave al reducir tamaño */
+    transition: all 0.3s ease;
 }
 
 .step-icon {
     width: 60px;
     height: auto;
+    transition: all 0.3s ease;
 }
 
 .step-text {
@@ -1294,6 +1352,41 @@
 .step-4-color { background-color: #e03387; }
 .step-5-color { background-color: #f2b934; }
 
+/* 🔹 Ajuste visual fluido entre escritorio y tablet (sin tocar móvil) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .work-process-section {
+        padding: 60px 30px;
+        height: auto;
+    }
+
+    .work-process-section .main-title {
+        font-size: 46px;
+        margin-bottom: 60px;
+    }
+
+    .process-steps {
+        gap: 30px;
+    }
+
+    .step {
+        width: 130px;
+    }
+
+    .step-circle {
+        width: 100px;
+        height: 100px;
+    }
+
+    .step-icon {
+        width: 50px;
+    }
+
+    .step-separator {
+        font-size: 36px;
+        margin-top: 40px;
+    }
+}
+
 
 /* -------------------------------------- */
 /* Estilos del Formulario Contacto*/
@@ -1302,7 +1395,7 @@
     width: 100%;
     max-width: 1200px;
     height: 940px;
-    margin: 25px auto 0;
+    margin: -50px auto 0;
     /* Color de fondo eliminado para que se vea el fondo de la página */
     display: flex;
     justify-content: center;
@@ -1486,6 +1579,7 @@
     align-items: flex-start;
     padding-top: 20px;
     box-sizing: border-box;
+    margin: 50px auto 0;
 }
 
 /* Contenedor del logo y los íconos de redes sociales */
@@ -1503,6 +1597,7 @@
 }
 .social-icons {
     margin: -50px auto 0;
+    display: flex;
 }
 
 .social-icons a img {

@@ -130,7 +130,7 @@
 /* -------------------------------------- */
 /* Estilos del Banner */
 /* -------------------------------------- */
-.banner {
+.banner { 
     width: 100%;
     height: 657px; /* Altura fija para escritorio */
     margin: 30px auto 0;
@@ -142,6 +142,9 @@
     padding: 0 100px; /* Padding a los lados para que el texto no toque los bordes */
     background-color: var(--bg-color);
     font-family: Century Gothic, sans-serif;
+
+    /* 🔹 Suaviza el cambio visual al redimensionar */
+    transition: all 0.3s ease;
 }
 
 .banner-content {
@@ -153,6 +156,9 @@
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
+
+    /* 🔹 Ajuste suave al reducir ventana */
+    transition: font-size 0.3s ease;
 }
 
 .banner-content p {
@@ -161,6 +167,7 @@
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.6;
+    transition: all 0.3s ease;
 }
 
 /* Contenedor para las formas en escritorio */
@@ -173,6 +180,9 @@
     width: 100%;
     max-width: 1000px;
     margin-top: 10px;
+
+    /* 🔹 Hace que el grid se reorganice suavemente */
+    transition: all 0.3s ease;
 }
 
 /* Estilos de las formas individuales */
@@ -181,6 +191,7 @@
     height: 160px;
     background-color: #eee;
     border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 /* Colores y formas específicas */
@@ -211,55 +222,83 @@
     border-radius: 50%;
 }
 
+/* 🔹 NUEVO BLOQUE: Ajuste fluido entre escritorio y tablet (sin tocar móvil) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .banner {
+        height: auto;
+        padding: 60px 40px;
+    }
+
+    .banner-content h2 {
+        font-size: 38px;
+    }
+
+    .banner-content p {
+        font-size: 15px;
+        max-width: 600px;
+    }
+
+    .banner-shapes {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 25px;
+        max-width: 800px;
+    }
+
+    .shape {
+        width: 140px;
+        height: 140px;
+    }
+}
+
 /* -------------------------------------- */
 /* Estilos generales de ¿Quiénes somos? */
 /* -------------------------------------- */
 .quienes-somos {
     width: 100%;
     max-width: 1200px;
-    height: 700px;
+    min-height: 700px;
     margin: -20px auto 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 40px;
     background-color: #ffffff;
     border-radius: 20px;
-    padding: 20px;
+    padding: 40px;
     box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
 }
 
-/* Lado izquierdo: Contenedor de la imagen y la forma */
+/* Lado izquierdo: Contenedor de la imagen */
 .quienes-somos-image-wrapper {
     position: relative;
-    width: 600px; /* Tamaño del contenedor */
-    height: 600px;
-    display: flex; /* Usamos flexbox para centrar la imagen */
+    flex: 1 1 50%;
+    max-width: 550px;
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .quienes-somos-image-shape {
-    /* Este div lo usamos como contenedor para la imagen y el badge */
     position: relative;
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 
 .quienes-somos-image {
-    width: 100%; /* Ocupa todo el contenedor para mantener la proporción de la imagen */
-    height: 100%;
-    object-fit: contain; /* Ajusta la imagen dentro del contenedor sin distorsionarla */
-    z-index: 1; /* Asegura que la imagen esté detrás del badge */
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    z-index: 1;
 }
 
 .experience-badge {
     position: absolute;
     top: 50%;
-    right: -20px; /* Posiciona el badge a la derecha para que se superponga */
+    right: -20px;
     transform: translateY(-50%);
-    width: 160px;
-    height: 160px;
+    width: 150px;
+    height: 150px;
     background-color: #ed217c;
     border-radius: 50%;
     color: #fff;
@@ -273,32 +312,32 @@
 }
 
 .experience-badge p:first-child {
-    font-size: 40px;
+    font-size: 36px;
     font-weight: bold;
     margin: 0;
 }
 
 .experience-badge p:last-child {
-    font-size: 25px;
+    font-size: 20px;
     margin: 0;
     line-height: 1.2;
 }
 
 /* Lado derecho: Contenedor del texto */
 .quienes-somos-content {
+    flex: 1 1 50%;
     max-width: 600px;
 }
 
 .quienes-somos-content h4 {
-    font-size: 25px;
+    font-size: 24px;
     color: #555;
     margin: 0;
-    font-weight: normal;
+    font-weight: 500;
 }
 
 .quienes-somos-content h2 {
-    font-size: 42px;
-    font-weight: bold;
+    font-size: 40px;
     color: #222;
     margin: 10px 0 20px;
     line-height: 1.2;
@@ -312,7 +351,7 @@
     line-height: 1.6;
 }
 
-/* Estilos para el botón de llamada a la acción */
+/* Botón CTA */
 .link-cta {
     display: inline-block;
     margin-top: 20px;
@@ -332,46 +371,47 @@
 }
 
 
-
 /* -------------------------------------- */
 /* Estilos generales de "Historia + Misión + Visión" */
 /* -------------------------------------- */
 .historia-mision-vision {
     width: 100%;
-    height: 1105px; /* Altura fija como solicitaste */
+    min-height: 100vh;
     background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 100px;
+    padding: 60px 80px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 .historia-mision-vision-container {
     width: 100%;
     max-width: 1200px;
-    height: 80%; /* Ajustamos la altura para que las tarjetas ocupen el espacio deseado */
     display: flex;
     gap: 40px;
-    align-items: stretch; /* Esto hace que los items se estiren para llenar el contenedor */
+    align-items: stretch;
+    transition: all 0.3s ease;
 }
 
 /* Columna de la izquierda */
 .historia-column {
     flex: 1;
-    height: 100%; /* El 100% de la altura del contenedor padre */
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribuye Misión y Visión con espacio entre ellos */
+    justify-content: space-between;
+    gap: 20px;
 }
 
 .historia-card {
-    width: 100%;
-    height: calc(50% - 20px); /* Dividimos la altura disponible y restamos la mitad del gap */
+    flex: 1;
     background-color: #f39200;
     border-radius: 20px;
     padding: 40px;
     color: #fff;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
 .historia-card h3 {
@@ -383,8 +423,21 @@
 .historia-card p {
     font-size: 20px;
     line-height: 1.6;
-    margin-bottom: 15px;
     margin: 50px auto 0;
+}
+
+/* Figura */
+.figura-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.figura-card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 /* Columna de la derecha */
@@ -392,49 +445,92 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribuye Misión y Visión con espacio entre ellos */
-    height: 100%; /* Ocupa el 100% de la altura del contenedor padre */
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.vision-card,
+.mision-card {
+    flex: 1;
+    border-radius: 20px;
+    padding: 40px;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
 .vision-card {
-    width: 100%;
-    height: calc(50% - 20px); /* Dividimos la altura disponible y restamos la mitad del gap */
     background-color: #218380;
-    border-radius: 20px;
-    padding: 40px;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 .mision-card {
-    width: 100%;
-    height: calc(50% - 20px); /* Dividimos la altura disponible y restamos la mitad del gap */
     background-color: #3cb09c;
-    border-radius: 20px;
-    padding: 40px;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.vision-card h3 {
-    font-size: 42px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+.vision-card h3,
 .mision-card h3 {
     font-size: 42px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-.vision-card p {
-    font-size: 20px;
-    line-height: 1.6;
-    margin: 50px auto 0;
-}
+.vision-card p,
 .mision-card p {
     font-size: 20px;
     line-height: 1.6;
     margin: 50px auto 0;
+}
+/* 🔹 NUEVO BLOQUE: Ajuste fluido entre escritorio y tablet (sin tocar móvil) */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .historia-mision-vision {
+        padding: 60px 40px;
+        height: auto;
+    }
+
+    .historia-mision-vision-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        max-width: 900px;
+    }
+
+    .historia-column,
+    .mision-vision-column {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+    }
+
+    .historia-card,
+    .vision-card,
+    .mision-card {
+        width: 100%;
+        max-width: 700px;
+        padding: 35px;
+        height: auto;
+    }
+
+    .historia-card h3,
+    .vision-card h3,
+    .mision-card h3 {
+        font-size: 36px;
+    }
+
+    .historia-card p,
+    .vision-card p,
+    .mision-card p {
+        font-size: 18px;
+    }
+
+    .figura-card {
+        order: 2;
+        margin-top: 20px;
+    }
+
+    .figura-card img {
+        max-width: 400px;
+    }
 }
 
 /* -------------------------------------- */
