@@ -272,7 +272,7 @@
     /* -------------------------------------- */
     .nuestros-valores {
         padding: 40px 20px;
-        margin: 40px auto;
+        margin: -20px auto 0;
     }
 
     .valores-header {
@@ -334,6 +334,10 @@
     /* -------------------------------------- */
     /* Estilos generales de Equipo */
     /* -------------------------------------- */
+    .equipo h2 {
+        font-size: 35px;
+    }
+
     .equipo-grid {
         grid-template-columns: 1fr; /* 1 tarjeta por fila */
         gap: 30px; /* menos espacio entre tarjetas */
@@ -363,6 +367,10 @@
 
     .equipo-info p {
         font-size: 0.85rem;
+    }
+
+    .equipo-info-e p {
+        font-size: 0.75rem;
     }
 
     /* -------------------------------------- */

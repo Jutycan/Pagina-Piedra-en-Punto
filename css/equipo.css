@@ -536,25 +536,25 @@
 /* -------------------------------------- */
 /* Estilos generales de  "Nuestros Valores" */
 /* -------------------------------------- */
+/* -------------------------------------- */
+/* Estilos generales de  "Nuestros Valores" (ESCRITORIO MEJORADO) */
+/* -------------------------------------- */
 :root {
-    --color-pink-primary: #f06292; /* Rosado oscuro para el card activo */
-    --color-pink-line: #ed217c; /* Rosado más vibrante para la línea/fondo */
-    --color-gray-bg: #f5f5f5; /* Gris claro para el fondo de los cards inactivos */
+    --color-pink-primary: #f06292;
+    --color-pink-line: #ed217c;
+    --color-gray-bg: #f5f5f5;
     --color-text-dark: #333333;
     --color-text-light: #555555;
-    /* Puedes añadir más colores aquí si los necesitas en el futuro */
 }
 
-/* -------------------------------------- */
-/* Estilos generales de "Nuestros Valores" (ESCRITORIO) */
-/* -------------------------------------- */
 .nuestros-valores {
-    width: 80%;
-    max-width: 1400px;
+    width: 90%;
+    max-width: 1000px;
     margin: 80px auto;
-    padding: 0 50px;
-    font-family: 'Century Gothic', sans-serif; /* Título */
+    padding: 0 40px;
+    font-family: 'Century Gothic', sans-serif;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
 .valores-header {
@@ -572,36 +572,40 @@
 }
 
 .valores-header p {
-    font-family: 'Comfortaa', cursive; /* Párrafo */
+    font-family: 'Comfortaa', cursive;
     font-size: 18px;
     color: var(--color-text-light);
     line-height: 1.6;
 }
 
-/* Contenedor de la cuadrícula de tarjetas */
+/* Contenedor de tarjetas */
 .valores-grid {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 25px;
+    transition: all 0.3s ease;
 }
 
-/* Estilos de las tarjetas individuales (Estado por defecto/Gris) */
+/* Tarjetas individuales */
 .valor-card {
-    flex: 1; 
-    max-width: 250px;
+    flex: 1 1 250px;
+    max-width: 260px;
     min-height: 380px;
-    padding: 30px 15px;
+    padding: 30px 20px;
     border-radius: 12px;
     text-align: center;
-    
-    /* Estado inicial: Gris para todas las tarjetas */
-    background-color: var(--color-gray-bg); 
+    background-color: var(--color-gray-bg);
     color: var(--color-text-dark);
-    
-    /* Transición suave para el hover y el JS */
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.4s ease, color 0.4s ease, transform 0.3s ease;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     cursor: pointer;
+}
+
+.valor-card:hover {
+    background-color: var(--color-pink-primary);
+    color: #fff;
+    transform: translateY(-5px);
 }
 
 /* Icono dentro del círculo */
@@ -613,7 +617,7 @@
     height: 80px;
     margin: 0 auto 30px;
     border-radius: 50%;
-    background-color: transparent; /* Círculo interior transparente*/
+    background-color: transparent;
 }
 
 .valor-icon-wrapper img {
@@ -627,17 +631,16 @@
     margin-bottom: 20px;
 }
 
-/* Línea horizontal (div.valor-line) */
+/* Línea decorativa */
 .valor-line {
     width: 60px;
     height: 4px;
-    background-color: var(--color-pink-line); /* Línea por defecto rosada */
+    background-color: var(--color-pink-line);
     margin: 0 auto 20px;
     border-radius: 2px;
     transition: background-color 0.4s ease;
 }
 
-/* Texto de descripción corta */
 .valor-card p {
     font-size: 16px;
     line-height: 1.4;
@@ -645,17 +648,55 @@
     padding: 0 5px;
 }
 
-/* -------------------------------------- */
-/* Efecto HOVER (ESCRITORIO) */
-/* -------------------------------------- */
-
-.valor-card:hover {
-    background-color: var(--color-pink-primary);
-    color: #fff;
-}
-
+/* Hover línea blanca */
 .valor-card:hover .valor-line {
-    background-color: #fff; /* Cambia a blanco en estado hover */
+    background-color: #fff;
+}
+/* 🔹 Ajuste fluido entre 1024px y 769px */
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .nuestros-valores {
+        width: 90%;
+        padding: 0 30px;
+    }
+
+    .valores-header h2 {
+        font-size: 48px;
+    }
+
+    .valores-header p {
+        font-size: 17px;
+    }
+
+    .valores-grid {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .valor-card {
+        flex: 1 1 45%;
+        max-width: 340px;
+        min-height: 350px;
+        padding: 25px 20px;
+    }
+
+    .valor-card h3 {
+        font-size: 22px;
+    }
+
+    .valor-card p {
+        font-size: 15px;
+    }
+
+    .valor-icon-wrapper {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 25px;
+    }
+
+    .valor-icon-wrapper img {
+        width: 50px;
+        height: 50px;
+    }
 }
 
 
@@ -742,6 +783,29 @@
 }
 
 .equipo-info p {
+    font-size: 0.9rem;
+    color: gray;
+    margin: 0;
+}
+
+.equipo-info-e {
+    background: rgba(255, 255, 255, 0.95);
+    width: 100%;
+    padding: 12px 0;
+    position: relative;
+    z-index: 2;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.equipo-info-e h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.equipo-info-e p {
     font-size: 0.9rem;
     color: gray;
     margin: 0;
@@ -1004,6 +1068,7 @@
     align-items: flex-start;
     padding-top: 20px;
     box-sizing: border-box;
+    margin: 50px auto 0;
 }
 
 /* Contenedor del logo y los íconos de redes sociales */
@@ -1021,6 +1086,7 @@
 }
 .social-icons {
     margin: -50px auto 0;
+    display: flex;
 }
 
 .social-icons a img {
