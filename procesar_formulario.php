@@ -117,6 +117,7 @@ require __DIR__ . '/PHPMailer/Exception.php';
 $mail = new PHPMailer(true);
 
 try {
+    // ---- CONFIGURACIÓN SMTP ----
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
@@ -133,53 +134,85 @@ try {
         ]
     ];
 
-    // Envío al equipo
+    // ===============================================
+    // 📩 CORREO PARA LA JEFA (FORMAL Y EJECUTIVO)
+    // ===============================================
     $mail->setFrom('cortes270k@gmail.com', 'Formulario Piedra en Punto');
     $mail->addAddress('cortes270k@gmail.com', 'Equipo Piedra en Punto');
     $mail->isHTML(true);
-    $mail->Subject = "📩 Nuevo registro - Formulario general Piedra en Punto";
+    $mail->Subject = "📋 Nuevo registro recibido - Piedra en Punto";
+
     $mail->Body = "
-        <h2 style='color:#33614a;'>Nuevo registro recibido</h2>
-        <p><strong>Nombre:</strong> {$nombre}</p>
-        <p><strong>Empresa:</strong> {$empresa}</p>
-        <p><strong>Correo:</strong> {$email}</p>
-        <p><strong>Comentario:</strong> {$comentario}</p>
-        <hr>
-        <p>Estado actual: <b style='color:#f06292;'>Pendiente</b></p>
-        <a href='https://piedraenpunto.com/dashboard/gestion_leads.php' style='background:#33614a;color:white;padding:10px 20px;border-radius:5px;text-decoration:none;'>Abrir Panel</a>
+    <div style='font-family:Roboto,Arial,sans-serif;background:#f9f9f9;padding:40px;'>
+        <div style='max-width:600px;margin:auto;background:white;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);overflow:hidden;'>
+            <div style='text-align:center;padding:20px;background:#f06292;'>
+                <img src='https://piedraenpunto.com/imagenes/general/Icon Piedra en Punto.png' width='90' alt='Logo Piedra en Punto'>
+                <h2 style='color:white;margin:10px 0;'>Nuevo registro en el formulario general</h2>
+            </div>
+            <div style='padding:30px;color:#333;'>
+                <p><strong>Nombre:</strong> {$nombre}</p>
+                <p><strong>Empresa:</strong> {$empresa}</p>
+                <p><strong>Correo:</strong> {$email}</p>
+                <p><strong>Comentario:</strong> {$comentario}</p>
+                <hr style='border:0;border-top:1px solid #eee;margin:20px 0;'>
+                <p><strong>Estado actual:</strong> <span style='color:#f06292;'>Pendiente</span></p>
+                <div style='text-align:center;margin-top:25px;'>
+                    <a href='https://piedraenpunto.com/dashboard/gestion_leads.php' style='background:#33614a;color:white;padding:12px 25px;border-radius:6px;text-decoration:none;font-weight:bold;'>Abrir Panel de Gestión</a>
+                </div>
+            </div>
+            <div style='background:#f2f2f2;text-align:center;padding:15px;font-size:12px;color:#777;'>
+                © " . date('Y') . " Piedra en Punto · Mensaje automático del sistema.
+            </div>
+        </div>
+    </div>
     ";
     $mail->send();
 
-    // Envío al usuario
-    if ($recibir_info == 1) {
-        $mail2 = new PHPMailer(true);
-        $mail2->isSMTP();
-        $mail2->Host = 'smtp.gmail.com';
-        $mail2->SMTPAuth = true;
-        $mail2->Username = 'cortes270k@gmail.com';
-        $mail2->Password = 'bynhxhdosbcijffd';
-        $mail2->SMTPSecure = 'tls';
-        $mail2->Port = 587;
-        $mail2->CharSet = 'UTF-8';
-        $mail2->SMTPOptions = $mail->SMTPOptions;
+    // ===============================================
+    // 💌 CORREO PARA EL USUARIO (CÁLIDO Y CORPORATIVO)
+    // ===============================================
+    $mail2 = new PHPMailer(true);
+    $mail2->isSMTP();
+    $mail2->Host = 'smtp.gmail.com';
+    $mail2->SMTPAuth = true;
+    $mail2->Username = 'cortes270k@gmail.com';
+    $mail2->Password = 'bynhxhdosbcijffd';
+    $mail2->SMTPSecure = 'tls';
+    $mail2->Port = 587;
+    $mail2->CharSet = 'UTF-8';
+    $mail2->SMTPOptions = $mail->SMTPOptions;
 
-        $mail2->setFrom('cortes270k@gmail.com', 'Piedra en Punto');
-        $mail2->addAddress($email);
-        $mail2->isHTML(true);
-        $mail2->Subject = "¡Gracias por contactarte con Piedra en Punto!";
-        $mail2->Body = "
-            <div style='font-family:Roboto,Arial,sans-serif;color:#333'>
-                <h2 style='color:#33614a;'>¡Gracias por escribirnos, {$nombre}!</h2>
-                <p>Hemos recibido tu solicitud correctamente. En breve nuestro equipo se pondrá en contacto contigo.</p>
-                <p>Mientras tanto, te invitamos a conocer más sobre nosotros:</p>
-                <a href='https://piedraenpunto.com' style='color:#f06292;'>Visita nuestra página web</a><br>
-                <a href='https://www.instagram.com/piedraenpunto.com' style='color:#33614a;'>Síguenos en Instagram</a>
-                <hr>
-                <p style='font-size:12px;color:#888;'>Este mensaje fue generado automáticamente por el sistema de contacto de Piedra en Punto.</p>
+    $mail2->setFrom('cortes270k@gmail.com', 'Piedra en Punto');
+    $mail2->addAddress($email);
+    $mail2->isHTML(true);
+    $mail2->Subject = "✨ ¡Gracias por contactarte con Piedra en Punto!";
+
+    $mail2->Body = "
+    <div style='font-family:Roboto,Arial,sans-serif;background:#f9f9f9;padding:40px;'>
+        <div style='max-width:600px;margin:auto;background:white;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1);overflow:hidden;'>
+            <div style='text-align:center;padding:20px;background:#33614a;'>
+                <img src='https://piedraenpunto.com/imagenes/general/Icon Piedra en Punto.png' width='90' alt='Logo Piedra en Punto'>
+                <h2 style='color:white;margin:10px 0;'>¡Gracias por escribirnos, {$nombre}!</h2>
             </div>
-        ";
-        $mail2->send();
-    }
+            <div style='padding:30px;color:#333;'>
+                <p>Hemos recibido tu solicitud correctamente. Nuestro equipo se pondrá en contacto contigo en breve.</p>
+                <p>Mientras tanto, te invitamos a seguirnos y conocer más de nuestro trabajo:</p>
+                <div style='text-align:center;margin:25px 0;'>
+                    <a href='https://piedraenpunto.com' style='background:#f06292;color:white;padding:10px 20px;border-radius:5px;text-decoration:none;'>Visitar nuestro sitio web</a>
+                </div>
+                <div style='text-align:center;'>
+                    <a href='#' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733547.png' width='24'></a>
+                    <a href='https://www.instagram.com/piedraenpunto?igsh=MWRpaWE3Z2Z1b2Njcw%3D%3D&utm_source=qr' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733558.png' width='24'></a>
+                    <a href='https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A108482616&keywords=Piedra%20en%20Punto&origin=ENTITY_SEARCH_HOME_HISTORY&sid=yUC' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733561.png' width='24'></a>
+                </div>
+            </div>
+            <div style='background:#f2f2f2;text-align:center;padding:15px;font-size:12px;color:#777;'>
+                © " . date('Y') . " Piedra en Punto · Todos los derechos reservados.
+            </div>
+        </div>
+    </div>
+    ";
+    $mail2->send();
 
     echo json_encode(["success" => true, "message" => "Formulario enviado correctamente."]);
 
@@ -188,5 +221,6 @@ try {
     echo json_encode(["success" => false, "message" => "Error al enviar correos: " . $mail->ErrorInfo]);
 }
 ?>
+
 
 
