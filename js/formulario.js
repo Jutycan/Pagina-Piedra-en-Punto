@@ -1,64 +1,64 @@
 // ===============================
 // FORMULARIO GENERAL - Piedra en Punto
 // ===============================
-
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("contact-form");
 
-    // Aseguramos que el formulario exista
-    if (!form) return;
+    if (!form) {
+        console.error("❌ No se encontró el formulario con id='contact-form'.");
+        return;
+    }
 
     form.addEventListener("submit", function (e) {
-        e.preventDefault(); // Evita recargar la página
+        e.preventDefault();
 
-        // Desactivar botón mientras se envía
-        const submitBtn = form.querySelector("button[type='submit']");
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Enviando...";
-
-        // Ejecutar reCAPTCHA v3
+        console.log("📤 Enviando formulario...");
         grecaptcha.ready(function () {
-            grecaptcha.execute("TU_CLAVE_PUBLICA_RECAPTCHA", { action: "submit" }).then(function (token) {
-                // Insertar token en el campo oculto
+            // ✅ Tu clave pública real de reCAPTCHA v3
+            grecaptcha
+            .execute("6Ldk0OwrAAAAAPUdgSoQmF1GAkIKls0SME5qy4f2", { action: "submit" })
+            .then(function (token) {
+                console.log("✅ reCAPTCHA ejecutado correctamente. Token recibido.");
+
+                // Asignar el token al campo oculto
                 document.getElementById("recaptchaResponse").value = token;
 
-                // Crear objeto con los datos del formulario
+                // Enviar datos del formulario
                 const formData = new FormData(form);
 
-                // Enviar datos al servidor
-                fetch("procesar_formulario.php", {
+                fetch("/procesar_formulario.php", {
                     method: "POST",
-                    body: formData
+                    body: formData,
                 })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.success) {
-                            mostrarMensaje("✅ ¡Formulario enviado correctamente! Gracias por contactarte con Piedra en Punto.", "success");
-                            form.reset();
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("📦 Respuesta del servidor:", data);
+
+                    if (data.success) {
+                        // Mostrar modal o mensaje de éxito
+                        const modal = document.getElementById("modal-exito");
+                        if (modal) {
+                            modal.style.display = "block";
                         } else {
-                            mostrarMensaje("⚠️ " + data.message, "error");
+                            alert("✅ Formulario enviado correctamente.");
                         }
-                    })
-                    .catch(() => {
-                        mostrarMensaje("❌ Ocurrió un error al enviar el formulario. Inténtalo nuevamente.", "error");
-                    })
-                    .finally(() => {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = "Enviar →";
-                    });
+                        form.reset();
+                    } else {
+                        console.error("⚠️ Error del servidor:", data.error || "Desconocido");
+                        alert("Hubo un problema al enviar el formulario. Intenta nuevamente.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("❌ Error en la petición fetch:", error);
+                    alert("Error de conexión. Verifica tu red o el archivo PHP.");
+                });
+            })
+            .catch(function (error) {
+                console.error("❌ Error al ejecutar reCAPTCHA:", error);
+                alert("Error con reCAPTCHA. Por favor, recarga la página e inténtalo otra vez.");
             });
         });
     });
-
-    // Función para mostrar mensajes bonitos al usuario
-    function mostrarMensaje(mensaje, tipo) {
-        let box = document.createElement("div");
-        box.textContent = mensaje;
-        box.className = `alerta-formulario ${tipo}`;
-        document.body.appendChild(box);
-
-        // Desaparece automáticamente después de 4 segundos
-        setTimeout(() => box.remove(), 4000);
-    }
 });
+
 

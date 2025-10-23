@@ -265,6 +265,60 @@
 /* -------------------------------------- */
 .desktop-only { display: block; }
 .mobile-only { display: none; }
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .banner-section {
+        height: auto;
+        padding: 60px 40px;
+    }
+
+    .banner-text-top h1 {
+        font-size: 3.2rem;
+    }
+
+    .banner-text-top p {
+        font-size: 1.1rem;
+    }
+
+    .banner-main-visual {
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+    .chef-image {
+        width: 340px;
+    }
+
+    .chef-image-container {
+        margin-left: 40px;
+        position: relative;
+        margin: -65px auto 0;
+    }
+
+    .pink-square-bg {
+        width: 260px;
+        height: 260px;
+    }
+
+    .quote-box {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 80%;
+        margin: 0 auto 30px auto;
+        text-align: center;
+    }
+
+    .experience-circle {
+        position: relative;
+        right: 0;
+        top: 0;
+        transform: none;
+        margin: 30px auto 0 auto;
+    }
+}
+
 
 /* -------------------------------------- */
 /* Estilos del Frame 001 */
@@ -326,6 +380,37 @@
     font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
+}
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+    .about-section {
+        height: auto;
+        padding: 60px 40px;
+    }
+
+    .about-content {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 50px;
+    }
+
+    .about-image-wrapper {
+        width: 380px;
+        height: 380px;
+    }
+
+    .about-text-content {
+        max-width: 600px;
+        text-align: center;
+    }
+
+    .about-text-content h2 {
+        font-size: 2.4rem;
+    }
+
+    .about-text-content p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
 }
 
 /* -------------------------------------- */
@@ -503,6 +588,10 @@
     height: 100%;
 }
 
+.pink-title {
+    color: #e91e63;
+}
+
 .contact-form-content {
     width: 50%;
     padding: 0 50px 0 20px;
@@ -671,6 +760,7 @@
     align-items: flex-start;
     padding-top: 20px;
     box-sizing: border-box;
+    margin: 50px auto 0;
 }
 
 /* Contenedor del logo y los íconos de redes sociales */
@@ -688,6 +778,7 @@
 }
 .social-icons {
     margin: -50px auto 0;
+    display: flex;
 }
 
 .social-icons a img {
