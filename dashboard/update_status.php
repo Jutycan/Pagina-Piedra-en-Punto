@@ -1,50 +1,43 @@
 <?php
-// Script para actualizar el estado del lead
+session_start();
 
-// 🚨🚨🚨 INCLUYE TUS CREDENCIALES REALES AQUÍ 🚨🚨🚨
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'u894610526_P_Formulario1'); 
-define('DB_PASSWORD', 'Ejercicios$2021$'); 
-define('DB_NAME', 'u894610526_Formulario_1_P'); 
+// CONFIG DB
+$DB_HOST = "localhost";
+$DB_USER = "u894610526_formulario_g";
+$DB_PASS = "Vero$2025$"; // <-- tu contraseña
+$DB_NAME = "u894610526_piedraenpunto";
 
-header('Content-Type: application/json');
-
-// 1. Validar que la solicitud sea POST
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+// Solo POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: gestion_leads.php");
     exit;
 }
 
-$lead_id = $_POST['id'] ?? null;
-$new_status = $_POST['status'] ?? null;
+// CSRF simple
+if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
+    die("Token inválido.");
+}
 
-// 2. Validar datos
-if (empty($lead_id) || !in_array($new_status, ['Pendiente', 'Contestado'])) {
-    echo json_encode(['success' => false, 'message' => 'Datos inválidos.']);
+$id = intval($_POST['id'] ?? 0);
+$new_status = ($_POST['new_status'] === 'contestado') ? 'contestado' : 'pendiente';
+
+if ($id <= 0) {
+    header("Location: gestion_leads.php");
     exit;
 }
 
-// 3. Conexión a DB
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-if($link === false){
-    echo json_encode(['success' => false, 'message' => 'Error de conexión a la base de datos.']);
-    exit;
+// Conectar DB y actualizar
+$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+if ($conn->connect_error) {
+    die("Error DB");
 }
 
-// 4. Actualizar el estado
-$sql = "UPDATE leads SET status = ? WHERE id = ?";
-if ($stmt = mysqli_prepare($link, $sql)) {
-    mysqli_stmt_bind_param($stmt, "si", $new_status, $lead_id);
-    
-    if (mysqli_stmt_execute($stmt)) {
-        echo json_encode(['success' => true, 'message' => 'Estado actualizado a ' . $new_status]);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Error al ejecutar la actualización: ' . mysqli_stmt_error($stmt)]);
-    }
-    mysqli_stmt_close($stmt);
-} else {
-    echo json_encode(['success' => false, 'message' => 'Error al preparar la consulta.']);
-}
+$stmt = $conn->prepare("UPDATE leads SET estado = ? WHERE id = ?");
+$stmt->bind_param("si", $new_status, $id);
+$stmt->execute();
+$stmt->close();
+$conn->close();
 
-mysqli_close($link);
-?>
+// Redirigir de vuelta con un mensaje corto (podrías mostrar flash messages)
+header("Location: gestion_leads.php");
+exit;

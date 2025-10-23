@@ -1,44 +1,33 @@
 <?php
-// Script para ELIMINAR TODOS los registros de la tabla 'leads'
+session_start();
 
-// 🚨🚨🚨 INCLUYE TUS CREDENCIALES REALES AQUÍ 🚨🚨🚨
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'u894610526_P_Formulario1'); 
-define('DB_PASSWORD', 'Ejercicios$2021$'); // ¡Asegúrate de que sean las reales!
-define('DB_NAME', 'u894610526_Formulario_1_P'); 
+// CONFIG DB
+$DB_HOST = "localhost";
+$DB_USER = "u894610526_formulario_g";
+$DB_PASS = "Vero$2025$"; // <-- tu contraseña
+$DB_NAME = "u894610526_piedraenpunto";
 
-header('Content-Type: application/json');
-
-// 1. Validar que la solicitud sea POST
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+// Solo POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: gestion_leads.php");
     exit;
 }
 
-// 2. Conexión a DB
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-if($link === false){
-    echo json_encode(['success' => false, 'message' => 'Error de conexión a la base de datos.']);
-    exit;
+// CSRF
+if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== ($_SESSION['csrf_token'] ?? '')) {
+    die("Token inválido.");
 }
 
-// 3. Comando SQL para vaciar la tabla COMPLETAMENTE
-// TRUNCATE TABLE es mucho más rápido que DELETE FROM para vaciar tablas.
-$sql = "TRUNCATE TABLE leads"; 
-
-if (mysqli_query($link, $sql)) {
-    // Éxito: Retorna una respuesta de éxito a JavaScript
-    echo json_encode([
-        'success' => true, 
-        'message' => '✅ ¡Tabla de Leads limpiada con éxito! La tabla ahora está vacía.'
-    ]);
-} else {
-    // Error: Retorna un mensaje de error
-    echo json_encode([
-        'success' => false, 
-        'message' => '❌ Error al vaciar la tabla: ' . mysqli_error($link)
-    ]);
+// Conectar
+$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+if ($conn->connect_error) {
+    die("Error DB");
 }
 
-mysqli_close($link);
-?>
+// TRUNCATE
+$conn->query("TRUNCATE TABLE leads");
+$conn->close();
+
+// Regresar
+header("Location: gestion_leads.php");
+exit;

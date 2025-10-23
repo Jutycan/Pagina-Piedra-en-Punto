@@ -1,179 +1,194 @@
 <?php
-// 🚨🚨🚨 INCLUYE TUS CREDENCIALES REALES AQUÍ 🚨🚨🚨
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'u894610526_P_Formulario1'); 
-define('DB_PASSWORD', 'Ejercicios$2021$'); // ¡REVISA ESTO!
-define('DB_NAME', 'u894610526_Formulario_1_P'); 
+session_start();
 
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-if($link === false){
-    die("ERROR: No se pudo conectar a la base de datos.");
+// -----------------
+// CONFIG DB - pon tu contraseña localmente
+// -----------------
+$DB_HOST = "localhost";
+$DB_USER = "u894610526_formulario_g";
+$DB_PASS = "Vero$2025$"; // <-- Pega tu contraseña aquí (NO la compartas)
+$DB_NAME = "u894610526_piedraenpunto";
+
+// Conectar
+$conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+if ($conn->connect_error) {
+    die("Error de conexión DB: " . $conn->connect_error);
 }
 
-$leads = [];
-$sql = "SELECT id, nombre, empresa, email, comentario, opt_in, status, email_enviado, fecha_registro FROM leads ORDER BY fecha_registro DESC";
-if ($result = mysqli_query($link, $sql)) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        $leads[] = $row;
-    }
-    mysqli_free_result($result);
+// Generar token CSRF si no existe
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(24));
 }
-mysqli_close($link);
+$csrf = $_SESSION['csrf_token'];
+
+// Búsqueda (opcional)
+$search = trim($_GET['q'] ?? '');
+
+// Preparar consulta (limitada a 200 registros para no cargar)
+$sql = "SELECT id, nombre, empresa, email, comentario, recibir_info, politica_datos, estado, created_at 
+        FROM leads";
+$params = [];
+if ($search !== '') {
+    $sql .= " WHERE nombre LIKE ? OR email LIKE ? OR empresa LIKE ? OR comentario LIKE ?";
+    $like = "%$search%";
+    $params = [$like, $like, $like, $like];
+}
+$sql .= " ORDER BY created_at DESC LIMIT 200";
+
+$stmt = $conn->prepare($sql);
+if ($params) {
+    $types = str_repeat('s', count($params));
+    $stmt->bind_param($types, ...$params);
+}
+$stmt->execute();
+$result = $stmt->get_result();
+
+function esc($s) {
+    return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Gestión de Leads - Piedra en Punto</title>
-    <style>
-        /* Estilos CSS incluidos directamente para simplificar el despliegue */
-        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f7f3ed; }
-        h1 { color: #33614a; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        th, td { padding: 12px 15px; border: 1px solid #ddd; text-align: left; font-size: 14px; }
-        th { background-color: #33614a; color: white; }
-        tr:nth-child(even) { background-color: #f9f9f9; }
-        .status-pendiente { background-color: #ffe0b2; color: #e65100; font-weight: bold; padding: 5px; border-radius: 3px; }
-        .status-contestado { background-color: #c8e6c9; color: #2e7d32; font-weight: bold; padding: 5px; border-radius: 3px; }
-        .select-status { padding: 8px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
-        #btn-truncate {
-            background-color: #d32f2f; 
-            color: white; 
-            padding: 10px 20px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panel — Leads | Piedra en Punto</title>
+<style>
+/* Minimal styles: copia/ajusta según tu theme */
+:root{
+    --rosa:#f06292;
+    --verde:#33614a;
+    --bg:#f4f6f8;
+    --card:#ffffff;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,Arial,Helvetica,sans-serif;margin:0;background:var(--bg);color:#111}
+.header{background:linear-gradient(90deg,var(--rosa),#e86aa5); color:white;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+.header .brand{display:flex;align-items:center;gap:12px}
+.header img{height:44px}
+.container{max-width:1100px;margin:26px auto;padding:0 20px}
+.card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+.table{width:100%;border-collapse:collapse;margin-top:12px}
+.table th,.table td{padding:10px 12px;border-bottom:1px solid #eef1f4;text-align:left;font-size:14px}
+.table th{background:#fbfcfd;color:#333;font-weight:600}
+.btn{display:inline-block;padding:8px 12px;border-radius:6px;text-decoration:none;border:none;cursor:pointer;font-size:13px}
+.btn-primary{background:var(--verde);color:#fff}
+.btn-danger{background:#c62828;color:#fff}
+.btn-muted{background:#eef3f0;color:#333}
+.small{font-size:13px;color:#666}
+.actions form{display:inline-block;margin-right:6px}
+.search{display:flex;gap:8px;align-items:center}
+.notice{margin-top:12px;padding:10px;border-radius:8px;background:#fff3cd;color:#856404}
+.footer{margin-top:18px;font-size:13px;color:#666}
+.badge{display:inline-block;padding:6px 8px;border-radius:12px;font-size:13px}
+.badge-pend{background:#fff0f6;color:var(--rosa);border:1px solid rgba(240,100,150,0.12)}
+.badge-cont{background:#ecf9f3;color:var(--verde);border:1px solid rgba(50,120,90,0.08)}
+.search input{padding:8px;border:1px solid #ddd;border-radius:6px}
+</style>
 </head>
 <body>
-    <h1>Dashboard de Gestión de Leads</h1>
-    <p>Leads encontrados: <?php echo count($leads); ?></p>
+<div class="header">
+    <div class="brand">
+        <img src="/imagenes/general/Icon Piedra en Punto.png" alt="Logo Piedra en Punto">
+        <div>
+            <div style="font-weight:700;font-size:18px">Panel de Leads — Piedra en Punto</div>
+            <div class="small">Gestiona los registros recibidos desde el formulario</div>
+        </div>
+    </div>
+    <div>
+        <a href="/" class="btn btn-muted">Ver sitio</a>
+    </div>
+</div>
 
-    <button id="btn-truncate">
-        🚨 Limpiar/Eliminar TODOS los Registros
-    </button>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Fecha</th>
-                <th>Nombre</th>
-                <th>Empresa</th>
-                <th>Email</th>
-                <th>Comentario</th>
-                <th>Info</th>
-                <th>Email OK</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($leads as $lead): ?>
-            <tr data-lead-id="<?php echo $lead['id']; ?>">
-                <td><?php echo $lead['id']; ?></td>
-                <td><?php echo date('Y-m-d H:i', strtotime($lead['fecha_registro'])); ?></td>
-                <td><?php echo htmlspecialchars($lead['nombre']); ?></td>
-                <td><?php echo htmlspecialchars($lead['empresa']); ?></td>
-                <td><?php echo htmlspecialchars($lead['email']); ?></td>
-                <td><?php echo htmlspecialchars(substr($lead['comentario'], 0, 50)) . '...'; ?></td>
-                <td><?php echo $lead['opt_in'] ? 'Sí' : 'No'; ?></td>
-                <td><?php echo $lead['email_enviado'] ? '✅' : '❌'; ?></td>
-                <td>
-                    <select class="select-status" data-lead-id="<?php echo $lead['id']; ?>">
-                        <option value="Pendiente" <?php echo $lead['status'] === 'Pendiente' ? 'selected' : ''; ?>>Pendiente</option>
-                        <option value="Contestado" <?php echo $lead['status'] === 'Contestado' ? 'selected' : ''; ?>>Contestado</option>
-                    </select>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+<div class="container">
+    <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <h2 style="margin:0">Registros (últimos 200)</h2>
+            <div style="display:flex;gap:8px;align-items:center">
+                <form method="get" class="search" action="">
+                    <input type="text" name="q" placeholder="Buscar por nombre, email, empresa..." value="<?= esc($search) ?>">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </form>
+                <form method="post" action="truncate_leads.php" onsubmit="return confirm('¿Seguro borrar todos los registros? Esta acción es irreversible.');">
+                    <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
+                    <button class="btn btn-danger" type="submit">Borrar todos</button>
+                </form>
+            </div>
+        </div>
 
-    <script>
-        // Lógica para cambiar el estado del Lead
-        document.querySelectorAll('.select-status').forEach(select => {
-            select.addEventListener('change', async function() {
-                const leadId = this.dataset.leadId;
-                const newStatus = this.value;
-                const row = document.querySelector(`tr[data-lead-id="${leadId}"]`);
+        <table class="table" aria-describedby="listado">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Empresa</th>
+                    <th>Email</th>
+                    <th>Comentario</th>
+                    <th>Estado</th>
+                    <th>Creado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while($row = $result->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= esc($row['id']) ?></td>
+                        <td><?= esc($row['nombre']) ?></td>
+                        <td><?= esc($row['empresa']) ?></td>
+                        <td><a href="mailto:<?= esc($row['email']) ?>"><?= esc($row['email']) ?></a></td>
+                        <td><?= esc(mb_strimwidth($row['comentario'], 0, 70, '...')) ?></td>
+                        <td>
+                            <?php if ($row['estado'] === 'contestado'): ?>
+                                <span class="badge badge-cont">Contestado</span>
+                            <?php else: ?>
+                                <span class="badge badge-pend">Pendiente</span>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= esc($row['created_at']) ?></td>
+                        <td class="actions">
+                            <?php if ($row['estado'] === 'pendiente'): ?>
+                                <form method="post" action="update_status.php" style="display:inline">
+                                    <input type="hidden" name="id" value="<?= esc($row['id']) ?>">
+                                    <input type="hidden" name="new_status" value="contestado">
+                                    <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
+                                    <button class="btn btn-primary" type="submit">Marcar contestado</button>
+                                </form>
+                            <?php else: ?>
+                                <form method="post" action="update_status.php" style="display:inline">
+                                    <input type="hidden" name="id" value="<?= esc($row['id']) ?>">
+                                    <input type="hidden" name="new_status" value="pendiente">
+                                    <input type="hidden" name="csrf_token" value="<?= $csrf ?>">
+                                    <button class="btn btn-muted" type="submit">Marcar pendiente</button>
+                                </form>
+                            <?php endif; ?>
 
-                if (confirm(`¿Segura que quieres cambiar el estado del Lead #${leadId} a ${newStatus}?`)) {
-                    
-                    try {
-                        const response = await fetch('update_status.php', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                            body: `id=${leadId}&status=${newStatus}`
-                        });
-                        
-                        const result = await response.json();
+                            <button class="btn btn-muted" onclick="verDetalle(<?= esc($row['id']) ?>)">Ver</button>
 
-                        if (result.success) {
-                            alert(`¡Éxito! ${result.message}`);
-                            
-                            // 5. Actualizar la apariencia de la fila inmediatamente (Opcional: puedes recargar si lo prefieres)
-                            // Si quieres recargar para simplificar: window.location.reload();
+                            <form method="post" action="truncate_leads.php" style="display:none">
+                                <!-- placeholder -->
+                            </form>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
 
-                        } else {
-                            alert('Error al actualizar: ' + result.message);
-                            // Revertir el select si falla
-                            this.value = this.dataset.currentStatus; 
-                        }
-                    } catch (error) {
-                        alert('Error de conexión con el servidor.');
-                        // Revertir el select si falla
-                        this.value = this.dataset.currentStatus;
-                    }
-                } else {
-                    // Si cancela, revertir la selección
-                    this.value = this.dataset.currentStatus;
-                }
-                // Guardar el estado actual después de una actualización exitosa o al cargar
-                this.dataset.currentStatus = this.value; // Ya se actualizó this.value
-            });
-            // Inicializar el estado actual al cargar
-            select.dataset.currentStatus = select.value;
-        });
+        <div class="footer">
+            <span class="small">Panel protegido por Hostinger — acceso restringido.</span>
+        </div>
+    </div>
+</div>
 
-
-        // Lógica para el botón de TRUNCATE (Limpiar todos los registros)
-        document.getElementById('btn-truncate').addEventListener('click', async function() {
-            // Pedir doble confirmación para evitar accidentes
-            if (!confirm('🚨 ATENCIÓN: Esta acción ELIMINARÁ PERMANENTEMENTE TODOS los leads. ¿Estás absolutamente segura?')) {
-                return; 
-            }
-
-            if (!confirm('❌ CONFIRMACIÓN FINAL: ¿De verdad quieres borrar TODO? Esta acción es IRREVERSIBLE.')) {
-                return;
-            }
-
-            try {
-                // Llamar al script PHP que vacía la tabla
-                const response = await fetch('truncate_leads.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: '' // No necesitamos enviar datos
-                });
-                
-                const result = await response.json();
-
-                if (result.success) {
-                    alert(result.message);
-                    
-                    // Recargar la página para mostrar la tabla vacía
-                    window.location.reload(); 
-
-                } else {
-                    alert('Error al intentar limpiar la tabla: ' + result.message);
-                }
-            } catch (error) {
-                alert('Error de conexión con el script de limpieza del servidor.');
-                console.error(error);
-            }
-        });
-    </script>
+<script>
+// Función simple para mostrar detalle (puedes mejorar con modal)
+function verDetalle(id){
+    // Hacer fetch para traer detalles (opcional). Por ahora simple alerta con row data desde DOM no disponible.
+    alert('Para ver detalles completos usa phpMyAdmin o implementa el modal de detalle.');
+}
+</script>
 </body>
 </html>
+<?php
+$stmt->close();
+$conn->close();
+?>
