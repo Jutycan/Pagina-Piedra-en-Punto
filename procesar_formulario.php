@@ -126,7 +126,7 @@ try {
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'cortes270k@gmail.com'; // Gmail de la jefa o tuyo
-    $mail->Password = 'pkgwbezvtiyqiire'; // Contraseña de aplicación de Gmail
+    $mail->Password = 'bynhxhdosbcijffd'; // Contraseña de aplicación de Gmail
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
@@ -158,7 +158,7 @@ try {
         $mail2->Host = 'smtp.gmail.com';
         $mail2->SMTPAuth = true;
         $mail2->Username = 'cortes270k@gmail.com';
-        $mail2->Password = 'pkgwbezvtiyqiire';
+        $mail2->Password = 'bynhxhdosbcijffd';
         $mail2->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail2->Port = 587;
 
