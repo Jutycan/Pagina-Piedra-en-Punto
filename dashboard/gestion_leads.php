@@ -4,7 +4,7 @@ session_start();
 // ----------------- CONFIG DB -----------------
 $DB_HOST = "localhost";
 $DB_USER = "u894610526_formulario_g";
-$DB_PASS = "DVero$2025$"; // <-- tu contraseña real
+$DB_PASS = "Vero$2025$"; // <-- tu contraseña real
 $DB_NAME = "u894610526_piedraenpunto";
 
 $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
