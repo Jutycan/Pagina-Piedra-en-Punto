@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
             grecaptcha.execute("6Ldk0OwrAAAAAPUdgSoQmF1GAkIKls0SME5qy4f2", { action: "submit" })
             .then(function (token) {
                 const formData = new FormData(form);
-                formData.append("recaptcha_response", token);
+                formData.append("recaptchaResponse", token);
 
                 fetch("/procesar_contacto.php", {
                     method: "POST",
