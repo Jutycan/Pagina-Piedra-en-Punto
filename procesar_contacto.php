@@ -1,190 +1,165 @@
 <?php
-// Establecer la zona horaria a México City para las marcas de tiempo
-date_default_timezone_set('America/Mexico_City');
-// Configurar el encabezado para que la respuesta sea JSON (necesario para AJAX)
 header('Content-Type: application/json');
 
-// --- 1. CONFIGURACIÓN CRÍTICA (¡REEMPLAZA ESTOS VALORES!) ---
+// ==========================
+// CONFIGURACIÓN BASE
+// ==========================
+$host = "localhost";        // o el host de tu hosting (ej: "localhost" en Hostinger)
+$dbname = "u894610526_piedraenpunto"; // reemplaza con el nombre real de tu BD
+$username = "u894610526_formulario_g";    // reemplaza con tu usuario MySQL
+$password = "Vero$2025$";      // reemplaza con tu contraseña MySQL
 
-// Configuración de la Base de Datos MySQL
-$db_host = 'localhost';         // Ejemplo: 'localhost'
-$db_user = 'u894610526_P_Formulario1';  // Ejemplo: 'root'
-$db_pass = 'Ejercicios$2021$';// Ejemplo: 'miclave123'
-$db_name = 'u894610526_Formulario_1_P';  // Ejemplo: 'piedra11_db'
+// Clave secreta reCAPTCHA v3
+$recaptcha_secret = "6Ldk0OwrAAAAALN0Ru1tskiwsjLu-wZj_vIxrBET"; 
 
-// Configuración del Correo Saliente (Usando un correo de la empresa o Gmail)
-$jefa_email = 'cortes270k@gmail.com'; // El correo desde donde se enviarán las notificaciones
-$jefa_pass = 'pkgwbezvtiyqiire';        // Si usas Gmail: Contraseña de Aplicación. Si es hosting: Contraseña normal.
-$jefa_address = 'cortes270k@gmail.com'; // El correo que recibirá la notificación del nuevo contacto
+// Correo de la jefa
+$jefa_email = "cortes270k@gmail.com";
 
-// URL de la Interfaz de Administración (Para el botón en el correo de notificación)
-$admin_url = 'https://piedraenpunto.com/admin_contacto.html'; 
-$nombre_empresa = 'Piedra en Punto';
-
-
-// --- 2. CONFIGURACIÓN PHPMailer (Asegúrate que las rutas sean correctas) ---
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-// Incluir los archivos de PHPMailer (AJUSTA ESTAS RUTAS SEGÚN TU ESTRUCTURA)
-require 'PHPMailer.php';
-require 'SMTP.php';
-require 'Exception.php';
-
-
-// Función de respuesta JSON para terminar la ejecución
-function jsonResponse($success, $message, $extra = []) {
-    echo json_encode(array_merge(["success" => $success, "message" => $message], $extra));
+// ==========================
+// 1️⃣ Verificar que vengan datos POST
+// ==========================
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    echo json_encode(["success" => false, "error" => "Método no permitido."]);
     exit;
 }
 
-// --- 3. VALIDACIÓN INICIAL Y PREPARACIÓN DE DATOS ---
-if ($_SERVER["REQUEST_METHOD"] != "POST") {
-    jsonResponse(false, "Método no permitido.");
+// ==========================
+// 2️⃣ Capturar los datos del formulario
+// ==========================
+$nombre   = trim($_POST["nombre"] ?? "");
+$email    = trim($_POST["email"] ?? "");
+$telefono = trim($_POST["telefono"] ?? "");
+$mensaje  = trim($_POST["mensaje"] ?? "");
+$token    = $_POST["recaptchaResponse"] ?? "";
+
+// Validar campos requeridos
+if (empty($nombre) || empty($email) || empty($mensaje) || empty($token)) {
+    echo json_encode(["success" => false, "error" => "Faltan campos obligatorios."]);
+    exit;
 }
 
-// Limpiar y obtener datos del formulario
-$nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_STRING);
-$email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$telefono = filter_input(INPUT_POST, 'telefono', FILTER_SANITIZE_STRING);
-$mensaje = filter_input(INPUT_POST, 'mensaje', FILTER_SANITIZE_STRING);
+// ==========================
+// 3️⃣ Verificar reCAPTCHA con Google
+// ==========================
+$recaptcha_url = "https://www.google.com/recaptcha/api/siteverify";
+$recaptcha_data = [
+    "secret" => $recaptcha_secret,
+    "response" => $token
+];
 
-$fecha_registro = date('Y-m-d H:i:s');
-$estado_inicial = 'Pendiente';
+$options = [
+    "http" => [
+        "method"  => "POST",
+        "header"  => "Content-type: application/x-www-form-urlencoded\r\n",
+        "content" => http_build_query($recaptcha_data)
+    ]
+];
+$context  = stream_context_create($options);
+$response = file_get_contents($recaptcha_url, false, $context);
+$result   = json_decode($response, true);
 
-// Verificación de campos obligatorios
-if (!$nombre || !$email || !$telefono) {
-    jsonResponse(false, "Faltan campos obligatorios (Nombre, Email, Teléfono).");
+if (!$result["success"] || $result["score"] < 0.5) {
+    echo json_encode(["success" => false, "error" => "reCAPTCHA no válido."]);
+    exit;
 }
 
+// ==========================
+// 4️⃣ Guardar en la base de datos
+// ==========================
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// --- 4. MySQL: CONEXIÓN, CREACIÓN DE TABLA Y ALMACENAMIENTO ---
-$conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
+    $stmt = $pdo->prepare("
+        INSERT INTO contacto (nombre, email, telefono, mensaje, estado, fecha_envio)
+        VALUES (:nombre, :email, :telefono, :mensaje, 'Pendiente', NOW())
+    ");
 
-if ($conn->connect_error) {
-    error_log("Error de conexión a la BD: " . $conn->connect_error);
-    jsonResponse(false, "Error interno del servidor (DB).");
+    $stmt->execute([
+        ":nombre" => $nombre,
+        ":email" => $email,
+        ":telefono" => $telefono,
+        ":mensaje" => $mensaje
+    ]);
+
+} catch (PDOException $e) {
+    echo json_encode(["success" => false, "error" => "Error al guardar en BD: " . $e->getMessage()]);
+    exit;
 }
 
-// Crear la tabla 'contactos' si no existe (mismo código SQL del archivo anterior)
-$sql_create = "CREATE TABLE IF NOT EXISTS contactos (
-    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    telefono VARCHAR(50) NOT NULL,
-    mensaje TEXT NOT NULL,
-    estado ENUM('Pendiente', 'Contestado') DEFAULT 'Pendiente',
-    fecha_registro DATETIME NOT NULL
-)";
-if (!$conn->query($sql_create)) {
-    error_log("Error al crear la tabla: " . $conn->error);
-    $conn->close();
-    jsonResponse(false, "Error interno al configurar la tabla.");
-}
+// ==========================
+// 5️⃣ Enviar correos con PHPMailer
+// ==========================
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// Inserción de datos usando sentencias preparadas (para prevenir inyección SQL)
-$stmt = $conn->prepare("INSERT INTO contactos (nombre, email, telefono, mensaje, estado, fecha_registro) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssss", $nombre, $email, $telefono, $mensaje, $estado_inicial, $fecha_registro);
-
-if (!$stmt->execute()) {
-    error_log("Error al guardar el registro en MySQL: " . $stmt->error);
-    $stmt->close();
-    $conn->close();
-    jsonResponse(false, "Error al guardar el registro en la base de datos.");
-}
-
-$contacto_id = $stmt->insert_id; // Obtener el ID que se acaba de generar en MySQL
-$stmt->close();
-$conn->close();
-
-
-// --- 5. Firestore: NOTA SOBRE SINCRONIZACIÓN EN TIEMPO REAL ---
-// Aquí es donde, en un sistema real, se usaría la API REST de Firestore o un SDK de servidor
-// para replicar el registro. Dado que no se puede ejecutar código fuera del script PHP,
-// el ID de MySQL ($contacto_id) es el identificador principal. El Panel de Admin del paso 3
-// deberá usar un mecanismo para gestionar y sincronizar este estado en el futuro.
-// Por ahora, solo usamos el ID para la respuesta y los correos.
-
-
-// --- 6. ENVÍO DE CORREOS CON PHPMailer ---
+require __DIR__ . '/PHPMailer/Exception.php';
+require __DIR__ . '/PHPMailer/PHPMailer.php';
+require __DIR__ . '/PHPMailer/SMTP.php';
 
 $mail = new PHPMailer(true);
 
 try {
-    // Configuración SMTP para Gmail/Servidor
+    // --- CONFIGURACIÓN GENERAL SMTP ---
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com'; // O el host de tu proveedor de correo (ej: mail.tudominio.com)
-    $mail->SMTPAuth   = true;
-    $mail->Username   = $jefa_email; 
-    $mail->Password   = $jefa_pass;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Usar SSL o TLS. STARTTLS es el más común.
-    $mail->Port       = 587; // Puerto para TLS/STARTTLS
-    $mail->CharSet    = 'UTF-8';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'cortes270k@gmail.com';
+    $mail->Password = 'bynhxhdosbcijffd';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->CharSet = 'UTF-8';
+
+    // --- ENVÍO A LA JEFA ---
+    $mail->setFrom('cortes270k@gmail.com', 'Sistema Web Piedra en Punto');
+    $mail->addAddress($jefa_email, 'Jefa Piedra en Punto');
     $mail->isHTML(true);
-    $mail->setFrom($jefa_email, $nombre_empresa);
+    $mail->Subject = "📩 Nuevo mensaje de contacto recibido";
 
-
-    // --- 6.1 Correo de Notificación a la Jefa ---
-    $mail->clearAllRecipients();
-    $mail->addAddress($jefa_address, 'Admin Contacto');
-    $mail->Subject = '🚨 NUEVO CONTACTO PENDIENTE - ID: ' . $contacto_id;
-    
-    $cuerpo_jefa = "
-    <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
-        <h2 style='color: #EC0868;'>Notificación de Nuevo Contacto Registrado</h2>
-        <p>Se ha recibido un nuevo mensaje a través del formulario de contacto. Ha sido marcado como <strong>Pendiente</strong> en la base de datos.</p>
-        <div style='background-color: #f9f9f9; padding: 20px; border: 1px solid #ddd; margin: 25px 0; border-radius: 8px;'>
-            <h3 style='color: #444; border-bottom: 2px solid #EC0868; padding-bottom: 10px;'>Detalles del Contacto</h3>
-            <p><strong>ID de Base de Datos:</strong> #$contacto_id</p>
-            <p><strong>Nombre:</strong> " . htmlspecialchars($nombre) . "</p>
-            <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
-            <p><strong>Teléfono:</strong> " . htmlspecialchars($telefono) . "</p>
-            <p><strong>Fecha/Hora:</strong> $fecha_registro</p>
-            <p><strong>Mensaje:</strong><br>" . nl2br(htmlspecialchars($mensaje)) . "</p>
-        </div>
-        
-        <!-- Botón para ir a la Interfaz de Gestión -->
-        <a href='$admin_url' style='display: inline-block; padding: 12px 25px; margin-top: 20px; background-color: #EC0868; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;'>
-            Ir al Panel de Gestión
-        </a>
-        <p style='margin-top: 30px; font-size: 0.8rem; color: #999;'>Este correo es automático, por favor, no responder.</p>
-    </div>
+    $mail->Body = "
+    <h2>Nuevo mensaje de contacto recibido</h2>
+    <p><strong>Nombre:</strong> $nombre</p>
+    <p><strong>Email:</strong> $email</p>
+    <p><strong>Teléfono:</strong> $telefono</p>
+    <p><strong>Mensaje:</strong><br>$mensaje</p>
+    <p><strong>Estado actual:</strong> Pendiente</p>
+    <hr>
+    <p>
+        <a href='https://piedraenpunto.com/dashboard3/update_contacto_status.php?email=$email' style='
+            background-color:#4CAF50;
+            color:white;
+            padding:10px 20px;
+            text-decoration:none;
+            border-radius:5px;'>Cambiar a Contestada</a>
+        &nbsp;&nbsp;
+        <a href='https://piedraenpunto.com/dashboard3/truncate_contacto.php' style='
+            background-color:#e53935;
+            color:white;
+            padding:10px 20px;
+            text-decoration:none;
+            border-radius:5px;'>Borrar todos los registros</a>
+    </p>
     ";
-    $mail->Body = $cuerpo_jefa;
+
     $mail->send();
 
-
-    // --- 6.2 Correo de Confirmación al Usuario ---
-    $mail->clearAllRecipients();
+    // --- ENVÍO AL USUARIO ---
+    $mail->clearAddresses();
     $mail->addAddress($email, $nombre);
-    $mail->Subject = 'Confirmación de Recepción de Mensaje - ' . $nombre_empresa;
-    
-    $cuerpo_usuario = "
-    <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
-        <h2 style='color: #4CAF50;'>¡Hola $nombre! Mensaje Recibido Correctamente.</h2>
-        <p>Agradecemos tu contacto. Hemos recibido tu mensaje y nuestro equipo lo revisará a la brevedad.</p>
-        <p><strong>Detalles de tu mensaje:</strong></p>
-        <div style='background-color: #f5f5f5; padding: 15px; border-left: 4px solid #EC0868; margin: 20px 0; border-radius: 4px;'>
-            <p><strong>Mensaje:</strong><br>" . nl2br(htmlspecialchars($mensaje)) . "</p>
-        </div>
-        <p>¡Te contactaremos pronto!</p>
-        <p style='margin-top: 30px;'>Saludos cordiales,<br>El equipo de $nombre_empresa.</p>
-    </div>
+    $mail->Subject = "✅ Hemos recibido tu mensaje";
+    $mail->Body = "
+    <h2>Hola, $nombre 👋</h2>
+    <p>Gracias por contactarte con <strong>Piedra en Punto</strong>.</p>
+    <p>Hemos recibido tu mensaje y nuestro equipo te responderá pronto.</p>
+    <p>Saludos cordiales,<br>El equipo de Piedra en Punto</p>
     ";
-    $mail->Body = $cuerpo_usuario;
+
     $mail->send();
+
+    echo json_encode(["success" => true]);
 
 } catch (Exception $e) {
-    // Si falla el correo, lo registramos pero el registro de BD es exitoso.
-    error_log("Error al enviar correos: {$mail->ErrorInfo}");
-    // No detenemos la ejecución, ya que el dato se guardó en MySQL, que es lo más importante.
+    echo json_encode(["success" => false, "error" => "Error al enviar correo: " . $mail->ErrorInfo]);
+    exit;
 }
-
-
-// --- 7. RESPUESTA FINAL AJAX EXITOSA ---
-jsonResponse(true, "Mensaje enviado y registrado.", [
-    "id" => $contacto_id,
-    "nombre" => $nombre
-]);
 ?>

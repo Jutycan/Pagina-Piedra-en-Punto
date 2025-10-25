@@ -24,89 +24,52 @@ document.addEventListener("DOMContentLoaded", function () {
 //------------------------------------------------------------------------------
 //-----------------------------FORMULARIO CONTACTO---------------------------------------
 //-----------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Elementos del Formulario
-    const form = document.getElementById('contact-form');
 
-    // 2. Elementos del Modal
-    const modal = document.getElementById('contact-modal');
-    const modalTitle = document.getElementById('modal-title-contact');
-    const modalMessage = document.getElementById('modal-message-contact');
-    const modalIcon = document.getElementById('modal-icon-contact');
-    const closeBtn = document.getElementById('modal-close-btn-contact');
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
 
     if (!form) {
-        console.error("No se encontró el formulario de contacto con ID 'contact-form'.");
-        return; 
+        console.error("❌ No se encontró el formulario con id='contact-form'.");
+        return;
     }
 
-    // --- Funcionalidad del Modal ---
-    const showModal = (success, title, message) => {
-        modalTitle.textContent = title;
-        modalMessage.textContent = message;
-            
-        // Estilos del icono
-        modalIcon.style.color = success ? '#4CAF50' : '#F44336'; 
-        modalIcon.innerHTML = success ? '✔️' : '❌';
-        
-        modal.style.display = 'block';
-    };
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-    closeBtn.onclick = () => {
-        modal.style.display = 'none';
-    };
+        grecaptcha.ready(function () {
+            grecaptcha.execute("6Ldk0OwrAAAAAPUdgSoQmF1GAkIKls0SME5qy4f2", { action: "submit" })
+            .then(function (token) {
+                const formData = new FormData(form);
+                formData.append("recaptcha_response", token);
 
-    window.onclick = (event) => {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    };
-    // -------------------------------
-
-    // --- Manejo del Envío del Formulario ---
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault(); 
-
-        const submitBtn = form.querySelector('.submit-btn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
-
-        try {
-            const formData = new FormData(form);
-            
-            // Envío de la petición AJAX al script PHP
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
+                fetch("/procesar_contacto.php", {
+                    method: "POST",
+                    body: formData
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        const modal = document.getElementById("contact-success-modal");
+                        if (modal) modal.style.display = "flex";
+                        form.reset();
+                    } else {
+                        alert("⚠️ Ocurrió un error: " + (data.error || "Intenta nuevamente."));
+                    }
+                })
+                .catch((error) => {
+                    console.error("❌ Error en la solicitud:", error);
+                    alert("Error al enviar el formulario.");
+                });
             });
-
-            const result = await response.json();
-
-            if (result.success) {
-                showModal(
-                    true, 
-                    '¡Mensaje Recibido!', 
-                    'Gracias por contactarnos, ' + result.nombre + '. Hemos recibido tu mensaje y te responderemos en breve.'
-                );
-                form.reset(); // Limpiar el formulario
-            } else {
-                showModal(
-                    false, 
-                    'Error al enviar el mensaje', 
-                    result.message || 'Hubo un error en el servidor. Por favor, inténtalo de nuevo.'
-                );
-            }
-
-        } catch (error) {
-            console.error('Error de red:', error);
-            showModal(
-                false, 
-                'Error de Conexión', 
-                'No pudimos conectar con el servidor. Verifica tu conexión e inténtalo de nuevo.'
-            );
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Enviar →';
-        }
+        });
     });
+
+    // Cerrar el modal
+    const closeBtn = document.querySelector(".close-button-custom");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", function () {
+            document.getElementById("contact-success-modal").style.display = "none";
+        });
+    }
 });
+
