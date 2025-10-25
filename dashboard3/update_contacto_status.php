@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 $host = "localhost";
 $dbname = "u894610526_piedraenpunto";
 $username = "u894610526_formulario_g";
@@ -8,19 +10,18 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if (isset($_GET['id'], $_GET['estado'])) {
-        $id = intval($_GET['id']);
-        $estado = $_GET['estado'] === 'Contestada' ? 'Contestada' : 'Pendiente';
+    $id = $_POST['id'] ?? null;
 
-        $stmt = $pdo->prepare("UPDATE contacto SET estado = :estado WHERE id = :id");
-        $stmt->execute([':estado' => $estado, ':id' => $id]);
-
-        header("Location: gestion_contacto.php");
+    if (!$id) {
+        echo json_encode(["success" => false, "error" => "ID no proporcionado"]);
         exit;
-    } else {
-        echo "❌ Parámetros inválidos.";
     }
+
+    $stmt = $pdo->prepare("UPDATE contacto SET estado = 'Contestada' WHERE id = ?");
+    $stmt->execute([$id]);
+
+    echo json_encode(["success" => true]);
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo json_encode(["success" => false, "error" => $e->getMessage()]);
 }
-?>
+

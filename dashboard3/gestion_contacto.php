@@ -1,9 +1,7 @@
 <?php
-session_start();
-
-// ==================================
-// ⚙️ CONEXIÓN A LA BASE DE DATOS
-// ==================================
+// ==========================
+// CONEXIÓN A LA BASE DE DATOS
+// ==========================
 $host = "localhost";
 $dbname = "u894610526_piedraenpunto";
 $username = "u894610526_formulario_g";
@@ -13,137 +11,192 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("❌ Error de conexión: " . $e->getMessage());
+    die("Error en la conexión: " . $e->getMessage());
 }
 
-// ==================================
-// 📋 CONSULTAR MENSAJES
-// ==================================
+// ==========================
+// CONSULTAR LOS CONTACTOS
+// ==========================
 $stmt = $pdo->query("SELECT * FROM contacto ORDER BY fecha_envio DESC");
-$mensajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$contactos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Contactos - Piedra en Punto</title>
+    <title>Gestión de Contactos | Piedra en Punto</title>
     <style>
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f8f9fa;
-            padding: 40px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafc;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
         h1 {
-            color: #e91e63;
+            background: linear-gradient(90deg, #ff007f, #ff80bf);
+            color: white;
+            padding: 20px;
             text-align: center;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 15px;
         }
-        th {
-            background-color: #e91e63;
-            color: white;
+        th, td {
+            border-bottom: 1px solid #ddd;
             padding: 12px;
             text-align: left;
         }
-        td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
+        th {
+            background-color: #f1f1f1;
+            color: #333;
         }
         tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f9f9f9;
         }
-        .estado {
-            font-weight: bold;
-            padding: 5px 10px;
+        button {
+            border: none;
+            padding: 8px 14px;
             border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
         }
-        .pendiente {
-            background-color: #ffe4ec;
-            color: #d81b60;
-        }
-        .contestada {
-            background-color: #e6f4ea;
-            color: #388e3c;
-        }
-        a.btn {
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+        .btn-status {
+            background-color: #4CAF50;
             color: white;
-            font-size: 14px;
         }
-        .btn-verde { background-color: #4CAF50; }
-        .btn-rojo { background-color: #e53935; }
-        .btn-gris { background-color: #607d8b; }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+        .btn-delete {
+            background-color: #e53935;
+            color: white;
         }
-        .btn-large {
-            padding: 10px 18px;
-            font-size: 15px;
+        .actions {
+            text-align: center;
+            margin-top: 25px;
         }
+        .status-pendiente {
+            color: #e53935;
+            font-weight: 600;
+        }
+        .status-contestada {
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        /* Responsive */
         @media screen and (max-width: 768px) {
-            table, th, td {
-                font-size: 12px;
-            }
-            .btn-large {
+            table, thead, tbody, th, td, tr {
                 display: block;
-                margin: 10px auto;
-                width: 90%;
-                text-align: center;
+            }
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 10px;
+            }
+            td {
+                padding: 8px 10px;
+                border: none;
+            }
+            th {
+                display: none;
+            }
+            .actions {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        <h1>📨 Panel de Mensajes de Contacto</h1>
-        <a href="truncate_contacto.php" class="btn btn-rojo btn-large" onclick="return confirm('¿Seguro que quieres borrar todos los registros?')">🗑️ Borrar todos</a>
+    <h1>📋 Panel de Contactos - Piedra en Punto</h1>
+    <div class="container">
+        <table id="tabla-contactos">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Mensaje</th>
+                    <th>Estado</th>
+                    <th>Fecha Envío</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($contactos as $contacto): ?>
+                <tr data-id="<?= $contacto['id'] ?>">
+                    <td><?= $contacto['id'] ?></td>
+                    <td><?= htmlspecialchars($contacto['nombre']) ?></td>
+                    <td><?= htmlspecialchars($contacto['email']) ?></td>
+                    <td><?= htmlspecialchars($contacto['telefono'] ?: '-') ?></td>
+                    <td><?= nl2br(htmlspecialchars($contacto['mensaje'])) ?></td>
+                    <td class="<?= $contacto['estado'] == 'Pendiente' ? 'status-pendiente' : 'status-contestada' ?>">
+                        <?= $contacto['estado'] ?>
+                    </td>
+                    <td><?= $contacto['fecha_envio'] ?></td>
+                    <td>
+                        <button class="btn-status" onclick="cambiarEstado(<?= $contacto['id'] ?>)">Cambiar estado</button>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+
+        <div class="actions">
+            <button class="btn-delete" onclick="borrarRegistros()">🗑 Borrar todos los registros</button>
+        </div>
     </div>
 
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Teléfono</th>
-            <th>Mensaje</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Acciones</th>
-        </tr>
+    <script>
+        // Cambiar estado con AJAX
+        function cambiarEstado(id) {
+            if (!confirm("¿Deseas cambiar el estado a 'Contestada'?")) return;
 
-        <?php foreach ($mensajes as $fila): ?>
-            <tr>
-                <td><?= htmlspecialchars($fila['nombre']) ?></td>
-                <td><?= htmlspecialchars($fila['email']) ?></td>
-                <td><?= htmlspecialchars($fila['telefono'] ?: '—') ?></td>
-                <td><?= nl2br(htmlspecialchars($fila['mensaje'])) ?></td>
-                <td><?= $fila['fecha_envio'] ?></td>
-                <td>
-                    <span class="estado <?= strtolower($fila['estado']) ?>">
-                        <?= $fila['estado'] ?>
-                    </span>
-                </td>
-                <td>
-                    <?php if ($fila['estado'] === 'Pendiente'): ?>
-                        <a class="btn btn-verde" href="update_contacto_status.php?id=<?= $fila['id'] ?>&estado=Contestada">Marcar contestada</a>
-                    <?php else: ?>
-                        <a class="btn btn-gris" href="update_contacto_status.php?id=<?= $fila['id'] ?>&estado=Pendiente">Marcar pendiente</a>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+            fetch('update_contacto_status.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'id=' + id
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Estado actualizado correctamente ✅");
+                    location.reload();
+                } else {
+                    alert("Error: " + data.error);
+                }
+            });
+        }
+
+        // Borrar todos los registros con AJAX
+        function borrarRegistros() {
+            if (!confirm("⚠️ Esto eliminará todos los registros de contacto. ¿Estás segura?")) return;
+
+            fetch('truncate_contacto.php', { method: 'POST' })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Todos los registros fueron eliminados ✅");
+                    location.reload();
+                } else {
+                    alert("Error: " + data.error);
+                }
+            });
+        }
+    </script>
 </body>
 </html>
+
