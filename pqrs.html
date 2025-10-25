@@ -71,7 +71,14 @@
                 </div>
 
                 <div class="pqrs-form-right">
-                    <form id="pqrs-form" action="procesar_pqr.php" method="post" class="pqrs-form">
+                    <form id="pqrs-form" action="/procesar_pqr.php" method="post" class="pqrs-form" novalidate>
+                        <!-- HONEYPOT: campo invisible para bots -->
+                        <input type="text" name="website" id="website" style="position:absolute;left:-9999px;top:auto;opacity:0" autocomplete="off">
+
+                        <!-- Hidden fields -->
+                        <input type="hidden" id="pageUrl" name="pageUrl" value="">
+                        <input type="hidden" id="recaptchaResponse" name="recaptcha_response" value="">
+
                         <div class="form-row">
                             <div class="form-group-half">
                                 <label for="clasificacion">Clasificación*</label>
@@ -92,16 +99,9 @@
 
                         <div class="form-row">
                             <div class="form-group-half">
-                                <label for="identificacion">Número de identificación*</label>
-                                <input type="text" id="identificacion" name="identificacion" placeholder="Número de identificación" required>
-                            </div>
-                            <div class="form-group-half">
                                 <label for="fecha">Fecha*</label>
                                 <input type="date" id="fecha" name="fecha" required>
                             </div>
-                        </div>
-
-                        <div class="form-row">
                             <div class="form-group-half">
                                 <label for="motivo">Motivo PQRS*</label>
                                 <select id="motivo" name="motivo" required>
@@ -114,20 +114,19 @@
                                     <option value="otro">Otro</option>
                                 </select>
                             </div>
+                        </div>
 
+                        <div class="form-row">
                             <div class="form-group-half">
                                 <label for="email">Correo electrónico*</label>
                                 <input type="email" id="email" name="email" placeholder="¿Cuál es tu e-mail?" required>
                             </div>
-                        </div>
-
-                        <div class="form-row">
                             <div class="form-group-half">
                                 <label for="telefono">Número de teléfono*</label>
                                 <input type="tel" id="telefono" name="telefono" placeholder="¿Cuál es tu número de teléfono?" required>
                             </div>
                         </div>
-                
+
                         <div class="form-group">
                             <label for="mensaje">¿Cómo podemos ayudarte?*</label>
                             <textarea id="mensaje" name="mensaje" rows="4" placeholder="Dejar un comentario." required></textarea>
@@ -196,14 +195,22 @@
     </footer>
 
     <script src="/js/pqrs.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ldk0OwrAAAAAPUdgSoQmF1GAkIKls0SME5qy4f2"></script>
 
-    <!-- Modal de Confirmación -->
-    <div id="pqrs-modal" class="modal">
-        <div class="modal-content">
-            <div id="modal-icon" class="modal-success-icon"></div>
-            <div id="modal-title" class="modal-title"></div>
-            <div id="modal-message" class="modal-message"></div>
-            <button id="modal-close-btn" class="modal-close-btn">Cerrar</button>
+    <!-- Success modal PQRS -->
+    <div id="success-modal-pqr" style="display:none;">
+        <div class="modal-content-custom">
+            <span class="close-button-custom">&times;</span>
+            <div class="thank-you-message">
+                <h1 class="modal-title-custom">¡Gracias! Recibimos tu PQRS</h1>
+                <div class="modal-check-mark"></div>
+                <p style="font-size:1.05em;margin-top:18px;color:#555;">
+                    Hemos recibido tu solicitud. En breve nuestro equipo la evaluará y recibirás respuesta.
+                </p>
+                <p style="font-size:0.95em;color:#777;margin-top:6px;">
+                    Si necesitas, puedes contactarnos por nuestras redes o teléfono.
+                </p>
+            </div>
         </div>
     </div>
     

@@ -161,7 +161,7 @@
     /* -------------------------------------- */
     /* Estilos del modal */
     /* -------------------------------------- */
-    .modal-content {
-        margin: 20% auto;
-    }
+    .modal-content-custom { padding: 20px; max-width: 92%; }
+    .modal-title-custom { font-size: 22px; }
+    .modal-check-mark { width:64px;height:64px;font-size:34px; }
 }

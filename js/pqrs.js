@@ -24,99 +24,105 @@ document.addEventListener("DOMContentLoaded", function () {
 //------------------------------------------------------------------------------
 //-----------------------------FORMULARIO PQRS---------------------------------------
 //-----------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('pqrs-form');
-    const modal = document.getElementById('pqrs-modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalMessage = document.getElementById('modal-message');
-    const modalIcon = document.getElementById('modal-icon');
-    const closeBtn = document.getElementById('modal-close-btn');
+// pqrs.js
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("pqrs-form");
+    const modal = document.getElementById("success-modal-pqr");
+    const closeBtn = modal ? modal.querySelector(".close-button-custom") : null;
+    const siteKey = "6Ldk0OwrAAAAAPUdgSoQmF1GAkIKls0SME5qy4f2"; // <-- reemplaza por tu clave pública reCAPTCHA v3
 
-    // Si por alguna razón el formulario no existe (puede ser el problema inicial),
-    // terminamos la ejecución del script aquí para evitar errores.
+    // pageUrl auto
+    const pageUrlInput = document.getElementById("pageUrl");
+    if (pageUrlInput) pageUrlInput.value = window.location.href;
+
     if (!form) {
-        console.error("No se encontró el formulario con ID 'pqrs-form'.");
-        return; 
+        console.error("Formulario PQRS no encontrado (id='pqrs-form').");
+        return;
     }
 
-    // Función para mostrar el modal
-    const showModal = (success, title, message) => {
-        modalTitle.textContent = title;
-        modalMessage.textContent = message;
-            
-        if (success) {
-            modalIcon.innerHTML = '✔️'; 
-            modalIcon.className = 'modal-success-icon';
-        } else {
-            modalIcon.innerHTML = '❌'; 
-            modalIcon.className = 'modal-error-icon';
+    function mostrarAlerta(mensaje) {
+        alert(mensaje); // puedes mejorar con toasts personalizados
+    }
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Validación cliente mínima
+        const politicas = document.getElementById("politicas");
+        if (!politicas || !politicas.checked) {
+            mostrarAlerta("Debes aceptar las políticas de tratamiento de datos.");
+            return;
         }
-        // Asegúrate de que el modal siempre tenga display: block para mostrarse
-        modal.style.display = 'block'; 
-    };
 
-    // Función para cerrar el modal
-    closeBtn.onclick = () => {
-        modal.style.display = 'none';
-    };
+        // Desactivar botón
+        const btn = form.querySelector("button[type='submit']");
+        const originalText = btn ? btn.innerHTML : null;
+        if (btn) { btn.disabled = true; btn.innerText = "Enviando..."; }
 
-    // Cerrar el modal haciendo clic fuera de él
-    window.onclick = (event) => {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+        // Ejecutar reCAPTCHA v3
+        if (typeof grecaptcha === "undefined") {
+            console.error("reCAPTCHA no cargado.");
+            mostrarAlerta("Error de seguridad (reCAPTCHA). Recarga la página e inténtalo de nuevo.");
+            if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
+            return;
         }
-    };
 
-    // Captura del envío del formulario
-    form.addEventListener('submit', async (e) => {
-        // ESTO ES LO QUE DEBE FUNCIONAR
-        e.preventDefault(); 
+        grecaptcha.ready(function () {
+            grecaptcha.execute(siteKey, { action: "submit_pqr" }).then(function (token) {
+                // set token
+                const recaptchaField = document.getElementById("recaptchaResponse");
+                if (recaptchaField) recaptchaField.value = token;
 
-        // Deshabilitar botón para evitar doble envío
-        const submitBtn = form.querySelector('.submit-btn');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviando...';
+                // build FormData
+                const formData = new FormData(form);
 
-        try {
-            const formData = new FormData(form);
-                
-            // Usamos form.action para enviar la petición a procesar_pqr.php
-            const response = await fetch(form.action, {
-                method: 'POST',
-                body: formData,
+                fetch("/procesar_pqr.php", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(async (res) => {
+                    // intentar parsear JSON; si no es JSON, mostrar error
+                    let data;
+                    try { data = await res.json(); } catch (err) {
+                        throw new Error("Respuesta inválida del servidor.");
+                    }
+                    if (res.ok && data.success) {
+                        // mostrar modal
+                        if (modal) {
+                            modal.style.display = "flex";
+                            // autocerrar en 5 seg (opcional)
+                            setTimeout(()=> { modal.style.display = "none"; }, 5000);
+                        } else {
+                            mostrarAlerta("Formulario enviado correctamente.");
+                        }
+                        form.reset();
+                    } else {
+                        console.error("Error servidor PQRS:", data.message || data);
+                        mostrarAlerta("Ocurrió un error al enviar. Intenta nuevamente.");
+                    }
+                })
+                .catch((err) => {
+                    console.error("Fetch error procesar_pqr:", err);
+                    mostrarAlerta("Error de conexión. Verifica tu red o el servidor.");
+                })
+                .finally(() => {
+                    if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
+                });
+
+            }).catch(function (err) {
+                console.error("reCAPTCHA error:", err);
+                mostrarAlerta("Error con reCAPTCHA. Recarga la página e inténtalo otra vez.");
+                if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
             });
+        });
 
-            const result = await response.json();
+    });
 
-            // La respuesta del servidor es exitosa
-            if (result.success) {
-                showModal(
-                    true, 
-                    '¡Solicitud PQRS Recibida!', 
-                    'Hemos registrado tu solicitud (#'+result.id+'). Te enviaremos una respuesta formal y profesional en el menor tiempo posible.'
-                );
-                form.reset(); // Limpiar el formulario
-            } else {
-                // Error reportado por el script PHP
-                showModal(
-                    false, 
-                    'Error al enviar la solicitud', 
-                    result.message || 'Hubo un error en el servidor. Por favor, inténtalo de nuevo.'
-                );
-            }
-
-        } catch (error) {
-            // Error de red/conexión
-            console.error('Error de red:', error);
-            showModal(
-                false, 
-                'Error de Conexión', 
-                'No pudimos conectar con el servidor. Verifica tu conexión e inténtalo de nuevo.'
-            );
-        } finally {
-            // Habilitar botón al finalizar
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Enviar →';
-        }
+    // cerrar modal en X o clic fuera
+    if (closeBtn) {
+        closeBtn.addEventListener("click", ()=> modal.style.display = "none");
+    }
+    window.addEventListener("click", (ev)=> {
+        if (ev.target === modal) modal.style.display = "none";
     });
 });
