@@ -124,22 +124,23 @@ try {
     <p><strong>Mensaje:</strong><br>$mensaje</p>
     <p><strong>Estado actual:</strong> Pendiente</p>
     <hr>
-    <p>
-        <a href='https://piedraenpunto.com/dashboard3/update_contacto_status.php?email=$email' style='
-            background-color:#4CAF50;
-            color:white;
-            padding:10px 20px;
+    <p style='margin-top:20px;'>
+        <a href='https://piedraenpunto.com/dashboard3/gestion_contacto.php' style='
+            display:inline-block;
+            background-color:#e91e63;
+            color:#fff;
+            font-weight:bold;
+            padding:12px 25px;
             text-decoration:none;
-            border-radius:5px;'>Cambiar a Contestada</a>
-        &nbsp;&nbsp;
-        <a href='https://piedraenpunto.com/dashboard3/truncate_contacto.php' style='
-            background-color:#e53935;
-            color:white;
-            padding:10px 20px;
-            text-decoration:none;
-            border-radius:5px;'>Borrar todos los registros</a>
+            border-radius:8px;
+            box-shadow:0 2px 5px rgba(0,0,0,0.15);
+        '>📋 Ir al panel de gestión de contactos</a>
     </p>
-    ";
+    <p style='margin-top:10px;font-size:13px;color:#666;'>
+        ⚠️ Este correo se generó automáticamente por el sistema web de <strong>Piedra en Punto</strong>.
+    </p>
+";
+
 
     $mail->send();
 
