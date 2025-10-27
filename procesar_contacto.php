@@ -13,7 +13,7 @@ $password = "Vero$2025$";      // reemplaza con tu contraseña MySQL
 $recaptcha_secret = "6Ldk0OwrAAAAALN0Ru1tskiwsjLu-wZj_vIxrBET"; 
 
 // Correo de la jefa
-$jefa_email = "cortes270k@gmail.com";
+$jefa_email = "info@piedraenpunto11.com";
 
 // ==========================
 // 1️⃣ Verificar que vengan datos POST
@@ -104,14 +104,14 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'cortes270k@gmail.com';
-    $mail->Password = 'bynhxhdosbcijffd';
+    $mail->Username = 'info@piedraenpunto11.com';
+    $mail->Password = 'mltkatltggucqivm';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
 
     // --- ENVÍO A LA JEFA ---
-    $mail->setFrom('cortes270k@gmail.com', 'Sistema Web Piedra en Punto');
+    $mail->setFrom('cinfo@piedraenpunto11.com', 'Sistema Web Piedra en Punto');
     $mail->addAddress($jefa_email, 'Jefa Piedra en Punto');
     $mail->isHTML(true);
     $mail->Subject = "📩 Nuevo mensaje de contacto recibido";
