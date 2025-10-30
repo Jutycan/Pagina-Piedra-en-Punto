@@ -236,9 +236,36 @@
 }
 
 .banner-inferior .chef img {
-    width: 280px;
+    width: 260px;
     height: auto;
 }
+
+@media screen and (max-width: 992px) {
+    /* Ocultar la imagen del chef cuando se achique la ventana */
+    .chef-img {
+        display: none;
+    }
+
+    /* Centrar el texto del banner inferior */
+    .banner-inferior {
+        flex-direction: left;
+        text-align: center;
+    }
+
+    .banner-texto {
+        max-width: 100%;
+        
+    }
+
+    .banner-texto h2 {
+        font-size: 0.6rem;
+    }
+
+    .banner-texto p {
+        font-size: 0.4rem;
+    }
+}
+
 
 
 /* -------------------------------------- */

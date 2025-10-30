@@ -24,7 +24,59 @@ document.addEventListener("DOMContentLoaded", function () {
 // -------------------------------------- ----------------------------------------
 //------------------------- Estilos del Banner ----------------------------------
 // -------------------------------------- ------------------------------------ -----
+document.addEventListener('DOMContentLoaded', () => {
+    // Ejecutar solo si el ancho de la ventana es de un dispositivo móvil
+    if (window.innerWidth <= 768) {
+            
+        /* ================================================= */
+        /* 1. Ciclo de Animación del Banner Superior (Cada 5s) */
+        /* ================================================= */
+        const bannerSuperior = document.querySelector('.banner-superior');
 
+        // Alterna la clase 'activo' que aplica el efecto de oscurecimiento y color de texto
+        function toggleBannerSuperiorState() {
+            bannerSuperior.classList.toggle('activo');
+        }
+
+        // Inicia el ciclo.
+        // NOTA: Si quieres que el efecto se active inmediatamente, puedes llamar a la función aquí.
+        // Si quieres que inicie después de 5s, el setInterval es suficiente.
+        setInterval(toggleBannerSuperiorState, 5000);
+
+
+        /* ================================================= */
+        /* 2. Efecto de Revelado del Banner Inferior (Visibilidad) */
+        /* ================================================= */
+        const bannerInferior = document.querySelector('.banner-inferior');
+            
+        // 1. Inicializar en estado 'inicial' (Imagen visible, Texto oculto)
+        bannerInferior.classList.add('inicial');
+
+        // 2. Configurar el observador
+        const observerOptions = {
+            root: null, // El viewport es el root
+            rootMargin: '0px',
+            threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // El usuario está en el section: REVELAR (quitar imagen, mostrar texto)
+                    entry.target.classList.remove('inicial');
+                    entry.target.classList.add('revelado');
+                } else {
+                    // El usuario salió del section: OCULTAR (mostrar imagen, quitar texto)
+                    entry.target.classList.remove('revelado');
+                    entry.target.classList.add('inicial');
+                }
+            });
+        }, observerOptions);
+
+        // 3. Empezar a observar
+        observer.observe(bannerInferior);
+    }
+});
 
 // ----------------------------------------------------------------------------- 
 //----------------------Estilos de Beneficios------------------------------------- 
