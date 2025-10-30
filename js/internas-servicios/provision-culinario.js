@@ -24,39 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // -------------------------------------- ----------------------------------------
 //------------------------- Estilos del Banner ----------------------------------
 // -------------------------------------- ------------------------------------ -----
-document.addEventListener('DOMContentLoaded', () => {
-    const chefContainer = document.getElementById('chef-container');
-    const textContent = document.querySelector('.service-banner-text');
 
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-        // Al cargar en móvil, añade el pulso
-        chefContainer.classList.add('pulse-on');
-
-        chefContainer.addEventListener('click', () => {
-            // Remueve el pulso y oculta la imagen colapsándola
-            chefContainer.classList.remove('pulse-on');
-            chefContainer.classList.add('is-hidden');
-            
-            // Muestra el texto expandiéndolo
-            textContent.classList.add('is-visible');
-
-            // Deshabilita el clic para evitar interacciones duplicadas
-            chefContainer.style.pointerEvents = 'none';
-        });
-
-        // NOTA: No agregues aquí ninguna lógica que escuche el evento de scroll
-        // para revertir el estado. El estado se mantendrá hasta que se recargue
-        // la página.
-    } else {
-        // En escritorio, elimina las clases de móvil para asegurar el comportamiento correcto
-        chefContainer.classList.remove('pulse-on');
-        chefContainer.classList.remove('is-hidden');
-        textContent.classList.remove('is-visible');
-        chefContainer.style.pointerEvents = 'auto';
-    }
-});
 
 // ----------------------------------------------------------------------------- 
 //----------------------Estilos de Beneficios------------------------------------- 
