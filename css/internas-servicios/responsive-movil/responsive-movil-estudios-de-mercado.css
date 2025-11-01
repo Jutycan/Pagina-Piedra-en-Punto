@@ -73,90 +73,148 @@
     /* -------------------------------------- */
     /* Estilos del Banner */
     /* -------------------------------------- */
-    .banner-section {
-        margin-top: 40px;
-        border-radius: 0; /* Sin bordes redondeados en móvil */
-        box-shadow: none;
+    .banner {
+        margin: 0;
     }
 
-    .banner-organizacion-eventos {
-        min-height: 180px; /* Altura mínima un poco menor para móviles */
-        max-height: 350px; /* Altura máxima para evitar que sea muy grande */
-        margin: 100px auto 0;
+    /* === PARTE SUPERIOR (ANIMACIÓN AUTOMÁTICA Y AJUSTE DE IMAGEN) === */
+    .banner-superior {
+        height: 50vh;
     }
 
-    .banner-image {
-        object-fit: cover; 
-        object-position: center center; 
-    }
-
-    .service-banner-bottom {
-        padding: 40px 20px;
-        margin: -28px auto 0;
-    }
-
-    .service-banner-bottom-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-    }
-
-    .service-banner-text h2 {
-        font-size: 2rem;
-    }
-
-    .service-banner-text p {
-        font-size: 1rem;
-    }
-
-    /* Colapsamos el contenedor del chef al ocultarlo */
-    .service-banner-image-chef {
-        width: 250px;
-        height: 300px;
-        border-radius: 10px;
-        overflow: hidden;
-        position: relative;
-        z-index: 2;
-        cursor: pointer;
-        transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out, margin 0.5s ease-in-out;
-        max-height: 300px; /* Tamaño inicial para la transición */
-    }
-    
-    /* El texto estará colapsado por defecto */
-    .service-banner-text {
-        text-align: center;
+    .banner-superior .equipo {
+        /* Cambio para mostrar la imagen completa */
+        object-fit: contain; 
+        background-color: #fff; /* Fondo blanco visible detrás de la imagen */
         width: 100%;
-        max-width: none;
-        order: 2;
-        opacity: 0;
-        max-height: 0; /* Lo colapsamos completamente */
-        overflow: hidden;
-        transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
-        padding: 0 20px; /* Padding inicial */
+        height: 100%;
     }
 
-    /* Animación de pulso */
-    @keyframes pulse-animation {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
-    }
-    .service-banner-image-chef.pulse-on {
-        animation: pulse-animation 2s infinite ease-in-out;
-    }
-
-    /* Clase para cuando el texto está visible */
-    .service-banner-text.is-visible {
-        opacity: 1;
-        max-height: 500px; /* Un valor grande para asegurar que todo el texto se muestre */
-        padding: 20px; /* Ajusta el padding para la visibilidad */
+    /* Desactivamos/ignoramos los estilos :hover de escritorio en móvil */
+    .banner-superior:hover .equipo,
+    .banner-superior:hover .overlay,
+    .banner-superior:hover .titulo-banner {
+        filter: none;
+        background: rgba(0, 0, 0, 0);
+        color: rgba(191, 190, 190, 0.4);
+        text-shadow: none;
+        z-index: 2;
+        -webkit-background-clip: none;
     }
 
-    /* Clase para cuando la imagen se oculta */
-    .service-banner-image-chef.is-hidden {
-        opacity: 0;
-        max-height: 0;
-        margin-bottom: 0; /* Elimina cualquier margen residual */
+
+    /* === BOTÓN ANIMADO === */
+    .boton-scroll {
+        top: 42vh; 
+        z-index: 10; 
+    }
+
+    .boton-scroll img {
+        width: 45px; 
+        height: 45px;
+    }
+
+    /* === PARTE INFERIOR (ESTRUCTURA MÓVIL Y EFECTO DE OCUPACIÓN) === */
+    .banner-inferior {
+        position: relative; /* Clave para que el chef se posicione de forma absoluta */
+        height: 50vh; 
+        flex-direction: column; 
+        text-align: center;
+        padding: 1.5rem 10%; 
+        justify-content: center;
+        overflow: hidden; /* Aseguramos que nada se desborde */
+        margin: -20px auto 0;
+    }
+
+    /* Contenedor del texto */
+    .banner-inferior .texto {
+        width: 100%; 
+        order: 2; 
+        /* Transiciones para el efecto de revelado */
+        transition: opacity 1s ease, padding-top 1s ease; 
+        position: relative; /* Necesario para el z-index */
+        z-index: 1; 
+    }
+
+    .banner-inferior h2 {
+        font-size: 1.5rem; 
+        margin-bottom: 0.5rem;
+    }
+
+    .banner-inferior p {
+        font-size: 0.9rem; 
+        line-height: 1.5;
+        margin-bottom: 0; 
+    }
+
+    /* Contenedor de la imagen del chef (Absoluto para ocupar el espacio y ocultarse) */
+    .banner-inferior .chef {
+        position: absolute; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; 
+        transition: opacity 5s ease;
+        z-index: 2; 
+    }
+
+    .banner-inferior .chef img {
+        width: 100%; 
+        max-width: 300px; 
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* === CLASES DE JS PARA ANIMACIÓN DE ESTADOS === */
+    /* ------------------------------------------------------------------ */
+
+    /* --- ESTADO ACTIVADO DEL BANNER SUPERIOR (CADA 5s) --- */
+    .banner-superior.activo .equipo {
+        filter: brightness(45%);
+    }
+
+    .banner-superior.activo .overlay {
+        background: rgba(50, 50, 50, 0.45);
+    }
+
+    .banner-superior.activo .titulo-banner {
+        background: linear-gradient(90deg, #f10ea9, #fe00cf);
+        -webkit-background-clip: text;
+        color: transparent;
+        text-shadow: 0px 0px 25px rgba(219, 184, 216, 0.7);
+        z-index: 3;
+    }
+
+    /* --- ESTADO INICIAL DEL BANNER INFERIOR (Fuera de vista) --- */
+    .banner-inferior.inicial .chef {
+        opacity: 1; /* Imagen visible */
+        z-index: 2;
+    }
+
+    .banner-inferior.inicial .texto {
+        opacity: 0; /* Texto oculto */
+        z-index: 1;
+        /* Simula que el texto está "empujado" o fuera de vista */
+        padding-top: 20vh; 
+    }
+
+    /* --- ESTADO DE REVELADO DEL BANNER INFERIOR (Dentro de vista) --- */
+    .banner-inferior.revelado .chef {
+        opacity: 0; /* Imagen desaparece */
+        z-index: 1;
+    }
+
+    .banner-inferior.revelado .texto {
+        opacity: 1; /* Texto visible */
+        z-index: 2;
+        /* El texto ocupa el espacio completo */
+        padding-top: 0; 
     }
 
 
@@ -164,7 +222,9 @@
     /* Estilos de Beneficios */
     /* -------------------------------------- */
     .benefits-title {
-        font-size: 3rem;
+        font-size: 1.9rem;
+        margin-left: -20px auto 0;
+        overflow-wrap: break-word; /* Evita que se salga del contenedor */
     }
 
     .benefits-grid {
@@ -186,7 +246,7 @@
     /* El número y título se muestran juntos abajo en estado inactivo */
     .benefit-content {
         position: static;
-        flex-direction: column;
+        flex-direction: center;
         justify-content: center;
     }
     

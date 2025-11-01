@@ -25,36 +25,56 @@ document.addEventListener("DOMContentLoaded", function () {
 //----------------------Estilos del Banner------------------------------------- 
 // -----------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-    const chefContainer = document.getElementById('chef-container');
-    const textContent = document.querySelector('.service-banner-text');
-
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-        // Al cargar en móvil, añade el pulso
-        chefContainer.classList.add('pulse-on');
-
-        chefContainer.addEventListener('click', () => {
-            // Remueve el pulso y oculta la imagen colapsándola
-            chefContainer.classList.remove('pulse-on');
-            chefContainer.classList.add('is-hidden');
+    // Ejecutar solo si el ancho de la ventana es de un dispositivo móvil
+    if (window.innerWidth <= 768) {
             
-            // Muestra el texto expandiéndolo
-            textContent.classList.add('is-visible');
+        /* ================================================= */
+        /* 1. Ciclo de Animación del Banner Superior (Cada 5s) */
+        /* ================================================= */
+        const bannerSuperior = document.querySelector('.banner-superior');
 
-            // Deshabilita el clic para evitar interacciones duplicadas
-            chefContainer.style.pointerEvents = 'none';
-        });
+        // Alterna la clase 'activo' que aplica el efecto de oscurecimiento y color de texto
+        function toggleBannerSuperiorState() {
+            bannerSuperior.classList.toggle('activo');
+        }
 
-        // NOTA: No agregues aquí ninguna lógica que escuche el evento de scroll
-        // para revertir el estado. El estado se mantendrá hasta que se recargue
-        // la página.
-    } else {
-        // En escritorio, elimina las clases de móvil para asegurar el comportamiento correcto
-        chefContainer.classList.remove('pulse-on');
-        chefContainer.classList.remove('is-hidden');
-        textContent.classList.remove('is-visible');
-        chefContainer.style.pointerEvents = 'auto';
+        // Inicia el ciclo.
+        // NOTA: Si quieres que el efecto se active inmediatamente, puedes llamar a la función aquí.
+        // Si quieres que inicie después de 5s, el setInterval es suficiente.
+        setInterval(toggleBannerSuperiorState, 5000);
+
+
+        /* ================================================= */
+        /* 2. Efecto de Revelado del Banner Inferior (Visibilidad) */
+        /* ================================================= */
+        const bannerInferior = document.querySelector('.banner-inferior');
+            
+        // 1. Inicializar en estado 'inicial' (Imagen visible, Texto oculto)
+        bannerInferior.classList.add('inicial');
+
+        // 2. Configurar el observador
+        const observerOptions = {
+            root: null, // El viewport es el root
+            rootMargin: '0px',
+            threshold: 0.1 // Se activa cuando el 10% del elemento es visible
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // El usuario está en el section: REVELAR (quitar imagen, mostrar texto)
+                    entry.target.classList.remove('inicial');
+                    entry.target.classList.add('revelado');
+                } else {
+                    // El usuario salió del section: OCULTAR (mostrar imagen, quitar texto)
+                    entry.target.classList.remove('revelado');
+                    entry.target.classList.add('inicial');
+                }
+            });
+        }, observerOptions);
+
+        // 3. Empezar a observar
+        observer.observe(bannerInferior);
     }
 });
 

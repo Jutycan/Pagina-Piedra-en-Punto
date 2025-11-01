@@ -223,7 +223,9 @@
     /* Estilos de Beneficios */
     /* -------------------------------------- */
     .benefits-title {
-        font-size: 3rem;
+        font-size: 1.9rem;
+        margin-left: -20px auto 0;
+        overflow-wrap: break-word; /* Evita que se salga del contenedor */
     }
 
     .benefits-grid {
@@ -245,7 +247,7 @@
     /* El número y título se muestran juntos abajo en estado inactivo */
     .benefit-content {
         position: static;
-        flex-direction: column;
+        flex-direction: center;
         justify-content: center;
     }
     
