@@ -8,7 +8,7 @@
     }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
     * {
         box-sizing: border-box;
     }
@@ -73,15 +73,69 @@
     /* -------------------------------------- */
     /* Estilos del banner */
     /* -------------------------------------- */
-    .banner-organizacion-eventos {
-        min-height: 180px; /* Altura mínima un poco menor para móviles */
-        max-height: 350px; /* Altura máxima para evitar que sea muy grande */
-        margin: 100px auto 0;
+    #activaciones-banner {
+        height: 52vh;
     }
 
-    .banner-image {
-        object-fit: cover; 
-        object-position: center center;
+    .banner-background-image {
+        width: 100%;
+        left: 0;
+        filter: brightness(0.7); /* Estado final fijo: más oscuro */
+    }
+
+    .banner-overlay {
+        margin: 0;
+    }
+
+    .banner-overlay::before {
+        background-color: rgba(88, 87, 87, 0.75); /* Capa gris oscura (estado final) */
+        background-image: none; /* Sin patrón */
+    }
+
+    .banner-text-initial {
+        opacity: 0; /* Oculta el texto gris */
+    }
+
+    .banner-text-hover {
+        opacity: 1; /* Muestra el texto naranja (estado final) */
+        max-width: 80vw;
+        top: 40%;
+    }
+
+    .sub-text {
+        top: 58%;
+        font-size: 1.6em;
+        opacity: 1; /* Siempre visible */
+    }
+
+    .animation-dots {
+        top: 66%;
+        opacity: 1; /* Siempre visibles */
+    }
+
+    /* Mantener la animación de los puntos */
+    .dot-1 {
+        animation: dot-pulse 3s infinite ease-in-out;
+        animation-delay: 0s;
+    }
+
+    .dot-2 {
+        animation: dot-pulse 3s infinite ease-in-out;
+        animation-delay: 1s;
+    }
+
+    .dot-3 {
+        animation: dot-pulse 3s infinite ease-in-out;
+        animation-delay: 2s;
+    }
+
+    /* Eliminar las animaciones automáticas entre estados */
+    .banner-container,
+    .banner-container::after,
+    .banner-text-initial,
+    .banner-text-hover,
+    .sub-text {
+        animation: none !important;
     }
 
     /* -------------------------------------- */

@@ -118,26 +118,249 @@
 /* -------------------------------------- */
 /* Estilos del banner */
 /* -------------------------------------- */
-.banner-degustaciones {
-    position: relative; /* Contenedor para posicionar elementos internos si fuera necesario */
-    width: 100%; /* Ocupa todo el ancho disponible */
-    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde al escalar */
-    margin: 100px auto 0; /* Espacio arriba y centrado horizontalmente */
-    background-color: #f8f8f8; /* Un color de fondo por si la imagen tarda en cargar */
-    display: flex; /* Para centrar la imagen si es más pequeña que el contenedor */
-    justify-content: center;
-    align-items: center;
-    height: auto; /* La altura se adaptará al contenido (la imagen) */
-    min-height: 250px; /* Altura mínima para que no se vea demasiado pequeña en ciertos casos */
-    max-height: 600px; /* Altura máxima para que no sea excesivamente grande en escritorios muy anchos */
+/* 1. Contenedor Principal: Full-Width y se ajusta a la altura de la pantalla (Viewport) */
+#activaciones-banner {
+    width: 100%;
+    /* CLAVE: Ajusta la altura del banner al 95% de la altura de la ventana (vh) para que no se recorte */
+    height: 85vh; 
+    position: relative; 
+    overflow: hidden;
+    margin: 15px auto 0;
 }
 
-.banner-image {
-    width: 100%; /* La imagen siempre ocupa el 100% del ancho de su contenedor */
-    height: auto; /* Mantiene la proporción de la imagen */
-    display: block; /* Elimina espacios extra que pueden aparecer debajo de las imágenes */
-    object-fit: cover; /* Recorta la imagen para que cubra el área sin distorsionarse */
-    /* object-position: center bottom; /* Opcional: enfoca la parte inferior de la imagen */
+/* Contenedor interno del Banner */
+.banner-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* 2. Imagen de Fondo de las Personas */
+.banner-background-image {
+    width: 55%;
+    /* CLAVE: La imagen se ajustará al ancho y se anclará abajo */
+    height: auto; 
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    bottom: 0; 
+    left: 22.5%;
+    filter: brightness(1); /* Estado inicial sin oscurecimiento */
+    transition: filter 0.5s ease;
+}
+
+/* 3. Contenedor de Textos y Capas */
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center;
+    z-index: 10;
+    margin: 30px auto 0;
+}
+
+/* 4. Pseudoelemento para la Capa del Patrón y Oscurecimiento */
+.banner-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* ESTADO INICIAL (Pantallazo 193523.jpg): Patrón superior */
+    background-image: url('Captura de pantalla 2025-11-01 193523.jpg'); /* Usamos tu imagen de patrón/fondo inicial */
+    background-size: cover;
+    background-position: top center; 
+    background-color: transparent; 
+    transition: background-color 0.5s ease;
+    z-index: -1; 
+}
+
+/* 5. Posicionamiento de las Imágenes de Texto "ORGANIZAMOS" */
+.banner-text-initial,
+.banner-text-hover {
+    position: absolute; 
+    /* Usamos un porcentaje para el tamaño de la frase, ajusta si es muy grande/pequeña */
+    max-width: 50vw; /* El 50% del ancho del Viewport */
+    height: auto;
+    /* CLAVE: Posicionamiento vertical con % para adaptarse a la altura del Viewport */
+    top: 35%; /* Coloca la frase en la parte superior (en la zona de las cabezas) */
+    transform: translateY(-50%); 
+    transition: opacity 0.5s ease; 
+}
+
+/* Visibilidad de los estados de la frase */
+.banner-text-initial {
+    opacity: 1; /* Gris visible por defecto */
+}
+.banner-text-hover {
+    opacity: 0; /* Naranja oculto por defecto */
+}
+
+/* 6. Estilo del Subtexto: "Eventos" (Siempre Visible) */
+.sub-text {
+    font-size: 2em; 
+    color: #ffffff; 
+    position: absolute;
+    /* CLAVE: Ajuste de posición vertical usando % para mantener la relación con "ORGANIZAMOS" */
+    top: 55%; /* Coloca "Eventos" justo debajo de "ORGANIZAMOS" */
+    transform: translateY(-50%); 
+    z-index: 20; 
+    margin: -30px auto 0;
+}
+
+/* 6. Estilo del Subtexto: "Eventos" (Solo Visible al pasar el mouse) */
+.sub-text {
+    font-size: 2em; 
+    color: #ffffff; 
+    position: absolute;
+    top: 55%; 
+    transform: translateY(-50%); 
+    z-index: 20; 
+    opacity: 0; /* CLAVE: Oculto por defecto en el estado inicial */
+    transition: opacity 0.5s ease;
+}
+
+/* Contenedor de la Animación */
+.animation-dots {
+    position: absolute;
+    top: 60%; /* Posicionamiento debajo de "Eventos" */
+    transform: translateY(-50%); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Espacio vertical entre los puntos */
+    z-index: 20;
+    opacity: 0; /* CLAVE: Oculto por defecto en el estado inicial */
+    transition: opacity 0.5s ease;
+    margin: 60px auto 0;
+}
+
+/* Definición de los puntos */
+.dot {
+    width: 15px;
+    height: 15px;
+    background-color: #ffffff; 
+    border-radius: 50%;
+    opacity: 0.5; /* Opacidad sutil para los puntos inactivos */
+    transition: all 0.5s ease;
+}
+
+/* --- EFECTOS AL PASAR EL MOUSE (HOVER) --- */
+
+.banner-container:hover .banner-background-image {
+    /* Oscurecimiento sutil de la imagen de fondo */
+    filter: brightness(0.7); 
+}
+
+.banner-container:hover .banner-overlay::before {
+    /* ESTADO FINAL (Pantallazo 202603.jpg): Capa gris oscura opaca */
+    background-color: rgba(50, 50, 50, 0.75); /* Oscurecimiento */
+    /* El pantallazo final (202603.jpg) sugiere que el patrón desaparece o se vuelve indistinguible */
+    background-image: none; 
+}
+
+.banner-container:hover .banner-text-initial {
+    opacity: 0; 
+}
+
+.banner-container:hover .banner-text-hover {
+    opacity: 1; 
+}
+
+.banner-container:hover .sub-text {
+    opacity: 1; /* Muestra "Eventos" al pasar el mouse */
+}
+
+.banner-container:hover .animation-dots {
+    opacity: 1; /* Muestra los puntos al pasar el mouse */
+}
+/* DEFINICIÓN DE LA ANIMACIÓN */
+@keyframes dot-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    33.3% {
+        transform: scale(1.4); /* Agranda el punto un 40% */
+        opacity: 1; /* Completamente blanco y visible */
+    }
+    66.6% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+}
+
+/* APLICACIÓN DE LA ANIMACIÓN CON RETRASO */
+.dot-1 {
+    animation: dot-pulse 3s infinite ease-in-out;
+    animation-delay: 0s; /* Empieza inmediatamente */
+}
+
+.dot-2 {
+    animation: dot-pulse 3s infinite ease-in-out;
+    animation-delay: 1s; /* Retraso de 1/3 del ciclo */
+}
+
+.dot-3 {
+    animation: dot-pulse 3s infinite ease-in-out;
+    animation-delay: 2s; /* Retraso de 2/3 del ciclo */
+}
+/* Ajuste fluido entre escritorio y 768px (solo mejora visual, sin cambiar diseño) */
+@media screen and (max-width: 1200px) and (min-width: 769px) {
+    #organizacion-de-eventos-banner {
+        height: 80vh; /* Evita recortes en pantallas medianas */
+    }
+
+    .banner-background-image {
+        width: 60%; /* Que la imagen no se desborde ni se vea aplastada */
+        left: 20%;
+    }
+
+    .banner-text-initial,
+    .banner-text-hover {
+        max-width: 60vw; /* El texto se mantiene dentro del área visible */
+        top: 38%; /* Ajuste vertical leve */
+    }
+
+    .sub-text {
+        top: 56%;
+        font-size: 1.8em;
+    }
+
+    .animation-dots {
+        top: 62%;
+    }
+}
+
+/* Ajuste adicional para pantallas más pequeñas tipo tablet (entre 900px y 1000px) */
+@media screen and (max-width: 1000px) and (min-width: 769px) {
+    .banner-background-image {
+        width: 70%;
+        left: 15%;
+    }
+
+    .banner-text-initial,
+    .banner-text-hover {
+        max-width: 70vw;
+        top: 40%;
+    }
+
+    .sub-text {
+        top: 58%;
+        font-size: 1.6em;
+    }
 }
 
 /* -------------------------------------- */
