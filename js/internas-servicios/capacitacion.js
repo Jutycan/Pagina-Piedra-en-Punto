@@ -24,32 +24,18 @@ document.addEventListener("DOMContentLoaded", function () {
 //------------------------------------------------------------------------------
 //----------------------------Servicio descripcion--------------------------------------
 //-----------------------------------------------------------------------------
-document.addEventListener('DOMContentLoaded', () => {
-    const section2 = document.querySelector('.service-description-animated-section-2');
-
-    if (!section2) return;
-
-    const isMobile = window.innerWidth <= 768;
-
-    if (isMobile) {
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.6
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    section2.classList.add('is-visible');
-                } else {
-                    section2.classList.remove('is-visible');
-                }
-            });
-        }, observerOptions);
-
-        observer.observe(section2);
-    }
+document.addEventListener("DOMContentLoaded", () => {
+    const section = document.querySelector(".service-description-animated-section-2");
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                section.classList.add("in-view");
+            } else {
+                section.classList.remove("in-view");
+            }
+        });
+    }, { threshold: 0.6 });
+    observer.observe(section);
 });
 
 // ----------------------------------------------------------------------------- 

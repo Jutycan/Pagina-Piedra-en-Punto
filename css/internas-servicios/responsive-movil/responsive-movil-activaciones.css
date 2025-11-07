@@ -120,7 +120,7 @@
         width: 80%;
         max-width: 300px;
         opacity: 1;
-        transition: opacity 1.5s ease-out;
+        transition: opacity 4s ease-out;
         z-index: 2;
     }
     .animated-chef-image img {
