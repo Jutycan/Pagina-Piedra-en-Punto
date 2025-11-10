@@ -118,10 +118,9 @@
 /* -------------------------------------- */
 /* Estilos del banner */
 /* -------------------------------------- */
-/* 1. Contenedor Principal: Full-Width y se ajusta a la altura de la pantalla (Viewport) */
+/* 1. Contenedor Principal */
 #activaciones-banner {
     width: 100%;
-    /* CLAVE: Ajusta la altura del banner al 95% de la altura de la ventana (vh) para que no se recorte */
     height: 85vh; 
     position: relative; 
     overflow: hidden;
@@ -135,18 +134,27 @@
     position: relative;
 }
 
-/* 2. Imagen de Fondo de las Personas */
+/* 2. Imágenes de Fondo - DOS IMÁGENES */
 .banner-background-image {
-    width: 55%;
-    /* CLAVE: La imagen se ajustará al ancho y se anclará abajo */
     height: auto; 
     object-fit: cover;
     display: block;
     position: absolute;
     bottom: 0; 
-    left: 22.5%;
-    filter: brightness(1); /* Estado inicial sin oscurecimiento */
+    filter: brightness(1);
     transition: filter 0.5s ease;
+}
+
+/* Imagen izquierda - elementos de diseño/pintura */
+.banner-image-left {
+    width: 35%;
+    left: 5%;
+}
+
+/* Imagen derecha - elementos técnicos/planos */
+.banner-image-right {
+    width: 35%;
+    right: 5%;
 }
 
 /* 3. Contenedor de Textos y Capas */
@@ -173,25 +181,30 @@
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* ESTADO INICIAL (Pantallazo 193523.jpg): Patrón superior */
-    background-image: url('Captura de pantalla 2025-11-01 193523.jpg'); /* Usamos tu imagen de patrón/fondo inicial */
-    background-size: cover;
-    background-position: top center; 
     background-color: transparent; 
     transition: background-color 0.5s ease;
     z-index: -1; 
 }
 
-/* 5. Posicionamiento de las Imágenes de Texto "ORGANIZAMOS" */
+/* 5. BOMBILLO - Estado inicial: grande y centrado */
+.lightbulb-icon {
+    position: absolute;
+    width: 120px; /* Grande en estado inicial */
+    height: auto;
+    top: 50%; /* Centrado verticalmente */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado perfectamente */
+    transition: all 0.5s ease;
+    z-index: 15;
+}
+
+/* 6. Posicionamiento de las Imágenes de Texto "PERSONALIZADOS" */
 .banner-text-initial,
 .banner-text-hover {
     position: absolute; 
-    /* Usamos un porcentaje para el tamaño de la frase, ajusta si es muy grande/pequeña */
-    max-width: 50vw; /* El 50% del ancho del Viewport */
+    max-width: 50vw;
     height: auto;
-    /* CLAVE: Posicionamiento vertical con % para adaptarse a la altura del Viewport */
-    top: 35%; /* Coloca la frase en la parte superior (en la zona de las cabezas) */
+    top: 35%;
     transform: translateY(-50%); 
     transition: opacity 0.5s ease; 
 }
@@ -200,45 +213,35 @@
 .banner-text-initial {
     opacity: 1; /* Gris visible por defecto */
 }
+
 .banner-text-hover {
     opacity: 0; /* Naranja oculto por defecto */
 }
 
-/* 6. Estilo del Subtexto: "Eventos" (Siempre Visible) */
+/* 7. Estilo del Subtexto: "Servicios" */
 .sub-text {
     font-size: 2em; 
     color: #ffffff; 
     position: absolute;
-    /* CLAVE: Ajuste de posición vertical usando % para mantener la relación con "ORGANIZAMOS" */
-    top: 55%; /* Coloca "Eventos" justo debajo de "ORGANIZAMOS" */
+    top: 55%;
     transform: translateY(-50%); 
     z-index: 20; 
-    margin: -30px auto 0;
-}
-
-/* 6. Estilo del Subtexto: "Eventos" (Solo Visible al pasar el mouse) */
-.sub-text {
-    font-size: 2em; 
-    color: #ffffff; 
-    position: absolute;
-    top: 55%; 
-    transform: translateY(-50%); 
-    z-index: 20; 
-    opacity: 0; /* CLAVE: Oculto por defecto en el estado inicial */
+    opacity: 0; /* Oculto por defecto en el estado inicial */
     transition: opacity 0.5s ease;
+    margin: -30px auto 0;
 }
 
 /* Contenedor de la Animación */
 .animation-dots {
     position: absolute;
-    top: 60%; /* Posicionamiento debajo de "Eventos" */
+    top: 60%;
     transform: translateY(-50%); 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px; /* Espacio vertical entre los puntos */
+    gap: 10px;
     z-index: 20;
-    opacity: 0; /* CLAVE: Oculto por defecto en el estado inicial */
+    opacity: 0; /* Oculto por defecto en el estado inicial */
     transition: opacity 0.5s ease;
     margin: 60px auto 0;
 }
@@ -249,22 +252,26 @@
     height: 15px;
     background-color: #ffffff; 
     border-radius: 50%;
-    opacity: 0.5; /* Opacidad sutil para los puntos inactivos */
+    opacity: 0.5;
     transition: all 0.5s ease;
 }
 
 /* --- EFECTOS AL PASAR EL MOUSE (HOVER) --- */
 
 .banner-container:hover .banner-background-image {
-    /* Oscurecimiento sutil de la imagen de fondo */
     filter: brightness(0.7); 
 }
 
 .banner-container:hover .banner-overlay::before {
-    /* ESTADO FINAL (Pantallazo 202603.jpg): Capa gris oscura opaca */
     background-color: rgba(50, 50, 50, 0.75); /* Oscurecimiento */
-    /* El pantallazo final (202603.jpg) sugiere que el patrón desaparece o se vuelve indistinguible */
-    background-image: none; 
+}
+
+/* BOMBILLO - Estado final: pequeño y arriba */
+.banner-container:hover .lightbulb-icon {
+    width: 60px; /* Más pequeño */
+    top: 25%; /* Más arriba */
+    left: 55%; /* Ligeramente a la derecha del centro */
+    transform: translate(-50%, -50%);
 }
 
 .banner-container:hover .banner-text-initial {
@@ -276,12 +283,13 @@
 }
 
 .banner-container:hover .sub-text {
-    opacity: 1; /* Muestra "Eventos" al pasar el mouse */
+    opacity: 1; /* Muestra "Servicios" al pasar el mouse */
 }
 
 .banner-container:hover .animation-dots {
     opacity: 1; /* Muestra los puntos al pasar el mouse */
 }
+
 /* DEFINICIÓN DE LA ANIMACIÓN */
 @keyframes dot-pulse {
     0% {
@@ -289,8 +297,8 @@
         opacity: 0.5;
     }
     33.3% {
-        transform: scale(1.4); /* Agranda el punto un 40% */
-        opacity: 1; /* Completamente blanco y visible */
+        transform: scale(1.4);
+        opacity: 1;
     }
     66.6% {
         transform: scale(1);
@@ -305,50 +313,66 @@
 /* APLICACIÓN DE LA ANIMACIÓN CON RETRASO */
 .dot-1 {
     animation: dot-pulse 3s infinite ease-in-out;
-    animation-delay: 0s; /* Empieza inmediatamente */
+    animation-delay: 0s;
 }
 
 .dot-2 {
     animation: dot-pulse 3s infinite ease-in-out;
-    animation-delay: 1s; /* Retraso de 1/3 del ciclo */
+    animation-delay: 1s;
 }
 
 .dot-3 {
     animation: dot-pulse 3s infinite ease-in-out;
-    animation-delay: 2s; /* Retraso de 2/3 del ciclo */
+    animation-delay: 2s;
 }
-/* Ajuste fluido entre escritorio y 768px (solo mejora visual, sin cambiar diseño) */
-@media screen and (max-width: 1200px) and (min-width: 769px) {
-    #organizacion-de-eventos-banner {
-        height: 80vh; /* Evita recortes en pantallas medianas */
+/* Ajuste fluido entre escritorio y 768px */
+@media screen y (ancho máximo: 1200px) y (ancho mínimo: 769px) {
+    #activaciones-banner {
+        altura: 80vh;
     }
 
-    .banner-background-image {
-        width: 60%; /* Que la imagen no se desborde ni se vea aplastada */
-        left: 20%;
+    .banner-image-left,
+    .banner-image-right {
+        width: 40%;
+    }
+
+    .banner-image-left {
+        stânga: 2%;
+    }
+
+    .banner-image-right {
+        dreapta: 2%;
     }
 
     .banner-text-initial,
     .banner-text-hover {
-        max-width: 60vw; /* El texto se mantiene dentro del área visible */
-        top: 38%; /* Ajuste vertical leve */
+        max-width: 60vw;
+        top: 38%;
     }
 
-    .sub-text {
+    .subtext {
         top: 56%;
-        font-size: 1.8em;
+        font-size: 1,8em;
     }
 
     .animation-dots {
         top: 62%;
     }
+
+    .lightbulb-icon {
+        width: 100px;
+    }
+
+    .banner-container:hover .lightbulb-icon {
+        width: 50px;
+    }
 }
 
-/* Ajuste adicional para pantallas más pequeñas tipo tablet (entre 900px y 1000px) */
-@media screen and (max-width: 1000px) and (min-width: 769px) {
-    .banner-background-image {
-        width: 70%;
-        left: 15%;
+/* Ajuste adicional para pantalones más pequeñas tipo tablet */
+@media screen y (ancho máximo: 1000px) y (ancho mínimo: 769px) {
+    .banner-image-left,
+    .banner-image-right {
+        width: 45%;
     }
 
     .banner-text-initial,
@@ -357,9 +381,9 @@
         top: 40%;
     }
 
-    .sub-text {
+    .subtext {
         top: 58%;
-        font-size: 1.6em;
+        font-size: 1,6em;
     }
 }
 
