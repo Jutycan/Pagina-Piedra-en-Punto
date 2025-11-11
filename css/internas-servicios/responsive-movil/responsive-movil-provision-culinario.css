@@ -73,37 +73,59 @@
     /* -------------------------------------- */
     /* Estilos del Banner */
     /* -------------------------------------- */
-    /*PENDIENTE*/
     .banner {
         margin: 0;
     }
 
-    /* === PARTE SUPERIOR (ANIMACIÓN AUTOMÁTICA Y AJUSTE DE IMAGEN) === */
+    /* === PARTE SUPERIOR (ESTADO FINAL FIJO EN MÓVIL) === */
     .banner-superior {
         height: 50vh;
     }
 
     .banner-superior .equipo {
-        /* Cambio para mostrar la imagen completa */
         object-fit: contain; 
-        background-color: #fff; /* Fondo blanco visible detrás de la imagen */
+        background-color: #fff; 
         width: 100%;
         height: 100%;
+        /* APLICACIÓN DEL ESTADO FINAL (ACTIVO) */
+        filter: brightness(45%); /* Oscurecimiento */
+    }
+
+    .banner-superior .overlay {
+        /* APLICACIÓN DEL ESTADO FINAL (ACTIVO) */
+        background: rgba(50, 50, 50, 0.45); /* Capa gris oscura */
+    }
+
+    .banner-superior .titulo-banner {
+        font-size: 10vw; /* Ajuste para móvil */
+        /* APLICACIÓN DEL ESTADO FINAL (ACTIVO) */
+        background: linear-gradient(90deg, #00e6e6, #00fbff);
+        -webkit-background-clip: text;
+        color: transparent;
+        text-shadow: 0px 0px 15px rgba(249, 250, 250, 0.7); /* Sombra de color */
+        z-index: 3;
+    }
+
+    /* Eliminamos las clases 'activo' y ':hover' ya que el estado es fijo */
+    .banner-superior.activo .equipo,
+    .banner-superior.activo .overlay,
+    .banner-superior.activo .titulo-banner {
+        /* Reset de estilos de animación para evitar conflictos, aunque no deberían aplicarse */
+        transition: none; 
     }
 
     /* Desactivamos/ignoramos los estilos :hover de escritorio en móvil */
     .banner-superior:hover .equipo,
     .banner-superior:hover .overlay,
     .banner-superior:hover .titulo-banner {
-        filter: none;
-        background: rgba(0, 0, 0, 0);
-        color: rgba(191, 190, 190, 0.4);
-        text-shadow: none;
-        z-index: 2;
-        -webkit-background-clip: none;
+        /* Reset de estilos de hover de escritorio */
+        filter: brightness(45%);
+        background: rgba(50, 50, 50, 0.45);
+        color: transparent;
+        text-shadow: 0px 0px 15px rgba(249, 250, 250, 0.7);
+        z-index: 3;
     }
-
-
+    
     /* === BOTÓN ANIMADO === */
     .boton-scroll {
         top: 46vh; 
@@ -117,23 +139,22 @@
 
     /* === PARTE INFERIOR (ESTRUCTURA MÓVIL Y EFECTO DE OCUPACIÓN) === */
     .banner-inferior {
-        position: relative; /* Clave para que el chef se posicione de forma absoluta */
+        position: relative; 
         height: 50vh; 
         flex-direction: column; 
         text-align: center;
         padding: 1.5rem 10%; 
         justify-content: center;
-        overflow: hidden; /* Aseguramos que nada se desborde */
-        margin: -20px auto 0;
+        overflow: hidden; 
+        margin: 0; /* Corrección: eliminamos el margen negativo (-20px) para evitar problemas de espacio */
     }
 
     /* Contenedor del texto */
     .banner-inferior .texto {
         width: 100%; 
         order: 2; 
-        /* Transiciones para el efecto de revelado */
         transition: opacity 1s ease, padding-top 1s ease; 
-        position: relative; /* Necesario para el z-index */
+        position: relative; 
         z-index: 1; 
     }
 
@@ -172,49 +193,38 @@
     }
 
     /* ------------------------------------------------------------------ */
-    /* === CLASES DE JS PARA ANIMACIÓN DE ESTADOS === */
+    /* === CLASES DE JS PARA ANIMACIÓN DE ESTADOS (Solo CSS) === */
     /* ------------------------------------------------------------------ */
 
-    /* --- ESTADO ACTIVADO DEL BANNER SUPERIOR (CADA 5s) --- */
-    .banner-superior.activo .equipo {
-        filter: brightness(45%);
-    }
+    /* --- ESTADO ACTIVADO DEL BANNER SUPERIOR (No se usan, se fijó arriba) --- */
+    .banner-superior.activo .equipo { transition: none; }
+    .banner-superior.activo .overlay { transition: none; }
+    .banner-superior.activo .titulo-banner { transition: none; }
 
-    .banner-superior.activo .overlay {
-        background: rgba(50, 50, 50, 0.45);
-    }
-
-    .banner-superior.activo .titulo-banner {
-        background: linear-gradient(90deg, #00e6e6, #00fbff);
-        -webkit-background-clip: text;
-        color: transparent;
-        text-shadow: 0px 0px 25px rgba(249, 250, 250, 0.7);
-        z-index: 3;
-    }
-
-    /* --- ESTADO INICIAL DEL BANNER INFERIOR (Fuera de vista) --- */
+    /* --- ESTADO INICIAL DEL BANNER INFERIOR (Debe iniciar en estado "revelado" si no hay scroll) --- */
+    /* Lo mantenemos para que el JS maneje el scroll, pero eliminamos las clases de JS de arriba */
+    
+    /* --- ESTADO INICIAL DEL BANNER INFERIOR (Imagen visible, Texto oculto) --- */
     .banner-inferior.inicial .chef {
-        opacity: 1; /* Imagen visible */
+        opacity: 1; 
         z-index: 2;
     }
 
     .banner-inferior.inicial .texto {
-        opacity: 0; /* Texto oculto */
+        opacity: 0; 
         z-index: 1;
-        /* Simula que el texto está "empujado" o fuera de vista */
         padding-top: 20vh; 
     }
 
-    /* --- ESTADO DE REVELADO DEL BANNER INFERIOR (Dentro de vista) --- */
+    /* --- ESTADO DE REVELADO DEL BANNER INFERIOR (Texto visible, Imagen oculta) --- */
     .banner-inferior.revelado .chef {
-        opacity: 0; /* Imagen desaparece */
+        opacity: 0; 
         z-index: 1;
     }
 
     .banner-inferior.revelado .texto {
-        opacity: 1; /* Texto visible */
+        opacity: 1; 
         z-index: 2;
-        /* El texto ocupa el espacio completo */
         padding-top: 0; 
     }
 

@@ -118,43 +118,39 @@
 /* -------------------------------------- */
 /* Estilos del banner */
 /* -------------------------------------- */
-/* 1. Contenedor Principal */
 #activaciones-banner {
     width: 100%;
-    height: 85vh; 
+    height: 90vh; 
     position: relative; 
     overflow: hidden;
-    margin: 15px auto 0;
+    /* Eliminamos el margen superior fijo que puede afectar la fluidez */
+    /* margin: 15px auto 0; */ 
 }
 
-/* Contenedor interno del Banner */
 .banner-container {
     width: 100%;
     height: 100%;
     position: relative;
+    display: flex; /* Usamos flexbox para posicionar las imágenes de fondo */
 }
 
-/* 2. Imágenes de Fondo - DOS IMÁGENES */
-.banner-background-image {
-    height: auto; 
+/* 2. Imágenes de Fondo del Banner (Izquierda y Derecha) */
+.banner-background-left {
+    width: 50%; /* Ocupa la mitad izquierda */
+    height: 100%;
     object-fit: cover;
     display: block;
-    position: absolute;
-    bottom: 0; 
-    filter: brightness(1);
+    filter: brightness(1); /* Estado inicial sin oscurecimiento */
     transition: filter 0.5s ease;
 }
 
-/* Imagen izquierda - elementos de diseño/pintura */
-.banner-image-left {
-    width: 35%;
-    left: 5%;
-}
-
-/* Imagen derecha - elementos técnicos/planos */
-.banner-image-right {
-    width: 35%;
-    right: 5%;
+.banner-background-right {
+    width: 50%; /* Ocupa la mitad derecha */
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(1); /* Estado inicial sin oscurecimiento */
+    transition: filter 0.5s ease;
 }
 
 /* 3. Contenedor de Textos y Capas */
@@ -170,7 +166,8 @@
     align-items: center; 
     text-align: center;
     z-index: 10;
-    margin: 30px auto 0;
+    /* Eliminamos el margen superior fijo */
+    /* margin: 30px auto 0; */
 }
 
 /* 4. Pseudoelemento para la Capa del Patrón y Oscurecimiento */
@@ -181,31 +178,38 @@
     left: 0;
     width: 100%;
     height: 100%;
+    
+    /* ESTADO INICIAL: Patrón de rombos sutil (si la imagen de tus pantallazos lo tiene) */
+    background-image: url('/imagenes/pattern-rombos-sutil.png'); /* Asegúrate de tener esta imagen de patrón */
+    background-size: cover;
+    background-position: center; 
     background-color: transparent; 
     transition: background-color 0.5s ease;
     z-index: -1; 
 }
 
-/* 5. BOMBILLO - Estado inicial: grande y centrado */
-.lightbulb-icon {
+/* NUEVO: Estilo del Bombillo */
+.banner-lightbulb {
     position: absolute;
-    width: 120px; /* Grande en estado inicial */
+    /* ESTADO INICIAL: Grande y Centrado */
+    width: 25vw; /* Tamaño inicial, ajusta según necesidad */
     height: auto;
-    top: 50%; /* Centrado verticalmente */
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centrado perfectamente */
-    transition: all 0.5s ease;
-    z-index: 15;
+    transform: translate(-50%, -50%); /* Centrado perfecto */
+    z-index: 15; /* Encima de las imágenes de texto */
+    transition: all 0.5s ease; /* Transición suave para tamaño y posición */
 }
 
-/* 6. Posicionamiento de las Imágenes de Texto "PERSONALIZADOS" */
+/* 5. Posicionamiento de las Imágenes de Texto "PERSONALIZADOS" */
 .banner-text-initial,
 .banner-text-hover {
     position: absolute; 
-    max-width: 50vw;
+    max-width: 68vw; /* Tamaño de la frase, ajusta si es muy grande/pequeña */
     height: auto;
-    top: 35%;
-    transform: translateY(-50%); 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     transition: opacity 0.5s ease; 
 }
 
@@ -213,177 +217,148 @@
 .banner-text-initial {
     opacity: 1; /* Gris visible por defecto */
 }
-
 .banner-text-hover {
     opacity: 0; /* Naranja oculto por defecto */
 }
 
-/* 7. Estilo del Subtexto: "Servicios" */
+/* 6. Estilo del Subtexto: "Servicios" (Solo Visible al pasar el mouse) */
 .sub-text {
     font-size: 2em; 
     color: #ffffff; 
     position: absolute;
-    top: 55%;
-    transform: translateY(-50%); 
+    top: 35%; /* Un poco más arriba que la frase principal */
+    left: 19.5%; 
+    transform: translate(-50%, -50%); 
     z-index: 20; 
-    opacity: 0; /* Oculto por defecto en el estado inicial */
+    opacity: 0; /* Oculto por defecto */
     transition: opacity 0.5s ease;
-    margin: -30px auto 0;
+    /* margin: -30px auto 0; */
+    
 }
 
 /* Contenedor de la Animación */
 .animation-dots {
     position: absolute;
-    top: 60%;
-    transform: translateY(-50%); 
+    top: 75%; /* Debajo de la frase y el bombillo final */
+    left: 50%; 
+    transform: translate(-50%, -50%); 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 10px; 
     z-index: 20;
-    opacity: 0; /* Oculto por defecto en el estado inicial */
+    opacity: 0; 
     transition: opacity 0.5s ease;
-    margin: 60px auto 0;
+    /* margin: 60px auto 0; */
 }
 
-/* Definición de los puntos */
 .dot {
     width: 15px;
     height: 15px;
     background-color: #ffffff; 
     border-radius: 50%;
-    opacity: 0.5;
+    opacity: 0.5; 
     transition: all 0.5s ease;
 }
 
 /* --- EFECTOS AL PASAR EL MOUSE (HOVER) --- */
 
-.banner-container:hover .banner-background-image {
-    filter: brightness(0.7); 
+#activaciones-banner:hover .banner-background-left,
+#activaciones-banner:hover .banner-background-right {
+    filter: brightness(0.7); /* Oscurecimiento sutil de ambas imágenes de fondo */
 }
 
-.banner-container:hover .banner-overlay::before {
-    background-color: rgba(50, 50, 50, 0.75); /* Oscurecimiento */
+#activaciones-banner:hover .banner-overlay::before {
+    background-color: rgba(50, 50, 50, 0.75); /* Capa gris oscura opaca */
+    background-image: none; /* Elimina el patrón en el estado final */
 }
 
-/* BOMBILLO - Estado final: pequeño y arriba */
-.banner-container:hover .lightbulb-icon {
-    width: 60px; /* Más pequeño */
-    top: 25%; /* Más arriba */
-    left: 55%; /* Ligeramente a la derecha del centro */
-    transform: translate(-50%, -50%);
-}
-
-.banner-container:hover .banner-text-initial {
+#activaciones-banner:hover .banner-text-initial {
     opacity: 0; 
 }
 
-.banner-container:hover .banner-text-hover {
+#activaciones-banner:hover .banner-text-hover {
     opacity: 1; 
 }
 
-.banner-container:hover .sub-text {
+#activaciones-banner:hover .sub-text {
     opacity: 1; /* Muestra "Servicios" al pasar el mouse */
 }
 
-.banner-container:hover .animation-dots {
+#activaciones-banner:hover .banner-lightbulb {
+    /* ESTADO FINAL: Pequeño y Arriba */
+    width: 10vw; /* Tamaño final, ajusta */
+    top: 25%; /* Posición final más arriba */
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#activaciones-banner:hover .animation-dots {
     opacity: 1; /* Muestra los puntos al pasar el mouse */
 }
 
 /* DEFINICIÓN DE LA ANIMACIÓN */
 @keyframes dot-pulse {
-    0% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-    33.3% {
-        transform: scale(1.4);
-        opacity: 1;
-    }
-    66.6% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
+    0% { transform: scale(1); opacity: 0.5; }
+    33.3% { transform: scale(1.4); opacity: 1; }
+    66.6% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0.5; }
 }
 
 /* APLICACIÓN DE LA ANIMACIÓN CON RETRASO */
-.dot-1 {
-    animation: dot-pulse 3s infinite ease-in-out;
-    animation-delay: 0s;
-}
+.dot-1 { animation: dot-pulse 3s infinite ease-in-out; animation-delay: 0s; }
+.dot-2 { animation: dot-pulse 3s infinite ease-in-out; animation-delay: 1s; }
+.dot-3 { animation: dot-pulse 3s infinite ease-in-out; animation-delay: 2s; }
 
-.dot-2 {
-    animation: dot-pulse 3s infinite ease-in-out;
-    animation-delay: 1s;
-}
 
-.dot-3 {
-    animation: dot-pulse 3s infinite ease-in-out;
-    animation-delay: 2s;
-}
-/* Ajuste fluido entre escritorio y 768px */
-@media screen y (ancho máximo: 1200px) y (ancho mínimo: 769px) {
+/* -------------------------------------- */
+/* Medias Queries para Desktop Fluidity (antes de móvil) */
+/* -------------------------------------- */
+
+@media screen and (max-width: 1200px) and (min-width: 769px) {
     #activaciones-banner {
-        altura: 80vh;
+        height: 75vh; /* Ajuste de altura para pantallas medianas */
     }
 
-    .banner-image-left,
-    .banner-image-right {
-        width: 40%;
+    /* Ajusta el tamaño del bombillo para que escale mejor */
+    .banner-lightbulb {
+        width: 20vw; /* Más pequeño en pantallas medianas */
     }
 
-    .banner-image-left {
-        stânga: 2%;
-    }
-
-    .banner-image-right {
-        dreapta: 2%;
+    #activaciones-banner:hover .banner-lightbulb {
+        width: 8vw; /* Tamaño final del bombillo más pequeño */
     }
 
     .banner-text-initial,
     .banner-text-hover {
-        max-width: 60vw;
-        top: 38%;
+        max-width: 60vw; 
     }
 
-    .subtext {
-        top: 56%;
-        font-size: 1,8em;
-    }
-
-    .animation-dots {
-        top: 62%;
-    }
-
-    .lightbulb-icon {
-        width: 100px;
-    }
-
-    .banner-container:hover .lightbulb-icon {
-        width: 50px;
+    .sub-text {
+        font-size: 1.8em;
     }
 }
 
-/* Ajuste adicional para pantalones más pequeñas tipo tablet */
-@media screen y (ancho máximo: 1000px) y (ancho mínimo: 769px) {
-    .banner-image-left,
-    .banner-image-right {
-        width: 45%;
+@media screen and (max-width: 1000px) and (min-width: 769px) {
+    #activaciones-banner {
+        height: 70vh; /* Ajuste de altura para pantallas más pequeñas */
+    }
+
+    .banner-lightbulb {
+        width: 18vw; 
+    }
+
+    #activaciones-banner:hover .banner-lightbulb {
+        width: 7vw; 
     }
 
     .banner-text-initial,
     .banner-text-hover {
         max-width: 70vw;
-        top: 40%;
     }
 
-    .subtext {
-        top: 58%;
-        font-size: 1,6em;
+    .sub-text {
+        font-size: 1.6em;
     }
 }
 

@@ -73,14 +73,75 @@
     /* -------------------------------------- */
     /* Estilos del banner */
     /* -------------------------------------- */
-    
+    #activaciones-banner {
+        height: 62vh;
+    }
+
+    /* CLAVE: Mantener FLEXBOX para que las imágenes sigan lado a lado */
+    .banner-container {
+        /* No se cambia a column, se mantiene flex (row por defecto) */
+        display: flex;
+    }
+
+    /* Las imágenes se adaptan al 50% del ancho, manteniendo el efecto lado a lado */
+    .banner-background-left,
+    .banner-background-right {
+        width: 50%; 
+        height: 100%;
+        filter: brightness(0.7); /* Estado final fijo: oscuro */
+    }
+
+    .banner-overlay::before {
+        background-color: rgba(50, 50, 50, 0.75); /* Capa gris oscura (estado final) */
+        background-image: none; 
+    }
+
+    /* Bombillo en estado final (pequeño y arriba) */
+    .banner-lightbulb {
+        width: 15vw; 
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Textos en estado final (naranja, visible) */
+    .banner-text-initial {
+        opacity: 0; 
+    }
+    .banner-text-hover {
+        opacity: 1; 
+        max-width: 80vw;
+        top: 55%;
+    }
+
+    /* Subtexto y Animación siempre visibles en estado final */
+    .sub-text {
+        top: 44.5%;
+        font-size: 1.6em;
+        opacity: 1;
+        left: 23%;
+    }
+
+    .animation-dots {
+        top: 76%;
+        opacity: 1; 
+    }
+
+    /* Eliminar animaciones/transiciones innecesarias en móvil */
+    .banner-container,
+    .banner-container::after,
+    .banner-text-initial,
+    .banner-text-hover,
+    .sub-text {
+        transition: none !important;
+    }
 
     /* -------------------------------------- */
     /* Estilos de servicio descripcion */
     /* -------------------------------------- */
     .service-description-animated-section {
         padding: 40px 20px;
-        margin: -15px auto 0;
+        margin: 0px auto 0;
         min-height: 400px; /* Vuelve a una altura mínima fija para el móvil */
         border-radius: 0;
         display: flex; /* Añadimos flexbox para centrar verticalmente */
