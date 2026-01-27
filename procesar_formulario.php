@@ -137,7 +137,7 @@ try {
     // ===============================================
     // 📩 CORREO PARA LA JEFA (FORMAL Y EJECUTIVO)
     // ===============================================
-    $mail->setFrom('cortes270k@gmail.com', 'Formulario Piedra en Punto');
+    $mail->setFrom('info@piedraenpunto.com', 'Formulario Piedra en Punto');
     $mail->addAddress('cortes270k@gmail.com', 'Equipo Piedra en Punto');
     $mail->isHTML(true);
     $mail->Subject = "📋 Nuevo registro recibido - Piedra en Punto";
@@ -182,7 +182,7 @@ try {
     $mail2->CharSet = 'UTF-8';
     $mail2->SMTPOptions = $mail->SMTPOptions;
 
-    $mail2->setFrom('cortes270k@gmail.com', 'Piedra en Punto');
+    $mail2->setFrom('info@piedraenpunto.com', 'Piedra en Punto');
     $mail2->addAddress($email);
     $mail2->isHTML(true);
     $mail2->Subject = "✨ ¡Gracias por contactarte con Piedra en Punto!";
