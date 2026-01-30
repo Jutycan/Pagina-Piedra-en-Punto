@@ -12,12 +12,12 @@ $RECAPTCHA_SECRET = "6Ldk0OwrAAAAALN0Ru1tskiwsjLu-wZj_vIxrBET"; // <-- pega tu c
 
 // Correo SMTP (Gmail)
 $SMTP_HOST = "smtp.gmail.com";
-$SMTP_USER = "verodlp@piedraenpunto11.com";       // correo remitente
-$SMTP_PASS = "bgafvciimbgqwaqk";     // <-- pega la contraseña de aplicación de Gmail aquí
+$SMTP_USER = "cortes270k@gmail.com";       // correo remitente
+$SMTP_PASS = "cwyutcwswbaslced";     // <-- pega la contraseña de aplicación de Gmail aquí
 $SMTP_PORT = 587;
 
 // Logo y enlaces
-$LOGO_URL = "https://piedraenpunto.com/imagenes/general/Icon Piedra en Punto.png";
+$LOGO_URL = "https://piedraenpunto.com/imagenes/general/Icon%20Piedra%20en%20Punto.png";
 $PANEL_URL = "https://piedraenpunto.com/dashboard2/gestion_pqr.php";
 $SITE_URL = "https://piedraenpunto.com";
 
@@ -146,7 +146,11 @@ try {
     $mail->Port = $SMTP_PORT;
     $mail->CharSet = 'UTF-8';
     $mail->SMTPOptions = $smtpOptions;
+    
 
+    // ===============================================
+    // 📩 CORREO PARA LA JEFA (FORMAL Y EJECUTIVO)
+    // ===============================================
     $mail->setFrom($SMTP_USER, 'Formulario PQRS - Piedra en Punto');
     $mail->addAddress($SMTP_USER, 'Equipo Piedra en Punto'); // jefa
     $mail->isHTML(true);
@@ -198,7 +202,12 @@ try {
     $mail2->addAddress($email);
     $mail2->isHTML(true);
     $mail2->Subject = "Hemos recibido tu solicitud — Piedra en Punto";
+    
 
+
+    // ===============================================
+    // 💌 CORREO PARA EL USUARIO (CÁLIDO Y CORPORATIVO)
+    // ===============================================
     $mail2->Body = "
     <div style='font-family:Roboto,Arial,sans-serif;background:#f8f8f8;padding:28px;'>
         <div style='max-width:640px;margin:auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.06)'>

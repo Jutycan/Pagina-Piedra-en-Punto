@@ -140,7 +140,7 @@ try {
     // ===============================================
     // 📩 CORREO PARA LA JEFA (FORMAL Y EJECUTIVO)
     // ===============================================
-    $mail->setFrom('info@piedraenpunto.com', 'Formulario Piedra en Punto');
+    $mail->setFrom('info@piedraenpunto.com', '|Formulario General| Piedra en Punto');
     $mail->addAddress('cortes270k@gmail.com', 'Equipo Piedra en Punto');
     $mail->isHTML(true);
     $mail->Subject = "📋 Nuevo registro recibido - Piedra en Punto";
@@ -153,7 +153,7 @@ try {
                 <h2 style='color: white; margin: 0; font-size: 22px; letter-spacing: 1px;'>Nuevo Registro Detectado</h2>
             </div>
             <div style='padding: 30px;'>
-                <p style='color: #555; font-size: 16px;'>Estimada dirección, se ha recibido una nueva solicitud a través del <strong>Formulario General</strong> del sitio web:</p>
+                <p style='color: #555; font-size: 16px;'>Estimada Jefa, se ha recibido una nueva solicitud a través del <strong>Formulario General</strong> del sitio web:</p>
                 
                 <div style='background: #f9f9f9; border-left: 4px solid #f06292; padding: 20px; margin: 20px 0;'>
                     <p style='margin: 5px 0;'><strong>👤 Nombre:</strong> {$nombre}</p>
