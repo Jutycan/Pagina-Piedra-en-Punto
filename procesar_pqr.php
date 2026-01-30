@@ -146,7 +146,8 @@ try {
     $mail->Port = $SMTP_PORT;
     $mail->CharSet = 'UTF-8';
     $mail->SMTPOptions = $smtpOptions;
-    
+    // Calcular fecha límite (15 días a partir de hoy)
+    $fecha_limite = date('d/m/Y', strtotime('+8 days'));
 
     // ===============================================
     // 📩 CORREO PARA LA JEFA (FORMAL Y EJECUTIVO)
@@ -157,33 +158,50 @@ try {
     $mail->Subject = "📩 Nuevo PQRS recibido — Piedra en Punto (ID: {$insertedId})";
 
     $mail->Body = "
-    <div style='font-family:Roboto,Arial,sans-serif;background:#f8f8f8;padding:30px;'>
-        <div style='max-width:680px;margin:auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,0.06)'>
-            <div style='background:#f06292;padding:20px;text-align:center;color:#fff;'>
-                <img src='{$LOGO_URL}' alt='Logo' width='84' style='display:block;margin:0 auto 8px'>
-                <h3 style='margin:0'>Nuevo PQRS recibido</h3>
+    <div style='font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 40px 10px;'>
+        <div style='max-width: 600px; margin: auto; background: white; border-radius: 8px; overflow: hidden; border: 1px solid #ddd;'>
+            <div style='background-color: #f06292; padding: 30px; text-align: center;'>
+                <img src='{$LOGO_URL}' width='80' alt='Piedra en Punto' style='margin-bottom: 15px;'>
+                <h2 style='color: white; margin: 0; font-size: 22px; letter-spacing: 1px;'>Nuevo PQRS Recibido</h2>
             </div>
-            <div style='padding:20px;color:#333;'>
-                <p><strong>ID:</strong> {$insertedId}</p>
-                <p><strong>Clasificación:</strong> {$clasificacion}</p>
-                <p><strong>Nombre:</strong> {$nombres}</p>
-                <p><strong>Fecha:</strong> {$fecha}</p>
-                <p><strong>Motivo:</strong> {$motivo}</p>
-                <p><strong>Correo:</strong> {$email}</p>
-                <p><strong>Teléfono:</strong> {$telefono}</p>
-                <p><strong>Mensaje:</strong><br>" . nl2br($mensaje) . "</p>
-                <hr style='border:0;border-top:1px solid #eee;margin:16px 0'>
-                <p><strong>Estado:</strong> <span style='color:#f06292;'>Pendiente</span></p>
-                <div style='text-align:center;margin-top:18px'>
-                    <a href='{$PANEL_URL}' style='background:#33614a;color:#fff;padding:12px 18px;border-radius:8px;text-decoration:none;font-weight:600;'>Abrir Panel PQRS</a>
+            <div style='padding: 30px;'>
+                <p style='color: #555; font-size: 16px;'>Estimada dirección, se ha registrado una nueva solicitud en el sistema de <strong>PQRS</strong> (ID: #{$insertedId}):</p>
+                
+                <div style='background: #f9f9f9; border-left: 4px solid #33614a; padding: 20px; margin: 20px 0;'>
+                    <p style='margin: 5px 0;'><strong>📋 Clasificación:</strong> <span style='color:#f06292; font-weight:bold;'>{$clasificacion}</span></p>
+                    <p style='margin: 5px 0;'><strong>👤 Remitente:</strong> {$nombres}</p>
+                    <p style='margin: 5px 0;'><strong>📅 Fecha del suceso:</strong> {$fecha}</p>
+                    <p style='margin: 5px 0;'><strong>🎯 Motivo:</strong> {$motivo}</p>
+                    <p style='margin: 5px 0;'><strong>📧 Correo:</strong> {$email}</p>
+                    <p style='margin: 5px 0;'><strong>📞 Teléfono:</strong> {$telefono}</p>
+                    <p style='margin: 15px 0 5px 0;'><strong>💬 Detalle del mensaje:</strong><br><span style='color: #666; font-style: italic;'>\"" . nl2br($mensaje) . "\"</span></p>
+                </div>
+
+                <div style='background: #fff5f7; border: 1px solid #f06292; border-radius: 6px; padding: 15px; margin-bottom: 25px; text-align: center;'>
+                    <p style='margin: 0; color: #d81b60; font-size: 14px;'>
+                        <i style='font-size: 18px;'>📅</i> <strong>Fecha límite sugerida para respuesta:</strong> {$fecha_limite}
+                    </p>
+                    <p style='margin: 5px 0 0 0; font-size: 12px; color: #888;'>Basado en los términos de ley para la atención de PQRS.</p>
+                </div>
+
+                <div style='text-align: center; margin-top: 10px;'>
+                    <a href='{$PANEL_URL}' style='background: #33614a; color: white; padding: 14px 30px; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block;'>Gestionar en Panel PQRS</a>
+                </div>
+
+                <div style='margin-top: 25px; padding: 15px; border: 1px dashed #ccc; border-radius: 5px; background-color: #fffcf5;'>
+                    <p style='margin: 0; font-size: 13px; color: #888;'>
+                        <strong>💡 Ayuda de acceso:</strong><br>
+                        Si no recuerda las credenciales de ingreso al Panel de Gestión, puede consultarlas en el siguiente documento: 
+                        <a href='URL_DE_TU_EXCEL_EN_DRIVE' style='color: #f06292; font-weight: bold;'>Ver Hoja de Claves Drive</a>.
+                    </p>
                 </div>
             </div>
-            <div style='background:#fafafa;padding:12px;text-align:center;color:#777;font-size:13px'>
-                © " . date('Y') . " Piedra en Punto · Mensaje automático
+            <div style='background-color: #eee; text-align: center; padding: 20px; font-size: 12px; color: #777;'>
+                <p style='margin: 0;'>Este es un mensaje enviado automáticamente por el servidor.</p>
+                <p style='margin: 5px 0 0 0;'>© 2026 Piedra en Punto · Mensaje automático del sistema.</p>
             </div>
         </div>
-    </div>
-    ";
+    </div>";
     $mail->send();
 
     // === Confirmation email to user (friendly) ===
@@ -209,36 +227,40 @@ try {
     // 💌 CORREO PARA EL USUARIO (CÁLIDO Y CORPORATIVO)
     // ===============================================
     $mail2->Body = "
-    <div style='font-family:Roboto,Arial,sans-serif;background:#f8f8f8;padding:28px;'>
-        <div style='max-width:640px;margin:auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.06)'>
-            <div style='background:#33614a;padding:18px;text-align:center;color:#fff;'>
-                <img src='{$LOGO_URL}' alt='Logo' width='78' style='display:block;margin:0 auto 8px'>
-                <h3 style='margin:0'>Gracias por contactarnos, " . htmlspecialchars($nombres, ENT_QUOTES) . "</h3>
-            </div>
-            <div style='padding:18px;color:#333;'>
-                <p>Hemos recibido tu solicitud (ID: <strong>{$insertedId}</strong>). Nuestro equipo la revisará y te contactaremos en el menor tiempo posible.</p>
-                <p>Resumen:</p>
-                <ul>
-                    <li><strong>Clasificación:</strong> {$clasificacion}</li>
-                    <li><strong>Motivo:</strong> {$motivo}</li>
-                    <li><strong>Fecha:</strong> {$fecha}</li>
-                </ul>
-                <div style='text-align:center;margin-top:14px'>
-                    <a href='{$SITE_URL}' style='background:#f06292;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:600;'>Visita nuestra web</a>
+    <div style='font-family: Arial, sans-serif; background-color: #fdfdfd; padding: 40px 10px;'>
+        <div style='max-width: 600px; margin: auto; background: white; border-top: 5px solid #33614a; box-shadow: 0 4px 15px rgba(0,0,0,0.05);'>
+            <div style='padding: 40px; text-align: center;'>
+                <img src='{$LOGO_URL}' width='90' alt='Piedra en Punto' style='margin-bottom: 20px;'>
+                <h1 style='color: #333; font-size: 24px; margin: 0;'>¡Hola, " . htmlspecialchars($nombres) . "!</h1>
+                <p style='color: #666; font-size: 16px; line-height: 1.6; margin-top: 15px;'>
+                    Hemos recibido formalmente tu <strong>{$clasificacion}</strong> con el radicado <strong>#{$insertedId}</strong>.
+                </p>
+                <p style='color: #666; font-size: 16px;'>
+                    Para nosotros es muy importante escucharte. Nuestro equipo de atención revisará los detalles y te brindará una respuesta formal a la brevedad posible.
+                </p>
+                
+                <div style='background: #f9f9f9; padding: 15px; border-radius: 5px; margin: 25px 0; text-align: left; display: inline-block; width: 100%; box-sizing: border-box;'>
+                    <p style='margin: 0; font-size: 14px; color: #555;'><strong>Radicado:</strong> #{$insertedId}</p>
+                    <p style='margin: 5px 0 0 0; font-size: 14px; color: #555;'><strong>Motivo:</strong> {$motivo}</p>
                 </div>
-                <div style='text-align:center;margin-top:14px'>
-                    <!-- redes: reemplaza tus URLs reales -->
-                    <a href='#' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733547.png' width='24'></a>
-                    <a href='https://www.instagram.com/piedraenpunto?igsh=MWRpaWE3Z2Z1b2Njcw%3D%3D&utm_source=qr' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733558.png' width='24'></a>
-                    <a href='https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A108482616&keywords=Piedra%20en%20Punto&origin=ENTITY_SEARCH_HOME_HISTORY&sid=yUC' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733561.png' width='24'></a>
+                
+                <div style='margin-top: 30px;'>
+                    <a href='{$SITE_URL}' style='background: #f06292; color: white; padding: 12px 25px; border-radius: 4px; text-decoration: none; font-weight: bold;'>Regresar al Sitio Web</a>
+                </div>
+                
+                <div style='margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;'>
+                    <p style='font-size: 14px; color: #999; margin-bottom: 10px;'>Conoce más de nosotros:</p>
+                    <a href='#' style='text-decoration:none; margin: 0 10px;'><img src='https://cdn-icons-png.flaticon.com/512/2111/2111463.png' width='22'></a>
+                    <a href='https://www.instagram.com/piedraenpunto' style='text-decoration:none; margin: 0 10px;'><img src='https://cdn-icons-png.flaticon.com/512/145/145807.png' width='22'></a>
                 </div>
             </div>
-            <div style='background:#fafafa;padding:12px;text-align:center;color:#777;font-size:13px'>
-                © " . date('Y') . " Piedra en Punto
+            <div style='background-color: #33614a; text-align: center; padding: 25px; font-size: 12px; color: white; opacity: 0.9;'>
+                <p style='margin: 0; font-weight: bold;'>Aviso importante:</p>
+                <p style='margin: 5px 0;'>Este es un envío automático. Por favor, no responda directamente a este correo, ya que la cuenta no es monitoreada.</p>
+                <p style='margin: 15px 0 0 0; font-size: 11px; color: #ccc;'>© 2026 Piedra en Punto · Todos los derechos reservados.</p>
             </div>
         </div>
-    </div>
-    ";
+    </div>";
     $mail2->send();
 
     echo json_encode(["success" => true, "message" => "PQRS enviado correctamente."]);
