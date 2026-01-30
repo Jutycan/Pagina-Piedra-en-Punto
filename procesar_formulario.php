@@ -218,6 +218,7 @@ try {
                 
                 <div style='margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;'>
                     <p style='font-size: 14px; color: #999; margin-bottom: 10px;'>Síguenos en nuestras redes:</p>
+                    <a href='#' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733547.png' width='24'></a>
                     <a href='https://www.instagram.com/piedraenpunto' style='text-decoration:none; margin: 0 10px;'><img src='https://cdn-icons-png.flaticon.com/512/2111/2111463.png' width='24'></a>
                     <a href='https://www.linkedin.com' style='text-decoration:none; margin: 0 10px;'><img src='https://cdn-icons-png.flaticon.com/512/145/145807.png' width='24'></a>
                 </div>
