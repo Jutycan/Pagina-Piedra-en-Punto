@@ -165,7 +165,7 @@ try {
                 <h2 style='color: white; margin: 0; font-size: 22px; letter-spacing: 1px;'>Nuevo PQRS Recibido</h2>
             </div>
             <div style='padding: 30px;'>
-                <p style='color: #555; font-size: 16px;'>Estimada dirección, se ha registrado una nueva solicitud en el sistema de <strong>PQRS</strong> (ID: #{$insertedId}):</p>
+                <p style='color: #555; font-size: 16px;'>Estimada Jefa, se ha registrado una nueva solicitud en el sistema de <strong>PQRS</strong> (ID: #{$insertedId}):</p>
                 
                 <div style='background: #f9f9f9; border-left: 4px solid #33614a; padding: 20px; margin: 20px 0;'>
                     <p style='margin: 5px 0;'><strong>📋 Clasificación:</strong> <span style='color:#f06292; font-weight:bold;'>{$clasificacion}</span></p>
@@ -250,6 +250,7 @@ try {
                 
                 <div style='margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px;'>
                     <p style='font-size: 14px; color: #999; margin-bottom: 10px;'>Conoce más de nosotros:</p>
+                    <a href='#' style='margin:0 5px;'><img src='https://cdn-icons-png.flaticon.com/512/733/733547.png' width='24'></a>
                     <a href='#' style='text-decoration:none; margin: 0 10px;'><img src='https://cdn-icons-png.flaticon.com/512/2111/2111463.png' width='22'></a>
                     <a href='https://www.instagram.com/piedraenpunto' style='text-decoration:none; margin: 0 10px;'><img src='https://cdn-icons-png.flaticon.com/512/145/145807.png' width='22'></a>
                 </div>
