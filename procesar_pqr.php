@@ -12,8 +12,8 @@ $RECAPTCHA_SECRET = "6Ldk0OwrAAAAALN0Ru1tskiwsjLu-wZj_vIxrBET"; // <-- pega tu c
 
 // Correo SMTP (Gmail)
 $SMTP_HOST = "smtp.gmail.com";
-$SMTP_USER = "dianasaenz070@gmail.com";       // correo remitente
-$SMTP_PASS = "ojqlfeibionhteny";     // <-- pega la contraseña de aplicación de Gmail aquí
+$SMTP_USER = "verodlp@piedraenpunto11.com";       // correo remitente
+$SMTP_PASS = "bgafvciimbgqwaqk";     // <-- pega la contraseña de aplicación de Gmail aquí
 $SMTP_PORT = 587;
 
 // Logo y enlaces
