@@ -10,7 +10,7 @@ $username = "u894610526_formulario_g"; // Reemplaza con tu usuario real
 $password = "Vero$2025$"; // Reemplaza con tu contraseña real
 
 $recaptcha_secret = "6Ldk0OwrAAAAALN0Ru1tskiwsjLu-wZj_vIxrBET"; 
-$jefa_email = "cortes270k@gmail.com";
+$jefa_email = "dianasaenz070@gmail.com";
 $LOGO_URL = "https://piedraenpunto.com/imagenes/general/Icon%20Piedra%20en%20Punto.png";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -66,8 +66,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'cortes270k@gmail.com';
-    $mail->Password = 'cwyutcwswbaslced'; // 16 dígitos de Google
+    $mail->Username = 'dianasaenz070@gmail.com';
+    $mail->Password = 'ojqlfeibionhteny'; // 16 dígitos de Google
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
@@ -118,8 +118,8 @@ try {
     $mail2->isSMTP();
     $mail2->Host = 'smtp.gmail.com';
     $mail2->SMTPAuth = true;
-    $mail2->Username = 'cortes270k@gmail.com';
-    $mail2->Password = 'cwyutcwswbaslced'; 
+    $mail2->Username = 'dianasaenz070@gmail.com';
+    $mail2->Password = 'ojqlfeibionhteny'; 
     $mail2->SMTPSecure = 'tls';
     $mail2->Port = 587;
     $mail2->CharSet = 'UTF-8';

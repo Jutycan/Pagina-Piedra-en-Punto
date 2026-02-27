@@ -121,8 +121,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'cortes270k@gmail.com'; // Gmail de la jefa
-    $mail->Password = 'cwyutcwswbaslced'; // Contraseña de aplicación Gmail
+    $mail->Username = 'dianasaenz070@gmail.com'; // Gmail de la jefa
+    $mail->Password = 'ojqlfeibionhteny'; // Contraseña de aplicación Gmail
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
@@ -141,7 +141,7 @@ try {
     // 📩 CORREO PARA LA JEFA (FORMAL Y EJECUTIVO)
     // ===============================================
     $mail->setFrom('info@piedraenpunto.com', '|Formulario General| Piedra en Punto');
-    $mail->addAddress('cortes270k@gmail.com', 'Equipo Piedra en Punto');
+    $mail->addAddress('dianasaenz070@gmail.com', 'Equipo Piedra en Punto');
     $mail->isHTML(true);
     $mail->Subject = "📋 Nuevo registro recibido - Piedra en Punto";
 
@@ -189,8 +189,8 @@ try {
     $mail2->isSMTP();
     $mail2->Host = 'smtp.gmail.com';
     $mail2->SMTPAuth = true;
-    $mail2->Username = 'cortes270k@gmail.com';
-    $mail2->Password = 'cwyutcwswbaslced';
+    $mail2->Username = 'dianasaenz070@gmail.com';
+    $mail2->Password = 'ojqlfeibionhteny';
     $mail2->SMTPSecure = 'tls';
     $mail2->Port = 587;
     $mail2->CharSet = 'UTF-8';
