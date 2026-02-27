@@ -121,8 +121,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'verodlp@piedraenpunto11.com'; // Gmail de la jefa
-    $mail->Password = 'bgafvciimbgqwaqk'; // Contraseña de aplicación Gmail
+    $mail->Username = 'cortes270k@gmail.com'; // Gmail de la jefa
+    $mail->Password = 'cwyutcwswbaslced'; // Contraseña de aplicación Gmail
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
@@ -141,7 +141,7 @@ try {
     // 📩 CORREO PARA LA JEFA (FORMAL Y EJECUTIVO)
     // ===============================================
     $mail->setFrom('info@piedraenpunto.com', '|Formulario General| Piedra en Punto');
-    $mail->addAddress('verodlp@piedraenpunto11.com', 'Equipo Piedra en Punto');
+    $mail->addAddress('cortes270k@gmail.com', 'Equipo Piedra en Punto');
     $mail->isHTML(true);
     $mail->Subject = "📋 Nuevo registro recibido - Piedra en Punto";
 
@@ -170,7 +170,7 @@ try {
                     <p style='margin: 0; font-size: 13px; color: #888;'>
                         <strong>💡 Ayuda de acceso:</strong><br>
                         Si no recuerda las credenciales de ingreso al Panel de Gestión, puede consultarlas de forma segura en el siguiente documento: 
-                        <a href='URL_DE_TU_EXCEL_EN_DRIVE' style='color: #f06292; font-weight: bold;'>Ver Hoja de Claves Drive</a>.
+                        <a href='https://docs.google.com/document/d/1-udNBYlBHRfYaMroSjRCZkyfzWio0YA8PlrbKzYgoHM/edit?usp=sharing' style='color: #f06292; font-weight: bold;'>Ver Hoja de Claves Drive</a>.
                     </p>
                 </div>
             </div>
@@ -189,8 +189,8 @@ try {
     $mail2->isSMTP();
     $mail2->Host = 'smtp.gmail.com';
     $mail2->SMTPAuth = true;
-    $mail2->Username = 'verodlp@piedraenpunto11.com';
-    $mail2->Password = 'bgafvciimbgqwaqk';
+    $mail2->Username = 'cortes270k@gmail.com';
+    $mail2->Password = 'cwyutcwswbaslced';
     $mail2->SMTPSecure = 'tls';
     $mail2->Port = 587;
     $mail2->CharSet = 'UTF-8';

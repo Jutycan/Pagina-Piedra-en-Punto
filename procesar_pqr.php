@@ -12,8 +12,8 @@ $RECAPTCHA_SECRET = "6Ldk0OwrAAAAALN0Ru1tskiwsjLu-wZj_vIxrBET"; // <-- pega tu c
 
 // Correo SMTP (Gmail)
 $SMTP_HOST = "smtp.gmail.com";
-$SMTP_USER = "verodlp@piedraenpunto11.com";       // correo remitente
-$SMTP_PASS = "bgafvciimbgqwaqk";     // <-- pega la contraseña de aplicación de Gmail aquí
+$SMTP_USER = "cortes270k@gmail.com";       // correo remitente
+$SMTP_PASS = "cwyutcwswbaslced";     // <-- pega la contraseña de aplicación de Gmail aquí
 $SMTP_PORT = 587;
 
 // Logo y enlaces
@@ -192,7 +192,7 @@ try {
                     <p style='margin: 0; font-size: 13px; color: #888;'>
                         <strong>💡 Ayuda de acceso:</strong><br>
                         Si no recuerda las credenciales de ingreso al Panel de Gestión, puede consultarlas en el siguiente documento: 
-                        <a href='URL_DE_TU_EXCEL_EN_DRIVE' style='color: #f06292; font-weight: bold;'>Ver Hoja de Claves Drive</a>.
+                        <a href='https://docs.google.com/document/d/1-udNBYlBHRfYaMroSjRCZkyfzWio0YA8PlrbKzYgoHM/edit?usp=sharing' style='color: #f06292; font-weight: bold;'>Ver Hoja de Claves Drive</a>.
                     </p>
                 </div>
             </div>

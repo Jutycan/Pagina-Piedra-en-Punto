@@ -1,14 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
 <?php
 header('Content-Type: application/json');
 
@@ -21,7 +10,7 @@ $username = "u894610526_formulario_g"; // Reemplaza con tu usuario real
 $password = "Vero$2025$"; // Reemplaza con tu contraseña real
 
 $recaptcha_secret = "6Ldk0OwrAAAAALN0Ru1tskiwsjLu-wZj_vIxrBET"; 
-$jefa_email = "verodlp@piedraenpunto11.com";
+$jefa_email = "cortes270k@gmail.com";
 $LOGO_URL = "https://piedraenpunto.com/imagenes/general/Icon%20Piedra%20en%20Punto.png";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -77,8 +66,8 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'verodlp@piedraenpunto11.com';
-    $mail->Password = 'bgafvciimbgqwaqk'; // 16 dígitos de Google
+    $mail->Username = 'cortes270k@gmail.com';
+    $mail->Password = 'cwyutcwswbaslced'; // 16 dígitos de Google
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
@@ -110,7 +99,7 @@ try {
                     <p style='margin: 0; font-size: 13px; color: #888;'>
                         <strong>💡 Ayuda de acceso:</strong><br>
                         Si no recuerda las credenciales de ingreso al Panel de Gestión, puede consultarlas de forma segura en el siguiente documento: 
-                        <a href='URL_DE_TU_DRIVE' style='color: #f06292; font-weight: bold;'>Ver Hoja de Claves Drive</a>.
+                        <a href='https://docs.google.com/document/d/1-udNBYlBHRfYaMroSjRCZkyfzWio0YA8PlrbKzYgoHM/edit?usp=sharing' style='color: #f06292; font-weight: bold;'>Ver Hoja de Claves Drive</a>.
                     </p>
                 </div>
             </div>
@@ -129,8 +118,8 @@ try {
     $mail2->isSMTP();
     $mail2->Host = 'smtp.gmail.com';
     $mail2->SMTPAuth = true;
-    $mail2->Username = 'verodlp@piedraenpunto11.com';
-    $mail2->Password = 'bgafvciimbgqwaqk'; 
+    $mail2->Username = 'cortes270k@gmail.com';
+    $mail2->Password = 'cwyutcwswbaslced'; 
     $mail2->SMTPSecure = 'tls';
     $mail2->Port = 587;
     $mail2->CharSet = 'UTF-8';
